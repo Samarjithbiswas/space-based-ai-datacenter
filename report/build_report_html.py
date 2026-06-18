@@ -16,7 +16,7 @@ def embed(m):
     return f'![{m.group(1)}](data:image/png;base64,{base64.b64encode(p.read_bytes()).decode()})'
 md = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', embed, md)
 
-body = markdown.markdown(md, extensions=["tables", "sane_lists", "toc"])
+body = markdown.markdown(md, extensions=["tables", "sane_lists", "toc", "fenced_code"])
 body = re.sub(r"@@M(\d+)@@",
               lambda m: ("\\[" + store[int(m.group(1))][1] + "\\]") if store[int(m.group(1))][0] == "d"
               else ("\\(" + store[int(m.group(1))][1] + "\\)"), body)

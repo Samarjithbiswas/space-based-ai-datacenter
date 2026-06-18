@@ -9,7 +9,7 @@ import math
 import pytest
 from orbital_dc import (orbit, thermal, power, adcs, comms, radiation, debris,
                         propulsion, reliability, compute, economics, environment,
-                        groundlink, structures, workload, finance)
+                        groundlink, structures, workload, finance, solvers)
 from orbital_dc.system import DesignPoint, constellation
 
 # ----------------------------------------------------------------- worked examples
@@ -242,3 +242,43 @@ def test_design_point_exposes_new_outputs():
     for k in ("ground_downlink_TB_day", "inertia_max_kgm2", "throttle_loss_frac",
               "lcoe_usd_per_pflop_hr", "gravity_gradient_torque_Nm"):
         assert k in s
+
+# ----------------------------------------------------------------- numerical solvers
+def test_newton_raphson_root():
+    root, it = solvers.newton_raphson(lambda x: x*x - 2, lambda x: 2*x, 1.0)
+    assert root == pytest.approx(math.sqrt(2), abs=1e-6) and it < 20
+
+def test_bisection_root():
+    root, _ = solvers.bisection(lambda x: x**3 - x - 2, 1.0, 2.0)
+    assert root == pytest.approx(1.5214, abs=1e-3)
+
+def test_rk4_matches_analytic():
+    # dy/dt = y, y(0)=1 -> y(1)=e
+    _, y = solvers.rk4_integrate(lambda t, y: y, 1.0, 0.0, 1.0, 0.01)
+    assert y[-1] == pytest.approx(math.e, rel=1e-4)
+
+def test_solver_radiator_temperature():
+    T, it = solvers.solve_radiator_temperature(1450.0, 4.0, 0.85, sides=1)
+    assert T == pytest.approx(21.4, abs=0.6) and it < 20
+
+def test_solver_lifetime_rk4():
+    assert 14 < solvers.solve_orbital_lifetime(650, 3.5/375, "mod") < 30
+
+def test_solver_eclipse_drop():
+    assert solvers.solve_eclipse_transient(300.0)["delta_T_C"] == pytest.approx(-0.6, abs=0.3)
+
+def test_solver_deorbit_dv():
+    assert solvers.solve_deorbit_dv(650) == pytest.approx(131.6, abs=0.5)
+
+def test_solver_link_range_anchor():
+    assert solvers.solve_link_max_range(1.0, 3.0) == pytest.approx(5419, abs=5)   # design anchor
+    assert solvers.solve_link_max_range(1.0, 0.0) == pytest.approx(7655, abs=30)
+
+def test_solver_irr():
+    assert solvers.solve_irr([-100, 60, 60]) == pytest.approx(0.1306, abs=0.01)
+
+def test_solver_reference_mission():
+    sol = solvers.solve_reference_mission()
+    assert sol["radiator_temperature_C"] == pytest.approx(21.4, abs=0.6)
+    assert sol["deorbit_dv_mps"] == pytest.approx(131.6, abs=0.5)
+    assert sol["link_range_3dB_km"] == pytest.approx(5419, abs=5)

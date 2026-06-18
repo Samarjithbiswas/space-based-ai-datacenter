@@ -23,9 +23,10 @@ Author: Samarjith Biswas, PhD   License: MIT
 """
 from . import (constants, environment, orbit, thermal, power, adcs, comms, groundlink,
                structures, radiation, debris, propulsion, reliability, compute, workload,
-               finance, economics, system, montecarlo)
+               finance, economics, solvers, system, montecarlo)
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 __all__ = ["constants", "environment", "orbit", "thermal", "power", "adcs", "comms",
            "groundlink", "structures", "radiation", "debris", "propulsion", "reliability",
-           "compute", "workload", "finance", "economics", "system", "montecarlo", "figures"]
+           "compute", "workload", "finance", "economics", "solvers", "system", "montecarlo",
+           "figures"]

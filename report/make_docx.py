@@ -24,7 +24,7 @@ print("inline '$' after fix:", single, "(even ->", single % 2 == 0, ")")
 pypandoc.convert_file(
     str(tmp), "docx", outputfile="Report_II_Complete.docx",
     extra_args=["--toc", "--toc-depth=2", "--resource-path=.",
-                "--metadata=title:Space-Based AI Data Centers — A Complete Engineering Treatise",
+                "--metadata=title:Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics",
                 "--metadata=author:Samarjith Biswas, PhD"],
 )
 tmp.unlink()
