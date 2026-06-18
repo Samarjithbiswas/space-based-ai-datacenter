@@ -52,6 +52,22 @@ python survivability.py   # regenerate the 7 figures
 python validate.py        # 14 checks
 ```
 
+## Reproduce everything (one command)
+
+```bash
+pip install numpy matplotlib pytest
+python reproduce_all.py      # runs both models' validation + tests + all figures + equation images
+```
+
+See [`REPRODUCE.md`](REPRODUCE.md) for a step-by-step guide and how to verify any single number.
+
+## Equations for LinkedIn / slides
+
+LinkedIn does not render LaTeX, and copying an HTML page does not carry the math. So every
+governing equation is also provided as a ready-to-upload **image**:
+[`report/equations/`](report/equations) (25 PNGs, see its `INDEX.md`). Insert these where each
+equation appears in a post or article.
+
 ## Read the study
 
 - **Report (HTML, figures embedded):** [`report/Report_II_Complete.html`](report/Report_II_Complete.html)
