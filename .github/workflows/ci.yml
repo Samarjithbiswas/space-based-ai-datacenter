@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install systems-model
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "systems-model/.[dev]"
+      - name: systems-model validation + tests + study
+        working-directory: systems-model
+        run: |
+          python validate.py
+          pytest -q
+          python run_study.py
+      - name: survivability-model validation
+        working-directory: survivability-model
+        run: |
+          pip install -r requirements.txt
+          python validate.py

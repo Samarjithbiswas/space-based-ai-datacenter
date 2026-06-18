@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# large media / build artifacts (keep the repo light)
+*.mp4
+*.mov
+*.prproj
+*.prin
+*.zip
+run_output.txt
+val.txt
+
+# figures and HTML are committed so the repo renders on GitHub.

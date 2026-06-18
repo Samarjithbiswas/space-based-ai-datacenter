@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Space-Based AI Data Centers: Open Models, Study, and Visualization"
+abstract: >-
+  A complete, fully-sourced, reproducible systems-engineering study of space-based AI compute,
+  with open Python models (13 subsystems + integration + Monte-Carlo), a derivation-by-derivation
+  mathematical guide, and a premium 3D visualization. Reference architecture: Google Project
+  Suncatcher (arXiv:2511.19468).
+type: software
+authors:
+  - family-names: Biswas
+    given-names: Samarjith
+    name-suffix: PhD
+version: "1.0.0"
+date-released: "2026-06-18"
+license: MIT
+keywords:
+  - space-based computing
+  - orbital data center
+  - systems engineering
+  - spacecraft thermal control
+  - free-space optical communications
+  - orbital debris
+  - Project Suncatcher

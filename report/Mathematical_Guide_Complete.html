@@ -1,0 +1,584 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mathematical Foundations of Space-Based AI Data Centers</title>
+<style>
+:root{--ink:#16243a;--accent:#c75c2e;--cool:#2f6f8f;--rule:#e2e2e2;--soft:#fbf7f3;}
+body{font-family:'Georgia','Times New Roman',serif;color:#1c1c1c;line-height:1.7;
+     max-width:900px;margin:0 auto;padding:54px 44px 100px;background:#fff;}
+h1{font-family:'Helvetica Neue',Arial,sans-serif;font-size:28px;color:var(--ink);margin:0 0 4px;line-height:1.2;}
+h1+h2{margin-top:14px;border:none;color:var(--accent);font-size:17px;font-weight:600;}
+h2{font-family:'Helvetica Neue',Arial,sans-serif;font-size:20px;color:var(--ink);
+   margin-top:42px;padding-bottom:6px;border-bottom:2px solid var(--accent);}
+h3{font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;color:var(--cool);margin-top:22px;}
+p,li{font-size:15px;} strong{color:var(--ink);}
+hr{border:none;border-top:1px solid var(--rule);margin:30px 0;}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:13px;
+      font-family:'Helvetica Neue',Arial,sans-serif;}
+th{background:var(--ink);color:#fff;text-align:left;padding:7px 10px;}
+td{padding:6px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}
+tr:nth-child(even) td{background:var(--soft);}
+code{background:#f3f0ec;padding:1px 5px;border-radius:3px;font-size:13px;font-family:Consolas,monospace;}
+mjx-container{overflow-x:auto;overflow-y:hidden;}
+mjx-container[display="true"]{margin:0.7em 0;}
+.masthead{border-top:6px solid var(--accent);padding-top:14px;margin-bottom:8px;
+   font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;letter-spacing:2px;
+   text-transform:uppercase;color:#888;}
+@media print{body{padding:0 8px;max-width:none;} h2{page-break-after:avoid;}}
+</style>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],
+  tags:'none'},svg:{fontCache:'global'}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head><body>
+<div class="masthead">Complete Mathematical Guide &middot; Derivations + Worked Examples &middot; June 2026</div>
+<h1 id="mathematical-foundations-of-space-based-ai-data-centers">Mathematical Foundations of Space-Based AI Data Centers</h1>
+<h2 id="a-complete-derivation-by-derivation-engineering-guide">A Complete, Derivation-by-Derivation Engineering Guide</h2>
+<p><strong>Author:</strong> Samarjith Biswas, PhD
+<strong>Companion to:</strong> <em>Space-Based AI Data Centers, Part II</em> (complete systems study)
+<strong>Edition:</strong> June 2026</p>
+<p>This guide derives, from first principles and in full, every governing equation used across
+the thirteen subsystems of the orbital data-center model. Each section gives: the physical
+setup, the derivation with intermediate steps, a worked numerical example whose result matches
+the open-source model, the assumptions and their validity, and how the result is used. Symbols
+are collected in the nomenclature table; numerical constants are listed once below.</p>
+<hr />
+<h2 id="0-conventions-constants-and-nomenclature">0. Conventions, constants, and nomenclature</h2>
+<p>All quantities are SI unless stated. Vectors are bold in concept; here written component-wise.
+The reference mission is Google Project Suncatcher: a dawn-dusk sun-synchronous orbit at
+altitude \(h = 650\ \mathrm{km}\), an \(N = 81\) satellite cluster of radius \(1\ \mathrm{km}\) with
+inter-satellite spacing \(d \approx 150\ \mathrm{m}\).</p>
+<p><strong>Physical constants</strong></p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\(\mu\)</td>
+<td>\(3.986004418\times10^{14}\ \mathrm{m^3 s^{-2}}\)</td>
+<td>Earth gravitational parameter</td>
+</tr>
+<tr>
+<td>\(R_E\)</td>
+<td>\(6.371\times10^{6}\ \mathrm{m}\)</td>
+<td>Earth mean radius</td>
+</tr>
+<tr>
+<td>\(J_2\)</td>
+<td>\(1.08263\times10^{-3}\)</td>
+<td>Earth oblateness coefficient</td>
+</tr>
+<tr>
+<td>\(\sigma\)</td>
+<td>\(5.670374\times10^{-8}\ \mathrm{W\,m^{-2}K^{-4}}\)</td>
+<td>Stefan-Boltzmann constant</td>
+</tr>
+<tr>
+<td>\(h_P\)</td>
+<td>\(6.62607\times10^{-34}\ \mathrm{J\,s}\)</td>
+<td>Planck constant</td>
+</tr>
+<tr>
+<td>\(k_B\)</td>
+<td>\(1.38065\times10^{-23}\ \mathrm{J\,K^{-1}}\)</td>
+<td>Boltzmann constant</td>
+</tr>
+<tr>
+<td>\(c\)</td>
+<td>\(2.99792458\times10^{8}\ \mathrm{m\,s^{-1}}\)</td>
+<td>speed of light (vacuum)</td>
+</tr>
+<tr>
+<td>\(g_0\)</td>
+<td>\(9.80665\ \mathrm{m\,s^{-2}}\)</td>
+<td>standard gravity</td>
+</tr>
+<tr>
+<td>\(S_0\)</td>
+<td>\(1361\ \mathrm{W\,m^{-2}}\)</td>
+<td>solar constant at 1 AU</td>
+</tr>
+<tr>
+<td>\(T_\mathrm{CMB}\)</td>
+<td>\(2.725\ \mathrm{K}\)</td>
+<td>cosmic-microwave-background sink</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-orbital-mechanics-of-a-circular-orbit">1. Orbital mechanics of a circular orbit</h2>
+<p><strong>Setup.</strong> A satellite of mass \(m\) on a circular orbit of radius \(r=a\) is held by gravity
+acting as the centripetal force.</p>
+<p><strong>Derivation.</strong> Newton's second law in the radial direction:</p>
+<p>\[\frac{\mu m}{a^2} = \frac{m v^2}{a}.\]</p>
+<p>The mass cancels, giving the <strong>circular orbital speed</strong></p>
+<p>\[\boxed{\ v = \sqrt{\frac{\mu}{a}}\ } \tag{1.1}\]</p>
+<p>The orbital period follows from \(v = 2\pi a / T\):</p>
+<p>\[T = \frac{2\pi a}{v} = 2\pi a \sqrt{\frac{a}{\mu}} = \boxed{\ 2\pi\sqrt{\frac{a^3}{\mu}}\ } \tag{1.2}\]</p>
+<p>which is Kepler's third law. The <strong>mean motion</strong> (orbital angular rate) is</p>
+<p>\[n = \frac{2\pi}{T} = \sqrt{\frac{\mu}{a^3}}. \tag{1.3}\]</p>
+<p>The <strong>specific orbital energy</strong> (energy per unit mass) combines kinetic and potential parts.
+For any orbit, the vis-viva relation \(v^2 = \mu\!\left(\tfrac{2}{r} - \tfrac{1}{a}\right)\) holds;
+the total specific energy is</p>
+<p>\[\mathcal{E} = \frac{v^2}{2} - \frac{\mu}{r} = -\frac{\mu}{2a}, \tag{1.4}\]</p>
+<p>a result we will use directly in the orbital-decay derivation (Section 4).</p>
+<p><strong>Worked example (\(h = 650\ \mathrm{km}\)).</strong> With \(a = R_E + h = 7.021\times10^{6}\ \mathrm{m}\):</p>
+<p>\[v = \sqrt{\frac{3.986\times10^{14}}{7.021\times10^{6}}} = 7534.8\ \mathrm{m/s},\qquad
+T = 2\pi\sqrt{\frac{(7.021\times10^{6})^3}{3.986\times10^{14}}} = 5854.8\ \mathrm{s} = 97.6\ \mathrm{min}.\]</p>
+<p><strong>Assumptions.</strong> Point-mass gravity, perfectly circular orbit, no perturbations. Valid to
+better than 1 percent for sizing; \(J_2\) and drag are treated separately (Sections 2, 4).</p>
+<hr />
+<h2 id="2-sun-synchronous-orbit-from-m93-nodal-precession">2. Sun-synchronous orbit from \(J_2\) nodal precession</h2>
+<p><strong>Setup.</strong> Earth's oblateness (\(J_2\)) makes the orbital plane's right ascension of the
+ascending node (RAAN, \(\Omega\)) precess. A sun-synchronous orbit (SSO) chooses the inclination
+\(i\) so this precession equals Earth's mean orbital rate about the Sun,
+\(\dot\Omega_\mathrm{sun} = 2\pi / (365.2422\ \mathrm{days}) = 1.991\times10^{-7}\ \mathrm{rad/s}\).</p>
+<p><strong>Derivation.</strong> The secular \(J_2\) nodal precession rate for a near-circular orbit is</p>
+<p>\[\dot\Omega = -\frac{3}{2}\, n\, J_2 \left(\frac{R_E}{a}\right)^2 \cos i. \tag{2.1}\]</p>
+<p>Setting \(\dot\Omega = \dot\Omega_\mathrm{sun}\) and solving for the inclination:</p>
+<p>\[\boxed{\ \cos i = -\frac{2\,\dot\Omega_\mathrm{sun}\,a^2}{3\,n\,J_2\,R_E^2}\ } \tag{2.2}\]</p>
+<p>The minus sign forces \(i > 90^\circ\) (a retrograde-precessing, near-polar orbit).</p>
+<p><strong>Worked example (\(h = 650\ \mathrm{km}\)).</strong> With \(n = 1.074\times10^{-3}\ \mathrm{rad/s}\),
+\(a = 7.021\times10^6\), Eq. (2.2) gives \(\cos i = -0.1386\), hence</p>
+<p>\[i = \arccos(-0.1386) = 98.0^\circ,\]</p>
+<p>matching the reference mission's stated inclination.</p>
+<p><strong>Use.</strong> SSO keeps the orbit plane at a near-fixed angle to the Sun all year. The dawn-dusk
+variant (orbit plane near the terminator) yields continuous sunlight (Section 3, 10).</p>
+<hr />
+<h2 id="3-eclipse-geometry-and-the-dawn-dusk-advantage">3. Eclipse geometry and the dawn-dusk advantage</h2>
+<p><strong>Setup.</strong> The fraction of an orbit spent in Earth's shadow depends on the beta angle \(\beta\),
+the angle between the orbit plane and the Sun direction.</p>
+<p><strong>Derivation.</strong> Eclipses occur only when the line of sight to the Sun is blocked by Earth.
+Geometrically, the satellite avoids shadow entirely when \(|\beta|\) exceeds the <strong>critical beta
+angle</strong> at which the orbit just grazes Earth's limb:</p>
+<p>\[\boxed{\ \beta^\* = \arcsin\!\frac{R_E}{R_E + h}\ } \tag{3.1}\]</p>
+<p>For \(|\beta| < \beta^\*\), the sunlit fraction of the orbit is</p>
+<p>\[f_\mathrm{sun} = 1 - \frac{1}{\pi}\cos^{-1}\!\left[\frac{\sqrt{h^2 + 2R_E h}}{(R_E + h)\cos\beta}\right]. \tag{3.2}\]</p>
+<p><strong>Worked example (\(h = 650\ \mathrm{km}\)).</strong></p>
+<p>\[\beta^\* = \arcsin\frac{6371}{7021} = \arcsin(0.9074) = 65.1^\circ.\]</p>
+<p>A dawn-dusk SSO holds \(|\beta|\) near \(90^\circ\) for most of the year, so \(|\beta| > \beta^\*\) and
+\(f_\mathrm{sun} \to 1\): better than 95 percent illumination, minimal thermal cycling, and a tiny
+battery (Section 10).</p>
+<hr />
+<h2 id="4-atmospheric-drag-and-orbital-decay">4. Atmospheric drag and orbital decay</h2>
+<p><strong>Setup.</strong> Even at 650 km the thin atmosphere exerts drag that slowly lowers the orbit. We seek
+\(da/dt\) and integrate it to a re-entry lifetime.</p>
+<p><strong>Drag force.</strong> A body of cross-section \(A\) moving at speed \(v\) through gas of density \(\rho\)
+feels a drag force opposing its velocity,</p>
+<p>\[F_D = \tfrac{1}{2}\,\rho\,v^2\,C_D\,A, \tag{4.1}\]</p>
+<p>with drag coefficient \(C_D \approx 2.2\) in free-molecular flow. The <strong>specific</strong> (per-mass)
+deceleration is</p>
+<p>\[a_D = \frac{F_D}{m} = \tfrac{1}{2}\,\rho\,v^2\,C_D\,\frac{A}{m}. \tag{4.2}\]</p>
+<p><strong>Energy-balance derivation of the decay rate.</strong> Drag does negative work at the rate (force
+times speed, per unit mass):</p>
+<p>\[\frac{d\mathcal{E}}{dt} = -\,a_D\, v = -\tfrac{1}{2}\,\rho\,C_D\,\frac{A}{m}\,v^3. \tag{4.3}\]</p>
+<p>For a near-circular orbit \(\mathcal{E} = -\mu/(2a)\) from Eq. (1.4), so</p>
+<p>\[\frac{d\mathcal{E}}{dt} = \frac{d}{dt}\!\left(-\frac{\mu}{2a}\right) = \frac{\mu}{2a^2}\,\frac{da}{dt}. \tag{4.4}\]</p>
+<p>Equating (4.3) and (4.4) and substituting \(v = \sqrt{\mu/a}\) so that \(v^3 = (\mu/a)^{3/2}\):</p>
+<p>\[\frac{\mu}{2a^2}\frac{da}{dt} = -\tfrac{1}{2}\,\rho\,C_D\,\frac{A}{m}\left(\frac{\mu}{a}\right)^{3/2}.\]</p>
+<p>Cancelling and simplifying the powers of \(a\) and \(\mu\):</p>
+<p>\[\boxed{\ \frac{da}{dt} = -\,C_D\,\frac{A}{m}\,\rho(h)\,\sqrt{\mu\,a}\ } \tag{4.5}\]</p>
+<p>The decay accelerates as the orbit lowers because \(\rho(h)\) rises steeply with decreasing
+altitude, ending in a rapid re-entry. The per-revolution contraction is
+\(\Delta a_\mathrm{rev} = \dot a\, T = -2\pi C_D (A/m)\,\rho\, a^2\).</p>
+<p><strong>Atmosphere model.</strong> \(\rho(h)\) is interpolated log-linearly between NRLMSIS anchors at
+600/650/700/800 km for three solar-activity levels. The minimum-to-maximum density ratio is
+about \(100\) over the 11-year solar cycle; this is the single largest source of lifetime
+uncertainty and is shown as a band, not a point.</p>
+<p><strong>Solution.</strong> Equation (4.5) is integrated by adaptive forward Euler,
+\(a_{k+1} = a_k - C_D (A/m)\,\rho(a_k - R_E)\sqrt{\mu a_k}\,\Delta t\), terminating at \(h = 120\ \mathrm{km}\).</p>
+<p><strong>Worked result.</strong> For the reference bus (\(A/m = 0.0084\ \mathrm{m^2/kg}\), \(C_D = 2.2\)) at 650 km,
+the integral gives a natural lifetime of about <strong>22 years</strong> at moderate solar activity (4 years
+at solar maximum, 312 years at solar minimum). Since the FCC post-mission disposal rule is now
+<strong>5 years</strong>, only a solar-maximum launch is even marginal: active de-orbit propulsion is
+mandatory (Section 15).</p>
+<hr />
+<h2 id="5-radiative-thermal-balance-and-radiator-sizing">5. Radiative thermal balance and radiator sizing</h2>
+<p><strong>Setup.</strong> In vacuum the only way to reject heat is radiation. We derive the radiated power and
+the area a radiator needs.</p>
+<p><strong>From Planck to Stefan-Boltzmann.</strong> A blackbody emits spectral radiance (power per area per
+solid angle per wavelength) given by Planck's law:</p>
+<p>\[B(\lambda, T) = \frac{2 h_P c^2}{\lambda^5}\,\frac{1}{\exp\!\big(h_P c / \lambda k_B T\big) - 1}. \tag{5.1}\]</p>
+<p>Integrating over the emitting hemisphere (\(\int \cos\theta\, d\Omega = \pi\)) and over all
+wavelengths gives the hemispherical emissive power:</p>
+<p>\[E_b(T) = \pi \int_0^\infty B(\lambda, T)\, d\lambda = \sigma T^4,
+\qquad \sigma = \frac{2\pi^5 k_B^4}{15\, h_P^3 c^2}. \tag{5.2}\]</p>
+<p>A real (gray) surface of emissivity \(\varepsilon\) radiating to a background at \(T_\infty\) rejects</p>
+<p>\[Q_\mathrm{rad} = \varepsilon\,\sigma\,A\,(T^4 - T_\infty^4). \tag{5.3}\]</p>
+<p>The radiative sink is the CMB, \(T_\infty = 2.725\ \mathrm{K}\); since
+\(T_\infty^4 / T^4 \sim 10^{-8}\) for \(T \sim 300\ \mathrm{K}\), the sink term is dropped.</p>
+<p><strong>Double-sided radiator with parasitic loads.</strong> A deployed panel radiates from both faces and
+loses a fraction \(f_p\) of its output to absorbed solar, albedo, and Earth-IR (Section 9). The
+<strong>net</strong> rejected flux per unit one-side area is \(q_\mathrm{net} = \varepsilon\sigma T^4\, n_s\, (1 - f_p)\)
+with \(n_s = 2\). The radiator area required for a heat load \(Q\) at operating temperature \(T\) is</p>
+<p>\[\boxed{\ A_\mathrm{rad} = \frac{Q}{\varepsilon\,\sigma\,T^4\,n_s\,(1 - f_p)}\ } \tag{5.4}\]</p>
+<p>This is <strong>linear in \(Q\)</strong>: cooling has no economy of scale, the central constraint of the study.</p>
+<p><strong>Worked example (1 MW at 20 C).</strong> With \(\varepsilon = 0.90\), \(T = 293.15\ \mathrm{K}\), \(n_s = 2\),
+\(f_p = 0.12\):</p>
+<p>\[\varepsilon\sigma T^4 = 0.90 \times 5.670\times10^{-8} \times (293.15)^4 = 376.9\ \mathrm{W/m^2}\ \text{(per side)},\]
+\[q_\mathrm{net} = 376.9 \times 2 \times 0.88 = 663.3\ \mathrm{W/m^2},\qquad
+A_\mathrm{rad} = \frac{10^6}{663.3} = 1508\ \mathrm{m^2}.\]</p>
+<p>This matches the industry "about 1,200 m² per MW" rule of thumb (which assumes a slightly higher
+\(\varepsilon\) and lower \(f_p\)). At 60 C the \(T^4\) factor raises \(q_\mathrm{net}\) and the area
+falls to about 900 m², at the cost of silicon lifetime.</p>
+<hr />
+<h2 id="6-solving-for-radiator-temperature-newton-raphson">6. Solving for radiator temperature: Newton-Raphson</h2>
+<p><strong>Setup.</strong> When the area \(A\) is fixed and the temperature is the unknown (the Part I baseline),
+Eq. (5.3) is a quartic in \(T\) that must be solved numerically.</p>
+<p><strong>Derivation.</strong> Define the residual and its derivative:</p>
+<p>\[f(T) = Q - \varepsilon\sigma A\, T^4, \qquad f'(T) = -4\,\varepsilon\sigma A\, T^3. \tag{6.1}\]</p>
+<p>The Newton-Raphson iteration is</p>
+<p>\[T_{k+1} = T_k - \frac{f(T_k)}{f'(T_k)} = T_k + \frac{Q - \varepsilon\sigma A\, T_k^4}{4\,\varepsilon\sigma A\, T_k^3}. \tag{6.2}\]</p>
+<p>Because \(f(T)\) is smooth and monotone decreasing for \(T > 0\), convergence from \(T_0 = 300\ \mathrm{K}\)
+to a tolerance \(|T_{k+1} - T_k| < 0.01\ \mathrm{K}\) takes 2 to 4 iterations.</p>
+<p><strong>Worked example (Part I baseline).</strong> With \(Q = 1450\ \mathrm{W}\), \(A = 4.0\ \mathrm{m^2}\)
+(single-sided), \(\varepsilon = 0.85\): iteration one gives \(T_1 = 294.4\ \mathrm{K}\), iteration two
+converges, yielding \(T_\mathrm{rad} = 294.4\ \mathrm{K} = 21.4\ \mathrm{C}\).</p>
+<hr />
+<h2 id="7-conductive-thermal-network-and-the-interface-wall">7. Conductive thermal network and the interface wall</h2>
+<p><strong>Setup.</strong> Heat must first travel from the chip junction to the radiator through solid layers.</p>
+<p><strong>Fourier's law and the thermal-resistance analogy.</strong> One-dimensional steady conduction through a
+layer of conductivity \(k\), area \(A\), length \(L\) carries</p>
+<p>\[Q = k A\,\frac{\Delta T}{L} \quad\Longleftrightarrow\quad \Delta T = Q\, R_{th},\qquad R_{th} = \frac{L}{k A}. \tag{7.1}\]</p>
+<p>This is exactly Ohm's law with \(\Delta T \leftrightarrow V\), \(Q \leftrightarrow I\),
+\(R_{th} \leftrightarrow R\). Layers in series add, parallel paths combine reciprocally:</p>
+<p>\[R_{th}^\mathrm{series} = \sum_i R_i, \qquad \frac{1}{R_{th}^\mathrm{parallel}} = \sum_i \frac{1}{R_i}. \tag{7.2}\]</p>
+<p>The junction temperature is then</p>
+<p>\[\boxed{\ T_j = T_\mathrm{rad} + Q\, R_{th}^\mathrm{sys}\ } \tag{7.3}\]</p>
+<p><strong>The interface wall.</strong> With the Part I passive chain \(R_{th}^\mathrm{sys} = 0.30\ \mathrm{K/W}\),
+the temperature rise across the chain alone is \(\Delta T = P \times 0.30\):</p>
+<p>\[P = 300\ \mathrm{W} \Rightarrow 90\ \mathrm{C}; \quad
+P = 700\ \mathrm{W} \Rightarrow 210\ \mathrm{C}; \quad
+P = 1200\ \mathrm{W} \Rightarrow 360\ \mathrm{C}.\]</p>
+<p>Since the entire junction budget is \(T_{j,\max} = 125\ \mathrm{C}\), any chip with
+\(P\, R_{th} > 125\ \mathrm{C}\), i.e. \(P > 417\ \mathrm{W}\) at \(R_{th} = 0.30\), <strong>cannot be cooled
+passively at any radiator size.</strong> This forces chip-level liquid or loop-heat-pipe cooling for
+H100-class and larger parts.</p>
+<hr />
+<h2 id="8-transient-thermal-response-eclipse">8. Transient thermal response (eclipse)</h2>
+<p><strong>Setup.</strong> During a brief eclipse the radiator keeps emitting while solar input drops. We need
+the temperature excursion.</p>
+<p><strong>Lumped-capacitance model.</strong> If internal gradients are negligible (small Biot number), the
+radiator is a single thermal node:</p>
+<p>\[m\, c_p\, \frac{dT}{dt} = Q_\mathrm{in}(t) - Q_\mathrm{out}(T). \tag{8.1}\]</p>
+<p><strong>Biot number check.</strong> With a radiative coefficient \(h_\mathrm{rad} = 4\varepsilon\sigma T^3\),
+characteristic length \(L_c = t_\mathrm{plate}\), and conductivity \(k\):</p>
+<p>\[\mathrm{Bi} = \frac{h_\mathrm{rad} L_c}{k} = \frac{(4.6)(0.005)}{167} \approx 1.4\times10^{-4} \ll 0.1, \tag{8.2}\]</p>
+<p>so the lumped model is valid. <strong>Linearizing</strong> the radiation term about \(T_0\) gives a first-order
+system with time constant</p>
+<p>\[\tau = \frac{m\, c_p}{h_\mathrm{rad}\, A}, \qquad h_\mathrm{rad} = 4\,\varepsilon\,\sigma\, T_0^3. \tag{8.3}\]</p>
+<p>A step change \(\Delta Q\) in input drives the temperature toward a new steady state
+\(\Delta T_\mathrm{ss} = \Delta Q / (h_\mathrm{rad} A)\) along</p>
+<p>\[T(t) = T_0 + \Delta T_\mathrm{ss}\left(1 - e^{-t/\tau}\right). \tag{8.4}\]</p>
+<p><strong>Worked example.</strong> Radiator \(m = 54\ \mathrm{kg}\), \(c_p = 900\ \mathrm{J/(kg\,K)}\),
+\(A = 4\ \mathrm{m^2}\), \(T_0 = 294.4\ \mathrm{K}\), \(\varepsilon = 0.85\): \(h_\mathrm{rad} = 4.6\ \mathrm{W/m^2K}\),
+\(\tau = (54)(900) / (4.6 \times 4) \approx 2620\ \mathrm{s} \approx 44\ \mathrm{min}\). A 5-minute eclipse
+(\(\Delta Q = -100\ \mathrm{W}\)) gives \(\Delta T_\mathrm{ss} = -5.6\ \mathrm{K}\) and
+\(T(300) = 294.4 - 5.6\,(1 - e^{-300/2620}) = 293.8\ \mathrm{K}\), a drop of only 0.6 C: the thermal
+mass buffers the eclipse almost completely.</p>
+<hr />
+<h2 id="9-external-heat-loads-view-factor-albedo-earth-ir-solar">9. External heat loads: view factor, albedo, Earth IR, solar</h2>
+<p><strong>Setup.</strong> A surface in LEO absorbs sunlight, sunlight reflected by Earth (albedo), and Earth's
+own infrared emission. These set the parasitic fraction \(f_p\) of Section 5.</p>
+<p><strong>Earth view factor.</strong> For a flat surface facing a sphere of radius \(R_E\) at orbital radius
+\(r = R_E + h\), the fraction of the hemisphere subtended by Earth is</p>
+<p>\[\boxed{\ F = \tfrac{1}{2}\!\left[1 - \sqrt{1 - \left(\tfrac{R_E}{r}\right)^2}\,\right]\ } \tag{9.1}\]</p>
+<p>At 650 km, \(F = 0.290\).</p>
+<p><strong>The three loads.</strong> With solar absorptivity \(\alpha_s\) and emissivity \(\varepsilon\):</p>
+<p>\[Q_\mathrm{solar} = S_0\, \alpha_s\, \cos\theta\, A, \tag{9.2}\]
+\[Q_\mathrm{albedo} = S_0\, a\, F\, \alpha_s\, A, \qquad a = 0.30\ \text{(Bond albedo)}, \tag{9.3}\]
+\[Q_\mathrm{IR} = q_\mathrm{IR}\, F\, \varepsilon\, A, \qquad q_\mathrm{IR} = 237\ \mathrm{W/m^2}. \tag{9.4}\]</p>
+<p><strong>Worked example (edge-on radiator, \(\alpha_s = 0.15\), \(\varepsilon = 0.91\), \(A = 4\ \mathrm{m^2}\)).</strong>
+Edge-on to the Sun, \(\cos\theta \approx 0\), so \(Q_\mathrm{solar} \approx 0\);
+\(Q_\mathrm{albedo} = 1361 \times 0.30 \times 0.290 \times 0.15 \times 4 = 71\ \mathrm{W}\);
+\(Q_\mathrm{IR} = 237 \times 0.290 \times 0.91 \times 4 = 251\ \mathrm{W}\). An Earth-facing radiator sees
+about 322 W of parasitic load; the optimized edge-on baseline lumps this to about 100 W.</p>
+<hr />
+<h2 id="10-electrical-power-solar-array-and-battery">10. Electrical power: solar array and battery</h2>
+<p><strong>Setup.</strong> A photovoltaic array converts sunlight to electrical power; a battery covers eclipse.</p>
+<p><strong>Array power.</strong> The electrical power delivered to the load is the incident solar power times the
+cell efficiency \(\eta\) (which degrades with radiation and falls with temperature), the panel
+packing factor, and the array-to-load path efficiency:</p>
+<p>\[P = S_0\, A\, \eta(T, \mathrm{life})\, \kappa_\mathrm{pack}\, \eta_\mathrm{path}, \tag{10.1}\]
+\[\eta(T,\mathrm{life}) = \eta_\mathrm{life}\,\big[1 + k_T (T - 28)\big], \tag{10.2}\]</p>
+<p>with triple-junction values \(\eta_\mathrm{BOL} = 0.296\), \(\eta_\mathrm{EOL,5yr} = 0.275\), temperature
+coefficient \(k_T = -0.0023\ \mathrm{per\ C}\), \(\kappa_\mathrm{pack} = 0.85\), \(\eta_\mathrm{path} = 0.88\).</p>
+<p><strong>Worked example (1 m², EOL, 70 C).</strong>
+\(\eta = 0.275\,[1 - 0.0023(70 - 28)] = 0.248\);
+\(P = 1361 \times 1 \times 0.248 \times 0.85 \times 0.88 = 253\ \mathrm{W}\).</p>
+<p><strong>Battery sizing.</strong> To carry the load \(P_L\) through an eclipse of duration \(t_e\) at depth of
+discharge DoD and specific energy \(e_\mathrm{sp}\), the battery mass is</p>
+<p>\[m_\mathrm{bat} = \frac{P_L\, t_e}{\mathrm{DoD}\, e_\mathrm{sp}}. \tag{10.3}\]</p>
+<p>In a dawn-dusk SSO, \(t_e\) is small (seasonal only), so \(m_\mathrm{bat}\) is minimal, a major mass
+saving over standard LEO with its 16 deep cycles per day.</p>
+<hr />
+<h2 id="11-attitude-control-and-optical-pointing">11. Attitude control and optical pointing</h2>
+<p><strong>Setup.</strong> A laser inter-satellite link needs sub-microradian pointing, far beyond what the bus
+attitude alone provides.</p>
+<p><strong>Diffraction-limited beam divergence.</strong> A telescope of aperture \(D\) at wavelength \(\lambda\)
+produces a full-angle divergence (Airy criterion)</p>
+<p>\[\Theta \approx \frac{2.44\,\lambda}{D}. \tag{11.1}\]</p>
+<p>At range \(R\) the beam spot radius is \(w(R) \approx \tfrac{1}{2}\Theta R\).</p>
+<p><strong>Pointing loss (Gaussian beam).</strong> A pointing error \(\theta_\mathrm{err}\) relative to the beam
+divergence \(\theta_\mathrm{div}\) costs received power</p>
+<p>\[L_\mathrm{point} = \exp\!\left(-\frac{2\,\theta_\mathrm{err}^2}{\theta_\mathrm{div}^2}\right). \tag{11.2}\]</p>
+<p><strong>Knowledge limit.</strong> A star tracker of accuracy \(\psi\) (arcseconds) gives attitude knowledge
+\(\psi \times 4.848\ \mathrm{\mu rad/arcsec}\). At \(\psi = 2''\) this is about \(10\ \mathrm{\mu rad}\), ten
+times coarser than the sub-microradian link requirement, so a fine-steering mirror is mandatory.</p>
+<p><strong>Disturbance torques.</strong> The dominant LEO torques are gravity-gradient and aerodynamic:</p>
+<p>\[\tau_\mathrm{gg} = \tfrac{3}{2}\, n^2\, |I_z - I_x|\, \sin 2\theta, \qquad
+\tau_\mathrm{aero} = \tfrac{1}{2}\rho v^2 C_D A\, \ell_{cp\text{-}cg}, \tag{11.3}\]</p>
+<p>where \(\ell_{cp\text{-}cg}\) is the center-of-pressure to center-of-mass offset. Reaction wheels
+absorb these and are desaturated by magnetorquers.</p>
+<hr />
+<h2 id="12-free-space-optical-communications-link-budget">12. Free-space optical communications link budget</h2>
+<p><strong>Setup.</strong> The received optical power sets the achievable data rate; range dominates the budget.</p>
+<p><strong>Antenna (telescope) gain.</strong> An aperture of diameter \(D\) has gain</p>
+<p>\[G = \left(\frac{\pi D}{\lambda}\right)^2. \tag{12.1}\]</p>
+<p><strong>Free-space path loss.</strong> Spreading over a sphere of radius \(R\) attenuates power by</p>
+<p>\[L_\mathrm{fs} = \left(\frac{4\pi R}{\lambda}\right)^2. \tag{12.2}\]</p>
+<p><strong>Link equation (decibel form).</strong> Combining transmit power, both telescopes, and losses:</p>
+<p>\[P_\mathrm{rx} = P_\mathrm{tx} + G_\mathrm{tx} + G_\mathrm{rx} - L_\mathrm{fs} - L_\mathrm{point} - L_\mathrm{atm} - L_\mathrm{optics}. \tag{12.3}\]</p>
+<p><strong>Worked example (why the formation is tight).</strong> At \(\lambda = 1.55\ \mathrm{\mu m}\), \(D = 0.1\ \mathrm{m}\):
+\(G = 10\log_{10}[(\pi \cdot 0.1 / 1.55\times10^{-6})^2] = 106\ \mathrm{dB}\) per telescope. The path loss is
+\(L_\mathrm{fs} = 184\ \mathrm{dB}\) at 200 m but \(258\ \mathrm{dB}\) at 1000 km, a 74 dB difference. Flying
+satellites about 150 m apart buys back this 74 dB, which is why a sub-200 m formation makes
+800 Gbps on a single transceiver realistic.</p>
+<p><strong>Latency.</strong> Light travels at \(c\) in vacuum but \(c/n_\mathrm{fiber}\) in fiber (\(n_\mathrm{fiber} = 1.4675\));
+a LEO optical mesh therefore beats terrestrial fiber for path distances beyond about 3000 km.</p>
+<hr />
+<h2 id="13-ionizing-radiation-dose-shielding-and-upsets">13. Ionizing radiation: dose, shielding, and upsets</h2>
+<p><strong>Setup.</strong> Trapped electrons and protons deposit dose in the silicon; energetic particles flip
+bits.</p>
+<p><strong>Dose-depth.</strong> Behind aluminium of thickness \(x\), the trapped-electron dose attenuates
+quasi-exponentially atop a proton/bremsstrahlung floor:</p>
+<p>\[\dot D(x) = D_0\, e^{-x/\lambda} + D_\infty, \qquad \lambda \approx 1.7\ \mathrm{mm}, \tag{13.1}\]</p>
+<p>calibrated so that \(D_\infty \sim 100\) to \(160\ \mathrm{rad/yr}\) (the proton floor measured by SIRI-1
+at 600 km SSO and consistent with the reference mission's proton-beam test). Cumulative mission
+dose is \(D_\mathrm{tot} = \dot D(x)\, t_\mathrm{mission}\).</p>
+<p><strong>Worked example (10 mm Al, 5 years).</strong> \(\dot D_\mathrm{lo} = 2.0\times10^4 e^{-10/1.7} + 100 = 156\),
+\(\dot D_\mathrm{hi} = 266\ \mathrm{rad/yr}\); \(D_\mathrm{tot} \approx \tfrac{1}{2}(156 + 266)\times 5 \approx 1.06\ \mathrm{krad(Si)}\),
+below the HBM tolerance of about 2 krad (margin about 1.9x).</p>
+<p><strong>Single-event upsets.</strong> The upset rate scales as</p>
+<p>\[R_\mathrm{SEU} = \sigma_\mathrm{SEU}\, \phi\, N_\mathrm{bits}, \tag{13.2}\]</p>
+<p>with per-bit cross-section \(\sigma_\mathrm{SEU}\) and particle flux \(\phi\) (enhanced in the South
+Atlantic Anomaly and polar horns). ECC corrects single-bit errors; the uncorrectable multi-bit
+tail (about \(10^{-3} R_\mathrm{SEU}\)) is absorbed by checkpointing, costing a 10 to 20 percent
+throughput tax.</p>
+<hr />
+<h2 id="14-orbital-debris-collision-probability-and-cascade">14. Orbital debris: collision probability and cascade</h2>
+<p><strong>Setup.</strong> Debris impacts are rare, independent events; we want the probability of at least one
+catastrophic hit, and the chance one fragmentation cascades through the formation.</p>
+<p><strong>Poisson model (from the binomial limit).</strong> Divide a mission into \(n\) short slices, each with hit
+probability \(p = \Phi A\, \Delta t\) (flux \(\times\) area \(\times\) time). The number of hits is binomial;
+taking \(n \to \infty\) with \(n p \to \Lambda\) yields a Poisson distribution,</p>
+<p>\[P(K = k) = \frac{\Lambda^k e^{-\Lambda}}{k!}, \qquad \Lambda = \Phi\, A\, N\, t. \tag{14.1}\]</p>
+<p>The probability of <strong>at least one</strong> catastrophic (\(>1\ \mathrm{cm}\)) impact in the cluster is</p>
+<p>\[\boxed{\ P(K \ge 1) = 1 - e^{-\Phi A N t}\ } \tag{14.2}\]</p>
+<p><strong>Worked example.</strong> With \(\Phi = 3\times10^{-5}\ \mathrm{m^{-2}yr^{-1}}\) (ORDEM/MASTER central),
+\(A = 15\ \mathrm{m^2}\), \(N = 81\), \(t = 5\ \mathrm{yr}\): \(\Lambda = 0.182\),
+\(P = 1 - e^{-0.182} = 16.7\%\). The flux band \(10^{-5}\) to \(10^{-4}\) maps to 6 to 46 percent.</p>
+<p><strong>Cascade coupling (expanding-shell model).</strong> A break-up sends \(N_f\) lethal fragments over a sphere
+of area \(4\pi d^2\) at range \(d\); a neighbor of cross-section \(\pi r_t^2\) intercepts an expected
+\(\Lambda_n = N_f r_t^2 / (4 d^2)\), so</p>
+<p>\[\boxed{\ P_\mathrm{hit}(d) = 1 - \exp\!\left(-\frac{N_f\, r_t^2}{4\, d^2}\right)\ } \tag{14.3}\]</p>
+<p><strong>Worked example.</strong> \(N_f = 2000\), \(r_t = 2\ \mathrm{m}\), \(d = 150\ \mathrm{m}\):
+\(\Lambda_n = 8000/90000 = 0.0889\), \(P_\mathrm{hit} = 8.5\%\) per neighbor. Since \(P_\mathrm{hit} \propto d^{-2}\),
+widening to 1 km drops it below 1 percent but degrades the optical-link budget: the formation
+paradox.</p>
+<hr />
+<h2 id="15-propulsion-drag-make-up-de-orbit-and-propellant">15. Propulsion: drag make-up, de-orbit, and propellant</h2>
+<p><strong>Setup.</strong> The satellite must counter drag, hold formation, dodge debris, and de-orbit at end of
+life.</p>
+<p><strong>Drag make-up.</strong> Integrating the specific drag deceleration (4.2) over the mission:</p>
+<p>\[\Delta v_\mathrm{drag} = \int_0^t a_D\, dt = \tfrac{1}{2}\,\rho\, v^2\, C_D\,\frac{A}{m}\, t. \tag{15.1}\]</p>
+<p>At 650 km this is about 13 m/s over 5 years.</p>
+<p><strong>Controlled de-orbit (Hohmann perigee-lowering).</strong> A single retrograde burn at the circular
+radius \(r_1\) lowers the perigee to \(r_2\) (180 km). The transfer ellipse has semi-major axis
+\(a_t = (r_1 + r_2)/2\). By vis-viva, the speed at the apogee of the transfer (where the burn occurs) is</p>
+<p>\[v_\mathrm{apo} = \sqrt{\mu\!\left(\frac{2}{r_1} - \frac{1}{a_t}\right)}
+= \sqrt{\mu\!\left(\frac{2}{r_1} - \frac{2}{r_1 + r_2}\right)}
+= \sqrt{\frac{\mu}{r_1}}\,\sqrt{\frac{2 r_2}{r_1 + r_2}}. \tag{15.2}\]</p>
+<p>The required impulse is the difference from the circular speed \(v_{c1} = \sqrt{\mu/r_1}\):</p>
+<p>\[\boxed{\ \Delta v_\mathrm{deorbit} = v_{c1}\!\left(1 - \sqrt{\frac{2 r_2}{r_1 + r_2}}\right)\ } \tag{15.3}\]</p>
+<p><strong>Worked example (650 to 180 km).</strong> \(r_1 = 7.021\times10^6\), \(r_2 = 6.551\times10^6\),
+\(v_{c1} = 7534.8\ \mathrm{m/s}\):</p>
+<p>\[\Delta v_\mathrm{deorbit} = 7534.8\left(1 - \sqrt{\tfrac{2(6.551)}{7.021 + 6.551}}\right) = 7534.8\,(1 - 0.9825) = 131.6\ \mathrm{m/s}.\]</p>
+<p>This single term dominates the 5-year budget of about 190 m/s (drag 13, formation 8, avoidance 5,
+de-orbit 132, plus 20 percent margin).</p>
+<p><strong>Propellant (Tsiolkovsky).</strong> Momentum conservation for a rocket expelling mass at exhaust speed
+\(v_e = I_{sp}\, g_0\) gives \(m\, dv = -v_e\, dm\), which integrates to the rocket equation
+\(\Delta v = v_e \ln(m_0/m_f)\). Solving for the propellant \(m_p = m_0 - m_f\) with \(m_f = m_\mathrm{dry}\):</p>
+<p>\[\boxed{\ m_p = m_\mathrm{dry}\!\left(e^{\Delta v / (I_{sp} g_0)} - 1\right)\ } \tag{15.4}\]</p>
+<p><strong>Worked example (\(\Delta v = 189.5\ \mathrm{m/s}\), \(m_\mathrm{dry} = 375\ \mathrm{kg}\)).</strong> Hydrazine
+(\(I_{sp} = 220\ \mathrm{s}\)): \(m_p = 375\,(e^{0.0878} - 1) = 34.4\ \mathrm{kg}\). Electric
+(\(I_{sp} = 1500\ \mathrm{s}\)): \(m_p = 4.9\ \mathrm{kg}\).</p>
+<hr />
+<h2 id="16-reliability-and-constellation-availability">16. Reliability and constellation availability</h2>
+<p><strong>Setup.</strong> With no on-orbit repair, availability is bought through redundancy and replenishment.</p>
+<p><strong>Exponential reliability.</strong> In the flat "useful life" region of the bathtub curve, failures are a
+constant-hazard (Poisson) process, so the probability a unit survives to time \(t\) is</p>
+<p>\[R(t) = e^{-t/\mathrm{MTBF}} = e^{-\lambda t}. \tag{16.1}\]</p>
+<p>A unit with \(\mathrm{MTBF} = 50{,}000\ \mathrm{h}\) over 5 years (\(43{,}800\ \mathrm{h}\)) has
+\(R = e^{-0.876} = 0.42\): less than half survive un-aided, so redundancy is mandatory.</p>
+<p><strong>\(k\)-of-\(n\) redundancy.</strong> If a system works when at least \(k\) of \(n\) identical units (each
+reliability \(p\)) survive:</p>
+<p>\[R_\mathrm{sys} = \sum_{i=k}^{n} \binom{n}{i}\, p^i\, (1-p)^{\,n-i}. \tag{16.2}\]</p>
+<p><strong>Constellation capacity.</strong> The expected fraction of required capacity available (no
+replenishment) is \(\min\!\big(1,\ n_\mathrm{deployed}\, p / n_\mathrm{required}\big)\); operational
+constellations sustain capacity by continuous replenishment at a rate
+\(\approx 1/\text{(design life)}\) (about 20 percent per year for a 5-year life).</p>
+<hr />
+<h2 id="17-compute-utilization-and-effective-efficiency">17. Compute, utilization, and effective efficiency</h2>
+<p><strong>Setup.</strong> The deliverable is useful compute, not peak FLOPS.</p>
+<p><strong>Delivered compute.</strong> With \(n\) chips of peak \(P_\mathrm{peak}\), model-FLOPs utilization (MFU), and
+radiation availability \(a_r\):</p>
+<p>\[\text{delivered} = n\, P_\mathrm{peak}\, \mathrm{MFU}\, a_r. \tag{17.1}\]</p>
+<p>MFU is 40 to 60 percent for training but only 8 to 10 percent for inference decode (memory-bound),
+so an inference platform must be planned around the low regime.</p>
+<p><strong>Effective PUE.</strong> Folding the radiation throughput tax into the power-overhead ratio:</p>
+<p>\[\mathrm{PUE}_\mathrm{eff} = \frac{P_\mathrm{total} / P_\mathrm{compute}}{a_r}. \tag{17.2}\]</p>
+<p><strong>Cost of useful compute.</strong> Cost per useful PFLOP-hour is the per-chip hourly cost divided by the
+useful throughput \(P_\mathrm{peak}\,\mathrm{MFU}\, a_r\); at realistic MFU this is 3 to 10 times the
+peak figure.</p>
+<hr />
+<h2 id="18-techno-economics">18. Techno-economics</h2>
+<p><strong>Setup.</strong> Per-satellite cost splits into launch and hardware.</p>
+<p><strong>Cost model.</strong> \(C_\mathrm{sat} = p_\mathrm{launch}\, m_\mathrm{launch} + C_\mathrm{hw}\). Launch equals
+hardware at the <strong>cross-over price</strong></p>
+<p>\[p^\* = \frac{C_\mathrm{hw}}{m_\mathrm{launch}}. \tag{18.1}\]</p>
+<p>With \(C_\mathrm{hw} = 1.1\) million USD and \(m_\mathrm{launch} = 415\ \mathrm{kg}\),
+\(p^\* = 2650\ \mathrm{USD/kg}\). Below this, hardware dominates; below about 600 USD/kg, launch is a
+small correction, so the economics are gated by hardware cost, lifetime, utilization, and the
+radiation tax, not by the headline dollar-per-kilogram. Total cost of ownership is
+\(\mathrm{TCO} = \mathrm{CAPEX} + n_\mathrm{years}\,\mathrm{OPEX}\).</p>
+<hr />
+<h2 id="19-master-list-of-governing-equations">19. Master list of governing equations</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Quantity</th>
+<th>Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td>Circular speed</td>
+<td>\(v = \sqrt{\mu/a}\)</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>Period</td>
+<td>\(T = 2\pi\sqrt{a^3/\mu}\)</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>SSO inclination</td>
+<td>\(\cos i = -2\dot\Omega_\mathrm{sun} a^2 / (3 n J_2 R_E^2)\)</td>
+</tr>
+<tr>
+<td>3.1</td>
+<td>Critical beta</td>
+<td>\(\beta^\* = \arcsin\!\big(R_E/(R_E+h)\big)\)</td>
+</tr>
+<tr>
+<td>4.5</td>
+<td>Orbital decay</td>
+<td>\(\dot a = -C_D (A/m)\,\rho\,\sqrt{\mu a}\)</td>
+</tr>
+<tr>
+<td>5.4</td>
+<td>Radiator area</td>
+<td>\(A_\mathrm{rad} = Q / [\varepsilon\sigma T^4 n_s (1 - f_p)]\)</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td>Newton-Raphson</td>
+<td>\(T_{k+1} = T_k + (Q - \varepsilon\sigma A T_k^4)/(4\varepsilon\sigma A T_k^3)\)</td>
+</tr>
+<tr>
+<td>7.3</td>
+<td>Junction temp</td>
+<td>\(T_j = T_\mathrm{rad} + Q R_{th}\)</td>
+</tr>
+<tr>
+<td>8.4</td>
+<td>Eclipse transient</td>
+<td>\(T(t) = T_0 + \Delta T_\mathrm{ss}(1 - e^{-t/\tau})\)</td>
+</tr>
+<tr>
+<td>9.1</td>
+<td>Earth view factor</td>
+<td>\(F = \tfrac{1}{2}[1 - \sqrt{1 - (R_E/r)^2}]\)</td>
+</tr>
+<tr>
+<td>10.1</td>
+<td>Array power</td>
+<td>\(P = S_0 A\,\eta\,\kappa\,\eta_\mathrm{path}\)</td>
+</tr>
+<tr>
+<td>11.2</td>
+<td>Pointing loss</td>
+<td>\(L = \exp(-2\theta_\mathrm{err}^2/\theta_\mathrm{div}^2)\)</td>
+</tr>
+<tr>
+<td>12.2</td>
+<td>Free-space loss</td>
+<td>\(L_\mathrm{fs} = (4\pi R/\lambda)^2\)</td>
+</tr>
+<tr>
+<td>13.1</td>
+<td>Dose-depth</td>
+<td>\(\dot D = D_0 e^{-x/\lambda} + D_\infty\)</td>
+</tr>
+<tr>
+<td>14.2</td>
+<td>Debris risk</td>
+<td>\(P = 1 - e^{-\Phi A N t}\)</td>
+</tr>
+<tr>
+<td>14.3</td>
+<td>Cascade</td>
+<td>\(P_\mathrm{hit} = 1 - e^{-N_f r_t^2 / 4 d^2}\)</td>
+</tr>
+<tr>
+<td>15.3</td>
+<td>De-orbit Δv</td>
+<td>\(\Delta v = v_{c1}(1 - \sqrt{2 r_2/(r_1 + r_2)})\)</td>
+</tr>
+<tr>
+<td>15.4</td>
+<td>Propellant</td>
+<td>\(m_p = m_\mathrm{dry}(e^{\Delta v/I_{sp} g_0} - 1)\)</td>
+</tr>
+<tr>
+<td>16.1</td>
+<td>Reliability</td>
+<td>\(R(t) = e^{-t/\mathrm{MTBF}}\)</td>
+</tr>
+<tr>
+<td>16.2</td>
+<td>k-of-n</td>
+<td>\(R_\mathrm{sys} = \sum_{i=k}^{n}\binom{n}{i}p^i(1-p)^{n-i}\)</td>
+</tr>
+<tr>
+<td>17.1</td>
+<td>Delivered compute</td>
+<td>\(n P_\mathrm{peak}\,\mathrm{MFU}\,a_r\)</td>
+</tr>
+<tr>
+<td>18.1</td>
+<td>Launch cross-over</td>
+<td>\(p^\* = C_\mathrm{hw}/m_\mathrm{launch}\)</td>
+</tr>
+</tbody>
+</table>
+<p>Every equation here is implemented in the open-source model and checked against the worked
+examples by its validation suite. This guide is the authoritative derivation reference for the
+<em>Space-Based AI Data Centers, Part II</em> study.</p>
+</body></html>

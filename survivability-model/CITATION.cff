@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this model, please cite it as below."
+title: "Orbital AI Data-Center Survivability Model"
+abstract: >-
+  A first-order, fully-sourced, reproducible engineering model for the survivability,
+  reliability, and launch architecture of space-based AI compute clusters. Companion to
+  the study "Space-Based AI Data Centers, Part II", using Google Project Suncatcher as the
+  reference architecture.
+type: software
+authors:
+  - family-names: Biswas
+    given-names: Samarjith
+    name-suffix: PhD
+version: "1.0.0"
+date-released: "2026-06-17"
+license: MIT
+keywords:
+  - space-based computing
+  - orbital data center
+  - spacecraft thermal control
+  - orbital debris
+  - LEO survivability
+  - Project Suncatcher
+references:
+  - type: article
+    title: "Towards a future space-based, highly scalable AI infrastructure system design"
+    authors:
+      - family-names: "Agüera y Arcas"
+        given-names: Blaise
+    year: 2025
+    notes: "arXiv:2511.19468"
