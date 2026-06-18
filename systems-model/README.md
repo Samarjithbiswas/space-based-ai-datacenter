@@ -7,7 +7,7 @@ this package models **every subsystem** and closes them into one self-consistent
 
 Reference architecture: Google **Project Suncatcher** ([arXiv:2511.19468](https://arxiv.org/abs/2511.19468)).
 
-![python](https://img.shields.io/badge/python-3.9%2B-blue) ![license](https://img.shields.io/badge/license-MIT-green) ![tests](https://img.shields.io/badge/pytest-83_passing-success) ![validation](https://img.shields.io/badge/validation-23%2F23-success) ![CI](https://img.shields.io/badge/CI-GitHub_Actions-blue) ![pip](https://img.shields.io/badge/install-pip%20install%20-e%20.-informational) ![modules](https://img.shields.io/badge/subsystems-13-informational)
+![python](https://img.shields.io/badge/python-3.9%2B-blue) ![license](https://img.shields.io/badge/license-MIT-green) ![tests](https://img.shields.io/badge/pytest-108_passing-success) ![validation](https://img.shields.io/badge/validation-23%2F23-success) ![CI](https://img.shields.io/badge/CI-GitHub_Actions-blue) ![pip](https://img.shields.io/badge/install-pip%20install%20-e%20.-informational) ![modules](https://img.shields.io/badge/subsystems-17-informational)
 
 ```python
 from orbital_dc.system import DesignPoint, constellation
@@ -36,6 +36,10 @@ close on each other instead of being analyzed in isolation.
 | `power` | triple-junction array (BOL/EOL + temp derate), Li-ion battery, EPS budget | Azur/Spectrolab, NASA SoA |
 | `adcs` | optical pointing budget, beam divergence, reaction-wheel/star-tracker limits, disturbance torques | SDA OCT, GRACE-FO, Mynaric/TESAT |
 | `comms` | FSO link budget (ISL + ground), latency, fabric capacity | NASA TBIRD/LCRD, arXiv:2204.13177 |
+| `groundlink` | sat-to-ground optical downlink, slant atmospheric loss, cloud site-diversity availability, contact geometry, mesh-vs-fiber latency | NASA TBIRD; FSO link literature |
+| `structures` | inertia tensor from geometry, structural mass from launch loads, panel modal frequency | spacecraft structural design |
+| `workload` | time-domain coupled thermal-throttle compute (delivered PFLOPS under junction limit + eclipse + checkpoint) | first-principles thermal+compute coupling |
+| `finance` | discounted cash flow (NPV/IRR), capital recovery, LCOE ($/PFLOP-hr), replenishment OPEX | standard project finance |
 | `radiation` | cumulative TID vs shielding, shielding mass, SEU availability tax | SHIELDOSE-2/AE8-AP8, Suncatcher |
 | `debris` | Poisson collision probability, fragmentation cascade | ORDEM 3.1 / MASTER-8, ESA SER 2025 |
 | `propulsion` | drag make-up, Hohmann de-orbit, Δv budget, rocket equation | vis-viva, Tsiolkovsky |

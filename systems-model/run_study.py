@@ -23,7 +23,9 @@ def main():
               "radiator_area_m2", "interface_dT_C", "active_cooling_required", "tid_5yr_rad",
               "tid_margin", "dry_mass_kg", "launch_mass_kg", "delta_v_total_mps", "propellant_kg",
               "natural_lifetime_yr", "meets_disposal_rule", "debris_P_catastrophic_5yr",
-              "cascade_neighbor_P", "delivered_PFLOPS", "satellite_cost_usd"]:
+              "cascade_neighbor_P", "delivered_PFLOPS", "throttle_loss_frac", "Tj_peak_C",
+              "ground_downlink_TB_day", "ground_availability", "inertia_max_kgm2",
+              "gravity_gradient_torque_Nm", "lcoe_usd_per_pflop_hr", "satellite_cost_usd"]:
         print(f"  {k:28s}: {s[k]}")
 
     banner("CONSTELLATION  (81 satellites)")

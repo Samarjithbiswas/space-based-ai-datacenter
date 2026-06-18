@@ -146,8 +146,36 @@ def fig_montecarlo(n=3000):
     fig.tight_layout(); fig.savefig(FIGDIR / "fig_montecarlo.png"); plt.close(fig)
 
 
+def fig_new_subsystems():
+    """Ground link, thermal-throttle workload, latency, and finance (the four added modules)."""
+    from . import groundlink, finance, workload
+    fig, ax = plt.subplots(2, 2, figsize=(10.2, 7.4))
+    chips = ["tpu_v6e", "h100", "b200"]
+    loss = [workload.simulate_orbit(chip=c, radiator_area_m2=4.0)["throttle_loss_frac"] * 100 for c in chips]
+    ax[0, 0].bar(chips, loss, color=[GOOD, WARN, BAD])
+    ax[0, 0].set_ylabel("throttle loss (%)"); ax[0, 0].set_title("(a) Passive thermal-throttle by chip")
+    for i, v in enumerate(loss): ax[0, 0].text(i, v + 1, f"{v:.0f}%", ha="center", fontsize=8.5)
+    ns = np.arange(1, 8)
+    av = [groundlink.site_diversity_availability(int(n)) * 100 for n in ns]
+    ax[0, 1].plot(ns, av, "o-", color=COOL, lw=2.3); ax[0, 1].axhline(99, color=GOOD, ls="--")
+    ax[0, 1].set_ylim(40, 102); ax[0, 1].set_xlabel("ground stations")
+    ax[0, 1].set_ylabel("downlink availability (%)"); ax[0, 1].set_title("(b) Ground-station site diversity")
+    d = np.linspace(500, 12000, 100)
+    ax[1, 0].plot(d, [groundlink.mesh_latency_ms(x)["leo_mesh_ms"] for x in d], color=COOL, lw=2.2, label="LEO optical mesh")
+    ax[1, 0].plot(d, [groundlink.mesh_latency_ms(x)["fiber_ms"] for x in d], color=ACCENT, lw=2.2, label="terrestrial fiber")
+    ax[1, 0].set_xlabel("path distance (km)"); ax[1, 0].set_ylabel("one-way latency (ms)")
+    ax[1, 0].set_title("(c) Latency crossover"); ax[1, 0].legend(fontsize=8)
+    rev = np.linspace(0.5e6, 4e6, 100)
+    ax[1, 1].plot(rev / 1e6, [finance.dcf_summary(2e6, 0.3e6, r, 5, 0.10)["npv_usd"] / 1e6 for r in rev], color=NAVY, lw=2.3)
+    ax[1, 1].axhline(0, color=BAD, ls="--"); ax[1, 1].set_xlabel("annual revenue ($M/sat)")
+    ax[1, 1].set_ylabel("NPV ($M, 10% disc.)"); ax[1, 1].set_title("(d) Discounted cash-flow breakeven")
+    fig.suptitle("FIG. N  Added subsystems: ground link, thermal-throttle, latency, finance", fontweight="bold")
+    _credit(fig, "groundlink/structures/workload/finance modules. Throttle from time-domain thermal sim; DCF at 10% discount.")
+    fig.tight_layout(); fig.savefig(FIGDIR / "fig_new_subsystems.png"); plt.close(fig)
+
+
 def generate_all():
     FIGDIR.mkdir(exist_ok=True); _style()
     fig_power(); fig_link_budget(); fig_reliability()
-    fig_compute_econ(); fig_mass_budget(); fig_montecarlo()
+    fig_compute_econ(); fig_mass_budget(); fig_montecarlo(); fig_new_subsystems()
     return sorted(p.name for p in FIGDIR.glob("fig_*.png"))

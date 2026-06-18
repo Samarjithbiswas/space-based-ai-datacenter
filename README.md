@@ -5,7 +5,7 @@ reproducible systems-engineering analysis of orbital AI compute, the open Python
 produce every number and figure, a derivation-by-derivation mathematical guide, and a premium 3D
 visualization. Reference architecture: Google **Project Suncatcher** ([arXiv:2511.19468](https://arxiv.org/abs/2511.19468)).
 
-![python](https://img.shields.io/badge/python-3.9%2B-blue) ![license](https://img.shields.io/badge/license-MIT-green) ![tests](https://img.shields.io/badge/pytest-83_passing-success) ![validation](https://img.shields.io/badge/validation-37_checks-success) ![subsystems](https://img.shields.io/badge/subsystems-13-informational)
+![python](https://img.shields.io/badge/python-3.9%2B-blue) ![license](https://img.shields.io/badge/license-MIT-green) ![tests](https://img.shields.io/badge/pytest-108_passing-success) ![validation](https://img.shields.io/badge/validation-23_checks-success) ![subsystems](https://img.shields.io/badge/subsystems-17-informational)
 
 > **Thesis:** radiative cooling is the *solved* part of orbital AI compute (now flight-proven by
 > Starcloud's H100). The unsolved parts are orbital-debris survivability in a tight formation,
@@ -17,7 +17,7 @@ visualization. Reference architecture: Google **Project Suncatcher** ([arXiv:251
 
 | Folder | Contents |
 |---|---|
-| [`systems-model/`](systems-model) | **`orbital_dc`** — the full 13-subsystem Python package (orbit, thermal, power, ADCS, comms, radiation, debris, propulsion, reliability, compute, economics) + an integration layer that closes the mass/power/thermal/Δv budget, Monte-Carlo, **83-test pytest suite**, and CI. |
+| [`systems-model/`](systems-model) | **`orbital_dc`** — the full **17-subsystem** Python package (orbit, thermal, power, ADCS, comms, **ground link**, **structures**, radiation, debris, propulsion, reliability, compute, **workload/thermal-throttle**, **finance**, economics) + an integration layer that closes the mass/power/thermal/Δv budget, Monte-Carlo, **108-test pytest suite**, and CI. |
 | [`survivability-model/`](survivability-model) | Focused survivability model (single module, 12 pure functions, 14-check validation, 7 figures). |
 | [`report/`](report) | The complete Part II report and the **derivation-by-derivation mathematical guide** (Markdown + MathJax HTML), all figures, the figure-generating script, and an independent peer review of a related repo. |
 | [`animation/`](animation) | A **premium cinematic 3D visualization** (photoreal day/night Earth, atmosphere, constellation, bloom) and a caption-free documentary copy. |

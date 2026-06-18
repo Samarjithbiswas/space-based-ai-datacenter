@@ -7,7 +7,8 @@ to a constellation.
 """
 from __future__ import annotations
 from dataclasses import dataclass, field
-from . import orbit, thermal, power, radiation, debris, propulsion, reliability, compute, economics
+from . import (orbit, thermal, power, radiation, debris, propulsion, reliability, compute,
+               economics, groundlink, structures, workload, finance, adcs)
 from .constants import ALT_KM, N_SATS, SPACING_M
 from .compute import EST_TDP_W
 
@@ -52,8 +53,14 @@ class DesignPoint:
         tid_margin = radiation.tid_margin(self.shielding_mm, 5.0)
         shield_m = radiation.shielding_mass(self.shielding_mm, area_m2=2.0)
 
+        # --- structures: structure mass + inertia from geometry (feeds ADCS) ---
+        supported = radiator_m + array_m + battery_m + shield_m + self.n_chips * 3.0 + 45.0
+        struct_m = structures.structural_mass(supported, 0.20)
+        inertia = structures.spacecraft_inertia(bus_mass=struct_m)
+        gg_torque = adcs.gravity_gradient_torque(self.alt_km, inertia["inertia_diff"])
+
         # --- mass budget (dry) ---
-        masses = {"structure": 85.0, "thermal": radiator_m, "power": array_m + battery_m,
+        masses = {"structure": struct_m, "thermal": radiator_m, "power": array_m + battery_m,
                   "adcs": 30.0, "shielding": shield_m, "avionics": 45.0,
                   "payload_chips": self.n_chips * 3.0, "harness": 28.0}
         dry_mass = sum(masses.values())
@@ -70,10 +77,20 @@ class DesignPoint:
         p_debris5 = debris.collision_probability(15.0, N_SATS, 5.0)
         cascade = debris.cascade_neighbor_probability(SPACING_M)
 
-        # --- compute / economics ---
-        delivered = compute.delivered_pflops(self.n_chips, self.chip, self.mfu, avail)
+        # --- compute: time-domain throttled delivery (couples thermal+compute) ---
+        wl = workload.simulate_orbit(n_chips=self.n_chips, chip=self.chip, alt_km=self.alt_km,
+                                     radiator_area_m2=max(radiator_area, 2.0), mfu=self.mfu,
+                                     protection=self.protection)
+        delivered = wl["delivered_PFLOPS_mean"]
         eff_pue = compute.effective_pue(compute_W, total_W, avail)
+
+        # --- ground segment ---
+        gl = groundlink.ground_downlink(self.alt_km)
+
+        # --- economics: LCOE of compute (discounted) ---
         sat_cost = economics.satellite_cost(self.launch_usd_per_kg)
+        opex_yr = 0.15 * sat_cost["total"]
+        lcoe = finance.lcoe_per_pflop_hr(sat_cost["total"], opex_yr, max(delivered, 1e-6))
 
         return {
             "compute_W": compute_W, "total_power_W": total_W, "electrical_PUE": pwr["electrical_PUE"],
@@ -81,12 +98,15 @@ class DesignPoint:
             "radiator_area_m2": radiator_area, "interface_dT_C": interface_dT,
             "active_cooling_required": interface_dT > 125.0,
             "tid_5yr_rad": tid, "tid_margin": tid_margin,
+            "inertia_max_kgm2": inertia["I_max"], "gravity_gradient_torque_Nm": gg_torque,
             "dry_mass_kg": dry_mass, "launch_mass_kg": launch_mass, "mass_breakdown": masses,
             "delta_v_total_mps": dv["total"], "propellant_kg": prop_m,
             "natural_lifetime_yr": life, "meets_disposal_rule": life <= 5.0,
             "debris_P_catastrophic_5yr": p_debris5, "cascade_neighbor_P": cascade,
-            "delivered_PFLOPS": delivered, "usable_compute_frac": avail,
-            "satellite_cost_usd": sat_cost["total"],
+            "delivered_PFLOPS": delivered, "throttle_loss_frac": wl["throttle_loss_frac"],
+            "Tj_peak_C": wl["Tj_peak_C"], "usable_compute_frac": avail,
+            "ground_downlink_TB_day": gl["daily_volume_TB"], "ground_availability": gl["availability"],
+            "satellite_cost_usd": sat_cost["total"], "lcoe_usd_per_pflop_hr": lcoe,
         }
 
 
