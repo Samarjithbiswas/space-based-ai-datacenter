@@ -70,8 +70,12 @@ equation appears in a post or article.
 
 ## Read the study
 
-- **Report (HTML, figures embedded):** [`report/Report_II_Complete.html`](report/Report_II_Complete.html)
-- **Mathematical guide (every derivation, MathJax):** [`report/Mathematical_Guide_Complete.html`](report/Mathematical_Guide_Complete.html)
+- **Master report (the complete study — physics + simulations + predictions, figures embedded, MathJax):**
+  [`report/Master_Report.html`](report/Master_Report.html) ← start here
+- **Mathematical guide (every derivation in full):** [`report/Mathematical_Guide_Complete.html`](report/Mathematical_Guide_Complete.html)
+- **Earlier complete report:** [`report/Report_II_Complete.html`](report/Report_II_Complete.html)
+- **Cost-parity prediction (Monte-Carlo):** `python report/predictions.py`
+- **LinkedIn-ready text + equation images:** [`linkedin/Master_Report_LinkedIn.txt`](linkedin/Master_Report_LinkedIn.txt), [`report/equations/`](report/equations)
 
 Open either in a browser; print to PDF if you want a document. The math guide needs internet on
 first load to typeset (MathJax CDN).
