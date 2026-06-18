@@ -70,10 +70,12 @@ equation appears in a post or article.
 
 ## Read the study
 
-- **Master report (the complete study — physics + simulations + predictions, figures embedded, MathJax):**
-  [`report/Master_Report.html`](report/Master_Report.html) ← start here
+- **The complete treatise (~60-page book — all models, derivations, 18 tables, predictions):**
+  [`report/Report_II_Complete.html`](report/Report_II_Complete.html) ← start here, or the
+  **Microsoft Word version** [`report/Report_II_Complete.docx`](report/Report_II_Complete.docx)
+  (403 native, editable Word equations; 14 figures; 18 tables). Regenerate with `python report/make_docx.py`.
+- **Concise master report:** [`report/Master_Report.html`](report/Master_Report.html)
 - **Mathematical guide (every derivation in full):** [`report/Mathematical_Guide_Complete.html`](report/Mathematical_Guide_Complete.html)
-- **Earlier complete report:** [`report/Report_II_Complete.html`](report/Report_II_Complete.html)
 - **Cost-parity prediction (Monte-Carlo):** `python report/predictions.py`
 - **LinkedIn-ready text + equation images:** [`linkedin/Master_Report_LinkedIn.txt`](linkedin/Master_Report_LinkedIn.txt), [`report/equations/`](report/equations)
 
