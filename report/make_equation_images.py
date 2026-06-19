@@ -71,11 +71,16 @@ EQS = [
 ]
 
 
-def render(name, latex, dpi=220):
+def render(name, latex, dpi=300):
+    # high resolution, transparent background, dark navy glyphs -> sits cleanly on the
+    # white LinkedIn article background with no visible box.
     fig = plt.figure(figsize=(0.01, 0.01))
-    fig.text(0.5, 0.5, latex, ha="center", va="center", fontsize=26, color=INK)
+    fig.text(0.5, 0.5, latex, ha="center", va="center", fontsize=30, color=INK)
     fig.savefig(OUT / f"eq_{name}.png", dpi=dpi, bbox_inches="tight",
-                pad_inches=0.18, facecolor="white", transparent=False)
+                pad_inches=0.30, transparent=True)
+    # also write a white-background copy in case transparency is unwanted
+    fig.savefig(OUT / f"eq_{name}_white.png", dpi=dpi, bbox_inches="tight",
+                pad_inches=0.30, facecolor="white")
     plt.close(fig)
 
 

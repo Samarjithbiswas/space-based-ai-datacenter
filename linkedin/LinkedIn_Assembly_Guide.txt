@@ -1,48 +1,12 @@
-============================================================
- HOW TO POST THIS ON LINKEDIN
-------------------------------------------------------------
- PART A = feed post. Paste into "Start a post" (fits 3,000 chars).
- PART B = the full article. Paste into "Write article".
- EQUATIONS: LinkedIn cannot render LaTeX. Where you see
-   [IMAGE: eq_XX_name.png], click + -> Image in the article
-   editor and upload that PNG from report/equations/. The
-   inline Unicode versions are a fallback if you skip images.
- FIGURES: upload the PNGs from report/figures/ where marked.
- LINK: put the GitHub repo link in the FIRST COMMENT (more reach).
-============================================================
+================================================================
+ LINKEDIN ARTICLE - ASSEMBLY GUIDE (top to bottom)
+----------------------------------------------------------------
+ Build the article in order. For each step: paste the text block,
+ then use + -> Image to upload the named file. Equation images are
+ transparent PNGs in report/equations/ (a _white.png copy exists too).
+================================================================
 
-
-
-============================================================
- PART A  -  FEED POST
-============================================================
-
-Space-based AI data centers stopped being a slide in 2025. Starcloud flew an NVIDIA H100 in orbit (Nov 2025). Axiom put data-center nodes in LEO (Jan 2026). Google's Project Suncatcher targets two TPU prototypes by early 2027.
-
-So I did the full engineering study, from primary sources and open simulation, and I tried hard to separate what is demonstrated from what is marketing.
-
-The verdict:
-
-🛰️ Cooling is solved and flight-proven. But it does not scale: radiator area is linear in power (~1,500 m² per megawatt), and above ~400 W per chip the passive heat path alone blows the 125 C budget, so big GPUs need liquid cooling at the die.
-
-☢️ Radiation is survivable, with margin. Google's TPU showed first memory irregularities at 2 krad and no hard failures to 15 krad, against a ~750 rad 5-year requirement. The real cost is a ~10-20% throughput tax from bit-flips.
-
-☄️ Orbital debris in a tight formation is the binding, unsolved problem: ~17% chance of a catastrophic hit per 81-satellite cluster over 5 years, and the 150 m spacing that makes the terabit laser links work is exactly what makes a cascade and collision-avoidance dangerous.
-
-🌍 It will not deorbit itself. At 650 km natural decay is ~22 years, failing the new FCC 5-year rule. Active de-orbit is mandatory.
-
-💰 And the economics are later than advertised. The "$200/kg launch by 2035" that underwrites the whole case is fragile: my independent Monte-Carlo puts median cost-parity around 2044, not 2035.
-
-Everything is open: a 21-module Python model, 120+ tests, full derivations, and the simulations behind every number. Repo in the comments.
-
-The takeaway for the teams flying this: cooling already works. Aim the demonstrators at debris autonomy and credible disposal, because those, not heat, decide whether orbital AI scales.
-
-#SpaceTech #AIInfrastructure #Aerospace #SystemsEngineering #OrbitalDebris #NASA #SpaceX #DataCenters #ThermalEngineering
-
-
-
-============================================================
- PART B  -  FULL ARTICLE
+----- STEP 1: PASTE THIS TEXT -----
 ============================================================
 
 SPACE-BASED AI DATA CENTERS: A COMPLETE ENGINEERING STUDY
@@ -65,91 +29,111 @@ A caution on claims: Starcloud's "10x cheaper including launch" claim and an "Ax
 
 Radiated power per unit area is fixed by the fourth-power law, so radiator area is linear in heat load:
 
-[IMAGE: eq_07_radiator_area.png]
-   A_rad = Q / ( ε · σ · T⁴ · n_sides · (1 − f_p) )
+----- STEP 2: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_07_radiator_area.png
 
+----- STEP 3: PASTE THIS TEXT -----
 A 1 MW node needs about 1,500 m² of double-sided radiator at 20 C, consistent with the ~1,200 m²/MW industry rule and with Starcloud's multi-kilometer panel vision for gigawatt scale. There is a second, sharper wall at the chip. With a passive thermal chain,
 
-[IMAGE: eq_08_junction_temp.png]
-   T_j = T_rad + Q · R_th
+----- STEP 4: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_08_junction_temp.png
 
+----- STEP 5: PASTE THIS TEXT -----
 at R_th = 0.30 K/W the rise across the interface alone is 90 C at 300 W but 210 C at 700 W and 360 C at 1200 W, exceeding the entire 125 C budget. Above ~400 W per chip, liquid or loop-heat-pipe cooling at the die is mandatory, which is why Starcloud and Axiom use pumped loops.
 
-[FIGURE: fig2_thermal_wall.png]
+----- STEP 6: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/figures/fig2_thermal_wall.png
 
-
+----- STEP 7: PASTE THIS TEXT -----
 2. END OF LIFE: DRAG, DECAY, AND THE 5-YEAR RULE
 
 Atmospheric drag slowly lowers the orbit. From the orbital-energy balance, the decay rate is:
 
-[IMAGE: eq_05_orbital_decay.png]
-   da/dt = − C_D · (A/m) · ρ(h) · √(μ a)
+----- STEP 8: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_05_orbital_decay.png
 
+----- STEP 9: PASTE THIS TEXT -----
 Integrating with a real atmosphere model, the reference satellite at 650 km decays in about 22 years (4 years at solar maximum, 312 years at solar minimum). The FCC now requires deorbit within 5 years (binding since 2022, effective 2024). So active de-orbit propulsion is mandatory, not optional.
 
-[FIGURE: fig1_orbital_decay.png]
+----- STEP 10: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/figures/fig1_orbital_decay.png
 
-
+----- STEP 11: PASTE THIS TEXT -----
 3. RADIATION IS SURVIVABLE, WITH MARGIN
 
 Dose behind aluminium falls roughly exponentially atop a proton floor:
 
-[IMAGE: eq_17_dose_depth.png]
-   D(x) = D₀ · e^(−x/λ) + D_∞
+----- STEP 12: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_17_dose_depth.png
 
+----- STEP 13: PASTE THIS TEXT -----
 Behind 10 mm of aluminium the 5-year dose is about 1 krad, against a ~750 rad requirement. Google's TPU showed first memory irregularities at 2 krad and no hard failures to 15 krad: comfortable margin. The real cost is single-event upsets; because AI inference tolerates bit-flips, the right design is error-correction plus checkpointing (about 86% usable compute), not full triple redundancy (which halves throughput). Carry the ~10-20% throughput tax explicitly.
 
-[FIGURE: fig4_radiation.png]
+----- STEP 14: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/figures/fig4_radiation.png
 
-
+----- STEP 15: PASTE THIS TEXT -----
 4. ORBITAL DEBRIS AND THE FORMATION PARADOX
 
 Catastrophic impacts are rare independent events (Poisson). The probability of at least one in the cluster is:
 
-[IMAGE: eq_18_debris_risk.png]
-   P = 1 − e^(−Φ A N t)
+----- STEP 16: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_18_debris_risk.png
 
+----- STEP 17: PASTE THIS TEXT -----
 With a representative flux this is about 17% per 81-satellite cluster over 5 years (band 6-46%). Worse, the tight formation couples failures: one fragmentation sprays lethal fragments, and a neighbor at spacing d is hit with
 
-[IMAGE: eq_19_cascade.png]
-   P_hit = 1 − exp( − N_f · r_t² / (4 d²) )
+----- STEP 18: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_19_cascade.png
 
+----- STEP 19: PASTE THIS TEXT -----
 about 8.5% per neighbor at 150 m. Because this scales as 1/d², widening to 1 km cuts it below 1% but breaks the laser-link budget. That is the formation paradox, and it is the binding, unsolved constraint.
 
-[FIGURE: fig3_debris_risk.png]
+----- STEP 20: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/figures/fig3_debris_risk.png
 
-
+----- STEP 21: PASTE THIS TEXT -----
 5. WHY THE FORMATION IS TIGHT (THE LINK BUDGET)
 
 Optical links are range-bound. Telescope gain and free-space loss are:
 
-[IMAGE: eq_15_telescope_gain.png]   G = (π D / λ)²
-[IMAGE: eq_16_free_space_loss.png]   L_fs = (4 π R / λ)²
+----- STEP 22: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_15_telescope_gain.png
 
+----- STEP 23: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_16_free_space_loss.png
+
+----- STEP 24: PASTE THIS TEXT -----
 With realized terminal parameters (1550 nm, 80 mm telescope, 15 microradian divergence, 1 microradian pointing, 10 Gbps), a 1 W link with 3 dB margin is reliable only to about 5,419 km, and path loss rises 20 dB per decade of range. Suncatcher needs roughly 10 Tbps per link, achievable with off-the-shelf wavelength multiplexing only by flying satellites about 150 m apart. The tight cluster is forced by the inverse-square link physics.
 
 
 6. DE-ORBIT, POWER, POINTING, COMPUTE (in brief)
 
 - De-orbit by a Hohmann burn:
-[IMAGE: eq_20_deorbit_dv.png]   Δv = v_c1 · (1 − √( 2 r₂ / (r₁ + r₂) ) ) ≈ 132 m/s
+
+----- STEP 25: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/equations/eq_20_deorbit_dv.png
+
+----- STEP 26: PASTE THIS TEXT -----
   This dominates the ~190 m/s 5-year budget; propellant by the rocket equation is ~5 kg with electric propulsion.
 - Power: a dawn-dusk orbit is >95% sunlit, so the battery is tiny; triple-junction arrays deliver ~253 W/m² at end of life.
 - Pointing: a laser link needs sub-microradian accuracy; a star tracker gives ~10, so a fine-steering mirror is mandatory. The bus cannot point the beam.
 - Compute: useful output is peak × utilization × radiation-availability. Inference utilization is only ~10%, so real cost per useful PFLOP-hour is several times the peak figure.
 
-[FIGURE: fig5_deltav.png]
+----- STEP 27: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/figures/fig5_deltav.png
 
-
+----- STEP 28: PASTE THIS TEXT -----
 7. PREDICTION: COST PARITY IS THE SWING VARIABLE, AND IT IS FRAGILE
 
 The entire economic case rests on launch reaching about $200/kg, at which point launched-power price approaches terrestrial data-center power spend. The vendor projects this by ~2035. I tested it with an independent Monte-Carlo (a learning curve on cumulative launched mass, sampling learning rate, payload, cadence, and starting price). The result: median parity around 2044, with a 5th percentile of 2037 and essentially no chance of 2035. The vendor date sits at the optimistic edge and needs its specific aggressive assumptions.
 
 Prediction: cost parity is more likely late-2030s to mid-2040s than 2035, and it is necessary but not sufficient. Hardware cost, lifetime, and utilization gate the economics regardless.
 
-[FIGURE: fig_cost_parity.png]
+----- STEP 29: UPLOAD THIS IMAGE (+ -> Image) -----
+   report/figures_pred/fig_cost_parity.png
 
-
+----- STEP 30: PASTE THIS TEXT -----
 8. THE HONEST PICTURE
 
 Demonstrated today: one H100 in orbit, ground TPU radiation testing, a 1.6 Tbps bench link, kilowatt-class nodes. Required for the vision: megawatt-to-gigawatt clusters, flown 10 Tbps formation links, $200/kg launch, and in-flight formation station-keeping. None of those is demonstrated. The binding milestones are not thermal; they are autonomous debris avoidance at tight spacing, credible propulsive disposal, a flown megawatt-class radiator, and launch economics actually reaching the parity band.
@@ -179,5 +163,7 @@ SELECTED SOURCES
 - NRLMSIS 2.1 atmosphere model; NVIDIA / Google Cloud hardware documentation
 
 ============================================================
- END
-============================================================
+
+================================================================
+ END OF ARTICLE
+================================================================
