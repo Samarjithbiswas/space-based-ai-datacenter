@@ -24,9 +24,27 @@ def density(alt_km: float, scenario: str = "mod") -> float:
 
 
 def earth_view_factor(alt_km: float) -> float:
-    """Satellite-to-Earth view factor F = 0.5*(1 - sqrt(1-(R_E/r)^2))."""
+    """Orientation-averaged (spherical-body) Earth view factor:
+
+        F = 0.5 * (1 - sqrt(1 - (R_E/r)^2))
+
+    This is the fraction of solid angle the Earth subtends, i.e. the view factor from an
+    isotropic body (a sphere) or the orientation-averaged value for a flat surface (Modest,
+    Radiative Heat Transfer). It is the representative value used here for external-load sizing.
+    Note that the Earth view factor is orientation-dependent: a nadir-facing flat plate sees more
+    (see earth_view_factor_nadir), and a deep-space-facing radiator sees less. The cross-check
+    research (Curtis/Gilmore/Modest corpus) could not tie a single closed form to one primary
+    citation, so this value is used as an estimate, not asserted as the unique textbook result."""
     r = R_E + alt_km * 1e3
     return float(0.5 * (1 - np.sqrt(1 - (R_E / r) ** 2)))
+
+
+def earth_view_factor_nadir(alt_km: float) -> float:
+    """Earth view factor for a flat plate facing nadir, F = (R_E/r)^2 (differential planar
+    element to a sphere; Modest, Radiative Heat Transfer, Appendix). Upper bound on the Earth
+    load for a downward-facing surface; a real radiator is oriented away from Earth to reduce it."""
+    r = R_E + alt_km * 1e3
+    return float((R_E / r) ** 2)
 
 
 def thermal_loads(alt_km: float, area_m2: float, alpha_s: float = 0.15,
