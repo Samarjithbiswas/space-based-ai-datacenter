@@ -300,6 +300,62 @@ data-center-class GPU in orbit, ground-based radiation testing of a TPU, a bench
 optical link, and initial kilowatt-class nodes, and what the vision requires, megawatt-to-gigawatt
 clusters, flown multi-terabit formation links, dramatically cheaper launch, and validated formation
 station-keeping. None of the latter has been demonstrated.</p>
+<h2 id="2a-the-original-feasibility-study-passive-cooling-of-a-tpu-node">2A. The original feasibility study: passive cooling of a TPU node</h2>
+<p><em>Sources: radiative and conductive relations from Incropera and DeWitt [21]; spacecraft thermal
+practice and white-paint properties from the Gilmore handbook [20]. Reproduced by
+<code>orbital_dc.thermal.report_i_baseline()</code>.</em></p>
+<p>The work that opened this line of analysis asked a single, narrow question: can a node carrying several
+high-power accelerators be held within its temperature limit at 650 kilometers using only passive
+radiative cooling, with no refrigeration and no consumable coolant. The answer governs everything that
+follows, because if the thermal case fails at the node level there is nothing to scale. This chapter
+reproduces that original steady-state design point in full, since the rest of the book extends and
+stress-tests it; the general thermal theory it draws on is developed in Chapter 10.</p>
+<p><strong>The heat load.</strong> The reference node dissipates four accelerators at a per-chip power of 300 watts,
+together with avionics and a parasitic allowance:</p>
+<p>\[Q_{\mathrm{total}} = 4 \times 300 + 150_{\mathrm{avionics}} + 100_{\mathrm{parasitic}} = 1450\ \mathrm{W}. \tag{2A.1}\]</p>
+<p><strong>Radiator temperature.</strong> All of this heat leaves as thermal radiation. For a gray emitter of area \(A\)
+and emissivity \(\varepsilon\) radiating from \(n_s\) sides into a cold background, the steady-state panel
+temperature follows from the Stefan-Boltzmann balance,</p>
+<p>\[Q_{\mathrm{total}} = \varepsilon\,\sigma\, A\, n_s\, T_{\mathrm{rad}}^4
+\quad\Longrightarrow\quad
+T_{\mathrm{rad}} = \left(\frac{Q_{\mathrm{total}}}{\varepsilon\,\sigma\,A\,n_s}\right)^{1/4}. \tag{2A.2}\]</p>
+<p>With two two-square-meter panels treated as a single-sided four-square-meter emitter, Z-93 white paint
+at its end-of-life emissivity of 0.85, the panel settles at \(T_{\mathrm{rad}} = 21.3\ ^\circ\mathrm{C}\).
+The radiator is comfortable; the difficulty is entirely in getting the heat from the silicon to it.</p>
+<p><strong>The conduction chain.</strong> Between the transistor junction and the panel sits a series of thermal
+resistances: junction to case, the thermal interface material, the cold-plate base, the heat pipe, and
+the radiator interface. In series they add,</p>
+<p>\[R_{\mathrm{th}} = r_{jc} + r_{\mathrm{tim}} + r_{\mathrm{base}} + r_{\mathrm{pipe}} + r_{\mathrm{rad}}. \tag{2A.3}\]</p>
+<p>The original budget is \(0.150 + 0.020 + 0.060 + 0.050 + 0.020 = 0.300\ \mathrm{K/W}\) after a modest
+interface and heat-pipe improvement, down from \(0.350\ \mathrm{K/W}\) before it. The junction-to-case
+term dominates and is fixed by the package; the terms a designer can influence are the interface
+material and the heat pipe.</p>
+<p><strong>Junction temperature and the margin.</strong> The junction sits above the radiator by the product of
+per-chip power and chain resistance,</p>
+<p>\[T_j = T_{\mathrm{rad}} + P_{\mathrm{chip}}\, R_{\mathrm{th}}
+      = 21.3 + 300 \times 0.300 = 111.3\ ^\circ\mathrm{C}. \tag{2A.4}\]</p>
+<p>Against a junction limit of \(125\ ^\circ\mathrm{C}\), this leaves a margin of \(13.6\ ^\circ\mathrm{C}\).
+The case closes, but not by much. The single result that named this study is that margin: passive
+cooling of a 300-watt-class accelerator at this altitude is feasible, and feasible only with a thin
+allowance.</p>
+<p><strong>Robustness.</strong> A spacecraft thermal path carries redundant heat pipes, so the design must survive one
+failing. If a single pipe drops out, the pipe resistance rises by about one part in seven, adding
+\(0.011\ \mathrm{K/W}\) to the chain,</p>
+<p>\[R_{\mathrm{fail}} = R_{\mathrm{th}} + \Delta r_{\mathrm{pipe}} = 0.300 + 0.011 = 0.311\ \mathrm{K/W},
+\qquad T_{j,\mathrm{fail}} = T_{\mathrm{rad}} + P_{\mathrm{chip}}\, R_{\mathrm{fail}} = 114.8\ ^\circ\mathrm{C}. \tag{2A.5}\]</p>
+<p>The junction climbs to \(114.8\ ^\circ\mathrm{C}\), so the margin narrows to about ten degrees but stays
+positive. The single-fault case survives.</p>
+<p><strong>What the study did and did not establish.</strong> Three caveats travel with this result, and they set the
+agenda for the rest of the book. First, the per-chip power was taken as 300 watts; the actual figure for
+the reference accelerator is undisclosed and is more plausibly in the 150-to-200-watt range, in which
+case the junction sits well below the limit and the margin is larger, not smaller. The 300-watt case is
+therefore conservative. Second, and pointing the other way, the analysis is a single-node steady state;
+it does not by itself address the sharper wall that appears as per-chip power rises, where above roughly
+400 watts the interface term alone overruns the entire budget and a passive chain can no longer cope, a
+point developed in Chapter 10. Third, the original study was candid that the thermal case being feasible
+does not make the system economical: its own break-even analysis was negative, which is exactly the
+question Chapter 22 takes up in detail. The thin margin and the per-chip ceiling are what motivated the
+full survivability, integration, and economic treatment that makes up the remainder of this book.</p>
 <h2 id="3-reference-architecture-and-scope">3. Reference architecture and scope</h2>
 <p>Throughout this analysis the reference design follows the Suncatcher parameters: a dawn-dusk
 sun-synchronous orbit at 650 km, an eighty-one-satellite cluster of one-kilometer radius, and
