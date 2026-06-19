@@ -4,7 +4,8 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 \documentclass[
   11pt,
-  openany]{book}
+  openany,
+  oneside]{book}
 \usepackage{xcolor}
 \usepackage[margin=2.2cm,top=2.4cm,bottom=2.4cm]{geometry}
 \usepackage{amsmath,amssymb}
@@ -124,20 +125,22 @@
               pdfauthor={Samarjith Biswas, PhD}}%
 }
 
-% --- Headings ---
+% --- Headings (Springer-monograph style chapter openers) ---
 \titleformat{\chapter}[display]
   {\sffamily}
-  {\Large\bfseries\color{brandTeal}\MakeUppercase{\chaptertitlename}}
-  {0pt}
-  {\Huge\bfseries\color{brandSlate}}
-  [\vskip4pt{\color{brandTeal}\titlerule[1.4pt]}]
+  {\raggedright\large\bfseries\color{brandTeal}\MakeUppercase{\chaptertitlename}}
+  {8pt}
+  {\raggedright\fontsize{26}{30}\selectfont\bfseries\color{brandSlate}}
+  [\vskip10pt{\color{brandTeal}\titlerule[1.5pt]}]
 \titleformat{\section}
   {\Large\bfseries\color{brandTealDk}}{}{0em}{}
 \titleformat{\subsection}
   {\large\bfseries\color{brandSlate}}{}{0em}{}
 \titleformat{\subsubsection}
   {\normalsize\bfseries\color{brandGray}}{}{0em}{}
-\titlespacing*{\chapter}{0pt}{6pt}{18pt}
+\titlespacing*{\chapter}{0pt}{12pt}{30pt}
+\titlespacing*{\section}{0pt}{16pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{4pt}
 
 % --- Part pages ---
 \titleformat{\part}[display]
@@ -146,15 +149,18 @@
   {10pt}
   {\Huge\bfseries\color{brandSlate}}
 
-% --- Running header / footer ---
+% --- Running header / footer (chapter title runs in the header) ---
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{brandGray}Space-Based AI Data Centers}
+\fancyhead[L]{\small\itshape\color{brandGray}\nouppercase{\leftmark}}
 \fancyhead[R]{\small\color{brandGray}\thepage}
-\fancyfoot[C]{\small\color{brandGray}An Engineering Study \textbullet{} Samarjith Biswas \textbullet{} 2026}
+\fancyfoot[C]{\small\color{brandGray}Space-Based AI Data Centers \textbullet{} Samarjith Biswas \textbullet{} 2026}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\headrule}{{\color{brandTeal}\hrule height 1pt}}
 \renewcommand{\footrulewidth}{0pt}
+% Plain style (chapter opening pages) keeps the footer, drops the header rule
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\color{brandGray}Space-Based AI Data Centers \textbullet{} Samarjith Biswas \textbullet{} 2026}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}}
 
 % --- Code listings (pandoc passes fenced code through listings) ---
 \lstset{
@@ -202,17 +208,30 @@
 \frontmatter
 
 % ---------------------------------------------------------------------
-% Cover page, matched to the website book-panel card (dark navy panel,
-% edition tag, large title with a teal accent word, author line).
-% Injected by pandoc as include-before-body.
+% Front matter, Springer-monograph style: half-title, full title page
+% (dark navy panel matching the website book card), and a colophon /
+% copyright page. Injected by pandoc as include-before-body, so it runs
+% after \frontmatter and before \tableofcontents. Uses \clearpage only
+% (never \cleardoublepage) so the one-sided layout adds no blank pages.
 % ---------------------------------------------------------------------
-\begin{titlepage}
-\thispagestyle{empty}
-\centering
-\vspace*{1.2cm}
 
+% ---------- Half-title ----------
+\thispagestyle{empty}
+\vspace*{0.30\textheight}
+\begin{center}
+{\sffamily\bfseries\fontsize{24}{28}\selectfont\color{brandSlate}%
+ Space-Based AI Data Centers}\\[10pt]
+{\sffamily\itshape\large\color{brandTeal}%
+ An Engineering Study}
+\end{center}
+\clearpage
+
+% ---------- Title page (designed panel) ----------
+\thispagestyle{empty}
+\vspace*{0.4cm}
+\begin{center}
 \begin{tcolorbox}[colback=spaceNavy, colframe=spaceNavy, arc=8pt,
-  boxrule=0pt, left=26pt, right=26pt, top=30pt, bottom=30pt,
+  boxrule=0pt, left=26pt, right=26pt, top=30pt, bottom=30pt, width=\textwidth,
   enhanced, borderline south={4pt}{0pt}{brandTeal}]
 \raggedright
 {\sffamily\bfseries\footnotesize\color{white!75!brandTeal}%
@@ -230,18 +249,35 @@
 \vfill
 
 {\sffamily\Large\bfseries\color{brandSlate} Samarjith Biswas, PhD}\\[4pt]
-{\sffamily\normalsize\color{brandGray} Research Scientist III}\\[18pt]
+{\sffamily\normalsize\color{brandGray} Research Scientist III}\\[16pt]
 {\sffamily\small\color{brandGray}%
- Reference architecture: Google Project Suncatcher (arXiv:2511.19468)\\[2pt]
- Open repository: \texttt{github.com/Samarjithbiswas/space-based-ai-datacenter}\\[2pt]
- Open access \textbullet{} MIT (code) and CC-BY (text)}
+ samarjithbiswas.com\,\textbullet\,Research Portfolio and Open Toolkits}
+\end{center}
+\clearpage
 
-\vspace*{1.0cm}
-\end{titlepage}
-\cleardoublepage
+% ---------- Colophon / copyright ----------
+\thispagestyle{empty}
+\vspace*{\fill}
+\noindent{\sffamily\small\color{brandGray}%
+\textbf{\color{brandSlate}Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics.}\\[2pt]
+Edition I, 2026. By Samarjith Biswas, PhD.\\[10pt]
+This work is released open access. The accompanying source code is licensed under the MIT License;
+the text, figures, and equations are licensed under Creative Commons Attribution 4.0 (CC-BY 4.0).
+You are free to read, share, cite, and adapt the work with attribution.\\[10pt]
+Source repository (models, derivations, simulations, figures):\\
+\texttt{github.com/Samarjithbiswas/space-based-ai-datacenter}\\[6pt]
+Reference architecture: Google Project Suncatcher, arXiv:2511.19468.\\[10pt]
+Every figure and every load-bearing number in this book is regenerated by the open repository.
+Forward-looking quantities, including the launch-cost trajectory of Chapter 22, are presented as
+projections with explicit uncertainty bands, not as guarantees. Independent reproduction and
+correction are welcome.\\[10pt]
+Typeset in IBM Plex Sans and IBM Plex Mono with pdf\LaTeX.\\[2pt]
+Part of the samarjithbiswas.com research portfolio.
+}
+\clearpage
 
 {
-\setcounter{tocdepth}{0}
+\setcounter{tocdepth}{1}
 \tableofcontents
 }
 \mainmatter
@@ -1968,7 +2004,22 @@ kilogram by about 2035 under a twenty-percent learning rate, requiring
 on the order of 370,000 tonnes of additional cumulative launched mass,
 some 1,800 Starship launches, at which point the launched-power price of
 roughly 810 dollars per kilowatt-year approaches the terrestrial
-data-center power spend of 570 to 3,000 dollars per kilowatt-year.
+data-center power spend of 570 to 3,000 dollars per kilowatt-year. The
+broader launch-cost landscape that frames this target is shown in Fig.
+22.1: today's reusable launch still sits an order of magnitude above it,
+and once the price falls below roughly 600 dollars per kilogram the
+all-in cost per satellite is set by hardware rather than launch, so
+further reductions in launch price yield diminishing returns.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 22.1. The launch-cost landscape. Left: below roughly 600 dollars per kilogram the all-in cost per satellite is dominated by hardware rather than launch. Right: the price-per-kilogram trajectory to low Earth orbit, from the Shuttle program average through reusable Falcon 9 to the realistic and aspirational Starship targets.}]{figures/fig6_launch_cost.png}}
+\caption{Fig. 22.1. The launch-cost landscape. Left: below roughly 600
+dollars per kilogram the all-in cost per satellite is dominated by
+hardware rather than launch. Right: the price-per-kilogram trajectory to
+low Earth orbit, from the Shuttle program average through reusable
+Falcon 9 to the realistic and aspirational Starship targets.}
+\end{figure}
 
 This forecast is assumption-fragile, so this study generates its own
 credibility band rather than inheriting a single date. A Wright learning
@@ -2004,8 +2055,8 @@ lifetime, and utilization.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 22.1, Launch-cost learning curve (Monte-Carlo) and the distribution of the cost-parity year. Most sampled scenarios never reach 200 dollars per kilogram within the horizon; conditional on those that do, the median is near 2044, later than the vendor's 2035.}]{figures_pred/fig_cost_parity.png}}
-\caption{Fig. 22.1, Launch-cost learning curve (Monte-Carlo) and the
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 22.2, Launch-cost learning curve (Monte-Carlo) and the distribution of the cost-parity year. Most sampled scenarios never reach 200 dollars per kilogram within the horizon; conditional on those that do, the median is near 2044, later than the vendor's 2035.}]{figures_pred/fig_cost_parity.png}}
+\caption{Fig. 22.2, Launch-cost learning curve (Monte-Carlo) and the
 distribution of the cost-parity year. Most sampled scenarios never reach
 200 dollars per kilogram within the horizon; conditional on those that
 do, the median is near 2044, later than the vendor's 2035.}

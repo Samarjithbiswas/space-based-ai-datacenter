@@ -1114,7 +1114,12 @@ orbit approaches the terrestrial cost of power. The reference paper projects lau
 dollars per kilogram by about 2035 under a twenty-percent learning rate, requiring on the order of
 370,000 tonnes of additional cumulative launched mass, some 1,800 Starship launches, at which point
 the launched-power price of roughly 810 dollars per kilowatt-year approaches the terrestrial
-data-center power spend of 570 to 3,000 dollars per kilowatt-year.
+data-center power spend of 570 to 3,000 dollars per kilowatt-year. The broader launch-cost landscape
+that frames this target is shown in Fig. 22.1: today's reusable launch still sits an order of magnitude
+above it, and once the price falls below roughly 600 dollars per kilogram the all-in cost per satellite
+is set by hardware rather than launch, so further reductions in launch price yield diminishing returns.
+
+![Fig. 22.1. The launch-cost landscape. Left: below roughly 600 dollars per kilogram the all-in cost per satellite is dominated by hardware rather than launch. Right: the price-per-kilogram trajectory to low Earth orbit, from the Shuttle program average through reusable Falcon 9 to the realistic and aspirational Starship targets.](figures/fig6_launch_cost.png)
 
 This forecast is assumption-fragile, so this study generates its own credibility band rather than
 inheriting a single date. A Wright learning curve is applied to cumulative launched mass, with a
@@ -1139,7 +1144,7 @@ most assumptions rather than merely late, and where it does arrive it is more li
 to mid-2040s than in 2035. Parity is in any case necessary but not sufficient: even at parity, the
 business case is gated by hardware cost, lifetime, and utilization.
 
-![Fig. 22.1, Launch-cost learning curve (Monte-Carlo) and the distribution of the cost-parity year. Most sampled scenarios never reach 200 dollars per kilogram within the horizon; conditional on those that do, the median is near 2044, later than the vendor's 2035.](figures_pred/fig_cost_parity.png)
+![Fig. 22.2, Launch-cost learning curve (Monte-Carlo) and the distribution of the cost-parity year. Most sampled scenarios never reach 200 dollars per kilogram within the horizon; conditional on those that do, the median is near 2044, later than the vendor's 2035.](figures_pred/fig_cost_parity.png)
 
 ## 23. Capability and risk trajectory, 2027-2035
 

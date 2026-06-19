@@ -50,20 +50,22 @@
               pdfauthor={Samarjith Biswas, PhD}}%
 }
 
-% --- Headings ---
+% --- Headings (Springer-monograph style chapter openers) ---
 \titleformat{\chapter}[display]
   {\sffamily}
-  {\Large\bfseries\color{brandTeal}\MakeUppercase{\chaptertitlename}}
-  {0pt}
-  {\Huge\bfseries\color{brandSlate}}
-  [\vskip4pt{\color{brandTeal}\titlerule[1.4pt]}]
+  {\raggedright\large\bfseries\color{brandTeal}\MakeUppercase{\chaptertitlename}}
+  {8pt}
+  {\raggedright\fontsize{26}{30}\selectfont\bfseries\color{brandSlate}}
+  [\vskip10pt{\color{brandTeal}\titlerule[1.5pt]}]
 \titleformat{\section}
   {\Large\bfseries\color{brandTealDk}}{}{0em}{}
 \titleformat{\subsection}
   {\large\bfseries\color{brandSlate}}{}{0em}{}
 \titleformat{\subsubsection}
   {\normalsize\bfseries\color{brandGray}}{}{0em}{}
-\titlespacing*{\chapter}{0pt}{6pt}{18pt}
+\titlespacing*{\chapter}{0pt}{12pt}{30pt}
+\titlespacing*{\section}{0pt}{16pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{4pt}
 
 % --- Part pages ---
 \titleformat{\part}[display]
@@ -72,15 +74,18 @@
   {10pt}
   {\Huge\bfseries\color{brandSlate}}
 
-% --- Running header / footer ---
+% --- Running header / footer (chapter title runs in the header) ---
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{brandGray}Space-Based AI Data Centers}
+\fancyhead[L]{\small\itshape\color{brandGray}\nouppercase{\leftmark}}
 \fancyhead[R]{\small\color{brandGray}\thepage}
-\fancyfoot[C]{\small\color{brandGray}An Engineering Study \textbullet{} Samarjith Biswas \textbullet{} 2026}
+\fancyfoot[C]{\small\color{brandGray}Space-Based AI Data Centers \textbullet{} Samarjith Biswas \textbullet{} 2026}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\headrule}{{\color{brandTeal}\hrule height 1pt}}
 \renewcommand{\footrulewidth}{0pt}
+% Plain style (chapter opening pages) keeps the footer, drops the header rule
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\color{brandGray}Space-Based AI Data Centers \textbullet{} Samarjith Biswas \textbullet{} 2026}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}}
 
 % --- Code listings (pandoc passes fenced code through listings) ---
 \lstset{

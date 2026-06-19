@@ -78,7 +78,7 @@ def build():
     extra = [
         "--standalone",
         "--top-level-division=part",
-        "--toc", "--toc-depth=1",
+        "--toc", "--toc-depth=2",
         "--listings",
         "--resource-path=" + str(REPO / "report"),
         f"--include-in-header={HERE/'preamble.tex'}",
@@ -86,6 +86,7 @@ def build():
         "-V", "documentclass=book",
         "-V", "classoption=11pt",
         "-V", "classoption=openany",
+        "-V", "classoption=oneside",
         "-V", "geometry=margin=2.2cm,top=2.4cm,bottom=2.4cm",
         "-V", "linkcolor=brandTealDk",
         # No title/author metadata on purpose: the cover page is the title, and
