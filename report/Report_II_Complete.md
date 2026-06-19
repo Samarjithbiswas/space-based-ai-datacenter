@@ -149,7 +149,7 @@ The work is organized as a book so that each result can be traced from physical 
 derivation and code, to a number with an uncertainty band and a citation. Where the analysis
 corrects an earlier assumption or contradicts a popular claim, it says so. Where a number is a
 vendor projection rather than a demonstrated capability, it is flagged. The accompanying software is
-open, validated by 108 automated tests, and reproduces every figure and value in this volume with a
+open, validated by 122 automated tests, and reproduces every figure and value in this volume with a
 single command.
 
 ## 2. The state of the art (2025-2026)

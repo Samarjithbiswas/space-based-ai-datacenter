@@ -50,13 +50,14 @@
               pdfauthor={Samarjith Biswas, PhD}}%
 }
 
-% --- Headings (Springer-monograph style chapter openers) ---
+% --- Headings (centered, monograph-style chapter openers) ---
 \titleformat{\chapter}[display]
-  {\sffamily}
-  {\raggedright\large\bfseries\color{brandTeal}\MakeUppercase{\chaptertitlename}}
-  {8pt}
-  {\raggedright\fontsize{26}{30}\selectfont\bfseries\color{brandSlate}}
-  [\vskip10pt{\color{brandTeal}\titlerule[1.5pt]}]
+  {\sffamily\filcenter}
+  {\large\bfseries\color{brandTeal}\MakeUppercase{\chaptertitlename}}
+  {10pt}
+  {\fontsize{25}{30}\selectfont\bfseries\color{brandSlate}}
+  [\vskip12pt{\color{brandTeal}\titlerule[1.2pt]}]
+\titlespacing*{\chapter}{0pt}{24pt}{34pt}
 \titleformat{\section}
   {\Large\bfseries\color{brandTealDk}}{}{0em}{}
 \titleformat{\subsection}

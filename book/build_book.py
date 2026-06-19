@@ -78,11 +78,11 @@ def build():
     extra = [
         "--standalone",
         "--top-level-division=part",
-        "--toc", "--toc-depth=2",
         "--listings",
         "--resource-path=" + str(REPO / "report"),
         f"--include-in-header={HERE/'preamble.tex'}",
         f"--include-before-body={HERE/'cover.tex'}",
+        f"--include-after-body={HERE/'about_author.tex'}",
         "-V", "documentclass=book",
         "-V", "classoption=11pt",
         "-V", "classoption=openany",
@@ -115,6 +115,7 @@ def build():
         z.write(OUT_TEX, "main.tex")
         z.write(HERE / "preamble.tex", "preamble.tex")
         z.write(HERE / "cover.tex", "cover.tex")
+        z.write(HERE / "about_author.tex", "about_author.tex")
         for d in FIG_DIRS:
             for f in (HERE / d).rglob("*"):
                 if f.is_file():
