@@ -117,7 +117,7 @@ if __name__ == "__main__":
             continue
         name, ttl = render(title, headers, rows, i)
         index.append(f"- `{name}.png` -- from section: {ttl} ({len(rows)} rows)")
-    (OUT / "INDEX.md").write_text("# Table images (for LinkedIn / slides)\n\n" + "\n".join(index) + "\n",
+    (OUT / "INDEX.md").write_text("# Table images\n\n" + "\n".join(index) + "\n",
                                   encoding="utf-8")
     print(f"rendered {len(index)} tables to {OUT}")
     for ln in index:

@@ -87,10 +87,10 @@ def render(name, latex, dpi=300):
 if __name__ == "__main__":
     for fname, _cap, latex in EQS:
         render(fname, latex)
-    # write a small index so the captions are obvious when inserting into LinkedIn
+    # write a small index naming each equation image
     idx = OUT / "INDEX.md"
-    idx.write_text("# Equation images (for LinkedIn / slides)\n\n"
-                   "Insert these PNGs where each equation appears in the article.\n\n"
+    idx.write_text("# Equation images\n\n"
+                   "Each governing equation rendered as a standalone PNG.\n\n"
                    + "\n".join(f"- `eq_{f}.png` — {c}" for f, c, _ in EQS) + "\n",
                    encoding="utf-8")
     print(f"Rendered {len(EQS)} equation images to {OUT}")

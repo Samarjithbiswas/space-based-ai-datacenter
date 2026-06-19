@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
-title: "Space-Based AI Data Centers: Open Models, Study, and Visualization"
+title: "Space-Based Data Center Infrastructure: A Multi-Physics Approach"
 abstract: >-
-  A complete, fully-sourced, reproducible systems-engineering study of space-based AI compute,
-  with open Python models (13 subsystems + integration + Monte-Carlo), a derivation-by-derivation
-  mathematical guide, and a premium 3D visualization. Reference architecture: Google Project
-  Suncatcher (arXiv:2511.19468).
+  A complete, fully sourced, reproducible systems-engineering study of artificial-intelligence data
+  centers in low Earth orbit, with open Python models (around twenty subsystems plus an integration
+  layer and Monte-Carlo), a derivation-by-derivation mathematical treatment, a typeset monograph,
+  and a 3D visualization. Reference architecture: Google Project Suncatcher (arXiv:2511.19468).
 type: software
 authors:
   - family-names: Biswas

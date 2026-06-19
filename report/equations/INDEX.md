@@ -1,6 +1,6 @@
-# Equation images (for LinkedIn / slides)
+# Equation images
 
-Insert these PNGs where each equation appears in the article.
+Each governing equation rendered as a standalone PNG.
 
 - `eq_01_circular_speed.png` — Circular orbital speed
 - `eq_02_period.png` — Orbital period (Kepler)

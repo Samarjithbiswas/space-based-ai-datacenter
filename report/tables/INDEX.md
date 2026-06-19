@@ -1,4 +1,4 @@
-# Table images (for LinkedIn / slides)
+# Table images
 
 - `table_01_nomenclature.png` -- from section: Nomenclature (17 rows)
 - `table_02_physical_constants.png` -- from section: Physical constants (9 rows)

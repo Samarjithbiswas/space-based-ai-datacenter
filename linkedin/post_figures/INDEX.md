@@ -1,8 +1,8 @@
-# Figures for the LinkedIn post (upload-ready PNGs)
+# Figure index
 
-Two kinds of image appear in Space_DataCenter_LinkedIn_Article.html:
-"diagram_*" are the inline geometry diagrams (now rasterized to PNG); "chart_*"
-are the data charts. They are listed below in the order they appear in the post.
+The figures used in the summary article (Space_DataCenter_LinkedIn_Article.html), as standalone
+PNGs. The `diagram_*` files are the geometry schematics; the `chart_*` files are the data charts.
+They are listed in the order they appear in the article.
 
 ## What is actually flying
 - diagram_orbit.png            dawn-dusk sun-synchronous orbit
