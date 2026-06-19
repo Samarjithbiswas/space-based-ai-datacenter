@@ -281,6 +281,8 @@ transparency, not in a claim of flight accuracy.
 
 ## 3A. Design methodology, margins, and readiness
 
+*Sources: margin and readiness practice from the NASA Systems Engineering Handbook [13], AIAA S-120 [14], the Goddard concurrent-design practice [15], and the SMAD systems text [18].*
+
 A conceptual design is judged not only by its point estimates but by the allowances it carries
 against growth and uncertainty. This analysis follows the practice of the NASA Systems Engineering
 Handbook (NASA/SP-2016-6105), which tracks resource margins as technical performance measures
@@ -373,6 +375,8 @@ per day. These values are reproduced exactly by `orbital_dc.orbit.velocity(650)`
 
 ## 5. Sun-synchronous orbits and J2 precession
 
+*Sources: the J2 secular precession and the sun-synchronous condition follow Vallado [17] and Curtis [16].*
+
 A sun-synchronous orbit maintains a near-constant orientation relative to the Sun by exploiting
 Earth's oblateness. The dominant non-spherical term in Earth's gravity, characterized by $J_2$,
 causes the orbital plane's right ascension of the ascending node, $\Omega$, to precess. The secular
@@ -422,6 +426,8 @@ plane near Earth's terminator, which (Chapter 6) yields nearly continuous sunlig
 cycling, a decisive advantage for a high-power, thermally sensitive payload.
 
 ## 6. Eclipse geometry and the dawn-dusk advantage
+
+*Sources: the beta-angle and eclipse-fraction geometry follow Curtis [16] and the SMAD mission-design text [18].*
 
 The fraction of each orbit spent in Earth's shadow is set by the beta angle $\beta$, the angle
 between the orbital plane and the Sun line. A satellite avoids eclipse entirely when $|\beta|$
@@ -661,6 +667,8 @@ first report assumed.
 
 ## 11. Electrical power
 
+*Sources: solar-array and power-budget sizing from SMAD [18] and the Gilmore handbook [20]; cell and battery parameters from vendor datasheets [12].*
+
 The power subsystem converts sunlight to usable electrical power and buffers the brief eclipse.
 
 **Array power.** The electrical power delivered to the load is the incident solar power times the
@@ -686,6 +694,8 @@ Chapter 6.
 ![Fig. 11.1, Array area versus load, and triple-junction degradation over the mission.](systems_figs/fig_power.png)
 
 ## 12. Structures and mass
+
+*Sources: mass-growth allowances from AIAA S-120 [14]; structural and modal relations from SMAD [18] and Sidi [33].*
 
 The structure carries launch loads, sets the spacecraft inertia (which feeds attitude control), and
 anchors the mass budget that closes the whole design.
@@ -721,6 +731,8 @@ The reference four-chip satellite closes at roughly 270 to 290 kg dry.
 ![Fig. 12.1  Reference satellite dry-mass breakdown by subsystem, closed self-consistently by the integrated model.](figures2/figA8_mass.png)
 
 ## 13. Attitude determination and control; optical pointing
+
+*Sources: attitude dynamics and control from Wertz [32] and Sidi [33]; optical-pointing requirements from Hemmati [30].*
 
 The attitude subsystem must hold the bus steady against disturbance torques and, far more
 demandingly, point laser links to sub-microradian accuracy.
@@ -791,6 +803,8 @@ beyond roughly 3,000 km, a genuine advantage for long-haul, latency-sensitive tr
 
 ## 15. Propulsion and end-of-life disposal
 
+*Sources: the rocket equation and propulsion sizing from Sutton and Biblarz [31]; the Hohmann de-orbit from Curtis [16]; the disposal requirement from FCC 22-74 [7].*
+
 Propulsion must make up drag, maintain the formation, enable collision avoidance, and, decisively, 
 de-orbit the satellite within the regulatory window.
 
@@ -820,6 +834,8 @@ makes de-orbit slow and requires coordination with the formation.
 ![Fig. 15.1, Per-satellite Δv budget (de-orbit dominates) and propellant mass by propulsion type.](figures/fig5_deltav.png)
 
 ## 16. Reliability and constellation availability
+
+*Sources: reliability and redundancy methods from the SMAD systems texts [18, 19].*
 
 Because no satellite can be repaired in orbit, reliability must be designed in and availability
 bought through redundancy and replenishment.
@@ -867,6 +883,8 @@ economics of Chapter 21. These figures are produced by `orbital_dc.reliability` 
 
 ## 17. Compute and workload
 
+*Sources: accelerator throughput and power from vendor documentation [12]; the workload and utilization model from the reference architecture [1].*
+
 The purpose of the system is useful computation, and the appropriate figure of merit is delivered useful
 work, not peak floating-point capability.
 
@@ -898,6 +916,8 @@ realistic utilization is several times the headline peak figure.
 
 ## 18. The integrated system model
 
+*Sources: the mass, power, thermal, and delta-v closure follows standard concurrent-design practice (SMAD [18]).*
+
 The value of a systems model lies in closure: the subsystems must be solved together so that their
 mutual dependencies are satisfied. The integrated model takes top-level choices, the number and
 type of chips, altitude, radiator operating temperature, shielding thickness, model-FLOPs
@@ -925,6 +945,8 @@ shielding dominate, and the design closes at roughly 270 to 290 kg dry.
 ![Fig. 18.1, Integrated dry-mass budget, closed self-consistently by the system model.](systems_figs/fig_mass_budget.png)
 
 ## 18A. Computational methods and numerical solvers
+
+*Sources: the numerical methods (Newton-Raphson, bisection, Brent, Runge-Kutta) are standard; the orbital integrations are checked against Vallado [17].*
 
 The governing equations are not only evaluated in closed form; each is solved with an explicit
 numerical method in an open solver suite. The quartic radiator energy balance is solved by
@@ -975,6 +997,8 @@ Each solver is checked against the worked examples of this document, so the numb
 and the figures are produced by the same code that a reader can run.
 
 ## 19. Uncertainty quantification and sensitivity
+
+*Sources: linear error propagation and Monte-Carlo are standard practice; the input distributions are documented in Appendix C.*
 
 
 
@@ -1048,6 +1072,8 @@ trade.
 
 ## 21. Techno-economics: cost, NPV, and the levelized cost of compute
 
+*Sources: the levelized-cost and net-present-value formulation follows standard engineering economics and the SMAD cost treatment [18]; launch-cost inputs per [35] and the reference architecture [1].*
+
 The economic case is built with a proper time-value-of-money treatment rather than simple cost
 bookkeeping.
 
@@ -1080,6 +1106,8 @@ at the reliability-driven rate of Chapter 16, is a first-order operating expense
 ![Fig. 21.1, Cost of useful compute versus utilization, and the radiation throughput tax by protection level.](systems_figs/fig_compute.png)
 
 ## 22. The launch-cost-parity prediction
+
+*Sources: the learning-curve and cadence inputs follow the reference architecture's cost model [1] and public launch data [35].*
 
 The entire economic case rests on launch cost falling far enough that the annualized cost of power in
 orbit approaches the terrestrial cost of power. The reference paper projects launch reaching 200
@@ -1380,6 +1408,8 @@ electrical PUE near 1.6; efficiency improves only at many-chip scale.
 | Capacity availability | 0.89 |
 
 ## 28. Constellation design and relative dynamics
+
+*Sources: the relative-motion (Clohessy-Wiltshire) equations and constellation geometry follow Curtis [16] and Vallado [17].*
 
 The eighty-one satellites do not fly in a rigid grid; they orbit in a loose formation governed by
 the linearized relative equations of motion. About a circular reference orbit of mean motion $n$,

@@ -634,6 +634,11 @@ accuracy.
 \chapter{3A. Design methodology, margins, and
 readiness}\label{a.-design-methodology-margins-and-readiness}
 
+\emph{Sources: margin and readiness practice from the NASA Systems
+Engineering Handbook {[}13{]}, AIAA S-120 {[}14{]}, the Goddard
+concurrent-design practice {[}15{]}, and the SMAD systems text
+{[}18{]}.}
+
 A conceptual design is judged not only by its point estimates but by the
 allowances it carries against growth and uncertainty. This analysis
 follows the practice of the NASA Systems Engineering Handbook
@@ -803,6 +808,9 @@ by \passthrough{\lstinline!orbital\_dc.orbit.velocity(650)!} and
 \chapter{5. Sun-synchronous orbits and J2
 precession}\label{sun-synchronous-orbits-and-j2-precession}
 
+\emph{Sources: the J2 secular precession and the sun-synchronous
+condition follow Vallado {[}17{]} and Curtis {[}16{]}.}
+
 A sun-synchronous orbit maintains a near-constant orientation relative
 to the Sun by exploiting Earth's oblateness. The dominant non-spherical
 term in Earth's gravity, characterized by \(J_2\), causes the orbital
@@ -876,6 +884,9 @@ thermally sensitive payload.
 
 \chapter{6. Eclipse geometry and the dawn-dusk
 advantage}\label{eclipse-geometry-and-the-dawn-dusk-advantage}
+
+\emph{Sources: the beta-angle and eclipse-fraction geometry follow
+Curtis {[}16{]} and the SMAD mission-design text {[}18{]}.}
 
 The fraction of each orbit spent in Earth's shadow is set by the beta
 angle \(\beta\), the angle between the orbital plane and the Sun line. A
@@ -1246,6 +1257,10 @@ chip-level active cooling.}
 
 \chapter{11. Electrical power}\label{electrical-power}
 
+\emph{Sources: solar-array and power-budget sizing from SMAD {[}18{]}
+and the Gilmore handbook {[}20{]}; cell and battery parameters from
+vendor datasheets {[}12{]}.}
+
 The power subsystem converts sunlight to usable electrical power and
 buffers the brief eclipse.
 
@@ -1285,6 +1300,9 @@ degradation over the mission.}
 \end{figure}
 
 \chapter{12. Structures and mass}\label{structures-and-mass}
+
+\emph{Sources: mass-growth allowances from AIAA S-120 {[}14{]};
+structural and modal relations from SMAD {[}18{]} and Sidi {[}33{]}.}
 
 The structure carries launch loads, sets the spacecraft inertia (which
 feeds attitude control), and anchors the mass budget that closes the
@@ -1340,6 +1358,9 @@ closed self-consistently by the integrated model.}
 
 \chapter{13. Attitude determination and control; optical
 pointing}\label{attitude-determination-and-control-optical-pointing}
+
+\emph{Sources: attitude dynamics and control from Wertz {[}32{]} and
+Sidi {[}33{]}; optical-pointing requirements from Hemmati {[}30{]}.}
 
 The attitude subsystem must hold the bus steady against disturbance
 torques and, far more demandingly, point laser links to sub-microradian
@@ -1444,6 +1465,10 @@ pointing-loss sensitivity.}
 \chapter{15. Propulsion and end-of-life
 disposal}\label{propulsion-and-end-of-life-disposal}
 
+\emph{Sources: the rocket equation and propulsion sizing from Sutton and
+Biblarz {[}31{]}; the Hohmann de-orbit from Curtis {[}16{]}; the
+disposal requirement from FCC 22-74 {[}7{]}.}
+
 Propulsion must make up drag, maintain the formation, enable collision
 avoidance, and, decisively, de-orbit the satellite within the regulatory
 window.
@@ -1491,6 +1516,9 @@ propellant mass by propulsion type.}
 
 \chapter{16. Reliability and constellation
 availability}\label{reliability-and-constellation-availability}
+
+\emph{Sources: reliability and redundancy methods from the SMAD systems
+texts {[}18, 19{]}.}
 
 Because no satellite can be repaired in orbit, reliability must be
 designed in and availability bought through redundancy and
@@ -1565,6 +1593,10 @@ over-provisioning needed to hold capacity.}
 
 \chapter{17. Compute and workload}\label{compute-and-workload}
 
+\emph{Sources: accelerator throughput and power from vendor
+documentation {[}12{]}; the workload and utilization model from the
+reference architecture {[}1{]}.}
+
 The purpose of the system is useful computation, and the appropriate
 figure of merit is delivered useful work, not peak floating-point
 capability.
@@ -1613,6 +1645,9 @@ RESULTS}\label{integration-simulation-and-results}
 \chapter{18. The integrated system
 model}\label{the-integrated-system-model}
 
+\emph{Sources: the mass, power, thermal, and delta-v closure follows
+standard concurrent-design practice (SMAD {[}18{]}).}
+
 The value of a systems model lies in closure: the subsystems must be
 solved together so that their mutual dependencies are satisfied. The
 integrated model takes top-level choices, the number and type of chips,
@@ -1655,6 +1690,10 @@ by the system model.}
 
 \chapter{18A. Computational methods and numerical
 solvers}\label{a.-computational-methods-and-numerical-solvers}
+
+\emph{Sources: the numerical methods (Newton-Raphson, bisection, Brent,
+Runge-Kutta) are standard; the orbital integrations are checked against
+Vallado {[}17{]}.}
 
 The governing equations are not only evaluated in closed form; each is
 solved with an explicit numerical method in an open solver suite. The
@@ -1730,6 +1769,9 @@ that a reader can run.
 
 \chapter{19. Uncertainty quantification and
 sensitivity}\label{uncertainty-quantification-and-sensitivity}
+
+\emph{Sources: linear error propagation and Monte-Carlo are standard
+practice; the input distributions are documented in Appendix C.}
 
 A point design is not credible without an uncertainty band. Two
 complementary tools are used: linear error propagation for a quick
@@ -1856,6 +1898,11 @@ reliability-throughput trade.}
 \chapter{21. Techno-economics: cost, NPV, and the levelized cost of
 compute}\label{techno-economics-cost-npv-and-the-levelized-cost-of-compute}
 
+\emph{Sources: the levelized-cost and net-present-value formulation
+follows standard engineering economics and the SMAD cost treatment
+{[}18{]}; launch-cost inputs per {[}35{]} and the reference architecture
+{[}1{]}.}
+
 The economic case is built with a proper time-value-of-money treatment
 rather than simple cost bookkeeping.
 
@@ -1909,6 +1956,10 @@ radiation throughput tax by protection level.}
 
 \chapter{22. The launch-cost-parity
 prediction}\label{the-launch-cost-parity-prediction}
+
+\emph{Sources: the learning-curve and cadence inputs follow the
+reference architecture's cost model {[}1{]} and public launch data
+{[}35{]}.}
 
 The entire economic case rests on launch cost falling far enough that
 the annualized cost of power in orbit approaches the terrestrial cost of
@@ -2397,6 +2448,9 @@ Capacity availability & 0.89 \\
 
 \chapter{28. Constellation design and relative
 dynamics}\label{constellation-design-and-relative-dynamics}
+
+\emph{Sources: the relative-motion (Clohessy-Wiltshire) equations and
+constellation geometry follow Curtis {[}16{]} and Vallado {[}17{]}.}
 
 The eighty-one satellites do not fly in a rigid grid; they orbit in a
 loose formation governed by the linearized relative equations of motion.
