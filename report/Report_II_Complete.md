@@ -126,6 +126,8 @@ Appendix C: data sources and confidence · Appendix D: reproduction and code
 
 ## 1. Introduction and motivation
 
+> *Abstract.* This chapter sets out the case for examining artificial-intelligence data centers in orbit: the energy and thermal pressure on terrestrial infrastructure, the three real physical advantages of orbit, and the severe penalties that come with them. It states the study's purpose, a complete first-principles model with an honest separation of demonstrated capability from projection, and how the book is organized.
+
 The energy and thermal demands of artificial-intelligence computing have grown faster than
 terrestrial infrastructure can comfortably absorb. Training and inference clusters are now
 provisioned in tens to hundreds of megawatts; cooling, water, land, and grid interconnection have
@@ -153,6 +155,8 @@ open, validated by 122 automated tests, and reproduces every figure and value in
 single command.
 
 ## 2. The state of the art (2025-2026)
+
+> *Abstract.* This chapter surveys what has actually flown by 2026, the single accelerator in orbit, the early data-center nodes, and the published constellation reference design, and distinguishes it from what the vision still requires. It also flags the load-bearing role, and the limits, of a non-peer-reviewed vendor preprint.
 
 Three programs anchor the field as of mid-2026. Their status here is drawn from primary sources.
 
@@ -186,6 +190,8 @@ clusters, flown multi-terabit formation links, dramatically cheaper launch, and 
 station-keeping. None of the latter has been demonstrated.
 
 ## 2A. The original feasibility study: passive cooling of a TPU node
+
+> *Abstract.* This chapter reproduces the original thermal-feasibility study in full: a 1450-watt node held within its junction-temperature limit at 650 kilometers by passive radiative cooling, with a margin of about fourteen degrees. It records the model, the worked numbers, the single-fault case, and the caveats that motivated the complete analysis that follows.
 
 *Sources: radiative and conductive relations from Incropera and DeWitt [21]; spacecraft thermal
 practice and white-paint properties from the Gilmore handbook [20]. Reproduced by
@@ -261,6 +267,8 @@ full survivability, integration, and economic treatment that makes up the remain
 
 ## 3. Reference architecture and scope
 
+> *Abstract.* This chapter fixes the reference architecture used throughout the book, an eighty-one-satellite, tight-formation constellation in a dawn-dusk sun-synchronous orbit, and states the scope and boundaries of the analysis.
+
 Throughout this analysis the reference design follows the Suncatcher parameters: a dawn-dusk
 sun-synchronous orbit at 650 km, an eighty-one-satellite cluster of one-kilometer radius, and
 inter-satellite spacing of roughly 150 m. The reference satellite bus is taken to carry four
@@ -280,6 +288,8 @@ transparency, not in a claim of flight accuracy.
 ---
 
 ## 3A. Design methodology, margins, and readiness
+
+> *Abstract.* This chapter sets the design discipline: the mass-growth and power allowances drawn from established flight practice, and an explicit technology-readiness assessment that locates each capability on the nine-level scale.
 
 *Sources: margin and readiness practice from the NASA Systems Engineering Handbook [13], AIAA S-120 [14], the Goddard concurrent-design practice [15], and the SMAD systems text [18].*
 
@@ -343,6 +353,8 @@ levels 2 to 3. The program risk is concentrated in the system-integration steps,
 
 ## 4. Orbital mechanics of a circular orbit
 
+> *Abstract.* This chapter derives the small set of circular-orbit quantities, speed, period, and specific energy, on which every later chapter depends, and works the reference orbit as an example.
+
 *Sources: the circular-orbit relations, vis-viva equation, and specific energy follow standard
 astrodynamics texts, principally Curtis [16] and Vallado [17].*
 
@@ -374,6 +386,8 @@ The orbital speed is about 7.5 km/s and the period about 97.6 minutes, giving ro
 per day. These values are reproduced exactly by `orbital_dc.orbit.velocity(650)` and `period(650)`.
 
 ## 5. Sun-synchronous orbits and J2 precession
+
+> *Abstract.* This chapter derives the secular nodal precession caused by Earth's oblateness and the inclination that makes an orbit sun-synchronous, and confirms the reference value of about ninety-eight degrees.
 
 *Sources: the J2 secular precession and the sun-synchronous condition follow Vallado [17] and Curtis [16].*
 
@@ -426,6 +440,8 @@ plane near Earth's terminator, which (Chapter 6) yields nearly continuous sunlig
 cycling, a decisive advantage for a high-power, thermally sensitive payload.
 
 ## 6. Eclipse geometry and the dawn-dusk advantage
+
+> *Abstract.* This chapter derives the beta angle and the sunlit fraction of the orbit from the cylindrical-shadow geometry, and shows why the dawn-dusk orbit stays sunlit year round.
 
 *Sources: the beta-angle and eclipse-fraction geometry follow Curtis [16] and the SMAD mission-design text [18].*
 
@@ -481,6 +497,8 @@ single favorable date.
 
 ## 7. The neutral atmosphere and orbital decay
 
+> *Abstract.* This chapter derives the orbital-decay rate from the energy balance under atmospheric drag and integrates it to a mission lifetime, a result that decides compliance with the five-year disposal rule.
+
 *Sources: density from the NRLMSIS empirical model [11]; the drag and orbit-averaged decay treatment
 follows Curtis [16] and the space-environment texts of Tribble [22] and Pisacane [23].*
 
@@ -533,6 +551,8 @@ mass and economic budgets.
 
 ## 8. The ionizing-radiation environment
 
+> *Abstract.* This chapter treats the two distinct radiation effects, accumulated dose behind shielding and stochastic single-event upsets, and shows that dose is comfortably survivable while upsets impose a bounded throughput tax.
+
 *Sources: trapped-particle fluxes from the AE8/AP8 [25] and AE9/AP9 [26] models; dose-depth via
 SHIELDOSE [27]; environment and effects from Tribble [22], Pisacane [23], and Hastings and Garrett [24].*
 
@@ -571,6 +591,8 @@ twenty percent, which must be carried explicitly in any efficiency figure.
 
 ## 9. The orbital-debris environment
 
+> *Abstract.* This chapter quantifies the debris hazard at the reference altitude: the catastrophic-impact probability for the cluster and the way a single fragmentation couples to neighbours as the spacing tightens.
+
 *Sources: flux from NASA ORDEM 3.2 [8] and ESA MASTER [9]; the collision-frequency and cascade
 framework follows Kessler and Cour-Palais [28] and Klinkrad [29].*
 
@@ -601,6 +623,8 @@ exact orbit and epoch, as noted in Chapter 24.
 # PART III, SPACECRAFT SUBSYSTEMS
 
 ## 10. Thermal control
+
+> *Abstract.* This chapter develops the thermal model, the linear scaling of radiator area with power and the sharper wall at the chip interface, and identifies the power level above which a passive path can no longer cope.
 
 *Sources: radiative and conductive relations from Incropera and DeWitt [21]; spacecraft-specific
 practice from the Gilmore thermal-control handbook [20] and ECSS-E-ST-31C [34].*
@@ -667,6 +691,8 @@ first report assumed.
 
 ## 11. Electrical power
 
+> *Abstract.* This chapter sizes the electrical-power subsystem for the dawn-dusk orbit, where near-continuous sunlight makes the battery small and the array sizing the dominant term.
+
 *Sources: solar-array and power-budget sizing from SMAD [18] and the Gilmore handbook [20]; cell and battery parameters from vendor datasheets [12].*
 
 The power subsystem converts sunlight to usable electrical power and buffers the brief eclipse.
@@ -694,6 +720,8 @@ Chapter 6.
 ![Fig. 11.1, Array area versus load, and triple-junction degradation over the mission.](systems_figs/fig_power.png)
 
 ## 12. Structures and mass
+
+> *Abstract.* This chapter estimates the structural and mass properties, the inertia tensor, the structural mass set by launch loads, and the panel modal frequency, that feed the attitude and integration analyses.
 
 *Sources: mass-growth allowances from AIAA S-120 [14]; structural and modal relations from SMAD [18] and Sidi [33].*
 
@@ -732,6 +760,8 @@ The reference four-chip satellite closes at roughly 270 to 290 kg dry.
 
 ## 13. Attitude determination and control; optical pointing
 
+> *Abstract.* This chapter treats attitude determination and control and the much finer pointing the optical links demand, showing why a fast-steering mirror is required on top of the spacecraft bus.
+
 *Sources: attitude dynamics and control from Wertz [32] and Sidi [33]; optical-pointing requirements from Hemmati [30].*
 
 The attitude subsystem must hold the bus steady against disturbance torques and, far more
@@ -759,6 +789,8 @@ twenty-microradian beam is millimeters wide at 150 m); the demanding pointing ca
 link and any long inter-satellite hop.
 
 ## 14. Communications: inter-satellite and ground
+
+> *Abstract.* This chapter develops the inter-satellite and ground communications link budgets and shows how the inverse-square behaviour of an optical beam forces the satellites into a tight formation.
 
 *Sources: the optical link budget follows Hemmati [30] and the free-space optical satellite-link
 analysis of Liang et al. [6].*
@@ -803,6 +835,8 @@ beyond roughly 3,000 km, a genuine advantage for long-haul, latency-sensitive tr
 
 ## 15. Propulsion and end-of-life disposal
 
+> *Abstract.* This chapter sizes the propulsion subsystem and the controlled end-of-life disposal, and shows that the de-orbit maneuver dominates the mission velocity budget.
+
 *Sources: the rocket equation and propulsion sizing from Sutton and Biblarz [31]; the Hohmann de-orbit from Curtis [16]; the disposal requirement from FCC 22-74 [7].*
 
 Propulsion must make up drag, maintain the formation, enable collision avoidance, and, decisively, 
@@ -834,6 +868,8 @@ makes de-orbit slow and requires coordination with the formation.
 ![Fig. 15.1, Per-satellite Δv budget (de-orbit dominates) and propellant mass by propulsion type.](figures/fig5_deltav.png)
 
 ## 16. Reliability and constellation availability
+
+> *Abstract.* This chapter develops reliability and constellation availability: exponential survival, k-of-n redundancy, and the continuous replenishment needed to hold capacity over the mission.
 
 *Sources: reliability and redundancy methods from the SMAD systems texts [18, 19].*
 
@@ -883,6 +919,8 @@ economics of Chapter 21. These figures are produced by `orbital_dc.reliability` 
 
 ## 17. Compute and workload
 
+> *Abstract.* This chapter relates peak hardware capability to the compute that is actually delivered, after utilization, the radiation tax, and thermal throttling are accounted for.
+
 *Sources: accelerator throughput and power from vendor documentation [12]; the workload and utilization model from the reference architecture [1].*
 
 The purpose of the system is useful computation, and the appropriate figure of merit is delivered useful
@@ -916,6 +954,8 @@ realistic utilization is several times the headline peak figure.
 
 ## 18. The integrated system model
 
+> *Abstract.* This chapter closes the integrated system: mass, power, thermal, and velocity budgets are solved self-consistently for the reference design point.
+
 *Sources: the mass, power, thermal, and delta-v closure follows standard concurrent-design practice (SMAD [18]).*
 
 The value of a systems model lies in closure: the subsystems must be solved together so that their
@@ -945,6 +985,8 @@ shielding dominate, and the design closes at roughly 270 to 290 kg dry.
 ![Fig. 18.1, Integrated dry-mass budget, closed self-consistently by the system model.](systems_figs/fig_mass_budget.png)
 
 ## 18A. Computational methods and numerical solvers
+
+> *Abstract.* This chapter documents the numerical methods, root-finding and time integration, used to solve the governing equations, and the checks that anchor them to known results.
 
 *Sources: the numerical methods (Newton-Raphson, bisection, Brent, Runge-Kutta) are standard; the orbital integrations are checked against Vallado [17].*
 
@@ -998,6 +1040,8 @@ and the figures are produced by the same code that a reader can run.
 
 ## 19. Uncertainty quantification and sensitivity
 
+> *Abstract.* This chapter places uncertainty bands on the headline results by linear error propagation and Monte-Carlo, and identifies the inputs to which the conclusions are most sensitive.
+
 *Sources: linear error propagation and Monte-Carlo are standard practice; the input distributions are documented in Appendix C.*
 
 
@@ -1040,6 +1084,8 @@ the chip power itself, undisclosed by the vendor and treated as a 150-to-200-wat
 
 ## 20. Results: reference design point and constellation
 
+> *Abstract.* This chapter collects the reference design-point and constellation results, the numbers that the rest of the book derives and the open model reproduces.
+
 Bringing the chapters together, the reference design point and its key results are summarized in
 Table 20.1 and the supporting figures.
 
@@ -1071,6 +1117,8 @@ trade.
 # PART V, ECONOMICS AND PREDICTIONS
 
 ## 21. Techno-economics: cost, NPV, and the levelized cost of compute
+
+> *Abstract.* This chapter develops the techno-economics, capital and operating cost, net present value, and the levelized cost of useful compute.
 
 *Sources: the levelized-cost and net-present-value formulation follows standard engineering economics and the SMAD cost treatment [18]; launch-cost inputs per [35] and the reference architecture [1].*
 
@@ -1106,6 +1154,8 @@ at the reliability-driven rate of Chapter 16, is a first-order operating expense
 ![Fig. 21.1, Cost of useful compute versus utilization, and the radiation throughput tax by protection level.](systems_figs/fig_compute.png)
 
 ## 22. The launch-cost-parity prediction
+
+> *Abstract.* This chapter tests the launch-cost-parity assumption that underwrites the business case, and finds that most sampled futures never reach the target price within the horizon, with parity, where it arrives, falling later than the headline date.
 
 *Sources: the learning-curve and cadence inputs follow the reference architecture's cost model [1] and public launch data [35].*
 
@@ -1148,6 +1198,8 @@ business case is gated by hardware cost, lifetime, and utilization.
 
 ## 23. Capability and risk trajectory, 2027-2035
 
+> *Abstract.* This chapter synthesizes the preceding analysis into a defensible capability and risk trajectory through the early 2030s, and names the gating demonstrations.
+
 Synthesizing the technology-readiness picture of Chapter 2 with the engineering constraints of the
 preceding chapters yields a defensible capability trajectory. By 2027, the demonstration missions
 (the Suncatcher two-satellite prototype, Starcloud's Blackwell-class follow-on) should place real
@@ -1169,6 +1221,8 @@ this with the official ORDEM 3.2 and LEGEND tools before committing to constella
 # PART VI, SYNTHESIS
 
 ## 24. Caveats and limitations
+
+> *Abstract.* This chapter states plainly what the study does and does not establish, including the quality of its sources and the model fidelity it deliberately stops short of.
 
 A complete assessment must state clearly what this study does and does not establish.
 
@@ -1192,6 +1246,8 @@ risks, and quantify the trades transparently. They do bound the confidence with 
 number should be quoted, and they identify exactly where higher-fidelity work is needed next.
 
 ## 25. Conclusions and the recommended demonstrator
+
+> *Abstract.* This chapter draws the conclusions and recommends the program that the analysis supports: small, attritable demonstrators aimed at the binding survivability and autonomy risks.
 
 The analysis supports a clear and defensible conclusion. Radiative cooling, the problem
 most often assumed to be the obstacle, is the solved part, now flight-proven at the single-node
@@ -1224,6 +1280,8 @@ and economics sit in the high-risk corner, and that is where the engineering att
 
 ## 26. A worked end-to-end computation
 
+> *Abstract.* This chapter carries a single design point end to end, from orbit through thermal, link, disposal, and compute, so the chain from principle to number can be followed in one place.
+
 To make the integrated model concrete, this chapter walks through the reference design point exactly
 as the code computes it, carrying the numbers at each step. The inputs are four TPU-class
 accelerators at an estimated 200 W each, a 650-km dawn-dusk orbit, a radiator operating point of
@@ -1250,6 +1308,8 @@ the eighty-one-satellite cluster gives the fleet totals of Table T12. Every one 
 produced by the open code and is reproduced by the validation suite.
 
 ## 27. Detailed results tables
+
+> *Abstract.* This chapter tabulates the detailed numerical results that support the figures and conclusions of the preceding parts.
 
 The following tables report the model output across the relevant input ranges. They are generated
 directly by the model (`report/gen_tables.py`) so that every value is consistent with the equations
@@ -1414,6 +1474,8 @@ electrical PUE near 1.6; efficiency improves only at many-chip scale.
 
 ## 28. Constellation design and relative dynamics
 
+> *Abstract.* This chapter treats the relative dynamics of the tight formation, the Clohessy-Wiltshire relations and the station-keeping they imply.
+
 *Sources: the relative-motion (Clohessy-Wiltshire) equations and constellation geometry follow Curtis [16] and Vallado [17].*
 
 The eighty-one satellites do not fly in a rigid grid; they orbit in a loose formation governed by
@@ -1437,6 +1499,8 @@ collision-avoidance maneuver, without that maneuver endangering a neighbor, is a
 problem at this density, and it is the operational face of the formation paradox.
 
 ## 29. Comparison with terrestrial data centers
+
+> *Abstract.* This chapter sets the orbital architecture against terrestrial hyperscale data centers, dimension by dimension, to locate where each genuinely differs.
 
 It is instructive to place the orbital architecture beside a terrestrial hyperscale facility on the
 metrics that matter (Table T13). Orbit wins decisively on cooling overhead and water, and it offers
