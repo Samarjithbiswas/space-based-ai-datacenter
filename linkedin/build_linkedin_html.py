@@ -50,8 +50,15 @@ def img(placeholder):
 
 
 def svgfig(name):
-    """An inline-SVG geometry diagram with its caption rendered below, in the text flow."""
+    """A geometry diagram with its caption below. Embedded as a PNG <img> (rasterized in
+    post_figures/) so it is copyable/saveable from the page like the chart figures; falls
+    back to inline SVG if the PNG has not been exported yet."""
     svg, cap = DIAGRAMS[name]
+    png = pathlib.Path(__file__).resolve().parent / "post_figures" / f"diagram_{name}.png"
+    if png.exists():
+        data = base64.b64encode(png.read_bytes()).decode("ascii")
+        return (f'<figure class="diagram"><img alt="{cap}" src="data:image/png;base64,{data}"/>'
+                f'<figcaption>{cap}</figcaption></figure>')
     return f'<figure class="diagram">{svg}<figcaption>{cap}</figcaption></figure>'
 
 
