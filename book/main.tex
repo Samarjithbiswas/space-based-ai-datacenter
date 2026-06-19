@@ -920,6 +920,62 @@ Equation (4.3) is the key to the orbital-decay derivation in Chapter 7:
 drag removes energy, and a loss of energy means a more negative
 \(\mathcal{E}\), hence a smaller \(a\).
 
+\textbf{The two-body problem.} The circular relations above are special
+cases of the two-body problem. Newton's law of gravitation and the
+second law give the relative acceleration of the satellite with respect
+to Earth,
+
+\begin{equation}
+\ddot{\mathbf r} = -\frac{\mu}{r^{3}}\,\mathbf r, \qquad \mu = G(M_\oplus + m) \approx G M_\oplus, \tag{4.4}
+\end{equation}
+
+where the approximation holds because the satellite mass is negligible
+against Earth's. Taking the cross product of (4.4) with \(\mathbf r\)
+shows that the specific angular momentum is conserved,
+
+\begin{equation}
+\mathbf h = \mathbf r \times \dot{\mathbf r}, \qquad \frac{d\mathbf h}{dt} = 0, \tag{4.5}
+\end{equation}
+
+so the motion stays in a plane and the radius vector sweeps equal areas
+in equal times, which is Kepler's second law.
+
+\textbf{The orbit equation.} Integrating (4.4) once, using the conserved
+eccentricity (Laplace-Runge-Lenz) vector, yields the trajectory as a
+conic section written in focal polar form,
+
+\begin{equation}
+r(\theta) = \frac{h^{2}/\mu}{1 + e\cos\theta} = \frac{p}{1 + e\cos\theta}, \qquad p = a\left(1 - e^{2}\right), \tag{4.6}
+\end{equation}
+
+where \(e\) is the eccentricity, \(\theta\) the true anomaly measured
+from perigee, and \(p\) the semi-latus rectum. Bound orbits have
+\(0 \le e < 1\); the circular orbit used throughout this study is the
+special case \(e = 0\), for which \(r = a\) is constant and (4.1) to
+(4.3) follow directly.
+
+\textbf{Kepler's third law.} For an ellipse of semi-axes \(a\) and
+\(b = a\sqrt{1-e^{2}}\), the constant areal rate \(\dot A = h/2\)
+integrated over the enclosed area \(\pi a b\) gives the period
+
+\begin{equation}
+T = 2\pi\sqrt{\frac{a^{3}}{\mu}}, \tag{4.7}
+\end{equation}
+
+independent of eccentricity, which is why the circular result (4.2)
+applies to the slightly non-circular reference orbit without correction.
+
+\textbf{Ground track and revisit.} Coverage planning needs the ground
+track, the locus of sub-satellite points. While the satellite completes
+one orbit in time \(T\), Earth turns beneath it at
+\(\omega_\oplus = 7.292\times10^{-5}\) rad/s, so successive equator
+crossings step westward by \(\Delta\lambda = \omega_\oplus T\). A ground
+track repeats when an integer number of orbits \(k\) fills an integer
+number \(d\) of nodal days, \(k\,T = d\,(2\pi/\omega_\oplus)\); for the
+reference orbit \(\Delta\lambda \approx 24.4^\circ\) per revolution, and
+the near-15-orbit day sets the natural revisit cadence over a given
+ground station (Chapter 14).
+
 \textbf{Worked example.} At \(h = 650\) km,
 \(a = R_E + h = 7.021\times10^6\) m:
 
