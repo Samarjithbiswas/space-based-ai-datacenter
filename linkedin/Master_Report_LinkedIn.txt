@@ -2,12 +2,12 @@
  HOW TO POST THIS ON LINKEDIN
 ------------------------------------------------------------
  PART A = feed post. Paste into "Start a post" (fits 3,000 chars).
+ COVER: attach linkedin/Cover_Part_II.png as the post image.
  PART B = the full article. Paste into "Write article".
- EQUATIONS: LinkedIn cannot render LaTeX. Where you see
-   [IMAGE: eq_XX_name.png], click + -> Image in the article
-   editor and upload that PNG from report/equations/. The
-   inline Unicode versions are a fallback if you skip images.
- FIGURES: upload the PNGs from report/figures/ where marked.
+ FIGURES: upload the upload-ready PNGs from linkedin/post_figures/
+   (the 11 diagram_*.png schematics + 8 chart_*.png graphs); see
+   linkedin/post_figures/INDEX.md for which image goes in which section.
+ EQUATIONS: this Part II post is equation-free; no LaTeX needed.
  LINK: put the GitHub repo link in the FIRST COMMENT (more reach).
 ============================================================
 
@@ -17,27 +17,44 @@
  PART A  -  FEED POST
 ============================================================
 
-Space-based AI data centers stopped being a slide in 2025. Starcloud flew an NVIDIA H100 in orbit (Nov 2025). Axiom put data-center nodes in LEO (Jan 2026). Google's Project Suncatcher targets two TPU prototypes by early 2027.
+Space-Based Data Center Infrastructure: A Multi-Physics Approach, Part II.
 
-So I did the full engineering study, from primary sources and open simulation, and I tried hard to separate what is demonstrated from what is marketing.
+Seven months ago I posted Part I, which asked one narrow question: can passive radiative cooling keep a data-center-class chip within its temperature limit in low Earth orbit? The answer was yes, but with a thin margin, about fourteen degrees.
 
-The verdict:
+A lot has happened since. Starcloud switched on an NVIDIA H100 in orbit (November 2025). Axiom placed data-center nodes in low Earth orbit (January 2026). Google's Project Suncatcher targets two TPU prototypes by early 2027. The idea stopped being a slide and became hardware.
 
-🛰️ Cooling is solved and flight-proven. But it does not scale: radiator area is linear in power (~1,500 m² per megawatt), and above ~400 W per chip the passive heat path alone blows the 125 C budget, so big GPUs need liquid cooling at the die.
+So Part II takes on the rest of the system. Not just whether the chip stays cool, but whether the spacecraft survives, communicates, points, powers itself, disposes of itself, and pays for itself. It is built from primary sources and an open simulation, and it keeps a strict line between what has been demonstrated and what is still a projection.
 
-☢️ Radiation is survivable, with margin. Google's TPU showed first memory irregularities at 2 krad and no hard failures to 15 krad, against a ~750 rad 5-year requirement. The real cost is a ~10-20% throughput tax from bit-flips.
+What it found:
 
-☄️ Orbital debris in a tight formation is the binding, unsolved problem: ~17% chance of a catastrophic hit per 81-satellite cluster over 5 years, and the 150 m spacing that makes the terabit laser links work is exactly what makes a cascade and collision-avoidance dangerous.
+🛰️ Cooling is solved and flight-proven, but it does not scale: radiator area is linear in power (~1,500 m² per megawatt), and above ~400 W per chip the passive heat path alone blows the 125 C budget, so big chips need liquid cooling at the die.
 
-🌍 It will not deorbit itself. At 650 km natural decay is ~22 years, failing the new FCC 5-year rule. Active de-orbit is mandatory.
+☢️ Radiation is survivable with margin. The tested processor showed first memory irregularities at 2 krad and no hard failures to 15 krad, against a ~750 rad five-year requirement. The real cost is a ~10-20% throughput tax from bit-flips.
 
-💰 And the economics are later than advertised. The "$200/kg launch by 2035" that underwrites the whole case is fragile: my independent Monte-Carlo puts median cost-parity around 2044, not 2035.
+☄️ Debris in a tight formation is the binding, unsolved problem: about a one-in-six chance of a catastrophic hit per 81-satellite cluster over five years, and the ~150 m spacing that makes the terabit laser links work is exactly what makes a cascade dangerous.
 
-Everything is open: a 21-module Python model, 120+ tests, full derivations, and the simulations behind every number. Repo in the comments.
+🌍 It will not deorbit itself. At 650 km natural decay runs to about two decades, failing the new FCC five-year rule. Active de-orbit is mandatory.
+
+💰 The economics are later and less certain than advertised. The "$200/kg launch by 2035" that underwrites the case is fragile: in my Monte-Carlo most scenarios never reach that price within the horizon, and where they do the median is around 2044, not 2035.
+
+Everything is open: a Python model of more than twenty subsystems, 122 tests, full derivations, and the simulations behind every number. The full Part II write-up and the repository are in the first comment.
 
 The takeaway for the teams flying this: cooling already works. Aim the demonstrators at debris autonomy and credible disposal, because those, not heat, decide whether orbital AI scales.
 
-#SpaceTech #AIInfrastructure #Aerospace #SystemsEngineering #OrbitalDebris #NASA #SpaceX #DataCenters #ThermalEngineering
+#SpaceTech #AIInfrastructure #Aerospace #SystemsEngineering #OrbitalDebris #NASA #SpaceX #DataCenters
+
+
+
+============================================================
+ FIRST COMMENT  (post this as the first comment for reach)
+============================================================
+
+Full Part II write-up, with the derivations, figures, and the simulation code for every number:
+github.com/Samarjithbiswas/space-based-ai-datacenter
+
+Part I (the original thermal-feasibility study) is here: [paste the link to your Part I post]
+
+Open access. Independent reproduction and corrections are welcome.
 
 
 
