@@ -76,10 +76,9 @@ for ln in desc:
     dy += 64
 
 # --- author / footer ---
-d.line([(cx - 170, 3120), (cx + 170, 3120)], fill=TEAL, width=4)
-d.text((cx, 3210), "Samarjith Biswas, PhD", font=auth_f, fill=WHITE, anchor="mm")
-d.text((cx, 3280), "Research Scientist III", font=small_f, fill=MUTE, anchor="mm")
-tracked(3380, "github.com/Samarjithbiswas/space-based-ai-datacenter", small_f, MUTE, 1)
+d.line([(cx - 170, 3180), (cx + 170, 3180)], fill=TEAL, width=4)
+d.text((cx, 3270), "Samarjith Biswas, PhD", font=auth_f, fill=WHITE, anchor="mm")
+d.text((cx, 3340), "Edition I  ·  2026", font=small_f, fill=MUTE, anchor="mm")
 
 cv.save(OUT, "PNG")
 print(f"wrote {OUT.name}  ({W}x{H})")
