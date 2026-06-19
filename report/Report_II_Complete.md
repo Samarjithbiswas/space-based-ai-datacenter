@@ -233,7 +233,23 @@ components of the reference architecture sit near the middle: a single accelerat
 orbit and a processor has been ground-tested for radiation (component levels 5 to 6), while the
 constellation-scale system, the flown multi-terabit formation links, and validated formation
 station-keeping remain at low system readiness. The gap between component and system readiness is the
-central programmatic risk identified in Chapter 23.
+central programmatic risk identified in Chapter 23. Assessing each major capability against the
+nine-level scale makes that gap explicit.
+
+| Capability | Demonstrated status, 2026 | Assessed TRL | Gating step to the next level |
+| --- | --- | --- | --- |
+| Data-center-class accelerator in orbit | one GPU flown (Starcloud-1, Nov 2025) | 6 | sustained multi-unit operation on orbit |
+| Processor radiation tolerance | ground-tested, no hard failures to 15 krad | 5 | in-flight dose and upset-rate confirmation |
+| Node-level thermal control | kilowatt-class pumped-loop nodes flown | 5 | a megawatt-class radiator flown |
+| Multi-terabit formation optical link | bench-scale link only | 4 | a flown link between two satellites |
+| Formation station-keeping at sub-km spacing | not demonstrated | 3 | two-satellite close-formation flight |
+| Autonomous cluster debris avoidance | not demonstrated | 2 | a closed-loop avoidance maneuver on orbit |
+| Propulsive disposal within five years | components flight-proven, configuration unproven | 5 | an end-to-end de-orbit demonstration |
+| Megawatt-to-gigawatt cluster | conceptual | 2 | a subscale multi-satellite cluster |
+
+The assessment confirms the central pattern: the building blocks sit at component levels 4 to 6,
+while every capability that depends on the constellation operating as a coordinated system sits at
+levels 2 to 3. The program risk is concentrated in the system-integration steps, not the components.
 
 | Allowance | Value | Source |
 | --- | --- | --- |
