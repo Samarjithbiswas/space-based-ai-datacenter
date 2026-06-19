@@ -1,0 +1,2712 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\documentclass[
+  11pt,
+  openany]{book}
+\usepackage{xcolor}
+\usepackage[margin=2.2cm,top=2.4cm,bottom=2.4cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% =====================================================================
+% House style for the samarjithbiswas.com handbook series.
+% Matched to the "On-Device LLMs for Engineering Software" toolkit:
+% IBM Plex Sans body, teal/slate palette, titlesec headings, fancyhdr,
+% tcolorbox callouts, a dark code-listing style. Injected by pandoc as
+% header-includes, so amsmath / graphicx / xcolor / hyperref / longtable
+% are already loaded by the pandoc book template; we only add styling.
+% =====================================================================
+\usepackage[T1]{fontenc}
+\usepackage{plex-sans}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[scaled=0.90]{plex-mono}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+
+% --- Brand palette (teal series + a navy accent for the space title) ---
+\definecolor{brandTeal}{HTML}{0d9488}
+\definecolor{brandTealDk}{HTML}{0f766e}
+\definecolor{brandPurple}{HTML}{7c3aed}
+\definecolor{brandAmber}{HTML}{d97706}
+\definecolor{brandSlate}{HTML}{0f172a}
+\definecolor{brandGray}{HTML}{475569}
+\definecolor{brandLight}{HTML}{f1f5f9}
+\definecolor{spaceNavy}{HTML}{16243a}
+\definecolor{codeBg}{HTML}{0f172a}
+\definecolor{codeFg}{HTML}{e2e8f0}
+\definecolor{calloutBlue}{HTML}{dbeafe}
+\definecolor{calloutAmber}{HTML}{fef3c7}
+\definecolor{calloutGreen}{HTML}{dcfce7}
+
+% --- Manual chapter/section numbers live in the headings (e.g. "3A.",
+% "4.1"); suppress LaTeX's automatic numbering so nothing is doubled.
+% Parts stay numbered (Part I .. Part VII). ---
+\setcounter{secnumdepth}{-1}
+\setcounter{tocdepth}{1}
+
+% --- Hyperlink colours (hyperref already loaded by pandoc) ---
+\hypersetup{colorlinks=true, linkcolor=brandTealDk, citecolor=brandTealDk,
+            urlcolor=brandTeal, linktoc=all,
+            pdftitle={Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics},
+            pdfauthor={Samarjith Biswas, PhD}}
+
+% --- Headings ---
+\titleformat{\chapter}[display]
+  {\sffamily}
+  {\Large\bfseries\color{brandTeal}\MakeUppercase{\chaptertitlename}}
+  {0pt}
+  {\Huge\bfseries\color{brandSlate}}
+  [\vskip4pt{\color{brandTeal}\titlerule[1.4pt]}]
+\titleformat{\section}
+  {\Large\bfseries\color{brandTealDk}}{}{0em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{brandSlate}}{}{0em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{brandGray}}{}{0em}{}
+\titlespacing*{\chapter}{0pt}{6pt}{18pt}
+
+% --- Part pages ---
+\titleformat{\part}[display]
+  {\sffamily\centering}
+  {\Large\bfseries\color{brandTeal}\MakeUppercase{\partname~\thepart}}
+  {10pt}
+  {\Huge\bfseries\color{brandSlate}}
+
+% --- Running header / footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{brandGray}Space-Based AI Data Centers}
+\fancyhead[R]{\small\color{brandGray}\thepage}
+\fancyfoot[C]{\small\color{brandGray}An Engineering Study \textbullet{} Samarjith Biswas \textbullet{} 2026}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{brandTeal}\hrule height 1pt}}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Code listings (pandoc passes fenced code through listings) ---
+\lstset{
+  basicstyle=\ttfamily\footnotesize\color{codeFg},
+  backgroundcolor=\color{codeBg},
+  keywordstyle=\color{brandTeal!80!white}\bfseries,
+  stringstyle=\color{brandAmber!85!white},
+  commentstyle=\color{brandGray!85!white}\itshape,
+  numberstyle=\tiny\color{brandGray}, numbers=left, numbersep=8pt,
+  showstringspaces=false, breaklines=true, breakatwhitespace=true,
+  frame=none, framesep=8pt, xleftmargin=12pt, xrightmargin=8pt,
+  aboveskip=10pt, belowskip=10pt,
+  morekeywords={def,return,import,from,as,for,while,if,elif,else,class,with,lambda,True,False,None,and,or,not,in,np,self},
+}
+
+% --- Callout boxes (available for future hand-authored notes) ---
+\newtcolorbox{insightbox}[1][]{colback=calloutBlue, colframe=blue!50!brandSlate,
+  boxrule=0pt, leftrule=4pt, arc=2pt, fonttitle=\bfseries, title={Key insight},
+  coltitle=blue!60!brandSlate, top=8pt, bottom=8pt, breakable, #1}
+\newtcolorbox{tipbox}[1][]{colback=calloutGreen, colframe=brandTeal,
+  boxrule=0pt, leftrule=4pt, arc=2pt, fonttitle=\bfseries, title={Result},
+  coltitle=brandTealDk, top=8pt, bottom=8pt, breakable, #1}
+\newtcolorbox{warnbox}[1][]{colback=calloutAmber, colframe=brandAmber,
+  boxrule=0pt, leftrule=4pt, arc=2pt, fonttitle=\bfseries, title={Caveat},
+  coltitle=brandAmber, top=8pt, bottom=8pt, breakable, #1}
+
+% --- Figures sit centred and never overflow the text block ---
+\setkeys{Gin}{width=0.86\linewidth, keepaspectratio}
+\captionsetup{font=small, labelfont={bf,color=brandTealDk}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={brandTealDk},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+\frontmatter
+
+% ---------------------------------------------------------------------
+% Cover page, matched to the website book-panel card (dark navy panel,
+% edition tag, large title with a teal accent word, author line).
+% Injected by pandoc as include-before-body.
+% ---------------------------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\vspace*{1.2cm}
+
+\begin{tcolorbox}[colback=spaceNavy, colframe=spaceNavy, arc=8pt,
+  boxrule=0pt, left=26pt, right=26pt, top=30pt, bottom=30pt,
+  enhanced, borderline south={4pt}{0pt}{brandTeal}]
+\raggedright
+{\sffamily\bfseries\footnotesize\color{white!75!brandTeal}%
+ \fcolorbox{white!25!spaceNavy}{white!12!spaceNavy}{\strut~EDITION I\,\textbullet\,ENGINEERING STUDY\,\textbullet\,2026~}}\\[26pt]
+{\sffamily\bfseries\fontsize{34}{38}\selectfont\color{white}%
+ Space-Based\\ AI Data Centers}\\[10pt]
+{\sffamily\itshape\Large\color{brandTeal!75!white}%
+ Physics, Mathematics, Simulation, and Economics\\ of an Orbital Compute Constellation}\\[30pt]
+{\sffamily\normalsize\color{white!80!spaceNavy}%
+ A primary-source engineering study of the orbital data-center concept,\\
+ from orbital mechanics and thermal control to debris survivability,\\
+ launch economics, and a fully open simulation model.}
+\end{tcolorbox}
+
+\vfill
+
+{\sffamily\Large\bfseries\color{brandSlate} Samarjith Biswas, PhD}\\[4pt]
+{\sffamily\normalsize\color{brandGray} Research Scientist III}\\[18pt]
+{\sffamily\small\color{brandGray}%
+ Reference architecture: Google Project Suncatcher (arXiv:2511.19468)\\[2pt]
+ Open repository: \texttt{github.com/Samarjithbiswas/space-based-ai-datacenter}\\[2pt]
+ Open access \textbullet{} MIT (code) and CC-BY (text)}
+
+\vspace*{1.0cm}
+\end{titlepage}
+\cleardoublepage
+
+{
+\setcounter{tocdepth}{0}
+\tableofcontents
+}
+\mainmatter
+\section{An engineering analysis of a space-based AI compute
+constellation}\label{an-engineering-analysis-of-a-space-based-ai-compute-constellation}
+
+\textbf{Author:} Samarjith Biswas, PhD \textbf{Date:} June 2026
+\textbf{Reference architecture:} Google Project Suncatcher
+(arXiv:2511.19468) \textbf{Companion code:}
+github.com/Samarjithbiswas/space-based-ai-datacenter (20-module model,
+118 tests)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Abstract}\label{abstract}
+
+Space-based artificial-intelligence computing moved from concept to
+flight demonstration in 2025-2026. This document derives, from first
+principles, the complete physical and economic model of an orbital AI
+data center, implements every model in open and validated code, and
+reports the results, sensitivities, and forecasts. It spans seventeen
+subsystems, orbital mechanics, the neutral atmosphere and orbital decay,
+the ionizing-radiation and orbital-debris environments, thermal control,
+electrical power, structures, attitude control and optical pointing,
+inter-satellite and ground communications, propulsion and disposal,
+reliability, compute and workload, and techno-economics, and closes them
+into one self-consistent design point and constellation. Each chapter
+presents the governing equations with their derivations and worked
+numerical examples, the simulation that produces the results, and a
+discussion of what the result means. The central conclusions are that
+radiative cooling is the solved part of the problem and is now
+flight-proven; that the binding, unsolved constraints are orbital-debris
+survivability in a tight formation, credible end-of-life disposal, and
+economics; and that the launch-cost parity which underwrites the
+business case is later and less certain than commonly advertised. Every
+load-bearing fact is cited to a primary source, every forward-looking
+number is flagged as a projection, and every figure and number is
+generated by the accompanying open-source model.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Table of contents}\label{table-of-contents}
+
+\textbf{Front matter}, Abstract · Nomenclature · Physical constants
+
+\textbf{Part I, Introduction and context} 1. Introduction and motivation
+2. The state of the art (2025-2026) 3. Reference architecture and scope
+3A. Design methodology, margins, and readiness
+
+\textbf{Part II, The orbital environment} 4. Orbital mechanics of a
+circular orbit 5. Sun-synchronous orbits and J2 precession 6. Eclipse
+geometry and the dawn-dusk advantage 7. The neutral atmosphere and
+orbital decay 8. The ionizing-radiation environment 9. The
+orbital-debris environment
+
+\textbf{Part III, Spacecraft subsystems} 10. Thermal control 11.
+Electrical power 12. Structures and mass 13. Attitude determination and
+control; optical pointing 14. Communications: inter-satellite and ground
+15. Propulsion and end-of-life disposal 16. Reliability and
+constellation availability 17. Compute and workload
+
+\textbf{Part IV, Integration, simulation, and results} 18. The
+integrated system model 19. Uncertainty quantification and sensitivity
+20. Results: reference design point and constellation
+
+\textbf{Part V, Economics and predictions} 21. Techno-economics: cost,
+NPV, and the levelized cost of compute 22. The launch-cost-parity
+prediction 23. Capability and risk trajectory, 2027-2035
+
+\textbf{Part VI, Synthesis} 24. Caveats and limitations 25. Conclusions
+and the recommended demonstrator
+
+\textbf{Part VII, Detailed results, data, and worked computations} 26. A
+worked end-to-end computation 27. Detailed results tables (T1-T13) 28.
+Constellation design and relative dynamics 29. Comparison with
+terrestrial data centers
+
+\textbf{Back matter}, References · Appendix A: master equation list ·
+Appendix B: nomenclature · Appendix C: data sources and confidence ·
+Appendix D: reproduction and code
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Nomenclature}\label{nomenclature}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Symbol
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Units
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(\mu\) & Earth gravitational parameter & \(\mathrm{m^3\,s^{-2}}\) \\
+\(R_E\) & Earth mean radius & \(\mathrm{m}\) \\
+\(J_2\) & Earth oblateness coefficient & -- \\
+\(a,\ h,\ r\) & semi-major axis, altitude, orbital radius &
+\(\mathrm{m}\) \\
+\(v,\ n,\ T\) & speed, mean motion, period &
+\(\mathrm{m/s,\ rad/s,\ s}\) \\
+\(\mathcal{E}\) & specific orbital energy & \(\mathrm{J/kg}\) \\
+\(\rho\) & neutral atmospheric density & \(\mathrm{kg/m^3}\) \\
+\(C_D,\ A/m\) & drag coefficient, area-to-mass ratio & --,
+\(\mathrm{m^2/kg}\) \\
+\(\sigma,\ \varepsilon,\ \alpha_s\) & Stefan-Boltzmann constant,
+emissivity, solar absorptivity & \(\mathrm{W/m^2K^4}\), --, -- \\
+\(T,\ Q,\ R_{th}\) & temperature, heat load, thermal resistance &
+\(\mathrm{K,\ W,\ K/W}\) \\
+\(S_0,\ F,\ a_{\mathrm{alb}}\) & solar constant, view factor, Bond
+albedo & \(\mathrm{W/m^2}\), --, -- \\
+\(\Phi,\ N_f,\ r_t\) & debris flux, fragment count, target radius &
+\(\mathrm{m^{-2}yr^{-1}}\), --, \(\mathrm{m}\) \\
+\(\Delta v,\ I_{sp}\) & velocity increment, specific impulse &
+\(\mathrm{m/s,\ s}\) \\
+\(G,\ L_{fs},\ \lambda,\ D\) & telescope gain, free-space loss,
+wavelength, aperture & dB, dB, m, m \\
+\(\mathrm{MTBF},\ R(t)\) & mean time between failures, reliability & h,
+-- \\
+\(\eta,\ \mathrm{MFU},\ \mathrm{PUE}\) & efficiency, model-FLOPs
+utilization, power-usage effectiveness & -- \\
+\(r,\ \mathrm{CRF},\ \mathrm{NPV}\) & discount rate, capital-recovery
+factor, net present value & --, --, USD \\
+\end{longtable}
+}
+
+\chapter{Physical constants}\label{physical-constants}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Symbol
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Value
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(\mu\) & \(3.986004418\times10^{14}\ \mathrm{m^3 s^{-2}}\) \\
+\(R_E\) & \(6.371\times10^{6}\ \mathrm{m}\) \\
+\(J_2\) & \(1.08263\times10^{-3}\) \\
+\(\sigma\) & \(5.670374\times10^{-8}\ \mathrm{W\,m^{-2}K^{-4}}\) \\
+\(h_P,\ k_B,\ c\) & \(6.62607\times10^{-34}\ \mathrm{J\,s}\),
+\(1.38065\times10^{-23}\ \mathrm{J/K}\),
+\(2.99792458\times10^{8}\ \mathrm{m/s}\) \\
+\(g_0\) & \(9.80665\ \mathrm{m/s^2}\) \\
+\(S_0\) & \(1361\ \mathrm{W/m^2}\) \\
+\(T_{\mathrm{CMB}}\) & \(2.725\ \mathrm{K}\) \\
+\(a_{\mathrm{alb}},\ q_{\mathrm{IR}}\) & \(0.30\),
+\(237\ \mathrm{W/m^2}\) \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{INTRODUCTION AND CONTEXT}\label{introduction-and-context}
+
+\chapter{1. Introduction and
+motivation}\label{introduction-and-motivation}
+
+The energy and thermal demands of artificial-intelligence computing have
+grown faster than terrestrial infrastructure can comfortably absorb.
+Training and inference clusters are now provisioned in tens to hundreds
+of megawatts; cooling, water, land, and grid interconnection have become
+first-order constraints. Against this backdrop, placing computation in
+orbit is no longer purely speculative. Orbit offers three physical
+advantages that are real and quantifiable: a continuous, high-flux solar
+resource in the right orbit; an effectively unlimited radiative heat
+sink at the 2.725 K cosmic-microwave-background temperature; and freedom
+from terrestrial land and water constraints. It also imposes severe
+penalties: a harsh radiation environment, a congested and debris-laden
+orbital neighborhood, the impossibility of hands-on repair, the cost of
+launch, and a regulatory obligation to dispose of the hardware
+responsibly.
+
+The purpose of this analysis is neither advocacy nor dismissal. It is to
+build the complete engineering model of an orbital AI data center from
+first principles, to compute the numbers carefully, and to state plainly
+which problems are solved and which are not. The first report in this
+series (November 2025) examined a single question, whether passive
+radiative cooling can keep a processor within its junction-temperature
+limit in low Earth orbit, and answered yes. This complete edition
+addresses the entire system: not only whether the chip stays cool, but
+whether the spacecraft survives, communicates, points, powers itself,
+disposes of itself, and pays for itself.
+
+The work is organized as a book so that each result can be traced from
+physical principle, through derivation and code, to a number with an
+uncertainty band and a citation. Where the analysis corrects an earlier
+assumption or contradicts a popular claim, it says so. Where a number is
+a vendor projection rather than a demonstrated capability, it is
+flagged. The accompanying software is open, validated by 108 automated
+tests, and reproduces every figure and value in this volume with a
+single command.
+
+\chapter{2. The state of the art
+(2025-2026)}\label{the-state-of-the-art-2025-2026}
+
+Three programs anchor the field as of mid-2026. Their status here is
+drawn from primary sources.
+
+\textbf{Google Project Suncatcher.} The reference architecture for this
+study. Google's research paper (arXiv:2511.19468) describes an
+illustrative constellation of eighty-one satellites arranged in a
+cluster of approximately one-kilometer radius, in a dawn-dusk
+sun-synchronous low-Earth orbit at a mean altitude of 650 km, with the
+satellites separated by roughly 100 to 200 m and connected by free-space
+optical links. Each satellite carries Google Tensor Processing Units.
+Google and Planet Labs have announced a learning mission to launch two
+prototype satellites carrying TPUs by early 2027; Planet will build and
+operate the platform. These facts are corroborated by Google's and
+Planet's own releases. The ``by early 2027'' date is a corporate target
+subject to slip.
+
+\textbf{Starcloud.} In a significant demonstration, Starcloud flew an
+NVIDIA H100 GPU, the highest-power data-center-class processor flown to
+date, aboard the approximately sixty-kilogram Starcloud-1 satellite,
+launched on 2 November 2025. NVIDIA reports the satellite carries an
+H100 with 80 GB of high-bandwidth memory and on the order of four
+petaflops of AI compute. Starcloud has articulated a long-term vision of
+a five-gigawatt orbital data center with solar and cooling panels
+spanning roughly four kilometers on a side. The five-gigawatt figure is
+an aspirational early-2030s engineering target, not a demonstrated
+capability. Notably, Starcloud's marketing claim of ``ten times cheaper
+including launch'' failed independent verification and should be treated
+with caution.
+
+\textbf{Axiom Space.} Axiom deployed its first Orbital Data Center nodes
+to low Earth orbit on 11 January 2026 and has stated a goal of scaling
+on-orbit processing from kilowatts to megawatts on future nodes.
+Megawatt scale is a future goal, not current capacity; a claim that the
+first nodes would launch by the end of 2025 was inaccurate (actual
+deployment was January 2026).
+
+The state of the art shows a clear gap between what has been
+demonstrated, one data-center-class GPU in orbit, ground-based radiation
+testing of a TPU, a bench-scale 1.6-terabit optical link, and initial
+kilowatt-class nodes, and what the vision requires, megawatt-to-gigawatt
+clusters, flown multi-terabit formation links, dramatically cheaper
+launch, and validated formation station-keeping. None of the latter has
+been demonstrated.
+
+\chapter{3. Reference architecture and
+scope}\label{reference-architecture-and-scope}
+
+Throughout this analysis the reference design follows the Suncatcher
+parameters: a dawn-dusk sun-synchronous orbit at 650 km, an
+eighty-one-satellite cluster of one-kilometer radius, and
+inter-satellite spacing of roughly 150 m. The reference satellite bus is
+taken to carry four accelerators with an avionics and support
+complement, consistent with the mass budget developed in Chapter 12.
+Where the analysis examines higher-power chips (NVIDIA H100 at 700 W,
+B200 at 1000 W, the GB200 GPU at 1200 W), it does so to test the scaling
+of each subsystem, because the trend in AI accelerators is toward
+higher, not lower, per-chip power.
+
+The scope of the models is conceptual to preliminary design (Phase A in
+aerospace terms). The intent is to size each subsystem, rank the risks,
+and quantify the trades, not to produce a certifiable flight design.
+Several domains are treated at first order with explicit uncertainty
+bands, and a number of analyses that a flight program would require (a
+thermal finite-element model, a closed-loop attitude-control simulation,
+formal failure-modes analysis, and runs of the official agency debris
+and radiation tools) are out of scope and are identified as such in
+Chapter 24. Stating the fidelity plainly is essential: the value of the
+model lies in its breadth and its transparency, not in a claim of flight
+accuracy.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{3A. Design methodology, margins, and
+readiness}\label{a.-design-methodology-margins-and-readiness}
+
+A conceptual design is judged not only by its point estimates but by the
+allowances it carries against growth and uncertainty. This analysis
+follows the practice of the NASA Systems Engineering Handbook
+(NASA/SP-2016-6105), which tracks resource margins as technical
+performance measures rather than prescribing fixed numbers, together
+with the quantitative allowances that flight programs apply.
+
+\textbf{Mass growth.} AIAA S-120-2006 sets a mass-growth allowance by
+hardware category for an estimated design: 30 percent for small
+electronics and solar arrays, 25 percent for structures, mechanisms,
+thermal control, batteries, and propulsion, 20 percent for large
+electronics, and 60 percent for harness. On top of the per-item
+allowance, the NASA Goddard Integrated Design Center applies a
+system-level mass margin of about 30 percent at the pre-Phase-A concept
+stage. Published mass-growth data from operational programs show actual
+growth often exceeds the AIAA allowance, so these figures are treated as
+lower bounds. The reference dry mass reported in Chapter 12 is a
+current-best-estimate; applying the allowances above (implemented in the
+margins module) gives the predicted mass a program would budget.
+
+\textbf{Power.} The Goddard practice sizes the power system for a
+minimum 30 percent contingency of delivered power over the
+current-best-estimate load, evaluated at the worst-case operational
+scenario at end of life. The dawn-dusk power margin of Chapter 11 is
+interpreted against this rule.
+
+\textbf{Readiness.} Progress is measured on the NASA nine-level
+technology-readiness scale, from basic principles observed (level 1) to
+a system flight-proven through successful operations (level 9). The
+components of the reference architecture sit near the middle: a single
+accelerator has operated in orbit and a processor has been ground-tested
+for radiation (component levels 5 to 6), while the constellation-scale
+system, the flown multi-terabit formation links, and validated formation
+station-keeping remain at low system readiness. The gap between
+component and system readiness is the central programmatic risk
+identified in Chapter 23. Assessing each major capability against the
+nine-level scale makes that gap explicit.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Capability
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Demonstrated status, 2026
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Assessed TRL
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Gating step to the next level
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Data-center-class accelerator in orbit & one GPU flown (Starcloud-1, Nov
+2025) & 6 & sustained multi-unit operation on orbit \\
+Processor radiation tolerance & ground-tested, no hard failures to 15
+krad & 5 & in-flight dose and upset-rate confirmation \\
+Node-level thermal control & kilowatt-class pumped-loop nodes flown & 5
+& a megawatt-class radiator flown \\
+Multi-terabit formation optical link & bench-scale link only & 4 & a
+flown link between two satellites \\
+Formation station-keeping at sub-km spacing & not demonstrated & 3 &
+two-satellite close-formation flight \\
+Autonomous cluster debris avoidance & not demonstrated & 2 & a
+closed-loop avoidance maneuver on orbit \\
+Propulsive disposal within five years & components flight-proven,
+configuration unproven & 5 & an end-to-end de-orbit demonstration \\
+Megawatt-to-gigawatt cluster & conceptual & 2 & a subscale
+multi-satellite cluster \\
+\end{longtable}
+}
+
+The assessment confirms the central pattern: the building blocks sit at
+component levels 4 to 6, while every capability that depends on the
+constellation operating as a coordinated system sits at levels 2 to 3.
+The program risk is concentrated in the system-integration steps, not
+the components.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Allowance
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Source
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Mass growth, small electronics and solar array & 30 percent & AIAA
+S-120-2006 \\
+Mass growth, structures, thermal, battery, propulsion & 25 percent &
+AIAA S-120-2006 \\
+Mass growth, large electronics & 20 percent & AIAA S-120-2006 \\
+Mass growth, harness & 60 percent & AIAA S-120-2006 \\
+System-level mass margin, pre-Phase-A & 30 percent & NASA GSFC
+Integrated Design Center \\
+Power contingency over best estimate, worst-case end of life & 30
+percent minimum & NASA GSFC Integrated Design Center \\
+Readiness framework & levels 1 to 9 & NASA Systems Engineering Handbook,
+NASA/SP-2016-6105 \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{THE ORBITAL ENVIRONMENT}\label{the-orbital-environment}
+
+\chapter{4. Orbital mechanics of a circular
+orbit}\label{orbital-mechanics-of-a-circular-orbit}
+
+Every subsequent chapter depends on a small set of orbital quantities,
+derived here.
+
+\textbf{Circular speed.} For a satellite of mass \(m\) on a circular
+orbit of radius \(a\), gravity supplies the centripetal force:
+
+\begin{equation}
+\frac{\mu m}{a^2} = \frac{m v^2}{a} \quad\Longrightarrow\quad v = \sqrt{\frac{\mu}{a}}. \tag{4.1}
+\end{equation}
+
+\textbf{Period and mean motion.} From \(v = 2\pi a / T\),
+
+\begin{equation}
+T = 2\pi\sqrt{\frac{a^3}{\mu}}, \qquad n = \frac{2\pi}{T} = \sqrt{\frac{\mu}{a^3}}. \tag{4.2}
+\end{equation}
+
+\textbf{Vis-viva and specific energy.} For a general orbit, energy
+conservation yields the vis-viva relation
+\(v^2 = \mu\left(\tfrac{2}{r} - \tfrac{1}{a}\right)\), and the total
+specific energy is
+
+\begin{equation}
+\mathcal{E} = \frac{v^2}{2} - \frac{\mu}{r} = -\frac{\mu}{2a}. \tag{4.3}
+\end{equation}
+
+Equation (4.3) is the key to the orbital-decay derivation in Chapter 7:
+drag removes energy, and a loss of energy means a more negative
+\(\mathcal{E}\), hence a smaller \(a\).
+
+\textbf{Worked example.} At \(h = 650\) km,
+\(a = R_E + h = 7.021\times10^6\) m:
+
+\[v = \sqrt{\frac{3.986\times10^{14}}{7.021\times10^6}} = 7534.8\ \mathrm{m/s}, \qquad
+T = 2\pi\sqrt{\frac{(7.021\times10^6)^3}{3.986\times10^{14}}} = 5854.8\ \mathrm{s} = 97.6\ \mathrm{min}.\]
+
+The orbital speed is about 7.5 km/s and the period about 97.6 minutes,
+giving roughly 14.8 orbits per day. These values are reproduced exactly
+by \passthrough{\lstinline!orbital\_dc.orbit.velocity(650)!} and
+\passthrough{\lstinline!period(650)!}.
+
+\chapter{5. Sun-synchronous orbits and J2
+precession}\label{sun-synchronous-orbits-and-j2-precession}
+
+A sun-synchronous orbit maintains a near-constant orientation relative
+to the Sun by exploiting Earth's oblateness. The dominant non-spherical
+term in Earth's gravity, characterized by \(J_2\), causes the orbital
+plane's right ascension of the ascending node, \(\Omega\), to precess.
+The secular precession rate for a near-circular orbit is
+
+\begin{equation}
+\dot\Omega = -\frac{3}{2}\, n\, J_2 \left(\frac{R_E}{a}\right)^2 \cos i. \tag{5.1}
+\end{equation}
+
+\textbf{Origin of the precession.} Earth's gravitational potential,
+expanded in zonal harmonics and kept to the leading oblateness term, is
+
+\begin{equation}
+U(r,\phi) = -\frac{\mu}{r}\left[\,1 - J_2\left(\frac{R_E}{r}\right)^2 P_2(\sin\phi)\,\right],
+\qquad P_2(\sin\phi) = \tfrac{1}{2}\left(3\sin^2\phi - 1\right), \tag{5.2}
+\end{equation}
+
+where \(\phi\) is geocentric latitude and \(P_2\) is the second Legendre
+polynomial. The term beyond the point-mass field is the disturbing
+function \(R\). Writing the latitude through the orbital geometry,
+\(\sin\phi = \sin i\,\sin(\omega + \theta)\) with \(\theta\) the true
+anomaly, and averaging \(R\) over one revolution removes the
+short-period terms and leaves the secular part
+
+\begin{equation}
+\bar R = \frac{n^2 J_2 R_E^2}{2}\,\frac{1}{(1-e^2)^{3/2}}
+\left(\frac{3}{2}\sin^2 i - 1\right). \tag{5.3}
+\end{equation}
+
+Lagrange's planetary equation for the node connects this averaged
+potential to the drift of \(\Omega\),
+
+\begin{equation}
+\dot\Omega = \frac{1}{n a^2 \sqrt{1-e^2}\,\sin i}\,\frac{\partial \bar R}{\partial i}. \tag{5.4}
+\end{equation}
+
+Carrying out the derivative of (5.3) with respect to \(i\) gives
+\(\partial\bar R/\partial i \propto \sin i\cos i\), and the \(\sin i\)
+in the denominator of (5.4) cancels, leaving the \(\cos i\) dependence
+of (5.1). The result is exact at first order in \(J_2\) for any
+eccentricity if \(a\) is replaced by the semi-latus rectum
+\(p = a(1-e^2)\); for the near-circular reference orbit \(p \approx a\)
+and (5.1) follows directly. The sign is negative for prograde orbits
+(\(i < 90^\circ\)), so the node regresses, and positive for retrograde
+orbits, which is what makes synchronization with the Sun possible.
+
+A sun-synchronous orbit chooses the inclination \(i\) so that this
+precession equals Earth's mean rate about the Sun,
+\(\dot\Omega_{\mathrm{sun}} = 2\pi / (365.2422\ \mathrm{d}) = 1.991\times10^{-7}\ \mathrm{rad/s}\).
+Setting \(\dot\Omega = \dot\Omega_{\mathrm{sun}}\) and solving,
+
+\begin{equation}
+\cos i = -\frac{2\,\dot\Omega_{\mathrm{sun}}\, a^2}{3\, n\, J_2\, R_E^2}. \tag{5.5}
+\end{equation}
+
+The negative sign forces \(i > 90^\circ\), a retrograde, near-polar
+orbit. At 650 km, \(n = 1.074\times10^{-3}\ \mathrm{rad/s}\) and (5.5)
+gives \(\cos i = -0.139\), hence \(i = 98.0^\circ\), matching the
+reference mission and the value returned by
+\passthrough{\lstinline!orbital\_dc.orbit.sso\_inclination(650)!}. By
+construction the corresponding nodal precession is \(0.9856\) degrees
+per day, exactly one turn per tropical year, which is the defining
+property of the orbit. The required inclination rises slowly with
+altitude, from about \(96.3^\circ\) at 200 kilometers to \(98.6^\circ\)
+at 800 kilometers, because the \(a^2\) factor in (5.5) outpaces the fall
+in \(n\). The dawn-dusk variant orients the orbital plane near Earth's
+terminator, which (Chapter 6) yields nearly continuous sunlight and
+minimal thermal cycling, a decisive advantage for a high-power,
+thermally sensitive payload.
+
+\chapter{6. Eclipse geometry and the dawn-dusk
+advantage}\label{eclipse-geometry-and-the-dawn-dusk-advantage}
+
+The fraction of each orbit spent in Earth's shadow is set by the beta
+angle \(\beta\), the angle between the orbital plane and the Sun line. A
+satellite avoids eclipse entirely when \(|\beta|\) exceeds the critical
+value at which the orbit just grazes Earth's limb:
+
+\begin{equation}
+\beta^{*} = \arcsin\!\left(\frac{R_E}{R_E + h}\right). \tag{6.1}
+\end{equation}
+
+For \(|\beta| < \beta^{*}\), the sunlit fraction of the orbit is
+
+\begin{equation}
+f_{\mathrm{sun}} = 1 - \frac{1}{\pi}\cos^{-1}\!\left[\frac{\sqrt{h^2 + 2 R_E h}}{(R_E + h)\cos\beta}\right]. \tag{6.2}
+\end{equation}
+
+\textbf{Derivation from the cylindrical shadow.} Treat Earth's shadow as
+a half-infinite cylinder of radius \(R_E\) pointing away from the Sun, a
+good approximation in low Earth orbit where the penumbra is narrow and
+the Sun is effectively at infinity. A point on the circular orbit of
+radius \(r = R_E + h\) lies in shadow when its distance from the shadow
+axis is less than \(R_E\) and it is on the anti-sun side. Resolve the
+orbit into the shadow frame: the component of the orbit radius
+perpendicular to the Sun line, for an orbit whose plane makes angle
+\(\beta\) with that line, traces an ellipse of semi-axes \(r\) and
+\(r\cos\beta\). The satellite is eclipsed over the arc where this
+projected position falls within the cylinder, and the half-angle
+\(\psi\) of that arc, measured from the anti-solar point, satisfies
+
+\begin{equation}
+\cos\psi = \frac{\sqrt{r^2 - R_E^2}}{r\,\cos\beta}
+          = \frac{\sqrt{h^2 + 2 R_E h}}{(R_E + h)\cos\beta}. \tag{6.3}
+\end{equation}
+
+The eclipse occupies the fraction \(f_E = \psi/\pi\) of the orbit (the
+full eclipsed arc is \(2\psi\) out of \(2\pi\)), and the sunlit fraction
+is \(f_{\mathrm{sun}} = 1 - f_E\), which is (6.2). The expression is
+real only while the bracket does not exceed one; the threshold where
+\(\cos\psi = 1\) recovers the critical beta of (6.1), at which the
+eclipse arc shrinks to zero.
+
+\textbf{Annual variation of the beta angle.} The beta angle is not
+fixed: it depends on the angle between the orbit plane and the
+instantaneous Sun direction. For an orbit of inclination \(i\) and node
+\(\Omega\), with solar ecliptic longitude \(\lambda_\odot\) and
+obliquity \(\varepsilon = 23.44^\circ\),
+
+\begin{equation}
+\sin\beta = \cos\lambda_\odot\sin\Omega\sin i
+           - \sin\lambda_\odot\cos\varepsilon\cos\Omega\sin i
+           + \sin\lambda_\odot\sin\varepsilon\cos i. \tag{6.4}
+\end{equation}
+
+A sun-synchronous orbit holds \(\Omega\) at a fixed local time by
+construction, so the seasonal swing of \(\lambda_\odot\) is what moves
+\(\beta\). For the dawn-dusk case, where the node is set near the six
+o'clock line so the orbit plane contains the terminator, (6.4) reduces
+to \(|\beta|\) oscillating between about \(66.6^\circ\) and \(90^\circ\)
+over the year, the lower bound being \(90^\circ - \varepsilon\).
+
+At 650 km, \(\beta^{*} = \arcsin(6371/7021) = 65.1^\circ\). Because the
+dawn-dusk orbit keeps \(|\beta|\) above \(66.6^\circ\) at all times, it
+stays above this \(65.1^\circ\) threshold year round, so the satellite
+never enters a deep eclipse and \(f_{\mathrm{sun}} \to 1\): illumination
+exceeds ninety-five percent, the battery need is minimal (Chapter 11),
+and the thermal environment is nearly steady, justifying the
+quasi-steady thermal treatment of Chapter 10. This is the single most
+favorable environmental choice available to the architecture, and it is
+robust to the seasonal beta swing rather than dependent on a single
+favorable date.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 6.1 Critical beta angle versus altitude, and eclipse fraction versus beta at 650 km. A dawn-dusk orbit holds the beta angle high, so the satellite stays sunlit.}]{figures2/figA1_eclipse.png}}
+\caption{Fig. 6.1 Critical beta angle versus altitude, and eclipse
+fraction versus beta at 650 km. A dawn-dusk orbit holds the beta angle
+high, so the satellite stays sunlit.}
+\end{figure}
+
+\chapter{7. The neutral atmosphere and orbital
+decay}\label{the-neutral-atmosphere-and-orbital-decay}
+
+Even at 650 km a tenuous atmosphere remains, and the drag it exerts
+slowly lowers the orbit. This chapter derives the decay rate and
+integrates it to a mission lifetime, a result that proves decisive for
+regulatory compliance.
+
+\textbf{Drag force and specific deceleration.} A body of cross-section
+\(A\) moving at speed \(v\) through gas of density \(\rho\) feels a drag
+force opposing its velocity:
+
+\begin{equation}
+F_D = \tfrac{1}{2}\,\rho\, v^2\, C_D\, A, \tag{7.1}
+\end{equation}
+
+with \(C_D \approx 2.2\) in the free-molecular regime. The specific
+(per-mass) deceleration is
+\(a_D = F_D/m = \tfrac{1}{2}\rho v^2 C_D (A/m)\).
+
+\textbf{Derivation of the decay rate.} Drag does negative work at the
+rate (force times speed, per unit mass):
+
+\begin{equation}
+\frac{d\mathcal{E}}{dt} = -a_D\, v = -\tfrac{1}{2}\,\rho\, C_D\,\frac{A}{m}\, v^3. \tag{7.2}
+\end{equation}
+
+For a near-circular orbit \(\mathcal{E} = -\mu/2a\), so
+\(d\mathcal{E}/dt = (\mu/2a^2)\,\dot a\). Equating with (7.2) and
+substituting \(v = \sqrt{\mu/a}\) so that \(v^3 = (\mu/a)^{3/2}\):
+
+\begin{equation}
+\frac{\mu}{2a^2}\frac{da}{dt} = -\tfrac{1}{2}\rho C_D\frac{A}{m}\left(\frac{\mu}{a}\right)^{3/2}
+\;\Longrightarrow\;
+\frac{da}{dt} = -\,C_D\,\frac{A}{m}\,\rho(h)\,\sqrt{\mu\, a}. \tag{7.3}
+\end{equation}
+
+Because \(\rho(h)\) rises steeply as the orbit lowers, the decay
+accelerates and terminates in a rapid re-entry. The per-revolution
+contraction is \(\Delta a_{\mathrm{rev}} = \dot a\, T =
+-2\pi C_D (A/m)\rho a^2\).
+
+\textbf{Atmosphere model and solar-cycle uncertainty.} The density
+\(\rho(h)\) is taken from the NRLMSIS 2.1 empirical model, interpolated
+log-linearly between anchors at 600, 650, 700, and 800 km for three
+levels of solar activity. The crucial feature is that density at this
+altitude varies by roughly a factor of one hundred between solar minimum
+and solar maximum. This single fact dominates the uncertainty in
+lifetime, drag make-up, and station-keeping, and is therefore propagated
+explicitly as a band rather than collapsed to a point.
+
+\textbf{Numerical solution and result.} Equation (7.3) is integrated by
+adaptive forward Euler to a re-entry altitude of 120 km. For the
+reference bus, with an area-to-mass ratio of \(0.0084\ \mathrm{m^2/kg}\)
+and \(C_D = 2.2\), the natural lifetime at 650 km is approximately
+\textbf{twenty-two years} at moderate solar activity, about four years
+at solar maximum, and over three hundred years at solar minimum (Fig.
+7.1). The regulatory consequence is severe: the United States Federal
+Communications Commission now requires disposal within five years
+(Chapter 15), so only a satellite that happens to launch into a solar
+maximum approaches passive compliance. \textbf{Active de-orbit
+propulsion is therefore mandatory, not optional}, a conclusion that
+propagates into the mass and economic budgets.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 7.1, Natural orbital lifetime versus altitude with the solar-cycle uncertainty band; at 650 km the realistic lifetime fails the five-year disposal rule.}]{figures/fig1_orbital_decay.png}}
+\caption{Fig. 7.1, Natural orbital lifetime versus altitude with the
+solar-cycle uncertainty band; at 650 km the realistic lifetime fails the
+five-year disposal rule.}
+\end{figure}
+
+\chapter{8. The ionizing-radiation
+environment}\label{the-ionizing-radiation-environment}
+
+Two physically distinct radiation effects matter: the slow accumulation
+of total ionizing dose, which is a shielding problem, and the stochastic
+flipping of bits by energetic particles, which is a reliability and
+throughput problem.
+
+\textbf{Dose versus shielding.} Behind aluminium of thickness \(x\), the
+trapped-electron contribution to dose attenuates quasi-exponentially
+atop a floor set by penetrating protons and bremsstrahlung:
+
+\begin{equation}
+\dot D(x) = D_0\, e^{-x/\lambda} + D_\infty, \qquad \lambda \approx 1.7\ \mathrm{mm}. \tag{8.1}
+\end{equation}
+
+The constants are calibrated so that the deep-shield floor matches the
+proton-dominated value of roughly 100 to 150 rad(Si) per year measured
+by flight dosimeters in comparable sun-synchronous orbits and consistent
+with the reference mission's own estimate. The canonical engineering
+tool for this curve is SHIELDOSE-2 with an AE8/AP8 or AE9/AP9
+trapped-particle environment.
+
+\textbf{Result and margin.} At 10 mm of aluminium, the five-year
+cumulative dose is approximately 1.06 krad(Si). The reference mission
+reports that its processor's most sensitive subsystem, the
+high-bandwidth memory, first showed irregularities at 2 krad(Si), about
+three times the 750 rad(Si) five-year requirement, and exhibited no hard
+failures up to the maximum tested dose of 15 krad(Si). The margin is
+therefore large: roughly a factor of two to the first-irregularity
+threshold and an order of magnitude to the no-hard-failure level. Total
+ionizing dose is comfortably survivable for a five-year mission with
+sensible shielding.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 8.1 Cumulative five-year ionizing dose versus aluminium shielding, with the memory tolerance and the mission requirement marked. Ten millimeters of aluminium keeps the dose well below the first-irregularity threshold.}]{figures2/figA5_dose.png}}
+\caption{Fig. 8.1 Cumulative five-year ionizing dose versus aluminium
+shielding, with the memory tolerance and the mission requirement marked.
+Ten millimeters of aluminium keeps the dose well below the
+first-irregularity threshold.}
+\end{figure}
+
+\textbf{Single-event effects.} Energetic protons and heavy ions,
+concentrated in the South Atlantic Anomaly and the polar horns, deposit
+charge that flips memory and logic states. The upset rate scales as
+\(R_{\mathrm{SEU}} = \sigma_{\mathrm{SEU}}\,\phi\, N_{\mathrm{bits}}\),
+the product of the per-bit cross-section, the particle flux, and the
+number of bits. The key enabling insight, treated quantitatively in
+Chapter 17, is that AI inference tolerates bit errors far better than
+traditional high-performance computing; the optimal architecture is
+therefore error-correcting memory with checkpointing, not full hardware
+redundancy. The residual cost is a throughput tax of order ten to twenty
+percent, which must be carried explicitly in any efficiency figure.
+
+\chapter{9. The orbital-debris
+environment}\label{the-orbital-debris-environment}
+
+Low Earth orbit is increasingly congested, and the 650 km
+sun-synchronous shell is among the most crowded. The European Space
+Agency's environment models and NASA's ORDEM 3.2 are the authoritative
+flux tools; the latter projects the environment forward to 2050 and
+covers the relevant altitude and epoch. Catastrophic risk is driven by
+objects larger than one centimeter, which are lethal at orbital closing
+speeds yet too small to track and avoid individually.
+
+\textbf{Impact probability as a Poisson process.} Impacts are rare,
+independent events. Dividing a mission into \(n\) short intervals, each
+with hit probability \(p = \Phi A\,\Delta t\) (flux times cross-section
+times time), the number of impacts is binomial; in the limit
+\(n\to\infty\) with \(np\to\Lambda\) it becomes Poisson with mean
+\(\Lambda = \Phi A N t\), where \(N\) is the number of satellites. The
+probability of at least one catastrophic impact in the cluster is
+
+\begin{equation}
+P(K \ge 1) = 1 - e^{-\Phi A N t}. \tag{9.1}
+\end{equation}
+
+With a model-class flux for objects larger than one centimeter of
+\(\Phi = 3\times10^{-5}\
+\mathrm{m^{-2}yr^{-1}}\), a tumbling-averaged silhouette of
+\(A = 15\ \mathrm{m^2}\) per satellite, \(N = 81\), and \(t = 5\) years,
+the mean is \(\Lambda = 0.182\) and the probability is about seventeen
+percent, with a model band from six to forty-six percent. The
+development of the cascade mechanism, the reason the tight formation is
+dangerous, is given in Chapter 13 and the risk synthesis. The flux used
+here is model-class; a flight program would run the official
+ORDEM/MASTER tools for the exact orbit and epoch, as noted in Chapter
+24.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{SPACECRAFT SUBSYSTEMS}\label{spacecraft-subsystems}
+
+\chapter{10. Thermal control}\label{thermal-control}
+
+Thermal control is where the orbital data center is most often assumed
+to be hard and is in fact solved at the single-node scale, but it does
+not scale for free, and a second, sharper limit appears at the chip
+interface.
+
+\textbf{From Planck's law to Stefan-Boltzmann.} A blackbody emits
+spectral radiance
+
+\begin{equation}
+B(\lambda, T) = \frac{2 h_P c^2}{\lambda^5}\,\frac{1}{\exp(h_P c / \lambda k_B T) - 1}. \tag{10.1}
+\end{equation}
+
+Integrating over the emitting hemisphere (the factor \(\pi\) from
+\(\int\cos\theta\,d\Omega\)) and over all wavelengths gives the
+hemispherical emissive power,
+
+\begin{equation}
+E_b(T) = \pi\!\int_0^\infty B(\lambda, T)\,d\lambda = \sigma T^4, \qquad
+\sigma = \frac{2\pi^5 k_B^4}{15 h_P^3 c^2}. \tag{10.2}
+\end{equation}
+
+A gray surface of emissivity \(\varepsilon\) radiating to the
+cosmic-microwave-background sink at \(T_{\mathrm{CMB}}\) rejects
+\(Q_{\mathrm{rad}} = \varepsilon\sigma A (T^4 - T_{\mathrm{CMB}}^4)\);
+since \(T_{\mathrm{CMB}}^4/T^4 \sim 10^{-8}\) at room temperature, the
+sink term is negligible.
+
+\textbf{Radiator sizing.} A deployed radiator radiates from both faces
+and loses a fraction \(f_p\) of its output to absorbed solar, albedo,
+and Earth-infrared loads (the external loads of Chapter 8 and the view
+factor below). The net rejected flux per unit one-side area is
+\(\varepsilon\sigma T^4 n_s (1-f_p)\) with \(n_s = 2\), so the required
+area for a heat load \(Q\) at operating temperature \(T\) is
+
+\begin{equation}
+A_{\mathrm{rad}} = \frac{Q}{\varepsilon\,\sigma\,T^4\,n_s\,(1 - f_p)}. \tag{10.3}
+\end{equation}
+
+This is \textbf{linear in \(Q\)}: there is no economy of scale in
+radiative cooling, a fact with profound architectural consequences.
+\textbf{Worked example:} at 1 MW, 20 C, \(\varepsilon = 0.90\),
+\(n_s = 2\), \(f_p = 0.12\), the per-side flux is
+\(\varepsilon\sigma T^4 = 376.9\ \mathrm{W/m^2}\), the net flux is
+\(663.3\ \mathrm{W/m^2}\), and
+\(A_{\mathrm{rad}} = 1508\ \mathrm{m^2}\). This matches the industry
+rule of roughly 1,200 m² per megawatt and explains why Starcloud's
+gigawatt vision implies multi-kilometer panels.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 10.1 Radiator equilibrium temperature versus heat flux, and the radiator area required for one megawatt versus operating temperature. Running hotter reduces area at the cost of silicon lifetime.}]{figures2/figA3_radiator.png}}
+\caption{Fig. 10.1 Radiator equilibrium temperature versus heat flux,
+and the radiator area required for one megawatt versus operating
+temperature. Running hotter reduces area at the cost of silicon
+lifetime.}
+\end{figure}
+
+\textbf{External loads and view factor.} A surface at orbital radius
+\(r\) sees Earth through the view factor
+\(F = \tfrac{1}{2}[1 - \sqrt{1 - (R_E/r)^2}]\), equal to 0.290 at 650
+km. The absorbed loads are
+\(Q_{\mathrm{albedo}} = S_0\, a_{\mathrm{alb}}\, F\, \alpha_s\, A\) and
+\(Q_{\mathrm{IR}} =
+q_{\mathrm{IR}}\, F\, \varepsilon\, A\); for an edge-on radiator the
+direct-solar term vanishes. With \(\alpha_s = 0.15\) and
+\(A = 4\ \mathrm{m^2}\) these are about 71 W and 251 W respectively,
+which the design lumps to roughly 100 W of parasitic load.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 10.2 Earth view factor versus altitude, and the combined albedo, Earth-infrared, and solar load on a four-square-meter surface. External loads set the parasitic fraction in the radiator sizing.}]{figures2/figA2_loads.png}}
+\caption{Fig. 10.2 Earth view factor versus altitude, and the combined
+albedo, Earth-infrared, and solar load on a four-square-meter surface.
+External loads set the parasitic fraction in the radiator sizing.}
+\end{figure}
+
+\textbf{Inverse problem and Newton-Raphson.} When the area is fixed and
+the temperature is sought, (10.3) becomes a quartic, solved by
+Newton-Raphson on \(f(T) = Q - \varepsilon\sigma A T^4\) with
+\(f'(T) = -4\varepsilon\sigma A T^3\), converging in two to four
+iterations from \(T_0 = 300\) K. The first report's baseline (1450 W on
+4 m², \(\varepsilon = 0.85\), single-sided) yields a radiator
+temperature of 21.4 C.
+
+\textbf{The conductive chain and the interface wall.} Heat first travels
+from the junction to the radiator through series resistances,
+\(T_j = T_{\mathrm{rad}} + Q\, R_{th}\). With the passive chain
+\(R_{th} = 0.30\ \mathrm{K/W}\), the rise across the interface alone is
+\(P \times 0.30\): 90 C at 300 W, \textbf{210 C at 700 W, and 360 C at
+1200 W}. Because the entire junction budget is 125 C, any chip with
+\(P\, R_{th} > 125\ \mathrm{C}\), that is, \(P > 417\ \mathrm{W}\),
+cannot be cooled passively at any radiator size. Above this threshold,
+chip-level liquid or loop-heat-pipe cooling is mandatory. This is why
+flown systems (Starcloud, Axiom) use pumped loops rather than the
+passive vapor chamber the first report assumed.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 10.1, (a) Radiator area is linear in heat load; (b) the passive thermal chain saturates above \textasciitilde400 W, forcing chip-level active cooling.}]{figures/fig2_thermal_wall.png}}
+\caption{Fig. 10.1, (a) Radiator area is linear in heat load; (b) the
+passive thermal chain saturates above \textasciitilde400 W, forcing
+chip-level active cooling.}
+\end{figure}
+
+\chapter{11. Electrical power}\label{electrical-power}
+
+The power subsystem converts sunlight to usable electrical power and
+buffers the brief eclipse.
+
+\textbf{Array power.} The electrical power delivered to the load is the
+incident solar power times the cell efficiency (which falls with
+temperature and degrades with radiation), the panel packing factor, and
+the array-to-load path efficiency:
+
+\begin{equation}
+P = S_0\, A\, \eta(T,\mathrm{life})\, \kappa_{\mathrm{pack}}\, \eta_{\mathrm{path}}, \qquad
+\eta(T,\mathrm{life}) = \eta_{\mathrm{life}}\,\big[1 + k_T (T - 28)\big]. \tag{11.1}
+\end{equation}
+
+Triple-junction GaInP/GaAs/Ge cells deliver about 29.6 percent at
+beginning of life and 27.5 percent after a five-year fluence, with a
+temperature coefficient \(k_T \approx -0.0023\ \mathrm{per\ C}\),
+packing \(\kappa_{\mathrm{pack}} = 0.85\), and path efficiency
+\(\eta_{\mathrm{path}} = 0.88\). \textbf{Worked example:} at end of life
+and 70 C, \(\eta = 0.275[1 - 0.0023(70-28)] = 0.248\), so
+\(P = 1361 \times 1 \times 0.248 \times 0.85 \times 0.88 = 253\ \mathrm{W/m^2}\)
+at the load.
+
+\textbf{Battery and the dawn-dusk lever.} To carry the load \(P_L\)
+through an eclipse of duration \(t_e\) at depth-of-discharge DoD and
+specific energy \(e_{\mathrm{sp}}\), the battery mass is
+\(m_{\mathrm{bat}} = P_L t_e / (\mathrm{DoD}\, e_{\mathrm{sp}})\). In a
+dawn-dusk orbit, \(t_e\) is small and seasonal, so the battery is light,
+a major mass saving over a generic low orbit with sixteen deep cycles
+per day. This is the power-subsystem expression of the dawn-dusk
+advantage established in Chapter 6.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 11.1, Array area versus load, and triple-junction degradation over the mission.}]{systems_figs/fig_power.png}}
+\caption{Fig. 11.1, Array area versus load, and triple-junction
+degradation over the mission.}
+\end{figure}
+
+\chapter{12. Structures and mass}\label{structures-and-mass}
+
+The structure carries launch loads, sets the spacecraft inertia (which
+feeds attitude control), and anchors the mass budget that closes the
+whole design.
+
+\textbf{Inertia from geometry.} A uniform box of mass \(m\) and
+dimensions \(d_x, d_y, d_z\) has principal moments
+\(I_x = \tfrac{m}{12}(d_y^2 + d_z^2)\), and cyclic permutations. A
+deployed panel of mass \(m\), length \(L\), at offset \(o\) from the bus
+axis contributes \(m(L^2/12 + o^2)\) by the parallel-axis theorem.
+Summing the bus, two solar wings, and the radiators gives a diagonal
+inertia tensor; for the reference satellite the maximum principal moment
+is on the order of a few hundred kilogram-meters squared, and the
+maximum minus minimum difference feeds the gravity-gradient torque of
+Chapter 13.
+
+\textbf{Structural mass and launch loads.} Primary structure is sized as
+a fraction (typically fifteen to twenty-five percent) of the supported
+mass, and checked against the quasi-static launch load: the stress in a
+primary member is
+\(\sigma_{\mathrm{stress}} = m\, g_{\mathrm{load}}\, g_0 / A_{\mathrm{member}}\),
+and the margin is the yield strength divided by this stress, required to
+exceed roughly 1.25 with margin. For aluminium at an 8.5-g quasi-static
+load, modest member areas keep the margin comfortable.
+
+\textbf{Panel fundamental frequency.} Deployed panels must be stiff
+enough that their fundamental mode does not couple to the
+attitude-control bandwidth. For a plate of side \(a\), thickness \(t\),
+and areal mass \(\rho_A\),
+
+\begin{equation}
+f_1 = \frac{\beta}{2\pi}\sqrt{\frac{D}{\rho_A\, a^4}}, \qquad D = \frac{E t^3}{12(1-\nu^2)}, \tag{12.1}
+\end{equation}
+
+with \(\beta\) a boundary-condition constant. Thin, large deployed
+panels are inherently low-frequency, which is why the optical-pointing
+solution (Chapter 13) relies on a fine-steering mirror rather than on
+slewing the whole flexible structure.
+
+\textbf{Mass closure.} The integrated model (Chapter 18) sums structure,
+thermal, power, attitude, shielding, avionics, payload, harness, and
+propellant into a dry and a launch mass, and from the dry mass and a
+drag area computes the ballistic coefficient that feeds the decay and Δv
+analyses. The reference four-chip satellite closes at roughly 270 to 290
+kg dry.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 12.1 Reference satellite dry-mass breakdown by subsystem, closed self-consistently by the integrated model.}]{figures2/figA8_mass.png}}
+\caption{Fig. 12.1 Reference satellite dry-mass breakdown by subsystem,
+closed self-consistently by the integrated model.}
+\end{figure}
+
+\chapter{13. Attitude determination and control; optical
+pointing}\label{attitude-determination-and-control-optical-pointing}
+
+The attitude subsystem must hold the bus steady against disturbance
+torques and, far more demandingly, point laser links to sub-microradian
+accuracy.
+
+\textbf{Disturbance torques.} The dominant low-orbit torques are
+gravity-gradient and aerodynamic:
+
+\begin{equation}
+\tau_{\mathrm{gg}} = \tfrac{3}{2}\, n^2\, |I_z - I_x|\, \sin 2\theta, \qquad
+\tau_{\mathrm{aero}} = \tfrac{1}{2}\rho v^2 C_D A\,\ell_{cp\text{-}cg}, \tag{13.1}
+\end{equation}
+
+where \(\ell_{cp\text{-}cg}\) is the offset between the center of
+pressure and the center of mass. With the geometry-derived inertia of
+Chapter 12, the gravity-gradient torque at 650 km is of order
+\(10^{-4}\ \mathrm{N\,m}\). Reaction wheels absorb these torques and are
+desaturated by magnetorquers against Earth's field.
+
+\textbf{Optical pointing and the fine-steering mirror.} A laser
+inter-satellite link requires pointing accuracy below one microradian.
+The diffraction-limited beam divergence is \(\Theta \approx 2.44\,
+\lambda/D\), and a pointing error \(\theta_{\mathrm{err}}\) relative to
+the beam divergence \(\theta_{\mathrm{div}}\) costs received power
+\(L_{\mathrm{point}} = \exp(-2\theta_{\mathrm{err}}^2/
+\theta_{\mathrm{div}}^2)\). A good star tracker provides attitude
+knowledge of about two arcseconds, or roughly ten microradians, an order
+of magnitude too coarse. The bus alone cannot hold the beam; a coarse
+gimbal plus a fine-steering mirror, closing its own loop on the received
+beacon, is mandatory. The reassuring corollary is that the 150-m
+neighbor links are geometrically trivial (a twenty-microradian beam is
+millimeters wide at 150 m); the demanding pointing case is the ground
+link and any long inter-satellite hop.
+
+\chapter{14. Communications: inter-satellite and
+ground}\label{communications-inter-satellite-and-ground}
+
+The communications subsystem sets both the internal fabric capacity and
+the ability to deliver data to Earth.
+
+\textbf{Link budget.} Telescope gain and free-space loss are
+
+\begin{equation}
+G = \left(\frac{\pi D}{\lambda}\right)^2, \qquad L_{\mathrm{fs}} = \left(\frac{4\pi R}{\lambda}\right)^2, \tag{14.1}
+\end{equation}
+
+and the received power in decibels is
+\(P_{\mathrm{rx}} = P_{\mathrm{tx}} + G_{\mathrm{tx}} +
+G_{\mathrm{rx}} - L_{\mathrm{fs}} - L_{\mathrm{point}} - L_{\mathrm{atm}} - L_{\mathrm{optics}}\).
+
+\textbf{Why the formation is tight.} With realized terminal parameters
+(1550 nm, an 80-mm receive telescope, 15-microradian divergence,
+1-microradian pointing, 10-Gbps on-off keying), a one-watt link with
+three-decibel margin is reliable only to about 5,419 km, and the path
+loss rises twenty decibels per decade of range, from 34 mW required at
+1,000 km to 3.41 W at 10,000 km, against a commercial terminal limit
+near one watt. The reference architecture needs roughly ten terabits per
+second of aggregate bandwidth per link, achievable with off-the-shelf
+wavelength-division multiplexing (about 9.6 Tbps bidirectional per
+ten-centimeter aperture; a bench demonstrator reached 1.6 Tbps) only by
+flying the satellites about 150 m apart. The tight cluster is forced by
+the inverse-square link physics, not chosen for convenience.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 14.2 Transmit power required to hold a three-decibel link margin versus range, against the one-watt terminal limit, and the pointing-loss sensitivity to jitter. Range and pointing together force the tight formation.}]{figures2/figA4_link.png}}
+\caption{Fig. 14.2 Transmit power required to hold a three-decibel link
+margin versus range, against the one-watt terminal limit, and the
+pointing-loss sensitivity to jitter. Range and pointing together force
+the tight formation.}
+\end{figure}
+
+\textbf{Ground segment.} The downlink to Earth is the availability
+bottleneck. The slant atmospheric loss scales with the air mass
+\(1/\sin(\mathrm{elevation})\), and cloud cover is opaque at optical
+wavelengths, so single-site availability is poor. The remedy is site
+diversity: with \(n\) independent ground stations the probability that
+at least one is cloud-free is \(1 - (1 - p_{\mathrm{clear}})^n\), which
+reaches roughly ninety-six percent for four stations. Contact time per
+overhead pass follows from the elevation-mask geometry,
+\(\lambda_{\max} = \arccos[(R_E/(R_E+h))\cos\varepsilon] -
+\varepsilon\), giving about nine minutes at a ten-degree mask; combined
+with the data rate and the number of passes, this sets the daily
+deliverable volume (tens of terabytes per day in the reference case).
+
+\textbf{Latency.} Light travels at \(c\) in vacuum but at
+\(c/n_{\mathrm{fiber}}\) in fiber (\(n_{\mathrm{fiber}} = 1.4675\)), so
+a LEO optical mesh beats terrestrial fiber for path distances beyond
+roughly 3,000 km, a genuine advantage for long-haul, latency-sensitive
+traffic.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 14.1, Inter-satellite free-space loss versus range and pointing-loss sensitivity.}]{systems_figs/fig_comms.png}}
+\caption{Fig. 14.1, Inter-satellite free-space loss versus range and
+pointing-loss sensitivity.}
+\end{figure}
+
+\chapter{15. Propulsion and end-of-life
+disposal}\label{propulsion-and-end-of-life-disposal}
+
+Propulsion must make up drag, maintain the formation, enable collision
+avoidance, and, decisively, de-orbit the satellite within the regulatory
+window.
+
+\textbf{The disposal rule.} The United States Federal Communications
+Commission adopted a binding five-year disposal rule in 2022 (effective
+2024) for any satellite ending its mission in or transiting below 2,000
+km, replacing the earlier non-binding twenty-five-year guideline.
+Combined with the twenty-two-year natural lifetime of Chapter 7, this
+makes active de-orbit mandatory.
+
+\textbf{Controlled de-orbit by a Hohmann burn.} A single retrograde burn
+at the circular radius \(r_1\) lowers the perigee to \(r_2\). The
+transfer ellipse has semi-major axis \(a_t = (r_1+r_2)/2\), and by
+vis-viva the speed at its apogee (where the burn occurs) is
+\(v_{\mathrm{apo}} = v_{c1}\sqrt{2 r_2/
+(r_1+r_2)}\), so the required impulse is
+
+\begin{equation}
+\Delta v_{\mathrm{deorbit}} = v_{c1}\left(1 - \sqrt{\frac{2 r_2}{r_1 + r_2}}\right). \tag{15.1}
+\end{equation}
+
+\textbf{Worked example:} from 650 km to a 180-km perigee,
+\(r_1 = 7.021\times10^6\), \(r_2 = 6.551\times10^6\),
+\(v_{c1} = 7534.8\ \mathrm{m/s}\), giving
+\(\Delta v_{\mathrm{deorbit}} = 131.6\ \mathrm{m/s}\). This single term
+dominates the five-year budget of about 190 m/s (drag make-up
+\textasciitilde13, formation \textasciitilde8, collision avoidance
+\textasciitilde5, de-orbit \textasciitilde132, plus margin).
+
+\textbf{Propellant.} The rocket equation, derived from momentum
+conservation \(m\,dv = -v_e\,dm\) with \(v_e = I_{sp} g_0\), gives
+\(m_p = m_{\mathrm{dry}}(e^{\Delta v/(I_{sp}g_0)} - 1)\). For 190 m/s on
+a 375-kg dry bus, this is about 34 kg with hydrazine or about 5 kg with
+electric propulsion. Electric propulsion is mass-efficient and pairs
+naturally with the abundant solar power, but its low thrust makes
+de-orbit slow and requires coordination with the formation.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 15.1, Per-satellite Δv budget (de-orbit dominates) and propellant mass by propulsion type.}]{figures/fig5_deltav.png}}
+\caption{Fig. 15.1, Per-satellite Δv budget (de-orbit dominates) and
+propellant mass by propulsion type.}
+\end{figure}
+
+\chapter{16. Reliability and constellation
+availability}\label{reliability-and-constellation-availability}
+
+Because no satellite can be repaired in orbit, reliability must be
+designed in and availability bought through redundancy and
+replenishment.
+
+\textbf{Exponential reliability.} Let the hazard rate \(\lambda(t)\) be
+the instantaneous failure rate of a surviving unit. The survival
+probability obeys \(dR/dt = -\lambda(t)\,R\), whose solution is
+\(R(t) = \exp[-\int_0^t \lambda(t')\,dt']\). In the flat region of the
+bathtub curve the hazard is constant, \(\lambda = 1/\mathrm{MTBF}\), so
+
+\begin{equation}
+R(t) = e^{-\lambda t} = e^{-t/\mathrm{MTBF}}. \tag{16.1}
+\end{equation}
+
+This is the memoryless limit: a constant hazard is exactly the condition
+under which failures form a Poisson process, and the mean of the
+resulting exponential lifetime distribution is \(1/\lambda\), which is
+why the mean time between failures appears directly in the exponent. A
+bus with a mean time between failures of 50,000 hours has
+\(R(5\,\mathrm{yr}) = e^{-0.876} = 0.42\), so fewer than half survive
+un-aided; a higher-grade bus at 150,000 hours reaches
+\(R(5\,\mathrm{yr}) = 0.75\). Either way a bare unit is not enough, and
+redundancy is mandatory.
+
+\textbf{k-of-n redundancy.} Consider \(n\) identical units that fail
+independently, each surviving with probability \(p = R(t)\). The number
+that survive is binomial, \(\Pr[X = i] = \binom{n}{i} p^i (1-p)^{n-i}\).
+A system that functions when at least \(k\) of the \(n\) survive
+therefore has reliability
+
+\begin{equation}
+R_{\mathrm{sys}} = \Pr[X \ge k] = \sum_{i=k}^{n} \binom{n}{i}\, p^i (1-p)^{n-i}. \tag{16.2}
+\end{equation}
+
+The same expression sizes chip-level redundancy within a satellite and
+satellite-level over-provisioning within a cluster. Its power is in the
+steep climb of the tail sum: with \(n = 81\) nodes required to deliver
+\(k = 70\), a per-node reliability of \(p = 0.90\) yields
+\(R_{\mathrm{sys}} = 0.89\), but raising the per-node figure to
+\(p = 0.95\) pushes it to \(0.999\). Small gains in unit reliability buy
+large gains in system reliability once the redundancy margin is set.
+
+\textbf{Constellation availability and replenishment.} The expected
+fraction of required capacity available, absent replenishment, is
+\(\min(1,\ n_{\mathrm{deployed}}\, p / n_{\mathrm{required}})\). For 81
+deployed, 75 required, and \(p = 0.90\), this is \(0.97\), so a six-unit
+margin holds capacity near full even before any resupply. To sustain
+that level over the mission, units must be replaced as they fail.
+Modeling the fleet as a renewal process, each unit that fails is
+replaced after a lead time, and in steady state the replenishment rate
+equals the failure rate. For a design life \(L\) the long-run annual
+replacement rate is approximately \(1/L\), about twenty percent per year
+for a five-year life, and holding a fixed availability target against a
+given per-unit reliability sets the deployed count: reaching ninety-five
+percent availability of 75 required nodes at \(p = 0.90\) calls for on
+the order of 89 deployed. The associated replenishment is a major and
+recurring operating expense, carried explicitly in the economics of
+Chapter 21. These figures are produced by
+\passthrough{\lstinline!orbital\_dc.reliability!}
+(\passthrough{\lstinline!k\_of\_n!},
+\passthrough{\lstinline!expected\_capacity\_fraction!},
+\passthrough{\lstinline!spares\_for\_availability!},
+\passthrough{\lstinline!annual\_replacement\_rate!}).
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 16.1, Per-node reliability versus time and the over-provisioning needed to hold capacity.}]{systems_figs/fig_reliability.png}}
+\caption{Fig. 16.1, Per-node reliability versus time and the
+over-provisioning needed to hold capacity.}
+\end{figure}
+
+\chapter{17. Compute and workload}\label{compute-and-workload}
+
+The purpose of the system is useful computation, and the appropriate
+figure of merit is delivered useful work, not peak floating-point
+capability.
+
+\textbf{Delivered compute.} With \(n\) chips of peak rate
+\(P_{\mathrm{peak}}\), a model-FLOPs utilization MFU, and a radiation
+availability \(a_r\), the delivered useful rate is
+\(n\, P_{\mathrm{peak}}\,
+\mathrm{MFU}\, a_r\). Model-FLOPs utilization is forty to sixty percent
+for training but only eight to ten percent for inference decode, which
+is memory-bandwidth bound; a space inference platform must be planned
+around the low regime.
+
+\textbf{Coupled thermal-throttle simulation.} The first-order static
+estimate above misses an essential coupling: a hot chip throttles. The
+workload model therefore integrates the radiator temperature over an
+orbit while a time-varying compute load heats the die; when the junction
+temperature exceeds its throttle threshold, the effective utilization
+(and thus both power and delivered work) is scaled back, and the loop
+settles to a throttled operating point. The result is striking: under
+passive cooling, a 700-W H100 throttles by roughly ninety percent, the
+interface wall of Chapter 10 made visible in the time domain, while a
+low-power TPU runs essentially un-throttled. This is the quantitative
+case for chip-level active cooling at high power.
+
+\textbf{Effective efficiency.} The appropriate efficiency metric is an
+effective power-usage effectiveness that folds in the radiation
+throughput tax, \(\mathrm{PUE}_{\mathrm{eff}} = (P_{\mathrm{total}}/
+P_{\mathrm{compute}})/a_r\), and the relevant cost metric is dollars per
+useful petaflop-hour, which at realistic utilization is several times
+the headline peak figure.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 17.1, Added subsystems: passive thermal-throttle by chip, ground-station site diversity, latency crossover, and the discounted-cash-flow breakeven.}]{systems_figs/fig_new_subsystems.png}}
+\caption{Fig. 17.1, Added subsystems: passive thermal-throttle by chip,
+ground-station site diversity, latency crossover, and the
+discounted-cash-flow breakeven.}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{INTEGRATION, SIMULATION, AND
+RESULTS}\label{integration-simulation-and-results}
+
+\chapter{18. The integrated system
+model}\label{the-integrated-system-model}
+
+The value of a systems model lies in closure: the subsystems must be
+solved together so that their mutual dependencies are satisfied. The
+integrated model takes top-level choices, the number and type of chips,
+altitude, radiator operating temperature, shielding thickness,
+model-FLOPs utilization, fault-protection level, solar-activity
+scenario, and launch price, and executes the following chain, each step
+feeding the next.
+
+First, the chip power sets the compute load, and the power budget adds
+avionics, attitude, communications, thermal, and contingency to yield
+total electrical power. That power sizes the solar array area and mass
+and the battery. The thermal load sizes the radiator area and mass by
+equation (10.3). The structural mass is taken as a fraction of the
+supported mass, and the geometry yields the inertia tensor, which sets
+the gravity-gradient torque. The radiation dose sets the shielding mass.
+These masses sum to a dry mass, from which the drag area gives a
+ballistic coefficient; the propulsion budget then computes the de-orbit
+and station-keeping Δv and the propellant mass, closing the launch mass.
+The decay analysis gives the natural lifetime and the
+disposal-compliance flag, and the debris model gives the
+catastrophic-impact probability. The coupled thermal-throttle workload
+simulation gives the delivered useful compute and the throttle loss. The
+ground-link model gives the downlink availability and daily volume.
+Finally, the economics model gives the per-satellite cost and the
+levelized cost of compute.
+
+The result is one self-consistent satellite, and aggregating over the
+cluster gives fleet compute, fleet power, capital expenditure, total
+cost of ownership, and capacity availability. The mass budget for the
+reference four-chip satellite is shown in Fig. 18.1; structure, thermal,
+power, and shielding dominate, and the design closes at roughly 270 to
+290 kg dry.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 18.1, Integrated dry-mass budget, closed self-consistently by the system model.}]{systems_figs/fig_mass_budget.png}}
+\caption{Fig. 18.1, Integrated dry-mass budget, closed self-consistently
+by the system model.}
+\end{figure}
+
+\chapter{18A. Computational methods and numerical
+solvers}\label{a.-computational-methods-and-numerical-solvers}
+
+The governing equations are not only evaluated in closed form; each is
+solved with an explicit numerical method in an open solver suite. The
+quartic radiator energy balance is solved by Newton-Raphson. The
+drag-decay and eclipse-transient differential equations are integrated
+by a fourth-order Runge-Kutta scheme. The optical-link range and the
+internal rate of return are found by Brent root-finding. The
+launch-cost-parity year is obtained by Monte-Carlo over the uncertain
+assumptions, because that forecast is skewed and a single point would
+misrepresent it. Solving the reference mission end to end produces one
+consistent solution set.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Quantity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Numerical method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Solution
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Radiator temperature & Newton-Raphson (4 iterations) & 21.3 C \\
+Natural lifetime at 650 km & Runge-Kutta decay integration & 19.6 yr \\
+Eclipse temperature drop & Runge-Kutta transient & minus 0.6 C \\
+Controlled de-orbit delta-v & Hohmann (vis-viva) & 131.6 m/s \\
+Optical link range, 3 dB then 0 dB margin & Brent root & 5,419 then
+7,655 km \\
+Launch-cost parity year & Monte-Carlo & mid-2040s for the minority of
+scenarios that reach 200 dollars per kilogram within the horizon \\
+\end{longtable}
+}
+
+The numerical primitives are general-purpose and documented. The
+Newton-Raphson core, used for the radiator quartic, is
+
+\begin{lstlisting}[language=Python]
+def newton_raphson(f, fprime, x0, tol=1e-8, max_iter=100):
+    x = float(x0)
+    for k in range(1, max_iter + 1):
+        fx = f(x)
+        if abs(fx) < tol:
+            return x, k
+        x -= fx / fprime(x)
+    return x, max_iter
+\end{lstlisting}
+
+and the fourth-order Runge-Kutta integrator, used for orbital decay and
+the eclipse transient, is
+
+\begin{lstlisting}[language=Python]
+def rk4_integrate(rhs, y0, t0, t1, dt, stop=None):
+    t, y, ts, ys = t0, float(y0), [t0], [float(y0)]
+    for _ in range(int((t1 - t0) / dt)):
+        k1 = rhs(t, y); k2 = rhs(t + dt/2, y + dt/2*k1)
+        k3 = rhs(t + dt/2, y + dt/2*k2); k4 = rhs(t + dt, y + dt*k3)
+        y += dt/6 * (k1 + 2*k2 + 2*k3 + k4); t += dt
+        ts.append(t); ys.append(y)
+        if stop and stop(t, y): break
+    return ts, ys
+\end{lstlisting}
+
+Each solver is checked against the worked examples of this document, so
+the numbers in the tables and the figures are produced by the same code
+that a reader can run.
+
+\chapter{19. Uncertainty quantification and
+sensitivity}\label{uncertainty-quantification-and-sensitivity}
+
+A point design is not credible without an uncertainty band. Two
+complementary tools are used: linear error propagation for a quick
+analytic estimate, and Monte-Carlo for the full distribution when the
+inputs span orders of magnitude.
+
+\textbf{Linear error propagation.} For an output
+\(y = f(x_1,\dots,x_m)\) with independent inputs of standard deviation
+\(\sigma_{x_j}\), a first-order Taylor expansion about the mean gives
+
+\begin{equation}
+\sigma_y^2 \approx \sum_{j=1}^{m}\left(\frac{\partial f}{\partial x_j}\right)^2 \sigma_{x_j}^2. \tag{19.1}
+\end{equation}
+
+This is exact for linear \(f\) and a good guide when the inputs vary by
+a few percent. It fails precisely where the dominant uncertainty here
+lives, in atmospheric density, which is lognormal and varies by up to
+two orders of magnitude across the solar cycle, so the
+partial-derivative picture is supplemented by sampling.
+
+\textbf{Monte-Carlo propagation.} The model draws \(N\) samples of the
+uncertain inputs from their assumed distributions, evaluates the full
+model for each, and forms the empirical distribution of every output.
+The dominant inputs sampled are the solar-activity scenario (which moves
+atmospheric density by up to a factor of one hundred), the debris-flux
+band, the model-FLOPs utilization, and the undisclosed chip power. The
+estimator converges as \(1/\sqrt{N}\), so a few thousand samples fix the
+central percentiles to better than the input uncertainty warrants. The
+resulting distributions of natural lifetime, catastrophic-impact
+probability, total \(\Delta v\), and delivered compute are reported as
+fifth, fiftieth, and ninety-fifth percentiles rather than as single
+numbers (Fig. 19.1), produced by
+\passthrough{\lstinline!orbital\_dc.montecarlo.monte\_carlo!}.
+
+\textbf{Sensitivity ranking.} To attribute output variance to inputs,
+the model uses a one-at-a-time sweep
+(\passthrough{\lstinline!montecarlo.one\_at\_a\_time!}) that holds all
+but one input at its central value and records the output swing. The
+ratio of that swing to the baseline is a transparent local sensitivity
+index; where inputs interact, the full Monte-Carlo variance is the
+honest measure. Two sensitivities stand out. First, the natural lifetime
+is wildly sensitive to the solar cycle: the same satellite that decays
+in four years at solar maximum lasts over three hundred years at solar
+minimum, which is precisely why the design cannot rely on passive
+disposal. Second, delivered compute is sensitive to model-FLOPs
+utilization and to the radiation throughput tax, which is why the
+realistic cost of compute is several times the naive peak-based figure.
+The single weakest input is the chip power itself, undisclosed by the
+vendor and treated as a 150-to-200-watt band.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 19.1, Monte-Carlo distributions of natural lifetime, debris probability, and total Δv across the dominant uncertainties.}]{systems_figs/fig_montecarlo.png}}
+\caption{Fig. 19.1, Monte-Carlo distributions of natural lifetime,
+debris probability, and total Δv across the dominant uncertainties.}
+\end{figure}
+
+\chapter{20. Results: reference design point and
+constellation}\label{results-reference-design-point-and-constellation}
+
+Bringing the chapters together, the reference design point and its key
+results are summarized in Table 20.1 and the supporting figures.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Quantity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Driver / chapter
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Orbital period & 97.6 min & Ch. 4 \\
+Natural lifetime (moderate solar) & \textasciitilde22 yr & Ch. 7, fails
+5-yr rule \\
+Radiator area (1 MW, 20 C) & \textasciitilde1,508 m² & Ch. 10 \\
+Interface ΔT (700 W chip) & 210 C (\textgreater125 budget) & Ch. 10,
+active cooling needed \\
+5-yr dose behind 10 mm Al & \textasciitilde1.06 krad(Si) & Ch. 8, large
+margin \\
+Catastrophic debris P (cluster, 5 yr) & \textasciitilde17\% (6-46\%
+band) & Ch. 9 \\
+In-cluster cascade P (neighbor, 150 m) & \textasciitilde8.5\% & Ch. 13 /
+risk synthesis \\
+De-orbit Δv & 131.6 m/s (of \textasciitilde190 total) & Ch. 15 \\
+Passive H100 throttle loss & \textasciitilde90\% & Ch. 17 \\
+Reference dry mass & \textasciitilde270-290 kg & Ch. 12, 18 \\
+\end{longtable}
+}
+
+The debris and radiation results, central to the survivability case, are
+shown in Figs. 20.1 and 20.2. The debris figure shows both the
+cluster-level catastrophic probability over the mission and the
+in-cluster cascade coupling versus formation spacing; the radiation
+figure shows the dose-versus-shielding curve against the memory
+tolerance and the reliability-versus-throughput trade.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 20.1, Catastrophic debris risk for the full cluster, and the in-cluster cascade coupling versus formation spacing.}]{figures/fig3_debris_risk.png}}
+\caption{Fig. 20.1, Catastrophic debris risk for the full cluster, and
+the in-cluster cascade coupling versus formation spacing.}
+\end{figure}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 20.2, Cumulative dose versus aluminium shielding, and the reliability-throughput trade.}]{figures/fig4_radiation.png}}
+\caption{Fig. 20.2, Cumulative dose versus aluminium shielding, and the
+reliability-throughput trade.}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{ECONOMICS AND PREDICTIONS}\label{economics-and-predictions}
+
+\chapter{21. Techno-economics: cost, NPV, and the levelized cost of
+compute}\label{techno-economics-cost-npv-and-the-levelized-cost-of-compute}
+
+The economic case is built with a proper time-value-of-money treatment
+rather than simple cost bookkeeping.
+
+\textbf{Cost structure and the launch cross-over.} Per-satellite cost is
+launch plus hardware,
+\(C_{\mathrm{sat}} = p_{\mathrm{launch}}\, m_{\mathrm{launch}} + C_{\mathrm{hw}}\).
+Launch equals hardware at the cross-over price
+\(p^{*} = C_{\mathrm{hw}}/m_{\mathrm{launch}}\); with about 1.1 million
+dollars of hardware on a 415-kg satellite,
+\(p^{*} \approx 2{,}650\ \mathrm{USD/kg}\). Below this price, hardware
+dominates, and below roughly 600 USD/kg the launch term is a small
+correction. The economics are therefore gated by hardware cost,
+lifetime, utilization, and the radiation tax, not by the headline
+dollar-per-kilogram figure that dominates public discussion.
+
+\textbf{Discounted cash flow.} The capital-recovery factor that
+annualizes a capital cost over \(n\) years at discount rate \(r\) is
+\(\mathrm{CRF} = r(1+r)^n/[(1+r)^n - 1]\). Net present value is
+\(\mathrm{NPV} = \sum_t \mathrm{CF}_t/(1+r)^t\), and the internal rate
+of return is the rate at which NPV vanishes, solved by bisection.
+
+\textbf{Levelized cost of compute.} The most decision-relevant metric is
+the levelized cost per useful petaflop-hour:
+
+\begin{equation}
+\mathrm{LCOE} = \frac{\mathrm{CRF}\cdot \mathrm{CAPEX} + \mathrm{OPEX}_{\mathrm{yr}}}
+{\text{annual useful PFLOP-hours}}. \tag{21.1}
+\end{equation}
+
+Because the denominator uses delivered, throttled,
+utilization-and-availability-derated compute, a high-power chip that
+throttles under passive cooling shows a dramatically worse levelized
+cost than its peak rating implies, quantifying, in dollars, the penalty
+of the interface wall. Replenishment, at the reliability-driven rate of
+Chapter 16, is a first-order operating expense in this calculation.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 21.1b Levelized cost of useful compute versus model-FLOPs utilization, and versus launch price. The cost is dominated by utilization and hardware, not by launch.}]{figures2/figA7_lcoe.png}}
+\caption{Fig. 21.1b Levelized cost of useful compute versus model-FLOPs
+utilization, and versus launch price. The cost is dominated by
+utilization and hardware, not by launch.}
+\end{figure}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 21.1, Cost of useful compute versus utilization, and the radiation throughput tax by protection level.}]{systems_figs/fig_compute.png}}
+\caption{Fig. 21.1, Cost of useful compute versus utilization, and the
+radiation throughput tax by protection level.}
+\end{figure}
+
+\chapter{22. The launch-cost-parity
+prediction}\label{the-launch-cost-parity-prediction}
+
+The entire economic case rests on launch cost falling far enough that
+the annualized cost of power in orbit approaches the terrestrial cost of
+power. The reference paper projects launch reaching 200 dollars per
+kilogram by about 2035 under a twenty-percent learning rate, requiring
+on the order of 370,000 tonnes of additional cumulative launched mass,
+some 1,800 Starship launches, at which point the launched-power price of
+roughly 810 dollars per kilowatt-year approaches the terrestrial
+data-center power spend of 570 to 3,000 dollars per kilowatt-year.
+
+This forecast is assumption-fragile, so this study generates its own
+credibility band rather than inheriting a single date. A Wright learning
+curve is applied to cumulative launched mass, with a logistic ramp in
+launch cadence, and the unproven assumptions are sampled by Monte-Carlo:
+the learning rate from fifteen to twenty-five percent, the 2026
+effective price from 1,200 to 3,500 dollars per kilogram, the payload
+from 150 to 250 tonnes, and the peak cadence from 80 to 220 launches per
+year. The first result is the more important one and is easy to miss in
+a single headline date: across the sampled assumptions, only about five
+percent of scenarios reach 200 dollars per kilogram at all within the
+2050 horizon, and roughly ninety-five percent never reach it. Parity at
+that price is therefore not a near-certainty awaiting a date; under most
+defensible assumptions it does not arrive within the horizon.
+Conditional on the minority of scenarios that do reach it, the median
+parity year is near 2044 (Fig. 22.1), with a fifth percentile of about
+2037 and essentially no probability of reaching parity by 2035.
+Extending the horizon to 2060 raises the reaching fraction only to about
+nine percent and moves the conditional median to the end of the 2040s,
+so the conclusion is not an artifact of where the horizon is drawn. The
+vendor's 2035 date sits beyond the optimistic edge of the distribution
+and requires its specific aggressive anchors, full reusability at 200
+tonnes and roughly two million dollars marginal cost, sustained
+twenty-percent learning from a low starting price, and a total launched
+mass far larger than the cadence ranges sampled here deliver.
+
+The prediction is therefore twofold: launch-cost parity at 200 dollars
+per kilogram is unlikely under most assumptions rather than merely late,
+and where it does arrive it is more likely in the late 2030s to
+mid-2040s than in 2035. Parity is in any case necessary but not
+sufficient: even at parity, the business case is gated by hardware cost,
+lifetime, and utilization.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 22.1, Launch-cost learning curve (Monte-Carlo) and the distribution of the cost-parity year. Most sampled scenarios never reach 200 dollars per kilogram within the horizon; conditional on those that do, the median is near 2044, later than the vendor's 2035.}]{figures_pred/fig_cost_parity.png}}
+\caption{Fig. 22.1, Launch-cost learning curve (Monte-Carlo) and the
+distribution of the cost-parity year. Most sampled scenarios never reach
+200 dollars per kilogram within the horizon; conditional on those that
+do, the median is near 2044, later than the vendor's 2035.}
+\end{figure}
+
+\chapter{23. Capability and risk trajectory,
+2027-2035}\label{capability-and-risk-trajectory-2027-2035}
+
+Synthesizing the technology-readiness picture of Chapter 2 with the
+engineering constraints of the preceding chapters yields a defensible
+capability trajectory. By 2027, the demonstration missions (the
+Suncatcher two-satellite prototype, Starcloud's Blackwell-class
+follow-on) should place real accelerators in orbit and exercise
+components, raising their readiness while leaving constellation-scale
+operation unproven. Through 2028 to 2030, the gating demonstrations are
+flown multi-terabit formation links, validated formation station-keeping
+under the differential drag of the solar cycle, and, most importantly,
+autonomous, cluster-coordinated debris avoidance at sub-kilometer
+spacing. From 2030 to 2035, if launch trends hold, niche economic cases
+emerge for latency-critical or space-native workloads, while gigawatt
+scale remains aspirational and cost parity, per Chapter 22, is unlikely
+before the mid-2030s.
+
+The debris-and-Kessler trajectory deserves particular attention: a
+one-kilometer cluster in the congested 650-km shell raises both the
+catastrophic-impact exposure and the cascade hazard, and its evolution
+depends on disposal compliance and avoidance autonomy. A flight program
+should quantify this with the official ORDEM 3.2 and LEGEND tools before
+committing to constellation scale.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{SYNTHESIS}\label{synthesis}
+
+\chapter{24. Caveats and limitations}\label{caveats-and-limitations}
+
+A complete assessment must state clearly what this study does and does
+not establish.
+
+On source quality: the single most load-bearing source for the
+radiation, link-budget, and cost-parity claims is a non-peer-reviewed,
+vendor-authored preprint; its results are self-reported and not
+independently replicated. On the technology-readiness gap: what has been
+demonstrated is one data-center-class GPU in orbit, ground radiation
+testing of a TPU, a bench-scale optical link, and kilowatt-class nodes;
+what the vision requires, megawatt-to-gigawatt clusters, flown
+multi-terabit formation links, dramatically cheaper launch, and
+in-flight formation control, has not been demonstrated. On model
+fidelity: the debris flux, atmospheric density, and radiative limits
+used here are computed at first order with explicit uncertainty bands,
+not measured per-orbit; a flight program would use the official agency
+tools (NASA DAS, ORDEM 3.2, ESA MASTER and DRAMA, SPENVIS/SHIELDOSE-2)
+and a full thermal and orbit toolchain. The model also omits, by design,
+a multi-node thermal finite-element analysis, a closed-loop
+attitude-control simulation, formal failure-modes and effects analysis,
+micrometeoroid Whipple-shield sizing, and a full time-domain mission
+simulation. Finally, several widely repeated marketing claims, notably
+``ten times cheaper including launch'', failed independent verification
+and are not relied upon here.
+
+These limitations do not undermine the study's purpose, which is to size
+the problem, rank the risks, and quantify the trades transparently. They
+do bound the confidence with which any single number should be quoted,
+and they identify exactly where higher-fidelity work is needed next.
+
+\chapter{25. Conclusions and the recommended
+demonstrator}\label{conclusions-and-the-recommended-demonstrator}
+
+The analysis supports a clear and defensible conclusion. Radiative
+cooling, the problem most often assumed to be the obstacle, is the
+solved part, now flight-proven at the single-node scale, with the caveat
+that it does not scale for free and that high-power chips require active
+cooling at the die. Radiation is comfortably survivable with sensible
+shielding, at the cost of a modest throughput tax. The binding, unsolved
+constraints are elsewhere: orbital-debris survivability in a tight
+formation, where the same close spacing that enables terabit optical
+links makes a fragmentation cascade and collision avoidance dangerous;
+credible end-of-life disposal, which the 650-km orbit cannot achieve
+passively within the five-year rule and which therefore mandates
+propulsion; and economics, where the launch-cost parity that underwrites
+the business case is later and less certain than advertised.
+
+The recommended program follows directly. It is precisely what the
+leading efforts are already doing: small, attritable,
+one-or-two-satellite demonstrators that retire the risks that actually
+matter. Such a demonstrator should measure in-situ radiation dose and
+upset rates on the target accelerator, demonstrate a modular
+liquid-cooled radiator at real kilowatt-class chip power, demonstrate
+onboard debris sensing and an autonomous avoidance maneuver, and
+demonstrate a controlled propulsive de-orbit at end of mission.
+Constellation-scale deployment should be gated behind a demonstrated
+answer to the formation-and-debris paradox, not behind a launch-cost
+milestone. The systems-level risk picture is summarized in Fig. 25.1:
+cooling sits in the low-risk corner, while debris, disposal, and
+economics sit in the high-risk corner, and that is where the engineering
+attention belongs.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Fig. 25.1, Systems-level risk matrix: cooling is solved; debris, disposal, and economics are the open items.}]{figures/fig7_risk_matrix.png}}
+\caption{Fig. 25.1, Systems-level risk matrix: cooling is solved;
+debris, disposal, and economics are the open items.}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{DETAILED RESULTS, DATA, AND WORKED
+COMPUTATIONS}\label{detailed-results-data-and-worked-computations}
+
+\chapter{26. A worked end-to-end
+computation}\label{a-worked-end-to-end-computation}
+
+To make the integrated model concrete, this chapter walks through the
+reference design point exactly as the code computes it, carrying the
+numbers at each step. The inputs are four TPU-class accelerators at an
+estimated 200 W each, a 650-km dawn-dusk orbit, a radiator operating
+point of 45 C, 10 mm of aluminium shielding, a model-FLOPs utilization
+of 0.30, error-correcting memory with checkpointing, moderate solar
+activity, and a launch price of 300 dollars per kilogram.
+
+The compute load is four times 200, or 800 W. The power budget adds 150
+W of avionics, 80 W of attitude control, 50 W of communications, 20 W of
+thermal control, and a fifteen-percent contingency, giving a total
+electrical demand of 1,265 W and an electrical power-usage effectiveness
+of 1.58 (Table T10). That total sizes a solar array of about five square
+meters and a small dawn-dusk battery. The thermal load, compute plus
+avionics plus parasitic, sizes a modest radiator by equation (10.3). The
+radiation dose behind 10 mm of aluminium is about 1.05 krad(Si) over
+five years, comfortably within the memory tolerance (Table T4). The
+structural mass is taken as a fifth of the supported mass, and the
+geometry yields an inertia of a few hundred kilogram-meters squared,
+from which the gravity-gradient torque is of order one ten-thousandth of
+a newton-meter. Summing all subsystems gives a dry mass near 220 kg
+(Table T9), from which the drag area sets a ballistic coefficient that
+feeds a natural lifetime of roughly twelve to twenty-two years depending
+on solar activity, failing the five-year rule and mandating the 132 m/s
+de-orbit burn of Table T7. The coupled thermal-throttle simulation
+returns the delivered useful compute (about two-thirds of a petaflop for
+this low-power, lightly throttled case), the ground-link model returns
+tens of terabytes per day of downlink at ninety-six-percent
+availability, and the finance model returns a levelized cost of roughly
+one hundred dollars per useful petaflop-hour (Table T11). Aggregating
+over the eighty-one-satellite cluster gives the fleet totals of Table
+T12. Every one of these numbers is produced by the open code and is
+reproduced by the validation suite.
+
+\chapter{27. Detailed results tables}\label{detailed-results-tables}
+
+The following tables report the model output across the relevant input
+ranges. They are generated directly by the model
+(\passthrough{\lstinline!report/gen\_tables.py!}) so that every value is
+consistent with the equations of Parts II and III.
+
+\textbf{Table T1, Orbital parameters versus altitude.} Speed, period,
+critical beta angle, and natural lifetime. Note how steeply lifetime
+rises with altitude, and that 650 km already fails the five-year rule at
+moderate solar activity.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Alt (km)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+v (km/s)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Period (min)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+β* (deg)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Lifetime, moderate (yr)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+400 & 7.67 & 92.4 & 70.2 & 5 \\
+500 & 7.62 & 94.5 & 68.0 & 7 \\
+600 & 7.56 & 96.5 & 66.1 & 13 \\
+650 & 7.53 & 97.6 & 65.2 & 20 \\
+700 & 7.51 & 98.6 & 64.3 & 32 \\
+800 & 7.46 & 100.7 & 62.7 & 97 \\
+1000 & 7.35 & 105.0 & 59.8 & 309 \\
+\end{longtable}
+}
+
+\textbf{Table T2, Radiator area (m²) versus heat load and operating
+temperature} (double-sided, ε = 0.90, 12 \% parasitic). The linearity in
+load and the benefit of running hot are both visible.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Heat load & 20 C & 40 C & 60 C \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 kW & 2 & 1 & 1 \\
+10 kW & 15 & 12 & 9 \\
+100 kW & 151 & 116 & 90 \\
+1 MW & 1,508 & 1,158 & 904 \\
+\end{longtable}
+}
+
+\textbf{Table T3, Chip-interface temperature rise and passive
+feasibility} (R\_th = 0.30 K/W). The interface wall is stark: every
+GPU-class part exceeds the entire 125 C budget across the chain alone.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Chip & TDP (W) & Interface ΔT (C) & Passive feasible (\textless125)? \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+TPU v6e & 200 & 60 & yes \\
+TPU & 300 & 90 & yes \\
+H100 & 700 & 210 & NO \\
+B200 & 1000 & 300 & NO \\
+GB200 & 1200 & 360 & NO \\
+\end{longtable}
+}
+
+\textbf{Table T4, Cumulative total ionizing dose, rad(Si), versus
+aluminium shielding.} The 10-mm, five-year value of \textasciitilde1
+krad sits comfortably below the 2-krad first-irregularity threshold.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Al (mm) & 5-yr (rad) & 10-yr (rad) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 81,169 & 162,339 \\
+3 & 25,479 & 50,959 \\
+5 & 8,307 & 16,613 \\
+10 & 1,054 & 2,109 \\
+15 & 671 & 1,343 \\
+20 & 651 & 1,302 \\
+\end{longtable}
+}
+
+\textbf{Table T5, Catastrophic (\textgreater1 cm) debris probability
+(\%) for the 81-satellite cluster.} The low/mid/high columns span the
+ORDEM/MASTER flux band.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Years & low flux & mid & high \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 1.2 & 3.6 & 11.4 \\
+2 & 2.4 & 7.0 & 21.6 \\
+3 & 3.6 & 10.4 & 30.5 \\
+5 & 5.9 & 16.7 & 45.5 \\
+7 & 8.2 & 22.5 & 57.3 \\
+10 & 11.4 & 30.5 & 70.3 \\
+\end{longtable}
+}
+
+\textbf{Table T6, In-cluster cascade neighbor-hit probability (\%)
+versus formation spacing.} The inverse-square fall-off is the formation
+paradox quantified.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Spacing (m) & P\_hit (\%) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+100 & 18.1 \\
+150 & 8.5 \\
+200 & 4.9 \\
+300 & 2.2 \\
+500 & 0.8 \\
+1000 & 0.2 \\
+\end{longtable}
+}
+
+\textbf{Table T7, Per-satellite Δv budget and propellant.} De-orbit
+dominates; electric propulsion is dramatically lighter.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Δv component & Value (m/s) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Drag make-up & 14.7 \\
+Formation keeping & 8.0 \\
+Collision avoidance & 5.0 \\
+Controlled de-orbit & 131.6 \\
+Margin (20 \%) & 31.9 \\
+\textbf{Total} & \textbf{191.2} \\
+\end{longtable}
+}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Propulsion & Isp (s) & Propellant for total Δv (kg) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Cold gas & 70 & 120 \\
+Hydrazine & 220 & 35 \\
+Electric & 1500 & 5 \\
+\end{longtable}
+}
+
+\textbf{Table T8, Optical link budget versus range} (D = 0.1 m, λ = 1.55
+µm). The +20 dB per decade of range, against a fixed \textasciitilde106
+dB telescope gain, is why the cluster must be tight.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Range & Telescope gain (dB) & Free-space loss (dB) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+150 m & 106 & 182 \\
+1 km & 106 & 198 \\
+100 km & 106 & 238 \\
+1000 km & 106 & 258 \\
+10000 km & 106 & 278 \\
+\end{longtable}
+}
+
+\textbf{Table T9, Reference satellite mass budget} (four-chip bus,
+closed by the integrated model).
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Subsystem & Mass (kg) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Shielding & 54 \\
+Avionics & 45 \\
+ADCS & 30 \\
+Harness & 28 \\
+Structure & 27 \\
+Power & 18 \\
+Propulsion & 13 \\
+Payload (chips) & 12 \\
+Thermal & 6 \\
+\textbf{Dry total} & \textbf{220} \\
+Launch mass & 233 \\
+\end{longtable}
+}
+
+\textbf{Table T10, Reference power budget.} Non-compute overhead
+dominates a small bus, giving an electrical PUE near 1.6; efficiency
+improves only at many-chip scale.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Consumer & Power (W) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Compute & 800 \\
+Avionics & 150 \\
+ADCS & 80 \\
+Communications & 50 \\
+Thermal control & 20 \\
+Contingency & 165 \\
+\textbf{Total} & \textbf{1,265} \\
+Electrical PUE & 1.58 \\
+\end{longtable}
+}
+
+\textbf{Table T11, Reference design-point summary} (all model outputs).
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Quantity & Value \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Compute power (W) & 800 \\
+Total power (W) & 1,265 \\
+Effective PUE & 1.84 \\
+Radiator area (m²) & 1.1 \\
+5-yr dose behind 10 mm (rad) & 1,054 \\
+Dose margin (vs 2 krad) & 1.9× \\
+Natural lifetime (yr) & 11.5 \\
+Debris P (5 yr) & 0.17 \\
+Delivered (PFLOPS) & 0.67 \\
+Throttle loss & 14 \% \\
+Ground downlink (TB/day) & 26.9 \\
+LCOE (USD/PFLOP-hr) & 108 \\
+\end{longtable}
+}
+
+\textbf{Table T12, Constellation summary (81 satellites).}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Quantity & Value \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Fleet compute (PFLOPS) & 54.1 \\
+Fleet power (MW) & 0.10 \\
+CAPEX (USD) & 146,621,400 \\
+10-yr TCO (USD) & 317,621,400 \\
+Capacity availability & 0.89 \\
+\end{longtable}
+}
+
+\chapter{28. Constellation design and relative
+dynamics}\label{constellation-design-and-relative-dynamics}
+
+The eighty-one satellites do not fly in a rigid grid; they orbit in a
+loose formation governed by the linearized relative equations of motion.
+About a circular reference orbit of mean motion \(n\), the
+Clohessy-Wiltshire (Hill) equations describe a satellite's position
+relative to a co-orbiting frame:
+
+\begin{equation}
+\ddot x - 3 n^2 x - 2 n \dot y = a_x, \quad \ddot y + 2 n \dot x = a_y, \quad \ddot z + n^2 z = a_z. \tag{28.1}
+\end{equation}
+
+In the absence of forcing, the radial (\(x\)) and cross-track (\(z\))
+modes oscillate at the orbital rate \(n\), while the along-track (\(y\))
+motion contains a secular term: any small difference in energy or any
+differential acceleration produces a drift that grows linearly in time,
+and a differential along-track acceleration produces a drift that grows
+as \(t^2\). This is the central challenge of the formation: because the
+satellites have slightly different ballistic coefficients, differential
+atmospheric drag, itself varying by a factor of one hundred over the
+solar cycle, drives an along-track drift of order
+\(1.5\, \delta a_{\mathrm{drag}}\, t^2\). With a 150-m spacing budget,
+even a small differential acceleration consumes the margin within hours
+to days, so the formation requires active relative control. The
+propellant for this control is modest (Table T7), but the sensing and
+autonomy are not: maintaining a sub-200-m formation while remaining able
+to perform a collision-avoidance maneuver, without that maneuver
+endangering a neighbor, is an unsolved control problem at this density,
+and it is the operational face of the formation paradox.
+
+\chapter{29. Comparison with terrestrial data
+centers}\label{comparison-with-terrestrial-data-centers}
+
+It is instructive to place the orbital architecture beside a terrestrial
+hyperscale facility on the metrics that matter (Table T13). Orbit wins
+decisively on cooling overhead and water, and it offers a continuous
+solar resource and freedom from land and grid constraints. It loses
+decisively on serviceability (no repair), on the cost and risk of
+launch, on radiation-induced throughput loss, and on the debris and
+disposal obligations that have no terrestrial analogue. The reading is
+that the two are not substitutes today: orbit is competitive only for
+workloads that genuinely value what it uniquely provides, and only once
+launch economics enter the parity band of Chapter 22.
+
+\textbf{Table T13, Orbital versus terrestrial data center
+(qualitative).}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Dimension
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Terrestrial hyperscale
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Orbital (this study)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Cooling & chillers/water, PUE \textasciitilde1.1-1.6 & radiative to 2.7
+K; no water \\
+Water use & millions of liters/yr & none \\
+Power & grid, intermittent renewables & continuous solar (dawn-dusk) \\
+Land & large footprint & none \\
+Serviceability & hot-swap, on-site repair & none (no repair) \\
+Radiation & negligible & \textasciitilde10-20 \% throughput tax \\
+Disposal & decommission in place & mandatory propulsive de-orbit \\
+Debris risk & none & binding constraint \\
+Launch / deployment & trucking & USD/kg launch, dominant early cost \\
+Latency (long-haul) & fiber (n=1.47) & vacuum mesh wins beyond
+\textasciitilde3,000 km \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{Appendices and Back Matter}\label{appendices-and-back-matter}
+
+\chapter{References}\label{references}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Agüera y Arcas et al.~(2025). \emph{Towards a future space-based,
+  highly scalable AI infrastructure system design.} arXiv:2511.19468.
+\item
+  Google. \emph{Project Suncatcher.}
+  blog.google/innovation-and-ai/technology/research/google-project-suncatcher/
+\item
+  Planet Labs. \emph{Platform for Project Suncatcher.} planet.com/pulse/
+\item
+  NVIDIA. \emph{Starcloud, H100 in orbit.}
+  blogs.nvidia.com/blog/starcloud/
+\item
+  Axiom Space. \emph{Orbital Data Center nodes.} axiomspace.com
+\item
+  Liang et al.~(2022). \emph{Link Budget Analysis for Free-Space Optical
+  Satellite Networks.} arXiv:2204.13177.
+\item
+  FCC. \emph{Five-Year Rule (FCC 22-74).} fcc.gov ; Federal Register
+  2024-17093.
+\item
+  NASA. \emph{ORDEM 3.2 User Guide.} NTRS 20230014989.
+\item
+  ESA. \emph{MASTER / DRAMA debris tools.}
+  esa.int/Space\_Safety/Space\_Debris/
+\item
+  SPENVIS. \emph{SHIELDOSE.} spenvis.oma.be
+\item
+  Picone et al.~(2002). \emph{NRLMSISE-00 empirical atmosphere model.}
+  JGR, doi:10.1029/2002JA009430.
+\item
+  NVIDIA H100 / B200 / GB200 datasheets; Google Cloud TPU v6e
+  documentation; Azur/Spectrolab solar-cell datasheets; NASA ISS Active
+  Thermal Control System overview.
+\item
+  NASA Systems Engineering Handbook, NASA/SP-2016-6105.
+\item
+  AIAA S-120-2006, Mass Properties Control for Space Systems.
+\item
+  NASA Goddard Integrated Design Center, concurrent-design margin
+  practice (NTRS 20120013284).
+\end{enumerate}
+
+\chapter{Appendix A, Master list of governing
+equations}\label{appendix-a-master-list-of-governing-equations}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\#
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Quantity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Equation
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+4.1 & Circular speed & \(v = \sqrt{\mu/a}\) \\
+4.2 & Period / mean motion & \(T = 2\pi\sqrt{a^3/\mu}\),
+\(n=\sqrt{\mu/a^3}\) \\
+4.3 & Specific energy & \(\mathcal{E} = -\mu/2a\) \\
+5.2 & SSO inclination &
+\(\cos i = -2\dot\Omega_{\mathrm{sun}} a^2/(3 n J_2 R_E^2)\) \\
+6.1 & Critical beta & \(\beta^{*} = \arcsin(R_E/(R_E+h))\) \\
+7.3 & Orbital decay & \(\dot a = -C_D (A/m)\,\rho\,\sqrt{\mu a}\) \\
+8.1 & Dose-depth & \(\dot D(x) = D_0 e^{-x/\lambda} + D_\infty\) \\
+9.1 & Debris risk & \(P = 1 - e^{-\Phi A N t}\) \\
+10.2 & Stefan-Boltzmann & \(E_b = \sigma T^4\) \\
+10.3 & Radiator area &
+\(A_{\mathrm{rad}} = Q/[\varepsilon\sigma T^4 n_s(1-f_p)]\) \\
+11.1 & Array power &
+\(P = S_0 A\,\eta\,\kappa\,\eta_{\mathrm{path}}\) \\
+12.1 & Panel frequency & \(f_1 = (\beta/2\pi)\sqrt{D/(\rho_A a^4)}\) \\
+13.1 & Gravity-gradient torque &
+\(\tau_{\mathrm{gg}} = \tfrac{3}{2}\, n^2\, \Delta I\, \sin 2\theta\) \\
+14.1 & Telescope gain / FSPL & \(G=(\pi D/\lambda)^2\),
+\(L_{\mathrm{fs}}=(4\pi R/\lambda)^2\) \\
+15.1 & De-orbit Δv & \(\Delta v = v_{c1}(1-\sqrt{2 r_2/(r_1+r_2)})\) \\
+15.2 & Propellant &
+\(m_p = m_{\mathrm{dry}}(e^{\Delta v/I_{sp}g_0}-1)\) \\
+16.1 & Reliability & \(R(t) = e^{-t/\mathrm{MTBF}}\) \\
+16.2 & k-of-n &
+\(R_{\mathrm{sys}}=\sum_{i=k}^n \binom{n}{i}p^i(1-p)^{n-i}\) \\
+17.1 & Delivered compute & \(n P_{\mathrm{peak}}\,\mathrm{MFU}\,a_r\) \\
+21.1 & LCOE &
+\((\mathrm{CRF}\cdot\mathrm{CAPEX}+\mathrm{OPEX})/\text{useful PFLOP-hr}\) \\
+\end{longtable}
+}
+
+\chapter{Appendix B, Nomenclature}\label{appendix-b-nomenclature}
+
+See the Nomenclature table in the front matter; every symbol used in the
+equations above is defined there with its units.
+
+\chapter{Appendix C, Data sources and
+confidence}\label{appendix-c-data-sources-and-confidence}
+
+Every model input is tabulated with its value, source, and a confidence
+flag (official / model / estimate) in the companion repository's
+\passthrough{\lstinline!systems-model/docs/SOURCES.md!}. The dominant
+caveats are repeated here: the chip power is undisclosed and treated as
+an estimate; the solar-cycle density swing of roughly one hundred is the
+largest physical uncertainty and is shown as a band; and the
+1-mm-to-1-cm debris flux is the least model-validated quantity.
+
+\chapter{Appendix D, Reproduction and
+code}\label{appendix-d-reproduction-and-code}
+
+The entire analysis is open. From the repository,
+
+\begin{lstlisting}
+git clone https://github.com/Samarjithbiswas/space-based-ai-datacenter
+cd space-based-ai-datacenter && pip install numpy matplotlib pytest
+python reproduce_all.py        # both models, all figures, equation images
+python report/predictions.py   # the launch-cost-parity Monte-Carlo
+\end{lstlisting}
+
+The systems model comprises seventeen subsystem modules plus an
+integration layer and a Monte-Carlo engine, validated by 108 automated
+tests. Each module's docstring states its governing equation; the
+mathematical derivations in this volume are the authoritative reference.
+Independent reproduction, extension, and correction are welcome through
+the repository's issues and pull requests.
+
+For completeness, the core physics functions are listed below; each is a
+direct, pure implementation of the corresponding equation in this
+volume.
+
+\textbf{Orbital decay, Eq. (7.3).}
+
+\begin{lstlisting}[language=Python]
+def lifetime_years(alt_km, area_to_mass, scenario="mod", cd=2.2):
+    a, t, yr, dt = R_E + alt_km*1e3, 0.0, 3.15576e7, 3600*6
+    while a > R_E + 120e3 and t < 2000*yr:
+        h = (a - R_E)/1e3
+        a += -cd*area_to_mass*density(h, scenario)*np.sqrt(MU*a)*dt; t += dt
+        dt = 3600*48 if (a-R_E) > 500e3 else (3600*12 if (a-R_E) > 300e3 else 3600*2)
+    return t/yr
+\end{lstlisting}
+
+\textbf{Radiator sizing, Eq. (10.3).}
+
+\begin{lstlisting}[language=Python]
+def radiator_area(heat_W, temp_C, emissivity=0.90, sides=2, parasitic=0.12):
+    T = temp_C + 273.15
+    return heat_W / (emissivity * SIGMA * T**4 * sides * (1 - parasitic))
+\end{lstlisting}
+
+\textbf{Debris collision probability, Eq. (9.1).}
+
+\begin{lstlisting}[language=Python]
+def collision_probability(cross_section_m2, n_sats, years, size="1cm", band="mid"):
+    flux = debris_flux(size, band)
+    return 1 - np.exp(-flux * cross_section_m2 * n_sats * years)
+\end{lstlisting}
+
+\textbf{Controlled de-orbit Δv, Eq. (15.1).}
+
+\begin{lstlisting}[language=Python]
+def deorbit_delta_v(alt_km, perigee_km=180.0):
+    r1, r2 = R_E + alt_km*1e3, R_E + perigee_km*1e3
+    v1 = np.sqrt(MU / r1)
+    return v1 * (1 - np.sqrt(2*r2 / (r1 + r2)))
+\end{lstlisting}
+
+\textbf{Coupled thermal-throttle workload (excerpt), Chapter 17.}
+
+\begin{lstlisting}[language=Python]
+def throttle_factor(T_j, T_throttle=110.0, T_max=125.0):
+    return float(np.clip((T_max - T_j) / (T_max - T_throttle), 0.0, 1.0))
+# in the time loop: T_j = T_rad_C + P_full*r_th; u_eff = u_cmd * throttle_factor(T_j)
+# C dT/dt = Q_in - eps*sigma*A_eff*T^4   (forward Euler over one orbit)
+\end{lstlisting}
+
+\textbf{Levelized cost of compute, Eq. (21.1).}
+
+\begin{lstlisting}[language=Python]
+def lcoe_per_pflop_hr(capex, opex_yr, delivered_pflops, rate=0.10, life=5, util=0.8):
+    crf = rate*(1+rate)**life / ((1+rate)**life - 1)
+    return (crf*capex + opex_yr) / (delivered_pflops * 8766.0 * util)
+\end{lstlisting}
+
+\chapter{Appendix E, Extended
+derivations}\label{appendix-e-extended-derivations}
+
+This appendix gives the full step-by-step derivations of the results
+quoted in compressed form in the main text, so that the volume is
+mathematically self-contained.
+
+\section{E.1 Stefan-Boltzmann law from Planck's
+law}\label{e.1-stefan-boltzmann-law-from-plancks-law}
+
+Starting from the spectral radiance (10.1), the hemispherical emissive
+power is the integral of the radiance over the emitting hemisphere and
+all wavelengths. The angular integral over the hemisphere, weighted by
+the projection factor \(\cos\theta\), is
+
+\[\int_{\mathrm{hemi}} \cos\theta\, d\Omega = \int_0^{2\pi}\!\!\int_0^{\pi/2} \cos\theta\,\sin\theta\, d\theta\, d\phi = 2\pi\cdot\tfrac{1}{2} = \pi.\]
+
+Hence \(E_b(T) = \pi\int_0^\infty B(\lambda, T)\, d\lambda\).
+Substituting Planck's law and changing variables to
+\(u = h_P c/(\lambda k_B T)\), so that \(\lambda = h_P c/(u k_B T)\) and
+\(d\lambda = -h_P c/(u^2 k_B T)\, du\), the wavelength integral becomes
+
+\[E_b(T) = \frac{2\pi k_B^4 T^4}{h_P^3 c^2}\int_0^\infty \frac{u^3}{e^u - 1}\, du.\]
+
+The remaining integral is a standard result,
+\(\int_0^\infty u^3/(e^u-1)\, du = \pi^4/15\), giving
+
+\[E_b(T) = \frac{2\pi^5 k_B^4}{15\, h_P^3 c^2}\, T^4 \equiv \sigma T^4,\]
+
+which both proves the fourth-power law and yields the Stefan-Boltzmann
+constant in terms of fundamental constants. This is the foundation of
+every radiator result in Chapter 10.
+
+\section{E.2 The Poisson impact model from the binomial
+limit}\label{e.2-the-poisson-impact-model-from-the-binomial-limit}
+
+Divide the mission duration \(t\) into \(n\) equal intervals
+\(\Delta t = t/n\). In each interval the probability of one impact is
+\(p = \Phi A \Delta t\) (flux times cross-section times time), and
+impacts in different intervals are independent. The number of impacts
+\(K\) is therefore binomial, \(P(K=k) = \binom{n}{k} p^k (1-p)^{n-k}\).
+Hold the expected count \(\Lambda = n p = \Phi A t\) fixed and let
+\(n\to\infty\) (so \(p\to 0\)). Then
+\(\binom{n}{k} p^k \to \Lambda^k/k!\) and
+\((1-p)^{n-k} \to e^{-\Lambda}\), so
+
+\[P(K=k) = \frac{\Lambda^k e^{-\Lambda}}{k!}.\]
+
+The probability of at least one impact is
+\(P(K\ge 1) = 1 - P(K=0) = 1 - e^{-\Lambda}\). For \(N\) independent
+satellites the expected count scales to \(\Lambda = \Phi A N t\), giving
+equation (9.1). This is exact in the limit of many small independent
+intervals, the appropriate regime for rare debris impacts.
+
+\section{E.3 The Hohmann de-orbit impulse from
+vis-viva}\label{e.3-the-hohmann-de-orbit-impulse-from-vis-viva}
+
+The vis-viva relation for any Keplerian orbit is
+\(v^2 = \mu(2/r - 1/a)\), obtained from conservation of the specific
+energy \(\mathcal{E} = v^2/2 - \mu/r = -\mu/2a\). Consider a transfer
+ellipse whose apogee touches the circular orbit at \(r_1\) and whose
+perigee is lowered to \(r_2\); its semi-major axis is
+\(a_t = (r_1 + r_2)/2\). The speed required at the apogee of this
+transfer is
+
+\[v_{\mathrm{apo}} = \sqrt{\mu\left(\frac{2}{r_1} - \frac{1}{a_t}\right)}
+= \sqrt{\mu\left(\frac{2}{r_1} - \frac{2}{r_1 + r_2}\right)}
+= \sqrt{\frac{\mu}{r_1}}\sqrt{\frac{2 r_2}{r_1 + r_2}}.\]
+
+The satellite is initially on the circular orbit at speed
+\(v_{c1} = \sqrt{\mu/r_1}\), so the retrograde impulse needed is the
+difference,
+
+\[\Delta v_{\mathrm{deorbit}} = v_{c1} - v_{\mathrm{apo}} = v_{c1}\left(1 - \sqrt{\frac{2 r_2}{r_1 + r_2}}\right),\]
+
+which is equation (15.1). Lowering the perigee into the dense atmosphere
+(here to 180 km) guarantees re-entry within one or two orbits,
+satisfying the disposal requirement.
+
+\section{E.4 The Clohessy-Wiltshire relative
+equations}\label{e.4-the-clohessy-wiltshire-relative-equations}
+
+Let a chief satellite move on a circular orbit of radius \(r_0\) and
+mean motion \(n = \sqrt{\mu/r_0^3}\), and let a deputy be displaced by a
+small vector \((x, y, z)\) in the rotating Hill frame (radial,
+along-track, cross-track). Writing Newton's equation for the deputy,
+expanding the gravity gradient to first order in the small displacement,
+and accounting for the frame rotation (Coriolis and centrifugal terms)
+yields the linearized system
+
+\[\ddot x - 2 n \dot y - 3 n^2 x = a_x, \quad \ddot y + 2 n \dot x = a_y, \quad \ddot z + n^2 z = a_z.\]
+
+The cross-track equation is a simple harmonic oscillator at frequency
+\(n\). The in-plane equations couple radial and along-track motion;
+their unforced solution contains bounded oscillations at \(n\) plus a
+secular along-track drift proportional to any initial energy mismatch.
+Crucially, a constant differential along-track acceleration \(a_y\)
+(such as differential drag) integrates twice into an along-track
+displacement that grows as \(\tfrac{1}{2} a_y t^2\) to leading order,
+augmented by the Coriolis coupling to a coefficient of order
+\(\tfrac{3}{2}\), which is the quadratic-in-time drift discussed in
+Chapter 28 and the reason the formation needs active relative control.
+
+\section{E.5 The rocket equation}\label{e.5-the-rocket-equation}
+
+A rocket of instantaneous mass \(m\) expelling propellant at exhaust
+speed \(v_e\) relative to the vehicle changes its momentum according to
+\(m\, dv = -v_e\, dm\) (the mass decreases as propellant is ejected,
+hence the minus sign). Separating variables and integrating from the
+initial mass \(m_0\) to the final (dry) mass \(m_f\),
+
+\[\int_0^{\Delta v} dv = -v_e \int_{m_0}^{m_f} \frac{dm}{m} \;\Longrightarrow\; \Delta v = v_e \ln\frac{m_0}{m_f}.\]
+
+With \(v_e = I_{sp} g_0\) and \(m_f = m_{\mathrm{dry}}\), the propellant
+mass \(m_p = m_0 - m_f\) follows by inverting:
+
+\[m_p = m_{\mathrm{dry}}\left(e^{\Delta v/(I_{sp} g_0)} - 1\right),\]
+
+which is equation (15.2). The exponential dependence is why a high
+specific impulse (electric propulsion) so dramatically reduces
+propellant mass for a given Δv.
+
+\section{E.6 k-of-n redundancy}\label{e.6-k-of-n-redundancy}
+
+If \(n\) identical units each survive independently with probability
+\(p\), the number that survive is binomial. The system requires at least
+\(k\) survivors, so its reliability is the upper tail of the binomial
+distribution,
+
+\[R_{\mathrm{sys}} = \sum_{i=k}^{n} \binom{n}{i}\, p^i (1-p)^{n-i}.\]
+
+Two special cases are familiar: a parallel (one-of-\(n\)) system has
+\(R = 1 - (1-p)^n\), and a series (\(n\)-of-\(n\)) system has
+\(R = p^n\). This expression sizes both the spare accelerators within a
+satellite and the over-provisioned satellites within a cluster (Chapter
+16).
+
+\section{E.7 Newton-Raphson for the radiator
+quartic}\label{e.7-newton-raphson-for-the-radiator-quartic}
+
+To find the radiator temperature at fixed area, one solves
+\(f(T) = Q - \varepsilon\sigma A T^4 = 0\). Newton's method linearizes
+\(f\) about the current iterate:
+\(f(T + \delta) \approx f(T) + f'(T)\delta\), set to zero gives
+\(\delta = -f(T)/f'(T)\), hence
+
+\[T_{k+1} = T_k - \frac{f(T_k)}{f'(T_k)} = T_k + \frac{Q - \varepsilon\sigma A T_k^4}{4\,\varepsilon\sigma A T_k^3}.\]
+
+Because \(f\) is smooth and strictly decreasing for \(T>0\) (its
+derivative \(-4\varepsilon\sigma A T^3\) never vanishes there), the
+iteration converges quadratically from any reasonable start; in
+practice, from \(T_0 = 300\) K it reaches a tolerance of \(0.01\) K in
+two to four steps.
+
+\section{E.8 The capital-recovery
+factor}\label{e.8-the-capital-recovery-factor}
+
+The capital-recovery factor converts a present capital sum \(C\) into an
+equivalent stream of \(n\) equal annual payments \(X\) at discount rate
+\(r\). The present value of the payment stream is a finite geometric
+series,
+
+\[C = \sum_{t=1}^{n} \frac{X}{(1+r)^t} = X\,\frac{1 - (1+r)^{-n}}{r}.\]
+
+Solving for the annual payment per unit capital gives
+
+\[\mathrm{CRF} = \frac{X}{C} = \frac{r(1+r)^n}{(1+r)^n - 1},\]
+
+used in the levelized-cost-of-compute formula (21.1) to annualize the
+satellite hardware and launch cost over its operational life.
+
+\emph{End of report.}
+
+\backmatter
+\end{document}

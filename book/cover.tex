@@ -1,0 +1,38 @@
+% ---------------------------------------------------------------------
+% Cover page, matched to the website book-panel card (dark navy panel,
+% edition tag, large title with a teal accent word, author line).
+% Injected by pandoc as include-before-body.
+% ---------------------------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\vspace*{1.2cm}
+
+\begin{tcolorbox}[colback=spaceNavy, colframe=spaceNavy, arc=8pt,
+  boxrule=0pt, left=26pt, right=26pt, top=30pt, bottom=30pt,
+  enhanced, borderline south={4pt}{0pt}{brandTeal}]
+\raggedright
+{\sffamily\bfseries\footnotesize\color{white!75!brandTeal}%
+ \fcolorbox{white!25!spaceNavy}{white!12!spaceNavy}{\strut~EDITION I\,\textbullet\,ENGINEERING STUDY\,\textbullet\,2026~}}\\[26pt]
+{\sffamily\bfseries\fontsize{34}{38}\selectfont\color{white}%
+ Space-Based\\ AI Data Centers}\\[10pt]
+{\sffamily\itshape\Large\color{brandTeal!75!white}%
+ Physics, Mathematics, Simulation, and Economics\\ of an Orbital Compute Constellation}\\[30pt]
+{\sffamily\normalsize\color{white!80!spaceNavy}%
+ A primary-source engineering study of the orbital data-center concept,\\
+ from orbital mechanics and thermal control to debris survivability,\\
+ launch economics, and a fully open simulation model.}
+\end{tcolorbox}
+
+\vfill
+
+{\sffamily\Large\bfseries\color{brandSlate} Samarjith Biswas, PhD}\\[4pt]
+{\sffamily\normalsize\color{brandGray} Research Scientist III}\\[18pt]
+{\sffamily\small\color{brandGray}%
+ Reference architecture: Google Project Suncatcher (arXiv:2511.19468)\\[2pt]
+ Open repository: \texttt{github.com/Samarjithbiswas/space-based-ai-datacenter}\\[2pt]
+ Open access \textbullet{} MIT (code) and CC-BY (text)}
+
+\vspace*{1.0cm}
+\end{titlepage}
+\cleardoublepage

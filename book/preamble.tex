@@ -1,0 +1,107 @@
+% =====================================================================
+% House style for the samarjithbiswas.com handbook series.
+% Matched to the "On-Device LLMs for Engineering Software" toolkit:
+% IBM Plex Sans body, teal/slate palette, titlesec headings, fancyhdr,
+% tcolorbox callouts, a dark code-listing style. Injected by pandoc as
+% header-includes, so amsmath / graphicx / xcolor / hyperref / longtable
+% are already loaded by the pandoc book template; we only add styling.
+% =====================================================================
+\usepackage[T1]{fontenc}
+\usepackage{plex-sans}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[scaled=0.90]{plex-mono}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+
+% --- Brand palette (teal series + a navy accent for the space title) ---
+\definecolor{brandTeal}{HTML}{0d9488}
+\definecolor{brandTealDk}{HTML}{0f766e}
+\definecolor{brandPurple}{HTML}{7c3aed}
+\definecolor{brandAmber}{HTML}{d97706}
+\definecolor{brandSlate}{HTML}{0f172a}
+\definecolor{brandGray}{HTML}{475569}
+\definecolor{brandLight}{HTML}{f1f5f9}
+\definecolor{spaceNavy}{HTML}{16243a}
+\definecolor{codeBg}{HTML}{0f172a}
+\definecolor{codeFg}{HTML}{e2e8f0}
+\definecolor{calloutBlue}{HTML}{dbeafe}
+\definecolor{calloutAmber}{HTML}{fef3c7}
+\definecolor{calloutGreen}{HTML}{dcfce7}
+
+% --- Manual chapter/section numbers live in the headings (e.g. "3A.",
+% "4.1"); suppress LaTeX's automatic numbering so nothing is doubled.
+% Parts stay numbered (Part I .. Part VII). ---
+\setcounter{secnumdepth}{-1}
+\setcounter{tocdepth}{1}
+
+% --- Hyperlink colours (hyperref already loaded by pandoc) ---
+\hypersetup{colorlinks=true, linkcolor=brandTealDk, citecolor=brandTealDk,
+            urlcolor=brandTeal, linktoc=all,
+            pdftitle={Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics},
+            pdfauthor={Samarjith Biswas, PhD}}
+
+% --- Headings ---
+\titleformat{\chapter}[display]
+  {\sffamily}
+  {\Large\bfseries\color{brandTeal}\MakeUppercase{\chaptertitlename}}
+  {0pt}
+  {\Huge\bfseries\color{brandSlate}}
+  [\vskip4pt{\color{brandTeal}\titlerule[1.4pt]}]
+\titleformat{\section}
+  {\Large\bfseries\color{brandTealDk}}{}{0em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{brandSlate}}{}{0em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{brandGray}}{}{0em}{}
+\titlespacing*{\chapter}{0pt}{6pt}{18pt}
+
+% --- Part pages ---
+\titleformat{\part}[display]
+  {\sffamily\centering}
+  {\Large\bfseries\color{brandTeal}\MakeUppercase{\partname~\thepart}}
+  {10pt}
+  {\Huge\bfseries\color{brandSlate}}
+
+% --- Running header / footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{brandGray}Space-Based AI Data Centers}
+\fancyhead[R]{\small\color{brandGray}\thepage}
+\fancyfoot[C]{\small\color{brandGray}An Engineering Study \textbullet{} Samarjith Biswas \textbullet{} 2026}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{brandTeal}\hrule height 1pt}}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Code listings (pandoc passes fenced code through listings) ---
+\lstset{
+  basicstyle=\ttfamily\footnotesize\color{codeFg},
+  backgroundcolor=\color{codeBg},
+  keywordstyle=\color{brandTeal!80!white}\bfseries,
+  stringstyle=\color{brandAmber!85!white},
+  commentstyle=\color{brandGray!85!white}\itshape,
+  numberstyle=\tiny\color{brandGray}, numbers=left, numbersep=8pt,
+  showstringspaces=false, breaklines=true, breakatwhitespace=true,
+  frame=none, framesep=8pt, xleftmargin=12pt, xrightmargin=8pt,
+  aboveskip=10pt, belowskip=10pt,
+  morekeywords={def,return,import,from,as,for,while,if,elif,else,class,with,lambda,True,False,None,and,or,not,in,np,self},
+}
+
+% --- Callout boxes (available for future hand-authored notes) ---
+\newtcolorbox{insightbox}[1][]{colback=calloutBlue, colframe=blue!50!brandSlate,
+  boxrule=0pt, leftrule=4pt, arc=2pt, fonttitle=\bfseries, title={Key insight},
+  coltitle=blue!60!brandSlate, top=8pt, bottom=8pt, breakable, #1}
+\newtcolorbox{tipbox}[1][]{colback=calloutGreen, colframe=brandTeal,
+  boxrule=0pt, leftrule=4pt, arc=2pt, fonttitle=\bfseries, title={Result},
+  coltitle=brandTealDk, top=8pt, bottom=8pt, breakable, #1}
+\newtcolorbox{warnbox}[1][]{colback=calloutAmber, colframe=brandAmber,
+  boxrule=0pt, leftrule=4pt, arc=2pt, fonttitle=\bfseries, title={Caveat},
+  coltitle=brandAmber, top=8pt, bottom=8pt, breakable, #1}
+
+% --- Figures sit centred and never overflow the text block ---
+\setkeys{Gin}{width=0.86\linewidth, keepaspectratio}
+\captionsetup{font=small, labelfont={bf,color=brandTealDk}}
