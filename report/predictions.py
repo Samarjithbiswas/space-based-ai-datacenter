@@ -80,13 +80,13 @@ def main():
     a.plot(YEARS, md, color=COOL, lw=2.6, label="median path")
     a.axhline(PARITY, color=BAD, ls="--", lw=1.4); a.text(2026.2, PARITY*1.12, "$200/kg parity", color=BAD, fontsize=8.5)
     a.set_yscale("log"); a.set_xlabel("Year"); a.set_ylabel("LEO launch price (USD/kg, log)")
-    a.set_title("(a) Launch-cost learning curve (Monte-Carlo)"); a.legend(fontsize=8.3, loc="upper right")
+    a.set_title("(a)"); a.legend(fontsize=8.3, loc="upper right")
     # (b) parity-year histogram
     b.hist(valid, bins=np.arange(2030, 2051)-0.5, color=ACCENT, alpha=0.85)
     for p, c in [(5, GOOD), (50, NAVY), (95, BAD)]:
         b.axvline(pct[p], color=c, ls="--", lw=1.3)
     b.set_xlabel("Year LEO launch reaches $200/kg"); b.set_ylabel("Monte-Carlo count")
-    b.set_title(f"(b) Cost-parity year: P50={pct[50]:.0f} (P5 {pct[5]:.0f}, P95 {pct[95]:.0f})")
+    b.set_title("(b)")
     # figure number and source line removed: they live in the document caption
     fig.tight_layout(); fig.savefig(OUT / "fig_cost_parity.png"); plt.close(fig)
 
