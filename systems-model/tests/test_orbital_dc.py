@@ -9,7 +9,7 @@ import math
 import pytest
 from orbital_dc import (orbit, thermal, power, adcs, comms, radiation, debris,
                         propulsion, reliability, compute, economics, environment,
-                        groundlink, structures, workload, finance, solvers)
+                        groundlink, structures, workload, finance, solvers, margins)
 from orbital_dc.system import DesignPoint, constellation
 
 # ----------------------------------------------------------------- worked examples
@@ -282,3 +282,19 @@ def test_solver_reference_mission():
     assert sol["radiator_temperature_C"] == pytest.approx(21.4, abs=0.6)
     assert sol["deorbit_dv_mps"] == pytest.approx(131.6, abs=0.5)
     assert sol["link_range_3dB_km"] == pytest.approx(5419, abs=5)
+
+# ----------------------------------------------------------------- design margins
+def test_view_factor_nadir_vs_averaged():
+    assert environment.earth_view_factor_nadir(650) > environment.earth_view_factor(650)
+    assert environment.earth_view_factor_nadir(650) == pytest.approx(0.823, abs=0.005)
+
+def test_mass_growth_allowance():
+    r = margins.mass_with_growth({"a": 100.0}, {"a": "solar_array"})
+    assert r["grown_items_kg"]["a"] == pytest.approx(130.0)            # 30% AIAA MGA
+    assert r["predicted_mass_kg"] == pytest.approx(130.0 * 1.30)       # + 30% system margin
+
+def test_power_margin():
+    assert margins.power_with_margin(1000.0) == pytest.approx(1300.0)  # +30%
+
+def test_trl_scale():
+    assert len(margins.TRL) == 9 and margins.TRL[9].startswith("Actual system flight proven")
