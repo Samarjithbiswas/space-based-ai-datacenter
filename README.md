@@ -23,7 +23,6 @@ visualization. The reference architecture is Google's Project Suncatcher
 | [`report/`](report) | The complete study and the derivation-by-derivation mathematical guide (Markdown and HTML), all figures, and the figure-generating code. |
 | [`book/`](book) | The typeset monograph as an Overleaf-ready LaTeX bundle (designed cover, full front matter, every chapter, all figures, equations, and code listings). |
 | [`animation/`](animation) | A cinematic 3D visualization of the constellation, plus a caption-free copy. |
-| [`summary/`](summary) | A standalone, illustrated summary article (HTML) and its figures. |
 
 ## Headline results (all reproduced by the code)
 

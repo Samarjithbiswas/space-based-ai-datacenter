@@ -25,5 +25,6 @@ val.txt
 
 # figures and HTML are committed so the repo renders on GitHub.
 
-# personal posting drafts (kept local, not published)
-summary/*.txt
+# personal / working material kept local, not published to the public repo
+summary/
+report/_expanded/
