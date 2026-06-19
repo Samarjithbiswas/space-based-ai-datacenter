@@ -11,6 +11,7 @@ Output: linkedin/Space_DataCenter_LinkedIn_Article.html
 """
 import base64
 import pathlib
+from diagrams import DIAGRAMS
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = pathlib.Path(__file__).resolve().parent / "Space_DataCenter_LinkedIn_Article.html"
@@ -48,6 +49,12 @@ def img(placeholder):
             f'<figcaption>{cap}</figcaption></figure>')
 
 
+def svgfig(name):
+    """An inline-SVG geometry diagram with its caption rendered below, in the text flow."""
+    svg, cap = DIAGRAMS[name]
+    return f'<figure class="diagram">{svg}<figcaption>{cap}</figcaption></figure>'
+
+
 BODY = f"""
 <article>
 
@@ -75,6 +82,8 @@ class. The third effort, and the one that frames most of the numbers here, is a 
 for a constellation of roughly eighty satellites carrying machine-learning accelerators, flying within a
 circle about a kilometer across, in a dawn-dusk sun-synchronous orbit near six hundred and fifty
 kilometers, with two prototype satellites targeted for early 2027.</p>
+
+{svgfig("orbit")}
 
 <p>One caution belongs at the top rather than buried in a footnote. The most load-bearing single document
 in this whole area is a preprint that has not been through peer review and was written by the team
@@ -109,6 +118,8 @@ is allowed. The consequence is concrete and it is already visible in the hardwar
 high-power accelerator has to be cooled with a pumped liquid loop right at the die, not by a passive
 conduction path. That is exactly the design choice the flying systems have made.</p>
 
+{svgfig("thermal")}
+
 {img("thermal")}
 
 <p>The takeaway is almost the opposite of the popular framing. Cooling is the mature, low-risk part of this
@@ -139,6 +150,8 @@ must carry propulsion and actively drive itself down at end of life. Disposal is
 handled if convenient. It is a primary mission function that has to be designed in from the start, with its
 own propellant, its own reliability case, and its own share of the mass budget.</p>
 
+{svgfig("hohmann")}
+
 <h2>Radiation is survivable, and the honest cost is throughput</h2>
 
 <p>Orbit is a radiation environment. Trapped protons and electrons, cosmic rays, and the occasional solar
@@ -166,6 +179,8 @@ takes a slice off the top, somewhere in the range of ten to twenty percent of th
 for upsets, scrubbing, and the occasional reset. That number should appear in the cost of compute from the
 beginning rather than being discovered later.</p>
 
+{svgfig("shield")}
+
 <h2>Debris, and the paradox built into the formation</h2>
 
 <p>This is the subsystem that should keep designers awake, and it is the one the popular coverage almost
@@ -182,6 +197,8 @@ exact volume its neighbors occupy. The closer the neighbors, the higher the chan
 struck, and that coupling grows sharply as spacing shrinks. At the close spacing the architecture wants,
 the probability that a fragmentation takes a neighbor with it is high enough to raise the specter of a
 cascade, one failure seeding the next.</p>
+
+{svgfig("formation")}
 
 {img("debris")}
 
@@ -210,6 +227,8 @@ hoped for, forces the satellites to within roughly a hundred and fifty meters of
 cluster is not an aesthetic choice or a convenience. It is forced by the inverse-square behavior of light
 over distance.</p>
 
+{svgfig("link")}
+
 {img("link")}
 
 <p>This is what closes the trap described in the previous section. The communications engineer asks for the
@@ -234,6 +253,8 @@ aimed with extraordinary precision, far finer than the spacecraft body itself ca
 system. The standard sensors get you within roughly ten millionths of a radian, and the link needs better
 than one. The gap is closed by a small fast-steering mirror that makes fine corrections independently of the
 bus. The body coarse-points, the mirror fine-points, and without that mirror the link simply does not hold.</p>
+
+{svgfig("pointing")}
 
 {img("deltav")}
 
@@ -286,6 +307,8 @@ from a principle observed in a laboratory at the bottom to a system proven throu
 top. The building blocks score respectably. A data-center accelerator has run in orbit. A processor has been
 radiation-tested on the ground without hard failures. Kilowatt-class thermal hardware has flown. These sit
 in the middle of the ladder, the region where a component has been demonstrated in a relevant environment.</p>
+
+{svgfig("trl")}
 
 {img("risk")}
 
@@ -352,6 +375,8 @@ HTML = f"""<!DOCTYPE html>
   figure {{ margin:34px 0; }}
   figure img {{ width:100%; height:auto; border:1px solid var(--rule); border-radius:8px;
                 background:#fff; }}
+  figure.diagram svg {{ width:100%; height:auto; border:1px solid var(--rule); border-radius:8px;
+                background:#fff; padding:16px 14px; }}
   figcaption {{ font-family:'Inter',sans-serif; font-size:.84rem; line-height:1.5; color:var(--muted);
                 margin-top:10px; padding-left:2px; }}
   hr {{ border:none; border-top:1px solid var(--rule); margin:46px 0; }}
