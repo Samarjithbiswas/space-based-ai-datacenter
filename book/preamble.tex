@@ -39,11 +39,16 @@
 \setcounter{secnumdepth}{-1}
 \setcounter{tocdepth}{1}
 
-% --- Hyperlink colours (hyperref already loaded by pandoc) ---
-\hypersetup{colorlinks=true, linkcolor=brandTealDk, citecolor=brandTealDk,
-            urlcolor=brandTeal, linktoc=all,
-            pdftitle={Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics},
-            pdfauthor={Samarjith Biswas, PhD}}
+% --- Hyperlink colours. pandoc injects this header BEFORE it loads hyperref,
+% so \hypersetup is not yet defined here; defer it to \AtBeginDocument, which
+% runs after hyperref is loaded. (Calling it inline printed the options as body
+% text on page 1.) ---
+\AtBeginDocument{%
+  \hypersetup{colorlinks=true, linkcolor=brandTealDk, citecolor=brandTealDk,
+              urlcolor=brandTeal, linktoc=all,
+              pdftitle={Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics},
+              pdfauthor={Samarjith Biswas, PhD}}%
+}
 
 % --- Headings ---
 \titleformat{\chapter}[display]

@@ -113,11 +113,16 @@
 \setcounter{secnumdepth}{-1}
 \setcounter{tocdepth}{1}
 
-% --- Hyperlink colours (hyperref already loaded by pandoc) ---
-\hypersetup{colorlinks=true, linkcolor=brandTealDk, citecolor=brandTealDk,
-            urlcolor=brandTeal, linktoc=all,
-            pdftitle={Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics},
-            pdfauthor={Samarjith Biswas, PhD}}
+% --- Hyperlink colours. pandoc injects this header BEFORE it loads hyperref,
+% so \hypersetup is not yet defined here; defer it to \AtBeginDocument, which
+% runs after hyperref is loaded. (Calling it inline printed the options as body
+% text on page 1.) ---
+\AtBeginDocument{%
+  \hypersetup{colorlinks=true, linkcolor=brandTealDk, citecolor=brandTealDk,
+              urlcolor=brandTeal, linktoc=all,
+              pdftitle={Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics},
+              pdfauthor={Samarjith Biswas, PhD}}%
+}
 
 % --- Headings ---
 \titleformat{\chapter}[display]
@@ -644,6 +649,10 @@ NASA/SP-2016-6105 \\
 \chapter{4. Orbital mechanics of a circular
 orbit}\label{orbital-mechanics-of-a-circular-orbit}
 
+\emph{Sources: the circular-orbit relations, vis-viva equation, and
+specific energy follow standard astrodynamics texts, principally Curtis
+{[}16{]} and Vallado {[}17{]}.}
+
 Every subsequent chapter depends on a small set of orbital quantities,
 derived here.
 
@@ -842,6 +851,10 @@ high, so the satellite stays sunlit.}
 \chapter{7. The neutral atmosphere and orbital
 decay}\label{the-neutral-atmosphere-and-orbital-decay}
 
+\emph{Sources: density from the NRLMSIS empirical model {[}11{]}; the
+drag and orbit-averaged decay treatment follows Curtis {[}16{]} and the
+space-environment texts of Tribble {[}22{]} and Pisacane {[}23{]}.}
+
 Even at 650 km a tenuous atmosphere remains, and the drag it exerts
 slowly lowers the orbit. This chapter derives the decay rate and
 integrates it to a mission lifetime, a result that proves decisive for
@@ -914,6 +927,11 @@ five-year disposal rule.}
 \chapter{8. The ionizing-radiation
 environment}\label{the-ionizing-radiation-environment}
 
+\emph{Sources: trapped-particle fluxes from the AE8/AP8 {[}25{]} and
+AE9/AP9 {[}26{]} models; dose-depth via SHIELDOSE {[}27{]}; environment
+and effects from Tribble {[}22{]}, Pisacane {[}23{]}, and Hastings and
+Garrett {[}24{]}.}
+
 Two physically distinct radiation effects matter: the slow accumulation
 of total ionizing dose, which is a shielding problem, and the stochastic
 flipping of bits by energetic particles, which is a reliability and
@@ -969,6 +987,10 @@ percent, which must be carried explicitly in any efficiency figure.
 \chapter{9. The orbital-debris
 environment}\label{the-orbital-debris-environment}
 
+\emph{Sources: flux from NASA ORDEM 3.2 {[}8{]} and ESA MASTER {[}9{]};
+the collision-frequency and cascade framework follows Kessler and
+Cour-Palais {[}28{]} and Klinkrad {[}29{]}.}
+
 Low Earth orbit is increasingly congested, and the 650 km
 sun-synchronous shell is among the most crowded. The European Space
 Agency's environment models and NASA's ORDEM 3.2 are the authoritative
@@ -1006,6 +1028,10 @@ ORDEM/MASTER tools for the exact orbit and epoch, as noted in Chapter
 \part{SPACECRAFT SUBSYSTEMS}\label{spacecraft-subsystems}
 
 \chapter{10. Thermal control}\label{thermal-control}
+
+\emph{Sources: radiative and conductive relations from Incropera and
+DeWitt {[}21{]}; spacecraft-specific practice from the Gilmore
+thermal-control handbook {[}20{]} and ECSS-E-ST-31C {[}34{]}.}
 
 Thermal control is where the orbital data center is most often assumed
 to be hard and is in fact solved at the single-node scale, but it does
@@ -1243,6 +1269,9 @@ link and any long inter-satellite hop.
 
 \chapter{14. Communications: inter-satellite and
 ground}\label{communications-inter-satellite-and-ground}
+
+\emph{Sources: the optical link budget follows Hemmati {[}30{]} and the
+free-space optical satellite-link analysis of Liang et al.~{[}6{]}.}
 
 The communications subsystem sets both the internal fabric capacity and
 the ability to deliver data to Earth.
@@ -2388,6 +2417,72 @@ Latency (long-haul) & fiber (n=1.47) & vacuum mesh wins beyond
 \item
   NASA Goddard Integrated Design Center, concurrent-design margin
   practice (NTRS 20120013284).
+\item
+  Curtis, H. D. \emph{Orbital Mechanics for Engineering Students}, 4th
+  ed.~Butterworth-Heinemann, 2020.
+\item
+  Vallado, D. A. \emph{Fundamentals of Astrodynamics and Applications},
+  4th ed.~Microcosm Press, 2013.
+\item
+  Wertz, J. R., Everett, D. F., Puschell, J. J. (eds.). \emph{Space
+  Mission Engineering: The New SMAD.} Microcosm Press, 2011.
+\item
+  Larson, W. J., Wertz, J. R. (eds.). \emph{Space Mission Analysis and
+  Design}, 3rd ed.~Microcosm/Kluwer, 1999.
+\item
+  Gilmore, D. G. (ed.). \emph{Spacecraft Thermal Control Handbook,
+  Volume I: Fundamental Technologies}, 2nd ed.~The Aerospace Press,
+  2002.
+\item
+  Incropera, F. P., DeWitt, D. P., Bergman, T. L., Lavine, A. S.
+  \emph{Fundamentals of Heat and Mass Transfer}, 7th ed.~Wiley, 2011.
+\item
+  Tribble, A. C. \emph{The Space Environment: Implications for
+  Spacecraft Design}, rev. ed.~Princeton University Press, 2003.
+\item
+  Pisacane, V. L. (ed.). \emph{The Space Environment and Its Effects on
+  Space Systems}, 2nd ed.~AIAA Education Series, 2016.
+\item
+  Hastings, D., Garrett, H. \emph{Spacecraft-Environment Interactions.}
+  Cambridge University Press, 1996.
+\item
+  Vette, J. I. \emph{The AE-8 Trapped Electron Model Environment}
+  (NSSDC/WDC-A-R\&S 91-24); Sawyer, D. M., Vette, J. I. \emph{AP-8
+  Trapped Proton Environment} (NSSDC/WDC-A-R\&S 76-06). NASA GSFC.
+\item
+  Ginet, G. P. et al.~\emph{AE9, AP9 and SPM: New Models for Specifying
+  the Trapped Energetic Particle and Space Plasma Environment.} Space
+  Science Reviews 179, 2013.
+\item
+  Seltzer, S. M. \emph{SHIELDOSE: A Computer Code for Space-Shielding
+  Radiation Dose Calculations.} NBS Technical Note 1116, 1980.
+\item
+  Kessler, D. J., Cour-Palais, B. G. \emph{Collision Frequency of
+  Artificial Satellites: The Creation of a Debris Belt.} Journal of
+  Geophysical Research 83(A6), 1978.
+\item
+  Klinkrad, H. \emph{Space Debris: Models and Risk Analysis.}
+  Springer-Praxis, 2006.
+\item
+  Hemmati, H. (ed.). \emph{Deep Space Optical Communications.} JPL
+  Deep-Space Communications and Navigation Series, Wiley, 2006.
+\item
+  Sutton, G. P., Biblarz, O. \emph{Rocket Propulsion Elements}, 9th
+  ed.~Wiley, 2017.
+\item
+  Wertz, J. R. (ed.). \emph{Spacecraft Attitude Determination and
+  Control.} D. Reidel, 1978.
+\item
+  Sidi, M. J. \emph{Spacecraft Dynamics and Control: A Practical
+  Engineering Approach.} Cambridge University Press, 1997.
+\item
+  ECSS. \emph{Space Engineering: Thermal Control General Requirements}
+  (ECSS-E-ST-31C) and \emph{Space Environment} (ECSS-E-ST-10-04C).
+  European Cooperation for Space Standardization.
+\item
+  O'Hanlon, M. et al.; SpaceX published launch-manifest and reusability
+  data; FAA commercial-space launch records, for the launch-cadence and
+  cost-trajectory inputs of Chapter 22.
 \end{enumerate}
 
 \chapter{Appendix A, Master list of governing

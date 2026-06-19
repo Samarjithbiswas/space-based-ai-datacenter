@@ -267,6 +267,9 @@ levels 2 to 3. The program risk is concentrated in the system-integration steps,
 
 ## 4. Orbital mechanics of a circular orbit
 
+*Sources: the circular-orbit relations, vis-viva equation, and specific energy follow standard
+astrodynamics texts, principally Curtis [16] and Vallado [17].*
+
 Every subsequent chapter depends on a small set of orbital quantities, derived here.
 
 **Circular speed.** For a satellite of mass $m$ on a circular orbit of radius $a$, gravity supplies
@@ -398,6 +401,9 @@ single favorable date.
 
 ## 7. The neutral atmosphere and orbital decay
 
+*Sources: density from the NRLMSIS empirical model [11]; the drag and orbit-averaged decay treatment
+follows Curtis [16] and the space-environment texts of Tribble [22] and Pisacane [23].*
+
 Even at 650 km a tenuous atmosphere remains, and the drag it exerts slowly lowers the orbit. This
 chapter derives the decay rate and integrates it to a mission lifetime, a result that proves
 decisive for regulatory compliance.
@@ -447,6 +453,9 @@ mass and economic budgets.
 
 ## 8. The ionizing-radiation environment
 
+*Sources: trapped-particle fluxes from the AE8/AP8 [25] and AE9/AP9 [26] models; dose-depth via
+SHIELDOSE [27]; environment and effects from Tribble [22], Pisacane [23], and Hastings and Garrett [24].*
+
 Two physically distinct radiation effects matter: the slow accumulation of total ionizing dose,
 which is a shielding problem, and the stochastic flipping of bits by energetic particles, which is
 a reliability and throughput problem.
@@ -482,6 +491,9 @@ twenty percent, which must be carried explicitly in any efficiency figure.
 
 ## 9. The orbital-debris environment
 
+*Sources: flux from NASA ORDEM 3.2 [8] and ESA MASTER [9]; the collision-frequency and cascade
+framework follows Kessler and Cour-Palais [28] and Klinkrad [29].*
+
 Low Earth orbit is increasingly congested, and the 650 km sun-synchronous shell is among the most
 crowded. The European Space Agency's environment models and NASA's ORDEM 3.2 are the authoritative
 flux tools; the latter projects the environment forward to 2050 and covers the relevant altitude
@@ -509,6 +521,9 @@ exact orbit and epoch, as noted in Chapter 24.
 # PART III, SPACECRAFT SUBSYSTEMS
 
 ## 10. Thermal control
+
+*Sources: radiative and conductive relations from Incropera and DeWitt [21]; spacecraft-specific
+practice from the Gilmore thermal-control handbook [20] and ECSS-E-ST-31C [34].*
 
 Thermal control is where the orbital data center is most often assumed to be hard and is in fact
 solved at the single-node scale, but it does not scale for free, and a second, sharper limit
@@ -658,6 +673,9 @@ twenty-microradian beam is millimeters wide at 150 m); the demanding pointing ca
 link and any long inter-satellite hop.
 
 ## 14. Communications: inter-satellite and ground
+
+*Sources: the optical link budget follows Hemmati [30] and the free-space optical satellite-link
+analysis of Liang et al. [6].*
 
 The communications subsystem sets both the internal fabric capacity and the ability to deliver data
 to Earth.
@@ -1357,6 +1375,39 @@ what it uniquely provides, and only once launch economics enter the parity band 
 13. NASA Systems Engineering Handbook, NASA/SP-2016-6105.
 14. AIAA S-120-2006, Mass Properties Control for Space Systems.
 15. NASA Goddard Integrated Design Center, concurrent-design margin practice (NTRS 20120013284).
+16. Curtis, H. D. *Orbital Mechanics for Engineering Students*, 4th ed. Butterworth-Heinemann, 2020.
+17. Vallado, D. A. *Fundamentals of Astrodynamics and Applications*, 4th ed. Microcosm Press, 2013.
+18. Wertz, J. R., Everett, D. F., Puschell, J. J. (eds.). *Space Mission Engineering: The New SMAD.*
+    Microcosm Press, 2011.
+19. Larson, W. J., Wertz, J. R. (eds.). *Space Mission Analysis and Design*, 3rd ed. Microcosm/Kluwer, 1999.
+20. Gilmore, D. G. (ed.). *Spacecraft Thermal Control Handbook, Volume I: Fundamental Technologies*,
+    2nd ed. The Aerospace Press, 2002.
+21. Incropera, F. P., DeWitt, D. P., Bergman, T. L., Lavine, A. S. *Fundamentals of Heat and Mass
+    Transfer*, 7th ed. Wiley, 2011.
+22. Tribble, A. C. *The Space Environment: Implications for Spacecraft Design*, rev. ed. Princeton
+    University Press, 2003.
+23. Pisacane, V. L. (ed.). *The Space Environment and Its Effects on Space Systems*, 2nd ed. AIAA
+    Education Series, 2016.
+24. Hastings, D., Garrett, H. *Spacecraft-Environment Interactions.* Cambridge University Press, 1996.
+25. Vette, J. I. *The AE-8 Trapped Electron Model Environment* (NSSDC/WDC-A-R&S 91-24); Sawyer, D. M.,
+    Vette, J. I. *AP-8 Trapped Proton Environment* (NSSDC/WDC-A-R&S 76-06). NASA GSFC.
+26. Ginet, G. P. et al. *AE9, AP9 and SPM: New Models for Specifying the Trapped Energetic Particle
+    and Space Plasma Environment.* Space Science Reviews 179, 2013.
+27. Seltzer, S. M. *SHIELDOSE: A Computer Code for Space-Shielding Radiation Dose Calculations.*
+    NBS Technical Note 1116, 1980.
+28. Kessler, D. J., Cour-Palais, B. G. *Collision Frequency of Artificial Satellites: The Creation
+    of a Debris Belt.* Journal of Geophysical Research 83(A6), 1978.
+29. Klinkrad, H. *Space Debris: Models and Risk Analysis.* Springer-Praxis, 2006.
+30. Hemmati, H. (ed.). *Deep Space Optical Communications.* JPL Deep-Space Communications and
+    Navigation Series, Wiley, 2006.
+31. Sutton, G. P., Biblarz, O. *Rocket Propulsion Elements*, 9th ed. Wiley, 2017.
+32. Wertz, J. R. (ed.). *Spacecraft Attitude Determination and Control.* D. Reidel, 1978.
+33. Sidi, M. J. *Spacecraft Dynamics and Control: A Practical Engineering Approach.* Cambridge
+    University Press, 1997.
+34. ECSS. *Space Engineering: Thermal Control General Requirements* (ECSS-E-ST-31C) and *Space
+    Environment* (ECSS-E-ST-10-04C). European Cooperation for Space Standardization.
+35. O'Hanlon, M. et al.; SpaceX published launch-manifest and reusability data; FAA commercial-space
+    launch records, for the launch-cadence and cost-trajectory inputs of Chapter 22.
 
 ## Appendix A, Master list of governing equations
 
