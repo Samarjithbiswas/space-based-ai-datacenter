@@ -1,0 +1,14 @@
+<svg viewBox="0 0 660 210" xmlns="http://www.w3.org/2000/svg" role="img"><style>text{font-family:'Inter',system-ui,sans-serif}</style>
+<defs><marker id="arP" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+<path d="M0,0 L7,3 L0,6 Z" fill="#0d7d74"/></marker></defs>
+<rect x="40" y="70" width="120" height="90" rx="8" fill="#eef2f5" stroke="#16243a" stroke-width="1.3"/>
+<text x="100" y="120" text-anchor="middle" font-size="12.5" fill="#16243a">spacecraft</text>
+<text x="100" y="138" text-anchor="middle" font-size="11" fill="#5c6b7a">body: ~10 µrad</text>
+<line x1="160" y1="115" x2="250" y2="115" stroke="#0d7d74" stroke-width="2"/>
+<rect x="250" y="100" width="14" height="30" rx="2" fill="#0d7d74" transform="rotate(30 257 115)"/>
+<text x="257" y="160" text-anchor="middle" font-size="11" fill="#0d7d74">fast-steering</text>
+<text x="257" y="175" text-anchor="middle" font-size="11" fill="#0d7d74">mirror: &lt;1 µrad</text>
+<line x1="262" y1="110" x2="560" y2="60" stroke="#0d7d74" stroke-width="2" marker-end="url(#arP)"/>
+<circle cx="580" cy="56" r="8" fill="#16243a"/>
+<text x="580" y="40" text-anchor="middle" font-size="11.5" fill="#26313f">target satellite</text>
+</svg>
