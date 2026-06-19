@@ -26,15 +26,15 @@ mpl.rcParams.update({
     "legend.frameon": False,
 })
 NAVY="#16243a"; ACCENT="#c75c2e"; COOL="#2f6f8f"; GOOD="#2e7d4f"; WARN="#caa12a"; BAD="#a3303a"
-OUT="C:/Users/samar/Downloads/Space_DataCenter_ReportII/figures/"
+import os as _os
+OUT = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "figures") + "/"
 
 def credit(fig, text):
-    fig.text(0.005, -0.02, "DATA SOURCE  "+text, ha="left", va="top",
-             fontsize=6.7, color="#7a8590", style="italic")
+    # Source attribution lives in the document caption and References, not on the figure.
+    return
 def figtab(fig, label):
-    fig.text(0.005, 1.005, label, ha="left", va="bottom", fontsize=10.5,
-             fontweight="bold", color="white",
-             bbox=dict(boxstyle="round,pad=0.32", fc=NAVY, ec="none"))
+    # Figure numbers and titles live in the LaTeX \caption, not baked into the image.
+    return
 
 # physical constants
 MU=3.986004418e14; RE=6371e3; SIG=5.670374419e-8; G0=9.80665; S0=1361.0
@@ -80,7 +80,7 @@ ax.axhline(RULE_FCC,color=BAD,ls="--",lw=1.5); ax.text(452,RULE_FCC*1.1,"FCC 5-y
 ax.axhline(RULE_INTL,color="#555",ls=":",lw=1.2); ax.text(452,RULE_INTL*1.1,"25-yr international baseline",color="#555",fontsize=8.3)
 ax.axvline(650,color="#999",ls=":",lw=1.1); ax.text(655,2.2e3,"Suncatcher\n650 km",fontsize=8.5,color="#555")
 ax.set_xlabel("Initial circular altitude (km)"); ax.set_ylabel("Natural orbital lifetime (years, log)")
-ax.set_title("Natural decay fails the 5-year disposal rule at 650 km  →  active de-orbit is mandatory")
+# figure title removed: it lives in the document caption
 ax.set_ylim(0.7,5e3); ax.legend(loc="upper left",fontsize=8.5)
 ax.text(0.99,0.03,f"650 km, realistic bus (A/m=0.008):\nsolar-max {D['decay650_max']:.0f} yr · moderate {D['decay650_mod']:.0f} yr · solar-min {D['decay650_min']:.0f} yr\n"
         "Only a solar-max launch comes close to 5 yr. Propulsion required.",
@@ -278,7 +278,7 @@ ax.set_xlim(0,5); ax.set_ylim(0,5)
 ax.set_xticks([0.5,1.5,2.5,3.5,4.5]); ax.set_xticklabels(["Very low","Low","Moderate","High","Very high"],fontsize=8)
 ax.set_yticks([0.5,1.5,2.5,3.5,4.5]); ax.set_yticklabels(["Negligible","Minor","Moderate","Major","Catastrophic"],fontsize=8)
 ax.set_xlabel("LIKELIHOOD →",fontweight="bold"); ax.set_ylabel("CONSEQUENCE →",fontweight="bold")
-ax.set_title("Where the real risk lives: cooling is solved; debris, disposal & economics are not",fontsize=11)
+# figure title removed: it lives in the document caption
 ax.grid(False)
 figtab(fig,"FIG. 7"); credit(fig,"Synthesis of Figs. 1-6 and Project Suncatcher (arXiv:2511.19468). Risk placement is the author's engineering judgement, anchored to the quantified findings.")
 fig.savefig(OUT+"fig7_risk_matrix.png"); plt.close(fig)

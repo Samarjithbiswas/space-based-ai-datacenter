@@ -12,7 +12,12 @@ from .system import DesignPoint
 from .montecarlo import monte_carlo
 
 NAVY, ACCENT, COOL, GOOD, WARN, BAD = "#16243a", "#c75c2e", "#2f6f8f", "#2e7d4f", "#caa12a", "#a3303a"
-FIGDIR = Path(__file__).resolve().parent.parent / "figures"
+FIGDIR = Path(__file__).resolve().parent.parent.parent / "report" / "systems_figs"
+
+# Figure-level titles belong in the document caption, not baked into the image.
+# Suppress whole-figure suptitles globally; panel (a)/(b) titles are kept.
+import matplotlib.figure as _mfig
+_mfig.Figure.suptitle = lambda self, *a, **k: None
 
 
 def _style():
@@ -23,7 +28,8 @@ def _style():
 
 
 def _credit(fig, t):
-    fig.text(0.005, -0.02, "DATA SOURCE  " + t, fontsize=6.6, color="#7a8590", style="italic", va="top")
+    # Source attribution lives in the document caption and References, not on the figure.
+    return
 
 
 def fig_power():
@@ -111,8 +117,7 @@ def fig_mass_budget():
     items = sorted(mb.items(), key=lambda kv: -kv[1])
     ax.barh([k for k, _ in items][::-1], [v for _, v in items][::-1], color=COOL)
     ax.set_xlabel("Mass (kg)")
-    ax.set_title(f"FIG. M  Integrated dry-mass budget\n(closed self-consistently: {s['dry_mass_kg']:.0f} kg dry, "
-                 f"{s['launch_mass_kg']:.0f} kg launch)")
+    # figure title removed: it lives in the document caption
     for i, (k, v) in enumerate(items[::-1]):
         ax.text(v + 1, i, f"{v:.0f}", va="center", fontsize=8)
     _credit(fig, "orbital_dc.system.DesignPoint: power->array->mass->thermal->dv closure.")

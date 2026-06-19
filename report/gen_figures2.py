@@ -11,7 +11,10 @@ mpl.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9.5, "axes.title
     "figure.dpi": 135, "savefig.dpi": 165, "savefig.bbox": "tight", "legend.frameon": False})
 NAVY, ACC, COOL, GOOD, WARN, BAD = "#16243a", "#c75c2e", "#2f6f8f", "#2e7d4f", "#caa12a", "#a3303a"
 OUT = Path("figures2"); OUT.mkdir(exist_ok=True)
-def cred(fig, t): fig.text(0.005, -0.02, "SOURCE  " + t, fontsize=6.6, color="#7a8590", style="italic")
+# Figure-level titles and source lines live in the document caption, not on the image.
+import matplotlib.figure as _mfig
+_mfig.Figure.suptitle = lambda self, *a, **k: None
+def cred(fig, t): return
 
 # F1 eclipse & beta geometry
 fig, (a, b) = plt.subplots(1, 2, figsize=(9.6, 4.2))
@@ -81,7 +84,7 @@ ax.axhline(2000, color=BAD, ls="--"); ax.text(11, 2300, "HBM first irregularitie
 ax.axhline(15000, color="#b0506a", ls=":"); ax.text(11, 16500, "no hard failure to 15 krad", color="#b0506a", fontsize=8)
 ax.axhline(750, color=GOOD, ls=":"); ax.text(11, 820, "5-yr requirement 750 rad", color=GOOD, fontsize=8)
 ax.axvline(10, color="#999", ls=":"); ax.set_xlabel("Aluminium shielding (mm)")
-ax.set_ylabel("Cumulative 5-yr TID rad(Si), log"); ax.set_title("Fig. A5  Total ionizing dose vs shielding (Chapter 8)")
+ax.set_ylabel("Cumulative 5-yr TID rad(Si), log")  # title removed: lives in the document caption
 cred(fig, "environment.tid_dose_rate; SHIELDOSE-2/AE8-AP8 class; thresholds per arXiv:2511.19468.")
 fig.savefig(OUT / "figA5_dose.png"); plt.close(fig)
 
@@ -126,7 +129,7 @@ items = sorted(mb.items(), key=lambda kv: -kv[1])
 ax.pie([v for _, v in items], labels=[k for k, _ in items],
        autopct=lambda p: f"{p*sum(v for _,v in items)/100:.0f} kg", startangle=90,
        colors=plt.cm.tab20.colors, textprops={"fontsize": 8})
-ax.set_title(f"Fig. A8  Reference dry-mass breakdown ({s['dry_mass_kg']:.0f} kg)")
+# figure title removed: it lives in the document caption
 cred(fig, "system.DesignPoint mass closure (Chapter 12, 18).")
 fig.savefig(OUT / "figA8_mass.png"); plt.close(fig)
 

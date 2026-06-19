@@ -87,11 +87,7 @@ def main():
         b.axvline(pct[p], color=c, ls="--", lw=1.3)
     b.set_xlabel("Year LEO launch reaches $200/kg"); b.set_ylabel("Monte-Carlo count")
     b.set_title(f"(b) Cost-parity year: P50={pct[50]:.0f} (P5 {pct[5]:.0f}, P95 {pct[95]:.0f})")
-    fig.text(0.005, -0.02, "DATA SOURCE  Wright learning curve on cumulative launched mass; assumptions per "
-             "arXiv:2511.19468. Monte-Carlo over LR, 2026 price, payload, cadence. PROJECTION, not a guarantee.",
-             fontsize=6.6, color="#7a8590", style="italic")
-    fig.text(0.005, 1.005, "FIG. PRED", fontsize=10.5, fontweight="bold", color="white",
-             bbox=dict(boxstyle="round,pad=0.32", fc=NAVY, ec="none"))
+    # figure number and source line removed: they live in the document caption
     fig.tight_layout(); fig.savefig(OUT / "fig_cost_parity.png"); plt.close(fig)
 
     print("=" * 64)
