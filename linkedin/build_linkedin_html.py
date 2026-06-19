@@ -85,6 +85,8 @@ kilometers, with two prototype satellites targeted for early 2027.</p>
 
 {svgfig("orbit")}
 
+{svgfig("constellation")}
+
 <p>One caution belongs at the top rather than buried in a footnote. The most load-bearing single document
 in this whole area is a preprint that has not been through peer review and was written by the team
 proposing the system. That does not make it wrong, and much of it is careful, but it does mean the most
@@ -248,6 +250,8 @@ afterthought, since there is barely any night to ride through, and it keeps the 
 which in turn justifies treating the cooling problem as a steady-state one. Modern multi-junction solar
 cells deliver a few hundred watts per square meter even after accounting for degradation over the mission.</p>
 
+{svgfig("beta")}
+
 <p>Pointing is less friendly. A laser link between satellites a hundred and fifty meters apart has to be
 aimed with extraordinary precision, far finer than the spacecraft body itself can be held by its attitude
 system. The standard sensors get you within roughly ten millionths of a radian, and the link needs better
@@ -270,6 +274,8 @@ are and by how much the radiation tax removes. Real-world utilization for infere
 the honest cost per unit of useful computation is several times the naive figure you would get by dividing
 price by peak throughput. Any business case that quotes peak numbers is quoting a ceiling that operations
 never touch.</p>
+
+{svgfig("compute")}
 
 <h2>The money, and why the date everyone repeats is fragile</h2>
 

@@ -66,17 +66,18 @@ THERMAL = (_svg("""
 HOHMANN = (_svg("""
 <defs><marker id="arH" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
 <path d="M0,0 L7,3 L0,6 Z" fill="#a3303a"/></marker></defs>
-<circle cx="280" cy="190" r="50" fill="#cfe0ea" stroke="#16243a" stroke-width="1.4"/>
-<text x="280" y="195" text-anchor="middle" font-size="12" fill="#16243a">Earth</text>
-<circle cx="280" cy="190" r="150" fill="none" stroke="#0d7d74" stroke-width="2" stroke-dasharray="5 5"/>
-<text x="280" y="28" text-anchor="middle" font-size="12.5" fill="#0d7d74">operational orbit, 650 km</text>
-<path d="M280,40 A120,108 0 0,0 280,242" fill="none" stroke="#a3303a" stroke-width="2.4"/>
-<circle cx="280" cy="40" r="6" fill="#a3303a"/>
-<line x1="280" y1="40" x2="232" y2="40" stroke="#a3303a" stroke-width="2.4" marker-end="url(#arH)"/>
-<text x="225" y="36" text-anchor="end" font-size="13" fill="#a3303a" font-weight="600">retro burn Δv ≈ 132 m/s</text>
-<text x="150" y="150" text-anchor="middle" font-size="12.5" fill="#a3303a">transfer ellipse</text>
-<text x="280" y="262" text-anchor="middle" font-size="12" fill="#26313f">reentry perigee</text>
-""", 560, 300),
+<circle cx="300" cy="205" r="140" fill="none" stroke="#0d7d74" stroke-width="2" stroke-dasharray="5 5"/>
+<circle cx="300" cy="205" r="46" fill="#cfe0ea" stroke="#16243a" stroke-width="1.4"/>
+<text x="300" y="210" text-anchor="middle" font-size="12" fill="#16243a">Earth</text>
+<path d="M300,65 A132,97 0 0,0 300,255" fill="none" stroke="#a3303a" stroke-width="2.4"/>
+<circle cx="300" cy="65" r="6" fill="#a3303a"/>
+<line x1="300" y1="65" x2="250" y2="65" stroke="#a3303a" stroke-width="2.4" marker-end="url(#arH)"/>
+<text x="300" y="40" text-anchor="middle" font-size="13" fill="#a3303a" font-weight="600">retro burn   Δv ≈ 132 m/s</text>
+<circle cx="300" cy="255" r="5" fill="#a3303a"/>
+<text x="360" y="259" text-anchor="start" font-size="12" fill="#26313f">reentry perigee</text>
+<text x="150" y="118" text-anchor="middle" font-size="12.5" fill="#a3303a">transfer ellipse</text>
+<text x="300" y="378" text-anchor="middle" font-size="12.5" fill="#0d7d74">operational orbit, 650 km</text>
+""", 600, 392),
  "Controlled de-orbit. A small retrograde burn lowers the far side of the orbit into the atmosphere. The "
  "maneuver costs about a hundred and thirty metres per second and is the single largest demand on the "
  "propulsion system over the mission.")
@@ -213,5 +214,87 @@ TRL = (_trl(),
  "autonomous debris avoidance, sits near the bottom. That gap is the whole programme risk.")
 
 
+# 9. Constellation top-view (the tight cluster)
+def _constellation():
+    import math
+    cx, cy, R, n = 280, 188, 120, 16
+    pts = [(cx + R * math.cos(2 * math.pi * i / n - math.pi / 2),
+            cy + R * math.sin(2 * math.pi * i / n - math.pi / 2)) for i in range(n)]
+    links = ""
+    for i in range(n):
+        x1, y1 = pts[i]; x2, y2 = pts[(i + 1) % n]
+        links += f'<line x1="{x1:.0f}" y1="{y1:.0f}" x2="{x2:.0f}" y2="{y2:.0f}" stroke="#0d7d74" stroke-width="1" opacity="0.55"/>'
+    for i in range(0, n, 3):
+        x1, y1 = pts[i]; x2, y2 = pts[(i + n // 2) % n]
+        links += f'<line x1="{x1:.0f}" y1="{y1:.0f}" x2="{x2:.0f}" y2="{y2:.0f}" stroke="#0d7d74" stroke-width="0.6" opacity="0.22"/>'
+    dots = "".join(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="6" fill="#0d7d74"/>' for x, y in pts)
+    (x1, y1), (x2, y2) = pts[0], pts[1]
+    spacing = (f'<line x1="{x1:.0f}" y1="{y1:.0f}" x2="{x2:.0f}" y2="{y2:.0f}" stroke="#a3303a" stroke-width="2.4"/>'
+               f'<text x="{(x1 + x2) / 2 + 16:.0f}" y="{(y1 + y2) / 2 - 8:.0f}" font-size="11.5" fill="#a3303a">~150 m</text>')
+    defs = ('<defs><marker id="arN" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">'
+            '<path d="M6,0 L0,3 L6,6 Z" fill="#16243a"/></marker></defs>')
+    diam = (f'<line x1="{cx - R:.0f}" y1="{cy + R + 34:.0f}" x2="{cx + R:.0f}" y2="{cy + R + 34:.0f}" '
+            f'stroke="#16243a" stroke-width="1" marker-start="url(#arN)" marker-end="url(#arN)"/>'
+            f'<text x="{cx:.0f}" y="{cy + R + 28:.0f}" text-anchor="middle" font-size="12.5" fill="#16243a">cluster ≈ 1 km across</text>')
+    title = ('<text x="280" y="24" text-anchor="middle" font-size="12.5" fill="#26313f">'
+             '≈ 81 satellites, laser links between neighbours</text>')
+    return _svg(defs + links + dots + spacing + diam + title, 560, 380)
+
+
+CONSTELLATION = (_constellation(),
+ "The cluster, seen from above. Roughly eighty satellites fly within a circle about a kilometre across, "
+ "linked by laser so they act as one machine. The spacing the links require, about a hundred and fifty "
+ "metres, is the very spacing that makes a debris cascade dangerous.")
+
+
+# 10. Beta angle and Earth's shadow
+BETA = (_svg("""
+<defs><marker id="arB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+<path d="M0,0 L7,3 L0,6 Z" fill="#c75c2e"/></marker></defs>
+<g stroke="#c75c2e" stroke-width="2.2" marker-end="url(#arB)">
+<line x1="20" y1="80" x2="108" y2="80"/><line x1="20" y1="150" x2="108" y2="150"/><line x1="20" y1="220" x2="108" y2="220"/></g>
+<text x="20" y="64" font-size="13" fill="#c75c2e" font-weight="600">Sunlight</text>
+<rect x="260" y="102" width="430" height="96" fill="#e3e8ee"/>
+<text x="560" y="188" text-anchor="middle" font-size="12.5" fill="#7a8590">Earth's shadow</text>
+<circle cx="260" cy="150" r="54" fill="#cfe0ea" stroke="#16243a" stroke-width="1.4"/>
+<line x1="118" y1="150" x2="690" y2="150" stroke="#16243a" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="686" y="128" text-anchor="end" font-size="11.5" fill="#7a8590">Sun–Earth line</text>
+<line x1="150" y1="240" x2="372" y2="58" stroke="#0d7d74" stroke-width="2.6"/>
+<circle cx="372" cy="58" r="5.5" fill="#0d7d74"/><circle cx="150" cy="240" r="5.5" fill="#0d7d74"/>
+<text x="384" y="58" font-size="12" fill="#0d7d74">orbit plane (edge-on), satellites sunlit</text>
+<path d="M312,150 A52,52 0 0,0 295,114" fill="none" stroke="#16243a" stroke-width="1.5"/>
+<text x="320" y="128" font-size="14" fill="#16243a" font-weight="600">β</text>
+""", 720, 300),
+ "Why the dawn-dusk orbit avoids eclipse. A satellite is shadowed only when its orbit plane lies close to "
+ "the Sun line; the larger the angle β between them, the more the orbit lifts clear of Earth's shadow. The "
+ "dawn-dusk orbit holds β high all year, between about sixty-seven and ninety degrees, so it stays sunlit.")
+
+
+# 11. Delivered-compute funnel
+def _compute():
+    rows = [("Peak hardware throughput", 1.00, "100%", "#16243a"),
+            ("after real utilization", 0.10, "~10%", "#0d7d74"),
+            ("after radiation tax", 0.086, "~8.6% delivered", "#0f766e")]
+    x0, maxw, y = 232, 410, 42
+    body = ""
+    for label, frac, val, col in rows:
+        w = max(frac * maxw, 6)
+        body += (f'<text x="{x0 - 12}" y="{y + 23}" text-anchor="end" font-size="12.5" fill="#26313f">{label}</text>'
+                 f'<rect x="{x0}" y="{y}" width="{w:.0f}" height="34" rx="4" fill="{col}"/>'
+                 f'<text x="{x0 + w + 10:.0f}" y="{y + 23}" font-size="12.5" fill="{col}" font-weight="600">{val}</text>')
+        y += 56
+    note = ('<text x="360" y="212" text-anchor="middle" font-size="12.5" fill="#26313f">'
+            'delivered useful compute is a small fraction of the headline peak</text>')
+    return _svg(body + note, 720, 232)
+
+
+COMPUTE = (_compute(),
+ "What actually comes out. Useful compute is the peak capability multiplied by how busy the chips really "
+ "are and by what the radiation tax leaves. With inference utilization often near ten percent, the "
+ "delivered figure is a small fraction of the headline peak, and the honest cost per useful operation is "
+ "several times the naive one.")
+
+
 DIAGRAMS = {"orbit": ORBIT, "thermal": THERMAL, "hohmann": HOHMANN, "shield": SHIELD,
-            "formation": FORMATION, "link": LINK, "pointing": POINTING, "trl": TRL}
+            "formation": FORMATION, "link": LINK, "pointing": POINTING, "trl": TRL,
+            "constellation": CONSTELLATION, "beta": BETA, "compute": COMPUTE}
