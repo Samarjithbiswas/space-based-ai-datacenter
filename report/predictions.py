@@ -70,6 +70,7 @@ def main():
     valid = yrs[~np.isnan(yrs)]
     pct = {p: float(np.percentile(valid, p)) for p in (5, 50, 95)}
     frac_2035 = float(np.mean(valid <= 2035))
+    reach_frac = float(np.mean(~np.isnan(yrs)))   # fraction that reach parity within the 2050 horizon
 
     fig, (a, b) = plt.subplots(1, 2, figsize=(10.2, 4.6))
     # (a) price fan chart
@@ -96,11 +97,12 @@ def main():
     print("=" * 64)
     print(" LAUNCH-COST PARITY ($200/kg)  -  Monte-Carlo (n=20000)")
     print("=" * 64)
-    print(f"  Parity year   P5 = {pct[5]:.0f}   P50 = {pct[50]:.0f}   P95 = {pct[95]:.0f}")
+    print(f"  Scenarios reaching $200/kg by 2050 = {reach_frac*100:.0f}%  ({(1-reach_frac)*100:.0f}% never reach it)")
+    print(f"  Conditional parity year   P5 = {pct[5]:.0f}   P50 = {pct[50]:.0f}   P95 = {pct[95]:.0f}")
     print(f"  P(parity by 2035) = {frac_2035*100:.0f}%")
     print(f"  (Suncatcher headline: '<=$200/kg by ~2035')")
     print("=" * 64)
-    return pct, frac_2035
+    return pct, frac_2035, reach_frac
 
 
 if __name__ == "__main__":

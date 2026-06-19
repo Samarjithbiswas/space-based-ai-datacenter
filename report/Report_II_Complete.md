@@ -303,17 +303,46 @@ precession rate for a near-circular orbit is
 
 $$\dot\Omega = -\frac{3}{2}\, n\, J_2 \left(\frac{R_E}{a}\right)^2 \cos i. \tag{5.1}$$
 
+**Origin of the precession.** Earth's gravitational potential, expanded in zonal harmonics and kept
+to the leading oblateness term, is
+
+$$U(r,\phi) = -\frac{\mu}{r}\left[\,1 - J_2\left(\frac{R_E}{r}\right)^2 P_2(\sin\phi)\,\right],
+\qquad P_2(\sin\phi) = \tfrac{1}{2}\left(3\sin^2\phi - 1\right), \tag{5.2}$$
+
+where $\phi$ is geocentric latitude and $P_2$ is the second Legendre polynomial. The term beyond the
+point-mass field is the disturbing function $R$. Writing the latitude through the orbital geometry,
+$\sin\phi = \sin i\,\sin(\omega + \theta)$ with $\theta$ the true anomaly, and averaging $R$ over one
+revolution removes the short-period terms and leaves the secular part
+
+$$\bar R = \frac{n^2 J_2 R_E^2}{2}\,\frac{1}{(1-e^2)^{3/2}}
+\left(\frac{3}{2}\sin^2 i - 1\right). \tag{5.3}$$
+
+Lagrange's planetary equation for the node connects this averaged potential to the drift of $\Omega$,
+
+$$\dot\Omega = \frac{1}{n a^2 \sqrt{1-e^2}\,\sin i}\,\frac{\partial \bar R}{\partial i}. \tag{5.4}$$
+
+Carrying out the derivative of (5.3) with respect to $i$ gives $\partial\bar R/\partial i \propto \sin i\cos i$,
+and the $\sin i$ in the denominator of (5.4) cancels, leaving the $\cos i$ dependence of (5.1). The
+result is exact at first order in $J_2$ for any eccentricity if $a$ is replaced by the semi-latus rectum
+$p = a(1-e^2)$; for the near-circular reference orbit $p \approx a$ and (5.1) follows directly. The sign
+is negative for prograde orbits ($i < 90^\circ$), so the node regresses, and positive for retrograde
+orbits, which is what makes synchronization with the Sun possible.
+
 A sun-synchronous orbit chooses the inclination $i$ so that this precession equals Earth's mean
 rate about the Sun, $\dot\Omega_{\mathrm{sun}} = 2\pi / (365.2422\ \mathrm{d}) = 1.991\times10^{-7}\ \mathrm{rad/s}$.
 Setting $\dot\Omega = \dot\Omega_{\mathrm{sun}}$ and solving,
 
-$$\cos i = -\frac{2\,\dot\Omega_{\mathrm{sun}}\, a^2}{3\, n\, J_2\, R_E^2}. \tag{5.2}$$
+$$\cos i = -\frac{2\,\dot\Omega_{\mathrm{sun}}\, a^2}{3\, n\, J_2\, R_E^2}. \tag{5.5}$$
 
 The negative sign forces $i > 90^\circ$, a retrograde, near-polar orbit. At 650 km,
-$n = 1.074\times10^{-3}\ \mathrm{rad/s}$ and (5.2) gives $\cos i = -0.139$, hence $i = 98.0^\circ$,
-matching the reference mission. The dawn-dusk variant orients the orbital plane near Earth's
-terminator, which (Chapter 6) yields nearly continuous sunlight and minimal thermal cycling, a
-decisive advantage for a high-power, thermally sensitive payload.
+$n = 1.074\times10^{-3}\ \mathrm{rad/s}$ and (5.5) gives $\cos i = -0.139$, hence $i = 98.0^\circ$,
+matching the reference mission and the value returned by `orbital_dc.orbit.sso_inclination(650)`. By
+construction the corresponding nodal precession is $0.9856$ degrees per day, exactly one turn per
+tropical year, which is the defining property of the orbit. The required inclination rises slowly with
+altitude, from about $96.3^\circ$ at 200 kilometers to $98.6^\circ$ at 800 kilometers, because the
+$a^2$ factor in (5.5) outpaces the fall in $n$. The dawn-dusk variant orients the orbital
+plane near Earth's terminator, which (Chapter 6) yields nearly continuous sunlight and minimal thermal
+cycling, a decisive advantage for a high-power, thermally sensitive payload.
 
 ## 6. Eclipse geometry and the dawn-dusk advantage
 
@@ -327,11 +356,43 @@ For $|\beta| < \beta^{*}$, the sunlit fraction of the orbit is
 
 $$f_{\mathrm{sun}} = 1 - \frac{1}{\pi}\cos^{-1}\!\left[\frac{\sqrt{h^2 + 2 R_E h}}{(R_E + h)\cos\beta}\right]. \tag{6.2}$$
 
-At 650 km, $\beta^{*} = \arcsin(6371/7021) = 65.1^\circ$. A dawn-dusk sun-synchronous orbit holds
-$|\beta|$ near $90^\circ$ for most of the year, so $|\beta| > \beta^{*}$ and $f_{\mathrm{sun}} \to 1$:
-illumination exceeds ninety-five percent, the battery need is minimal (Chapter 11), and the
-thermal environment is nearly steady, justifying the quasi-steady thermal treatment of Chapter 10.
-This is the single most favorable environmental choice available to the architecture.
+**Derivation from the cylindrical shadow.** Treat Earth's shadow as a half-infinite cylinder of radius
+$R_E$ pointing away from the Sun, a good approximation in low Earth orbit where the penumbra is narrow
+and the Sun is effectively at infinity. A point on the circular orbit of radius $r = R_E + h$ lies in
+shadow when its distance from the shadow axis is less than $R_E$ and it is on the anti-sun side. Resolve
+the orbit into the shadow frame: the component of the orbit radius perpendicular to the Sun line, for an
+orbit whose plane makes angle $\beta$ with that line, traces an ellipse of semi-axes $r$ and $r\cos\beta$.
+The satellite is eclipsed over the arc where this projected position falls within the cylinder, and the
+half-angle $\psi$ of that arc, measured from the anti-solar point, satisfies
+
+$$\cos\psi = \frac{\sqrt{r^2 - R_E^2}}{r\,\cos\beta}
+          = \frac{\sqrt{h^2 + 2 R_E h}}{(R_E + h)\cos\beta}. \tag{6.3}$$
+
+The eclipse occupies the fraction $f_E = \psi/\pi$ of the orbit (the full eclipsed arc is $2\psi$ out of
+$2\pi$), and the sunlit fraction is $f_{\mathrm{sun}} = 1 - f_E$, which is (6.2). The expression is real
+only while the bracket does not exceed one; the threshold where $\cos\psi = 1$ recovers the critical beta
+of (6.1), at which the eclipse arc shrinks to zero.
+
+**Annual variation of the beta angle.** The beta angle is not fixed: it depends on the angle between the
+orbit plane and the instantaneous Sun direction. For an orbit of inclination $i$ and node $\Omega$, with
+solar ecliptic longitude $\lambda_\odot$ and obliquity $\varepsilon = 23.44^\circ$,
+
+$$\sin\beta = \cos\lambda_\odot\sin\Omega\sin i
+           - \sin\lambda_\odot\cos\varepsilon\cos\Omega\sin i
+           + \sin\lambda_\odot\sin\varepsilon\cos i. \tag{6.4}$$
+
+A sun-synchronous orbit holds $\Omega$ at a fixed local time by construction, so the seasonal swing of
+$\lambda_\odot$ is what moves $\beta$. For the dawn-dusk case, where the node is set near the six o'clock
+line so the orbit plane contains the terminator, (6.4) reduces to $|\beta|$ oscillating between about
+$66.6^\circ$ and $90^\circ$ over the year, the lower bound being $90^\circ - \varepsilon$.
+
+At 650 km, $\beta^{*} = \arcsin(6371/7021) = 65.1^\circ$. Because the dawn-dusk orbit keeps $|\beta|$
+above $66.6^\circ$ at all times, it stays above this $65.1^\circ$ threshold year round, so the satellite
+never enters a deep eclipse and $f_{\mathrm{sun}} \to 1$: illumination exceeds ninety-five percent, the
+battery need is minimal (Chapter 11), and the thermal environment is nearly steady, justifying the
+quasi-steady thermal treatment of Chapter 10. This is the single most favorable environmental choice
+available to the architecture, and it is robust to the seasonal beta swing rather than dependent on a
+single favorable date.
 
 ![Fig. 6.1  Critical beta angle versus altitude, and eclipse fraction versus beta at 650 km. A dawn-dusk orbit holds the beta angle high, so the satellite stays sunlit.](figures2/figA1_eclipse.png)
 
@@ -896,17 +957,25 @@ inheriting a single date. A Wright learning curve is applied to cumulative launc
 logistic ramp in launch cadence, and the unproven assumptions are sampled by Monte-Carlo: the
 learning rate from fifteen to twenty-five percent, the 2026 effective price from 1,200 to 3,500
 dollars per kilogram, the payload from 150 to 250 tonnes, and the peak cadence from 80 to 220
-launches per year. The result (Fig. 22.1) places the median parity year near 2044, with a fifth
-percentile of about 2037 and essentially no probability of reaching parity by 2035. The vendor's
-2035 date sits at the optimistic edge of the distribution and requires its specific aggressive
-anchors, full reusability at 200 tonnes and roughly two million dollars marginal cost, sustained
-twenty-percent learning from a low starting price.
+launches per year. The first result is the more important one and is easy to miss in a single
+headline date: across the sampled assumptions, only about five percent of scenarios reach 200 dollars
+per kilogram at all within the 2050 horizon, and roughly ninety-five percent never reach it. Parity at
+that price is therefore not a near-certainty awaiting a date; under most defensible assumptions it does
+not arrive within the horizon. Conditional on the minority of scenarios that do reach it, the median
+parity year is near 2044 (Fig. 22.1), with a fifth percentile of about 2037 and essentially no
+probability of reaching parity by 2035. Extending the horizon to 2060 raises the reaching fraction only
+to about nine percent and moves the conditional median to the end of the 2040s, so the conclusion is not
+an artifact of where the horizon is drawn. The vendor's 2035 date sits beyond the optimistic edge of the
+distribution and requires its specific aggressive anchors, full reusability at 200 tonnes and roughly
+two million dollars marginal cost, sustained twenty-percent learning from a low starting price, and a
+total launched mass far larger than the cadence ranges sampled here deliver.
 
-The prediction is that launch-cost parity is more likely to arrive in the late
-2030s to mid-2040s than in 2035, and that it is necessary but not sufficient: even at parity, the
+The prediction is therefore twofold: launch-cost parity at 200 dollars per kilogram is unlikely under
+most assumptions rather than merely late, and where it does arrive it is more likely in the late 2030s
+to mid-2040s than in 2035. Parity is in any case necessary but not sufficient: even at parity, the
 business case is gated by hardware cost, lifetime, and utilization.
 
-![Fig. 22.1, Launch-cost learning curve (Monte-Carlo) and the distribution of the cost-parity year; median near 2044, later than the vendor's 2035.](figures_pred/fig_cost_parity.png)
+![Fig. 22.1, Launch-cost learning curve (Monte-Carlo) and the distribution of the cost-parity year. Most sampled scenarios never reach 200 dollars per kilogram within the horizon; conditional on those that do, the median is near 2044, later than the vendor's 2035.](figures_pred/fig_cost_parity.png)
 
 ## 23. Capability and risk trajectory, 2027-2035
 
