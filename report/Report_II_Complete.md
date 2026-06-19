@@ -1245,7 +1245,7 @@ what it uniquely provides, and only once launch economics enter the parity band 
 | 10.3 | Radiator area | $A_{\mathrm{rad}} = Q/[\varepsilon\sigma T^4 n_s(1-f_p)]$ |
 | 11.1 | Array power | $P = S_0 A\,\eta\,\kappa\,\eta_{\mathrm{path}}$ |
 | 12.1 | Panel frequency | $f_1 = (\beta/2\pi)\sqrt{D/(\rho_A a^4)}$ |
-| 13.1 | Gravity-gradient torque | $\tau_{\mathrm{gg}} = \tfrac{3}{2} n^2 |I_z-I_x|\sin 2\theta$ |
+| 13.1 | Gravity-gradient torque | $\tau_{\mathrm{gg}} = \tfrac{3}{2}\, n^2\, \Delta I\, \sin 2\theta$ |
 | 14.1 | Telescope gain / FSPL | $G=(\pi D/\lambda)^2$, $L_{\mathrm{fs}}=(4\pi R/\lambda)^2$ |
 | 15.1 | De-orbit Δv | $\Delta v = v_{c1}(1-\sqrt{2 r_2/(r_1+r_2)})$ |
 | 15.2 | Propellant | $m_p = m_{\mathrm{dry}}(e^{\Delta v/I_{sp}g_0}-1)$ |
