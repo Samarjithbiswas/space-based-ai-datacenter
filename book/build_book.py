@@ -25,7 +25,7 @@ import pypandoc
 HERE = pathlib.Path(__file__).resolve().parent
 REPO = HERE.parent
 SRC = REPO / "report" / "Report_II_Complete.md"
-FIG_DIRS = ["figures", "figures2", "figures_pred", "systems_figs"]
+FIG_DIRS = ["figures", "figures2", "figures_pred", "systems_figs", "schematics"]
 OUT_TEX = HERE / "main.tex"
 
 
@@ -116,6 +116,7 @@ def build():
         z.write(HERE / "preamble.tex", "preamble.tex")
         z.write(HERE / "cover.tex", "cover.tex")
         z.write(HERE / "about_author.tex", "about_author.tex")
+        z.write(HERE / "cover_art.png", "cover_art.png")
         for d in FIG_DIRS:
             for f in (HERE / d).rglob("*"):
                 if f.is_file():

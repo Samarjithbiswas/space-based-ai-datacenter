@@ -269,6 +269,8 @@ full survivability, integration, and economic treatment that makes up the remain
 
 > *Abstract.* This chapter fixes the reference architecture used throughout the book, an eighty-one-satellite, tight-formation constellation in a dawn-dusk sun-synchronous orbit, and states the scope and boundaries of the analysis.
 
+![Top view of the reference cluster: about eighty satellites within a one-kilometre circle, linked by laser at roughly one hundred and fifty metre spacing.](schematics/diagram_constellation.png)
+
 Throughout this analysis the reference design follows the Suncatcher parameters: a dawn-dusk
 sun-synchronous orbit at 650 km, an eighty-one-satellite cluster of one-kilometer radius, and
 inter-satellite spacing of roughly 150 m. The reference satellite bus is taken to carry four
@@ -389,6 +391,8 @@ per day. These values are reproduced exactly by `orbital_dc.orbit.velocity(650)`
 
 > *Abstract.* This chapter derives the secular nodal precession caused by Earth's oblateness and the inclination that makes an orbit sun-synchronous, and confirms the reference value of about ninety-eight degrees.
 
+![The dawn-dusk sun-synchronous orbit, with the orbital plane held on the day-night terminator so the satellite stays sunlit.](schematics/diagram_orbit.png)
+
 *Sources: the J2 secular precession and the sun-synchronous condition follow Vallado [17] and Curtis [16].*
 
 A sun-synchronous orbit maintains a near-constant orientation relative to the Sun by exploiting
@@ -442,6 +446,8 @@ cycling, a decisive advantage for a high-power, thermally sensitive payload.
 ## 6. Eclipse geometry and the dawn-dusk advantage
 
 > *Abstract.* This chapter derives the beta angle and the sunlit fraction of the orbit from the cylindrical-shadow geometry, and shows why the dawn-dusk orbit stays sunlit year round.
+
+![The beta angle between the orbit plane and the Sun line, set against Earth's shadow; a high beta keeps the orbit out of eclipse.](schematics/diagram_beta.png)
 
 *Sources: the beta-angle and eclipse-fraction geometry follow Curtis [16] and the SMAD mission-design text [18].*
 
@@ -553,6 +559,8 @@ mass and economic budgets.
 
 > *Abstract.* This chapter treats the two distinct radiation effects, accumulated dose behind shielding and stochastic single-event upsets, and shows that dose is comfortably survivable while upsets impose a bounded throughput tax.
 
+![Radiation shielding and single-event upsets: aluminium attenuates the accumulated dose, while error correction and checkpointing handle upsets.](schematics/diagram_shield.png)
+
 *Sources: trapped-particle fluxes from the AE8/AP8 [25] and AE9/AP9 [26] models; dose-depth via
 SHIELDOSE [27]; environment and effects from Tribble [22], Pisacane [23], and Hastings and Garrett [24].*
 
@@ -593,6 +601,8 @@ twenty percent, which must be carried explicitly in any efficiency figure.
 
 > *Abstract.* This chapter quantifies the debris hazard at the reference altitude: the catastrophic-impact probability for the cluster and the way a single fragmentation couples to neighbours as the spacing tightens.
 
+![The formation paradox: one fragmentation sprays debris into the volume the neighbours occupy, with the neighbour-hit probability scaling as one over spacing squared.](schematics/diagram_formation.png)
+
 *Sources: flux from NASA ORDEM 3.2 [8] and ESA MASTER [9]; the collision-frequency and cascade
 framework follows Kessler and Cour-Palais [28] and Klinkrad [29].*
 
@@ -625,6 +635,8 @@ exact orbit and epoch, as noted in Chapter 24.
 ## 10. Thermal control
 
 > *Abstract.* This chapter develops the thermal model, the linear scaling of radiator area with power and the sharper wall at the chip interface, and identifies the power level above which a passive path can no longer cope.
+
+![The passive conduction path from the junction to the radiator, dominated by the junction-to-case resistance.](schematics/diagram_thermal.png)
 
 *Sources: radiative and conductive relations from Incropera and DeWitt [21]; spacecraft-specific
 practice from the Gilmore thermal-control handbook [20] and ECSS-E-ST-31C [34].*
@@ -762,6 +774,8 @@ The reference four-chip satellite closes at roughly 270 to 290 kg dry.
 
 > *Abstract.* This chapter treats attitude determination and control and the much finer pointing the optical links demand, showing why a fast-steering mirror is required on top of the spacecraft bus.
 
+![Coarse body pointing combined with a fast-steering mirror, which supplies the sub-microradian correction the optical link requires.](schematics/diagram_pointing.png)
+
 *Sources: attitude dynamics and control from Wertz [32] and Sidi [33]; optical-pointing requirements from Hemmati [30].*
 
 The attitude subsystem must hold the bus steady against disturbance torques and, far more
@@ -791,6 +805,8 @@ link and any long inter-satellite hop.
 ## 14. Communications: inter-satellite and ground
 
 > *Abstract.* This chapter develops the inter-satellite and ground communications link budgets and shows how the inverse-square behaviour of an optical beam forces the satellites into a tight formation.
+
+![Optical-beam divergence: the fraction of light captured by the receiver falls as one over range squared, which forces close spacing.](schematics/diagram_link.png)
 
 *Sources: the optical link budget follows Hemmati [30] and the free-space optical satellite-link
 analysis of Liang et al. [6].*
@@ -836,6 +852,8 @@ beyond roughly 3,000 km, a genuine advantage for long-haul, latency-sensitive tr
 ## 15. Propulsion and end-of-life disposal
 
 > *Abstract.* This chapter sizes the propulsion subsystem and the controlled end-of-life disposal, and shows that the de-orbit maneuver dominates the mission velocity budget.
+
+![Controlled de-orbit: a retrograde burn drops the far side of the orbit onto an atmosphere-grazing transfer ellipse.](schematics/diagram_hohmann.png)
 
 *Sources: the rocket equation and propulsion sizing from Sutton and Biblarz [31]; the Hohmann de-orbit from Curtis [16]; the disposal requirement from FCC 22-74 [7].*
 
@@ -920,6 +938,8 @@ economics of Chapter 21. These figures are produced by `orbital_dc.reliability` 
 ## 17. Compute and workload
 
 > *Abstract.* This chapter relates peak hardware capability to the compute that is actually delivered, after utilization, the radiation tax, and thermal throttling are accounted for.
+
+![Delivered compute as a fraction of the headline peak, after real utilization and the radiation tax.](schematics/diagram_compute.png)
 
 *Sources: accelerator throughput and power from vendor documentation [12]; the workload and utilization model from the reference architecture [1].*
 
@@ -1199,6 +1219,8 @@ business case is gated by hardware cost, lifetime, and utilization.
 ## 23. Capability and risk trajectory, 2027-2035
 
 > *Abstract.* This chapter synthesizes the preceding analysis into a defensible capability and risk trajectory through the early 2030s, and names the gating demonstrations.
+
+![Technology-readiness ladder: the components sit mid-scale, while system integration sits near the bottom.](schematics/diagram_trl.png)
 
 Synthesizing the technology-readiness picture of Chapter 2 with the engineering constraints of the
 preceding chapters yields a defensible capability trajectory. By 2027, the demonstration missions

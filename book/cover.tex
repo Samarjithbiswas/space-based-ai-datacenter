@@ -9,51 +9,18 @@
 % no blank pages.
 % ---------------------------------------------------------------------
 
-% ---------- Half-title ----------
-\thispagestyle{empty}
-\vspace*{0.30\textheight}
-\begin{center}
-{\sffamily\bfseries\fontsize{24}{28}\selectfont\color{brandSlate}%
- Space-Based AI Data Centers}\\[10pt]
-{\sffamily\itshape\large\color{brandTeal}%
- An Engineering Study}
-\end{center}
-\clearpage
-
-% ---------- Title page (designed panel) ----------
-\thispagestyle{empty}
-\vspace*{0.4cm}
-\begin{center}
-\begin{tcolorbox}[colback=spaceNavy, colframe=spaceNavy, arc=8pt,
-  boxrule=0pt, left=26pt, right=26pt, top=30pt, bottom=30pt, width=\textwidth,
-  enhanced, borderline south={4pt}{0pt}{brandTeal}]
-\raggedright
-{\sffamily\bfseries\footnotesize\color{white!75!brandTeal}%
- \fcolorbox{white!25!spaceNavy}{white!12!spaceNavy}{\strut~EDITION I\,\textbullet\,ENGINEERING STUDY\,\textbullet\,2026~}}\\[26pt]
-{\sffamily\bfseries\fontsize{34}{38}\selectfont\color{white}%
- Space-Based\\ AI Data Centers}\\[10pt]
-{\sffamily\itshape\Large\color{brandTeal!75!white}%
- Physics, Mathematics, Simulation, and Economics\\ of an Orbital Compute Constellation}\\[30pt]
-{\sffamily\normalsize\color{white!80!spaceNavy}%
- A primary-source engineering study of the orbital data-center concept,\\
- from orbital mechanics and thermal control to debris survivability,\\
- launch economics, and a fully open simulation model.}
-\end{tcolorbox}
-
-\vfill
-
-{\sffamily\Large\bfseries\color{brandSlate} Samarjith Biswas, PhD}\\[4pt]
-{\sffamily\normalsize\color{brandGray} Research Scientist III}\\[16pt]
-{\sffamily\small\color{brandGray}%
- samarjithbiswas.com\,\textbullet\,Research Portfolio and Open Toolkits}
-\end{center}
+% ---------- Full-bleed designed cover ----------
+\thispagestyle{empty}%
+\newgeometry{margin=0pt}%
+\noindent\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio=false]{cover_art.png}%
+\restoregeometry
 \clearpage
 
 % ---------- Colophon / copyright ----------
 \thispagestyle{empty}
 \vspace*{\fill}
 \noindent{\sffamily\small\color{brandGray}%
-\textbf{\color{brandSlate}Space-Based AI Data Centers: Physics, Mathematics, Simulation, and Economics.}\\[2pt]
+\textbf{\color{brandSlate}Space-Based Data Center Infrastructure: A Multi-Physics Approach.}\\[2pt]
 Edition I, 2026. By Samarjith Biswas, PhD.\\[10pt]
 This work is released open access. The accompanying source code is licensed under the MIT License;
 the text, figures, and equations are licensed under Creative Commons Attribution 4.0 (CC-BY 4.0).
