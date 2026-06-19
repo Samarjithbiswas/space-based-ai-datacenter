@@ -1,9 +1,9 @@
 """
-Render each governing equation as a clean PNG for LinkedIn / slides.
+Render each governing equation as a clean PNG for the document and slides.
 
-WHY: LinkedIn posts and articles do not support LaTeX or MathJax. When you copy an
+WHY: web posts and articles often do not support LaTeX or MathJax. When you copy an
 HTML page, the rendered math (SVG) does not paste. The reliable way to show real,
-properly-typeset equations on LinkedIn is to insert them as images. This script
+properly-typeset equations is to provide them as standalone images. This script
 renders every equation to a high-resolution transparent-friendly PNG using
 matplotlib's mathtext (no LaTeX installation required).
 
@@ -73,7 +73,7 @@ EQS = [
 
 def render(name, latex, dpi=300):
     # high resolution, transparent background, dark navy glyphs -> sits cleanly on the
-    # white LinkedIn article background with no visible box.
+    # white article background with no visible box.
     fig = plt.figure(figsize=(0.01, 0.01))
     fig.text(0.5, 0.5, latex, ha="center", va="center", fontsize=30, color=INK)
     fig.savefig(OUT / f"eq_{name}.png", dpi=dpi, bbox_inches="tight",

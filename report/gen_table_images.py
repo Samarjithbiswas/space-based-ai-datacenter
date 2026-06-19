@@ -1,4 +1,4 @@
-"""Render the nomenclature and physical-constants tables as clean PNG images for LinkedIn,
+"""Render the nomenclature and physical-constants tables as clean PNG images for the document and slides,
 so math symbols do not break on paste. Manual text layout (no cell clipping); symbols use
 mathtext; units use Unicode superscripts. High resolution, white and transparent copies."""
 from pathlib import Path

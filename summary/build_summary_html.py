@@ -1,20 +1,17 @@
-"""Build a self-contained, equation-free, long-form LinkedIn article in HTML.
+"""Build a self-contained, equation-free, long-form summary article in HTML.
 
-Why this exists: LinkedIn's article editor cannot render LaTeX or pasted equations, and the
-earlier text version read as a series of short sections. This version removes every equation,
-describes the physics in plain language, and runs each section as several full paragraphs so it
-reads like a written piece rather than a list. Key figures are embedded as base64 so the file is
-a single portable document that renders anywhere and can be read directly or its text copied
-section by section into the LinkedIn editor.
+The article describes the physics in plain language and runs each section as several full
+paragraphs. The charts and geometry schematics are embedded as base64 PNGs so the file is a
+single portable document that renders anywhere.
 
-Output: linkedin/Space_DataCenter_LinkedIn_Article.html
+Output: summary/Space_DataCenter_Summary_Article.html
 """
 import base64
 import pathlib
 from diagrams import DIAGRAMS
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-OUT = pathlib.Path(__file__).resolve().parent / "Space_DataCenter_LinkedIn_Article.html"
+OUT = pathlib.Path(__file__).resolve().parent / "Space_DataCenter_Summary_Article.html"
 
 # (placeholder, path, caption)
 FIGS = {

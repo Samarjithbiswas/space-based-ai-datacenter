@@ -1,7 +1,7 @@
-"""Inline SVG geometry diagrams for the LinkedIn article.
+"""Inline SVG geometry diagrams for the summary article.
 
 Each entry is (svg, caption). The svg carries NO title text on top; the caption is
-rendered in the document body, below the figure, by build_linkedin_html.py. Palette
+rendered in the document body, below the figure, by build_summary_html.py. Palette
 matches the article: ink #16243a, teal #0d7d74, slate #26313f, accent #c75c2e.
 """
 

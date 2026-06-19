@@ -1,5 +1,5 @@
 """Render EVERY Markdown table in Report_II_Complete.md as a clean PNG (white + transparent),
-matching the figure styling, so all tables can be dropped into LinkedIn as images.
+matching the figure styling, so all tables can be used as standalone images.
 
 Per-cell: math in $...$ is typeset with mathtext; plain cells get Unicode superscripts; literal
 currency '$' is escaped; each cell is wrapped if long so nothing clips. Output: report/tables/.

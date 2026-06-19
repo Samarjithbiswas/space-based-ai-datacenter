@@ -25,5 +25,5 @@ val.txt
 
 # figures and HTML are committed so the repo renders on GitHub.
 
-# personal LinkedIn posting drafts and guides (kept local, not published)
-linkedin/*.txt
+# personal posting drafts (kept local, not published)
+summary/*.txt

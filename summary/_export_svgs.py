@@ -1,7 +1,7 @@
 """Rasterize the inline-SVG diagrams to PNG using the headless browser's canvas.
 
 Serves a page that holds every diagram SVG plus a script that draws each onto a 2x canvas
-and POSTs the PNG back here; this handler writes them to linkedin/post_figures/. Run in the
+and POSTs the PNG back here; this handler writes them to summary/post_figures/. Run in the
 background, then load http://localhost:8775/ in the preview browser.
 """
 import sys, pathlib, http.server, socketserver

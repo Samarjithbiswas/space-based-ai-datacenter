@@ -1,8 +1,8 @@
-"""Render the LinkedIn post cover: the 'Cover 2' render with the Part II title overlaid.
+"""Render the cover photo for the article: the 'Cover 2' render with the Part II title overlaid.
 
 Continues the first report's title ("Space-Based Data Center Infrastructure: A Multi-Physics
 Approach") as Part II. A dark bottom gradient scrim gives the title contrast over the bright
-Earth. Output: linkedin/Cover_Part_II.png
+Earth. Output: summary/Cover_Part_II.png
 """
 import pathlib
 from PIL import Image, ImageDraw, ImageFont

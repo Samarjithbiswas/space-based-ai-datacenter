@@ -25,8 +25,8 @@ You should see a `PASS` for all seven steps and freshly generated PNGs under
 | `python systems-model/run_study.py` | Solves the integrated design point + constellation + Monte-Carlo; writes 6 figures |
 | `python survivability-model/validate.py` | 14 worked-example checks |
 | `python survivability-model/survivability.py` | The 7 survivability figures |
-| `python report/sim_survivability.py` | The 7 report figures (with data-source credit lines) |
-| `python report/make_equation_images.py` | 25 equation PNGs for slides / LinkedIn |
+| `python report/sim_survivability.py` | The 7 report figures |
+| `python report/make_equation_images.py` | Equation images (PNG) |
 
 ## Use the models in your own code
 
