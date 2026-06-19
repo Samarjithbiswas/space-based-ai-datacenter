@@ -732,20 +732,44 @@ makes de-orbit slow and requires coordination with the formation.
 Because no satellite can be repaired in orbit, reliability must be designed in and availability
 bought through redundancy and replenishment.
 
-**Exponential reliability.** In the flat region of the bathtub curve, failures are a constant-hazard
-Poisson process, so the probability that a unit survives to time $t$ is $R(t) = e^{-t/\mathrm{MTBF}}$.
-A bus with a mean time between failures of 50,000 hours has $R(5\,\mathrm{yr}) = e^{-0.876} = 0.42$:
-fewer than half survive un-aided, so redundancy is mandatory.
+**Exponential reliability.** Let the hazard rate $\lambda(t)$ be the instantaneous failure rate of a
+surviving unit. The survival probability obeys $dR/dt = -\lambda(t)\,R$, whose solution is
+$R(t) = \exp[-\int_0^t \lambda(t')\,dt']$. In the flat region of the bathtub curve the hazard is
+constant, $\lambda = 1/\mathrm{MTBF}$, so
 
-**k-of-n redundancy.** If a system functions when at least $k$ of $n$ identical units survive, each
-with reliability $p$, then $R_{\mathrm{sys}} = \sum_{i=k}^n \binom{n}{i} p^i (1-p)^{n-i}$. This sizes
-both chip-level redundancy within a satellite and satellite-level over-provisioning within a cluster.
+$$R(t) = e^{-\lambda t} = e^{-t/\mathrm{MTBF}}. \tag{16.1}$$
 
-**Constellation availability and replenishment.** The expected fraction of required capacity
-available, absent replenishment, is $\min(1,\ n_{\mathrm{deployed}}\, p / n_{\mathrm{required}})$.
-Operational constellations sustain capacity by continuous replenishment at a rate near the inverse
-of the design life, about twenty percent per year for a five-year life. The associated replenishment
-cost is a major and recurring operating expense, carried explicitly in the economics of Chapter 21.
+This is the memoryless limit: a constant hazard is exactly the condition under which failures form a
+Poisson process, and the mean of the resulting exponential lifetime distribution is $1/\lambda$, which
+is why the mean time between failures appears directly in the exponent. A bus with a mean time between
+failures of 50,000 hours has $R(5\,\mathrm{yr}) = e^{-0.876} = 0.42$, so fewer than half survive
+un-aided; a higher-grade bus at 150,000 hours reaches $R(5\,\mathrm{yr}) = 0.75$. Either way a bare unit
+is not enough, and redundancy is mandatory.
+
+**k-of-n redundancy.** Consider $n$ identical units that fail independently, each surviving with
+probability $p = R(t)$. The number that survive is binomial, $\Pr[X = i] = \binom{n}{i} p^i (1-p)^{n-i}$.
+A system that functions when at least $k$ of the $n$ survive therefore has reliability
+
+$$R_{\mathrm{sys}} = \Pr[X \ge k] = \sum_{i=k}^{n} \binom{n}{i}\, p^i (1-p)^{n-i}. \tag{16.2}$$
+
+The same expression sizes chip-level redundancy within a satellite and satellite-level
+over-provisioning within a cluster. Its power is in the steep climb of the tail sum: with $n = 81$
+nodes required to deliver $k = 70$, a per-node reliability of $p = 0.90$ yields
+$R_{\mathrm{sys}} = 0.89$, but raising the per-node figure to $p = 0.95$ pushes it to $0.999$. Small
+gains in unit reliability buy large gains in system reliability once the redundancy margin is set.
+
+**Constellation availability and replenishment.** The expected fraction of required capacity available,
+absent replenishment, is $\min(1,\ n_{\mathrm{deployed}}\, p / n_{\mathrm{required}})$. For 81 deployed,
+75 required, and $p = 0.90$, this is $0.97$, so a six-unit margin holds capacity near full even before
+any resupply. To sustain that level over the mission, units must be replaced as they fail. Modeling the
+fleet as a renewal process, each unit that fails is replaced after a lead time, and in steady state the
+replenishment rate equals the failure rate. For a design life $L$ the long-run annual replacement rate
+is approximately $1/L$, about twenty percent per year for a five-year life, and holding a fixed
+availability target against a given per-unit reliability sets the deployed count: reaching ninety-five
+percent availability of 75 required nodes at $p = 0.90$ calls for on the order of 89 deployed. The
+associated replenishment is a major and recurring operating expense, carried explicitly in the
+economics of Chapter 21. These figures are produced by `orbital_dc.reliability` (`k_of_n`,
+`expected_capacity_fraction`, `spares_for_availability`, `annual_replacement_rate`).
 
 ![Fig. 16.1, Per-node reliability versus time and the over-provisioning needed to hold capacity.](systems_figs/fig_reliability.png)
 
@@ -862,14 +886,34 @@ and the figures are produced by the same code that a reader can run.
 
 
 
-A point design is not credible without an uncertainty band. The model propagates the dominant input
-uncertainties by Monte-Carlo: the solar-activity scenario (which moves atmospheric density by up to
-a factor of one hundred), the debris-flux band, the model-FLOPs utilization, and the undisclosed
-chip power. The resulting distributions of natural lifetime, catastrophic-impact probability, total
-Δv, and delivered compute are reported as fifth, fiftieth, and ninety-fifth percentiles rather than
-as single numbers (Fig. 19.1).
+A point design is not credible without an uncertainty band. Two complementary tools are used: linear
+error propagation for a quick analytic estimate, and Monte-Carlo for the full distribution when the
+inputs span orders of magnitude.
 
-Two sensitivities stand out. First, the natural lifetime is wildly sensitive to the solar cycle:
+**Linear error propagation.** For an output $y = f(x_1,\dots,x_m)$ with independent inputs of standard
+deviation $\sigma_{x_j}$, a first-order Taylor expansion about the mean gives
+
+$$\sigma_y^2 \approx \sum_{j=1}^{m}\left(\frac{\partial f}{\partial x_j}\right)^2 \sigma_{x_j}^2. \tag{19.1}$$
+
+This is exact for linear $f$ and a good guide when the inputs vary by a few percent. It fails precisely
+where the dominant uncertainty here lives, in atmospheric density, which is lognormal and varies by up
+to two orders of magnitude across the solar cycle, so the partial-derivative picture is supplemented by
+sampling.
+
+**Monte-Carlo propagation.** The model draws $N$ samples of the uncertain inputs from their assumed
+distributions, evaluates the full model for each, and forms the empirical distribution of every output.
+The dominant inputs sampled are the solar-activity scenario (which moves atmospheric density by up to a
+factor of one hundred), the debris-flux band, the model-FLOPs utilization, and the undisclosed chip
+power. The estimator converges as $1/\sqrt{N}$, so a few thousand samples fix the central percentiles to
+better than the input uncertainty warrants. The resulting distributions of natural lifetime,
+catastrophic-impact probability, total $\Delta v$, and delivered compute are reported as fifth,
+fiftieth, and ninety-fifth percentiles rather than as single numbers (Fig. 19.1), produced by
+`orbital_dc.montecarlo.monte_carlo`.
+
+**Sensitivity ranking.** To attribute output variance to inputs, the model uses a one-at-a-time sweep
+(`montecarlo.one_at_a_time`) that holds all but one input at its central value and records the output
+swing. The ratio of that swing to the baseline is a transparent local sensitivity index; where inputs
+interact, the full Monte-Carlo variance is the honest measure. Two sensitivities stand out. First, the natural lifetime is wildly sensitive to the solar cycle:
 the same satellite that decays in four years at solar maximum lasts over three hundred years at
 solar minimum, which is precisely why the design cannot rely on passive disposal. Second, delivered
 compute is sensitive to model-FLOPs utilization and to the radiation throughput tax, which is why
