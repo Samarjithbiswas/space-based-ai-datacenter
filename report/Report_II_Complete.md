@@ -288,7 +288,7 @@ per-chip power and chain resistance,
 $$T_j = T_{\mathrm{rad}} + P_{\mathrm{chip}}\, R_{\mathrm{th}}
       = 21.3 + 300 \times 0.300 = 111.3\ ^\circ\mathrm{C}. \tag{2A.4}$$
 
-Against a junction limit of $125\ ^\circ\mathrm{C}$, this leaves a margin of $13.6\ ^\circ\mathrm{C}$.
+Against a junction limit of $125\ ^\circ\mathrm{C}$, this leaves a margin of $13.7\ ^\circ\mathrm{C}$.
 The case closes, but not by much. The single result that named this study is that margin: passive
 cooling of a 300-watt-class accelerator at this altitude is feasible, and feasible only with a thin
 allowance.
@@ -297,7 +297,7 @@ allowance.
 failing. If a single pipe drops out, the pipe resistance rises by about one part in seven, adding
 $0.011\ \mathrm{K/W}$ to the chain,
 
-$$R_{\mathrm{fail}} = R_{\mathrm{th}} + \Delta r_{\mathrm{pipe}} = 0.300 + 0.011 = 0.311\ \mathrm{K/W},
+$$R_{\mathrm{fail}} = R_{\mathrm{th}} + \Delta r_{\mathrm{pipe}} = 0.300 + 0.0114 = 0.3114\ \mathrm{K/W},
 \qquad T_{j,\mathrm{fail}} = T_{\mathrm{rad}} + P_{\mathrm{chip}}\, R_{\mathrm{fail}} = 114.8\ ^\circ\mathrm{C}. \tag{2A.5}$$
 
 The junction climbs to $114.8\ ^\circ\mathrm{C}$, so the margin narrows to about ten degrees but stays
@@ -372,7 +372,7 @@ A convenient single length scale for a uniform planar arrangement is the side of
 
 $$ s \;=\; \sqrt{A_{\mathrm{sat}}} \;=\; R\,\sqrt{\frac{\pi}{N}}. \tag{3.2}$$
 
-Substituting the reference values, $s = (1000\ \mathrm{m})\sqrt{\pi/81} = (1000\ \mathrm{m})\,(1.772/9) \approx 197\ \mathrm{m}$, which is the same order as the quoted nearest-neighbour spacing of roughly $150\ \mathrm{m}$; the difference reflects that nearest neighbours sit closer than the area-equivalent square edge, since a hexagonal close packing reduces the nearest-neighbour distance by a factor near $\sqrt{2/\sqrt{3}}$ relative to the square cell. The design implication is that station-keeping and collision-avoidance budgets must hold relative position to a small fraction of $s$, so the control authority required scales inversely with the spacing the architecture selects.
+Substituting the reference values, $s = (1000\ \mathrm{m})\sqrt{\pi/81} = (1000\ \mathrm{m})\,(1.772/9) \approx 197\ \mathrm{m}$, which is the same order as the quoted nearest-neighbour spacing of roughly $150\ \mathrm{m}$. The uniform area-per-satellite estimate is an upper bound on the typical separation; the quoted $150\ \mathrm{m}$ reflects a denser central arrangement than a uniform fill, since the satellites are clustered rather than spread evenly over the disc. The design implication is that station-keeping and collision-avoidance budgets must hold relative position to a small fraction of $s$, so the control authority required scales inversely with the spacing the architecture selects.
 
 **Orbital period and ground-track repetition.** At the reference altitude $h = 650\ \mathrm{km}$ the orbital radius is $a = R_{\oplus} + h$, and the Keplerian period follows from equating gravitational and centripetal acceleration, $\mu/a^{2} = \omega^{2} a$ with $\omega = 2\pi/T$, which rearranges to
 
@@ -487,6 +487,8 @@ The design implication is that contingency and degradation stack: the array must
 
 > *Abstract.* This chapter derives the small set of circular-orbit quantities, speed, period, and specific energy, on which every later chapter depends, and works the reference orbit as an example.
 
+![Geometry of a Keplerian orbit: Earth at one focus, the major axis 2a from apogee to perigee, and the satellite at radius r and true anomaly theta.](schematics/sch_orbit_geometry.png)
+
 *Sources: the circular-orbit relations, vis-viva equation, and specific energy follow standard
 astrodynamics texts, principally Curtis [16] and Vallado [17].*
 
@@ -545,7 +547,7 @@ points. While the satellite completes one orbit in time $T$, Earth turns beneath
 $\omega_\oplus = 7.292\times10^{-5}$ rad/s, so successive equator crossings step westward by
 $\Delta\lambda = \omega_\oplus T$. A ground track repeats when an integer number of orbits $k$ fills
 an integer number $d$ of nodal days, $k\,T = d\,(2\pi/\omega_\oplus)$; for the reference orbit
-$\Delta\lambda \approx 24.4^\circ$ per revolution, and the near-15-orbit day sets the natural revisit
+$\Delta\lambda \approx 24.5^\circ$ per revolution, and the near-15-orbit day sets the natural revisit
 cadence over a given ground station (Chapter 14).
 
 **Worked example.** At $h = 650$ km, $a = R_E + h = 7.021\times10^6$ m:
@@ -583,7 +585,7 @@ $\sin\phi = \sin i\,\sin(\omega + \theta)$ with $\theta$ the true anomaly, and a
 revolution removes the short-period terms and leaves the secular part
 
 $$\bar R = \frac{n^2 J_2 R_E^2}{2}\,\frac{1}{(1-e^2)^{3/2}}
-\left(\frac{3}{2}\sin^2 i - 1\right). \tag{5.3}$$
+\left(1 - \frac{3}{2}\sin^2 i\right). \tag{5.3}$$
 
 Lagrange's planetary equation for the node connects this averaged potential to the drift of $\Omega$,
 
@@ -603,7 +605,7 @@ Setting $\dot\Omega = \dot\Omega_{\mathrm{sun}}$ and solving,
 $$\cos i = -\frac{2\,\dot\Omega_{\mathrm{sun}}\, a^2}{3\, n\, J_2\, R_E^2}. \tag{5.5}$$
 
 The negative sign forces $i > 90^\circ$, a retrograde, near-polar orbit. At 650 km,
-$n = 1.074\times10^{-3}\ \mathrm{rad/s}$ and (5.5) gives $\cos i = -0.139$, hence $i = 98.0^\circ$,
+$n = 1.072\times10^{-3}\ \mathrm{rad/s}$ and (5.5) gives $\cos i = -0.139$, hence $i = 98.0^\circ$,
 matching the reference mission and the value returned by `orbital_dc.orbit.sso_inclination(650)`. By
 construction the corresponding nodal precession is $0.9856$ degrees per day, exactly one turn per
 tropical year, which is the defining property of the orbit. The required inclination rises slowly with
@@ -619,7 +621,7 @@ $$n = \sqrt{\frac{\mu}{a^3}}, \tag{5.6}$$
 
 where $\mu = G M_E$ is Earth's gravitational parameter and $a = R_E + h$ for a circular orbit at altitude $h$. The orbital period is then $T = 2\pi / n = 2\pi\sqrt{a^3/\mu}$. Because $n$ scales as $a^{-3/2}$, doubling the altitude lengthens the period and slows the satellite, which is the falling factor that competes with the rising $a^2$ term in (5.5).
 
-**The worked inclination at the reference altitude.** Take the reference orbit at $h = 650$ km, so $a = R_E + h \approx 6378 + 650 = 7028$ km. Substituting into (5.6) with $\mu = 3.986\times10^{14}\ \mathrm{m^3/s^2}$ returns $n = 1.074\times10^{-3}\ \mathrm{rad/s}$, the value already quoted in the chapter. Feeding this $n$, together with $J_2 = 1.083\times10^{-3}$ and $R_E = 6378$ km, into the synchronization condition (5.5) yields $\cos i = -0.139$, hence $i = 98.0^\circ$, in agreement with the reference mission. The two relations therefore form a closed chain: altitude fixes $n$ through (5.6), and $n$ fixes the inclination through (5.5).
+**The worked inclination at the reference altitude.** Take the reference orbit at $h = 650$ km, so $a = R_E + h \approx 6378 + 650 = 7028$ km. Substituting into (5.6) with $\mu = 3.986\times10^{14}\ \mathrm{m^3/s^2}$ returns $n = 1.072\times10^{-3}\ \mathrm{rad/s}$, the value already quoted in the chapter. Feeding this $n$, together with $J_2 = 1.083\times10^{-3}$ and $R_E = 6378$ km, into the synchronization condition (5.5) yields $\cos i = -0.139$, hence $i = 98.0^\circ$, in agreement with the reference mission. The two relations therefore form a closed chain: altitude fixes $n$ through (5.6), and $n$ fixes the inclination through (5.5).
 
 **Sensitivity to altitude.** Differentiating (5.5) shows how tightly the inclination must be held as the altitude is chosen. Writing $\cos i \propto a^2 / n = a^2 a^{3/2} = a^{7/2}$ after inserting (5.6), the synchronization condition becomes
 
@@ -716,6 +718,8 @@ $$t_E = \frac{2\psi}{2\pi}\,T = \frac{\psi}{\pi}\,T. \tag{6.9}$$
 
 > *Abstract.* This chapter derives the orbital-decay rate from the energy balance under atmospheric drag and integrates it to a mission lifetime, a result that decides compliance with the five-year disposal rule.
 
+![Atmospheric drag slowly removes orbital energy, so the orbit spirals inward; the natural lifetime is about two decades at moderate solar activity.](schematics/sch_decay_spiral.png)
+
 *Sources: density from the NRLMSIS empirical model [11]; the drag and orbit-averaged decay treatment
 follows Curtis [16] and the space-environment texts of Tribble [22] and Pisacane [23].*
 
@@ -787,7 +791,7 @@ $$t_{\mathrm{life}} \approx \frac{H}{B\,\rho_0\,\sqrt{\mu\, a_0}}. \tag{7.7}$$
 
 Equation (7.7) shows transparently that lifetime scales inversely with both the ballistic factor and the ambient density, the latter being the term that swings by two orders of magnitude across the solar cycle.
 
-**Worked example.** Take the reference bus with $B = C_D (A/m) = 2.2 \times 0.0084 \approx 0.0185\ \mathrm{m^2/kg}$ at $a_0 \approx 7028\ \mathrm{km}$ and $\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}$, so that $\sqrt{\mu a_0} \approx 1.67\times 10^{9}\ \mathrm{m^2/s}$. With a representative scale height of order tens of kilometres, (7.7) returns lifetimes in the decade-to-century range as the density $\rho_0$ is swept across its solar-cycle band, consistent with the integrated result of roughly twenty-two years at moderate activity reported above.
+**Worked example.** Take the reference bus with $B = C_D (A/m) = 2.2 \times 0.0084 \approx 0.0185\ \mathrm{m^2/kg}$ at $a_0 \approx 7028\ \mathrm{km}$ and $\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}$, so that $\sqrt{\mu a_0} \approx 5.3\times 10^{10}\ \mathrm{m^2/s}$. With a representative scale height of order tens of kilometres, (7.7) returns lifetimes in the decade-to-century range as the density $\rho_0$ is swept across its solar-cycle band, consistent with the integrated result of roughly twenty-two years at moderate activity reported above.
 
 **Design implication.** Equation (7.7) makes the sensitivity explicit; since lifetime falls linearly with the area-to-mass ratio and with ambient density, a designer cannot passively meet the five-year rule across the solar cycle, and the de-orbit propellant budget must be sized to the worst case rather than to a nominal density.
 
@@ -816,7 +820,7 @@ this curve is SHIELDOSE-2 with an AE8/AP8 or AE9/AP9 trapped-particle environmen
 
 **Result and margin.** At 10 mm of aluminium, the five-year cumulative dose is approximately 1.06
 krad(Si). The reference mission reports that its processor's most sensitive subsystem, the
-high-bandwidth memory, first showed irregularities at 2 krad(Si), about three times the 750
+high-bandwidth memory, first showed irregularities at 2 krad(Si), about 2.7 times the 750
 rad(Si) five-year requirement, and exhibited no hard failures up to the maximum tested dose of 15
 krad(Si). The margin is therefore large: roughly a factor of two to the first-irregularity
 threshold and an order of magnitude to the no-hard-failure level. Total ionizing dose is comfortably
@@ -848,11 +852,11 @@ $$D_\infty \approx \frac{D(x,T)}{T} = \frac{1.06\ \mathrm{krad(Si)}}{5\ \mathrm{
 
 which sits in the same range as the 100 to 150 rad(Si) per year cited for comparable sun-synchronous orbits once the small residual electron term at 10 mm is included. The shielding margin is governed not by the attenuation length, which is fixed by the spectrum, but by the floor, so beyond roughly one to two centimetres of aluminium the design trades shield mass for negligible dose reduction.
 
-**Upset rate and the throughput tax.** Expanding the upset relation $R_{\mathrm{SEU}} = \sigma_{\mathrm{SEU}}\,\phi\, N_{\mathrm{bits}}$, the fraction of operations corrupted per unit time is the upset rate divided by the bit-access rate $r_{\mathrm{acc}}$, and the throughput tax $\tau$ is the share of cycles reclaimed by error correction and checkpoint replay:
+**Upset rate and the throughput tax.** Expanding the upset relation $R_{\mathrm{SEU}} = \sigma_{\mathrm{SEU}}\,\phi\, N_{\mathrm{bits}}$, the throughput tax $\tau$ is the share of processor cycles reclaimed by error correction and checkpoint replay, namely the upset rate times the cycles charged per upset, divided by the cycle rate $r_{\mathrm{cyc}}$:
 
-$$\tau = \frac{c_{\mathrm{ECC}}\, R_{\mathrm{SEU}}}{r_{\mathrm{acc}}} = \frac{c_{\mathrm{ECC}}\, \sigma_{\mathrm{SEU}}\, \phi\, N_{\mathrm{bits}}}{r_{\mathrm{acc}}}, \tag{8.5}$$
+$$\tau = \frac{c_{\mathrm{ECC}}\, R_{\mathrm{SEU}}}{r_{\mathrm{cyc}}} = \frac{c_{\mathrm{ECC}}\, \sigma_{\mathrm{SEU}}\, \phi\, N_{\mathrm{bits}}}{r_{\mathrm{cyc}}}, \tag{8.5}$$
 
-where $c_{\mathrm{ECC}}$ is the average cycles charged per detected upset. The tax scales linearly with flux, so it peaks in the South Atlantic Anomaly and the polar horns and falls to a small floor elsewhere, consistent with the bounded ten to twenty percent figure carried in the efficiency budget.
+where $c_{\mathrm{ECC}}$ is the average cycles charged per detected upset and $r_{\mathrm{cyc}}$ is the processor cycle rate, so $\tau$ is dimensionless. The tax scales linearly with flux, so it peaks in the South Atlantic Anomaly and the polar horns and falls to a small floor elsewhere, consistent with the bounded ten to twenty percent figure carried in the efficiency budget.
 
 **Design implication.** Shield to the dose floor rather than to an arbitrary thickness, since mass past a centimetre or two buys almost no margin; then size the compute overhead from Eq. (8.5) so that the upset tax is budgeted explicitly rather than absorbed silently into throughput claims.
 
@@ -951,7 +955,7 @@ $$A_{\mathrm{rad}} = \frac{Q}{\varepsilon\,\sigma\,T^4\,n_s\,(1 - f_p)}. \tag{10
 This is **linear in $Q$**: there is no economy of scale in radiative cooling, a fact with profound
 architectural consequences. **Worked example:** at 1 MW, 20 C, $\varepsilon = 0.90$, $n_s = 2$,
 $f_p = 0.12$, the per-side flux is $\varepsilon\sigma T^4 = 376.9\ \mathrm{W/m^2}$, the net flux is
-$663.3\ \mathrm{W/m^2}$, and $A_{\mathrm{rad}} = 1508\ \mathrm{m^2}$. This matches the industry rule
+$663.3\ \mathrm{W/m^2}$, and $A_{\mathrm{rad}} = 1508\ \mathrm{m^2}$. This is of the same order as the industry rule
 of roughly 1,200 m² per megawatt and explains why Starcloud's gigawatt vision implies
 multi-kilometer panels.
 
@@ -961,7 +965,7 @@ multi-kilometer panels.
 factor $F = \tfrac{1}{2}[1 - \sqrt{1 - (R_E/r)^2}]$, equal to 0.290 at 650 km. The absorbed loads
 are $Q_{\mathrm{albedo}} = S_0\, a_{\mathrm{alb}}\, F\, \alpha_s\, A$ and $Q_{\mathrm{IR}} =
 q_{\mathrm{IR}}\, F\, \varepsilon\, A$; for an edge-on radiator the direct-solar term vanishes. With
-$\alpha_s = 0.15$ and $A = 4\ \mathrm{m^2}$ these are about 71 W and 251 W respectively, which the
+$\alpha_s = 0.15$ and $A = 4\ \mathrm{m^2}$ these are about 71 W and 247 W respectively, which the
 design lumps to roughly 100 W of parasitic load.
 
 ![Fig. 10.2  Earth view factor versus altitude, and the combined albedo, Earth-infrared, and solar load on a four-square-meter surface. External loads set the parasitic fraction in the radiator sizing.](figures2/figA2_loads.png)
@@ -1012,6 +1016,8 @@ This reproduces the 417 W threshold and confirms that no radiator size relaxes i
 
 > *Abstract.* This chapter sizes the electrical-power subsystem for the dawn-dusk orbit, where near-continuous sunlight makes the battery small and the array sizing the dominant term.
 
+![Power flow on the dawn-dusk orbit: the array feeds the bus and loads, and because the orbit is sunlit for more than ninety-five percent of each revolution the battery is barely exercised.](schematics/sch_power_budget.png)
+
 *Sources: solar-array and power-budget sizing from SMAD [18] and the Gilmore handbook [20]; cell and battery parameters from vendor datasheets [12].*
 
 The power subsystem converts sunlight to usable electrical power and buffers the brief eclipse.
@@ -1047,7 +1053,7 @@ Linearizing the temperature term about the reference temperature of 28 C, the re
 
 $$\frac{\eta(T) - \eta_{\mathrm{life}}}{\eta_{\mathrm{life}}} = k_T\,(T - 28). \tag{11.3}$$
 
-Using $\eta_{\mathrm{BOL}} = 0.296$ and $\eta_{\mathrm{life}} = 0.275$ over five years, equation (11.2) gives an implied annual rate $d = 1 - (0.275/0.296)^{1/5} \approx 0.0147$, that is about 1.5 percent per year, consistent with the five-year fluence quoted for the triple-junction cell.
+Using $\eta_{\mathrm{BOL}} = 0.296$ and $\eta_{\mathrm{life}} = 0.275$ over five years, equation (11.2) gives an implied annual rate $d = 1 - (0.275/0.296)^{1/5} pprox 0.0146$, that is about 1.5 percent per year, consistent with the five-year fluence quoted for the triple-junction cell.
 
 **Array equilibrium temperature.** Because $\eta$ depends on $T$, the operating temperature is itself set by a radiative balance and should be solved, not assumed. Equating absorbed solar flux to emitted thermal flux from both faces of the panel, with absorptance $\alpha$, front and back emittances $\varepsilon_f + \varepsilon_b$, and the electrical power drawn off the front face, gives
 
@@ -1323,6 +1329,8 @@ which is the sizing relation quoted in the chapter. The exponential dependence o
 
 > *Abstract.* This chapter develops reliability and constellation availability: exponential survival, k-of-n redundancy, and the continuous replenishment needed to hold capacity over the mission.
 
+![Redundancy and replenishment: the constellation deploys n units and requires k of them, while continuous resupply at about one over the design life per year holds capacity.](schematics/sch_redundancy.png)
+
 *Sources: reliability and redundancy methods from the SMAD systems texts [18, 19].*
 
 Because no satellite can be repaired in orbit, reliability must be designed in and availability
@@ -1390,11 +1398,11 @@ with variance $np(1-p)$. The deployed count $n$ must therefore exceed the requir
 
 $$\dot{N}_{\mathrm{repl}} = N\,\lambda = \frac{N}{L}. \tag{16.6}$$
 
-For a constellation of 81 units at a five-year design life, $\dot{N}_{\mathrm{repl}} = 81/5 \approx 16$ units per year, consistent with the roughly twenty percent annual rate stated above. The deployed count then follows from inverting the availability constraint: holding capacity for $n_{\mathrm{required}}$ nodes at availability $A$ and per-unit reliability $p$ requires
+For a constellation of 81 units at a five-year design life, $\dot{N}_{\mathrm{repl}} = 81/5 \approx 16$ units per year, consistent with the roughly twenty percent annual rate stated above. The deployed count then follows from inverting the availability constraint. A mean-capacity lower bound, holding the expected number of survivors at $n_{\mathrm{required}}$ for per-unit reliability $p$ and availability target $A$, is
 
-$$n_{\mathrm{deployed}} \gtrsim \frac{A\,n_{\mathrm{required}}}{p}. \tag{16.7}$$
+$$n_{\mathrm{deployed}} \gtrsim \frac{A\,n_{\mathrm{required}}}{p}, \tag{16.7}$$
 
-The design implication is that survival reliability, redundancy margin, and resupply cadence are not independent choices; fixing any two through Eqs. (16.6) and (16.7) determines the third and, with it, the recurring launch and manufacturing budget carried in the mission economics.
+which for the figures above gives about 80. The stricter requirement, that the probability of at least $n_{\mathrm{required}}$ survivors itself reach $A$ evaluated from the binomial tail (16.2), is what `spares_for_availability` applies and raises the figure to about 89, the value quoted earlier. The design implication is that survival reliability, redundancy margin, and resupply cadence are not independent choices; fixing any two through Eqs. (16.6) and (16.7) determines the third and, with it, the recurring launch and manufacturing budget carried in the mission economics.
 
 ## 17. Compute and Workload
 
@@ -1475,6 +1483,8 @@ Equation (17.7) makes the inverse dependence explicit: because $\mathrm{MFU}$ fo
 ## 18. The Integrated System Model
 
 > *Abstract.* This chapter closes the integrated system: mass, power, thermal, and velocity budgets are solved self-consistently for the reference design point.
+
+![The integrated design loop: power, array area, mass, propulsion, and thermal are solved together and iterated to a self-consistent design point.](schematics/sch_budget_closure.png)
 
 *Sources: the mass, power, thermal, and delta-v closure follows standard concurrent-design practice (SMAD [18]).*
 
@@ -1740,7 +1750,7 @@ The grouping $A/m$ is the area-to-mass ratio, the single most important design v
 
 $$ P_{\mathrm{cluster}} = 1 - (1 - p_1)^{N}. \tag{20.5}$$
 
-For small $p_1$ this is close to $N p_1$. The cluster figure of about 17 percent is therefore dominated by member count, so adding satellites raises survivability cost super-linearly. The design implication is direct: constellation sizing cannot be separated from the per-member debris hazard, and growth in $N$ must be paid for in either shielding mass or accepted mission risk.
+For small $p_1$ this is close to $N p_1$, which is an upper bound: the exact cluster probability $1 - (1 - p_1)^N$ is concave in $N$ and bends below the linear estimate, saturating toward one. The cluster figure of about 17 percent is therefore dominated by member count, and adding satellites raises the cluster risk close to linearly at this scale, with the per-member marginal risk slowly decreasing as $N$ grows. The design implication is direct: constellation sizing cannot be separated from the per-member debris hazard, and growth in $N$ must be paid for in either shielding mass or accepted mission risk.
 
 # PART V, ECONOMICS AND PREDICTIONS
 
@@ -2233,7 +2243,7 @@ electrical PUE near 1.6; efficiency improves only at many-chip scale.
 | --- | --- |
 | Compute power (W) | 800 |
 | Total power (W) | 1,265 |
-| Effective PUE | 1.84 |
+| Effective PUE (per usable compute, incl. radiation derate) | 1.84 |
 | Radiator area (m²) | 1.1 |
 | 5-yr dose behind 10 mm (rad) | 1,054 |
 | Dose margin (vs 2 krad) | 1.9× |
@@ -2257,6 +2267,8 @@ electrical PUE near 1.6; efficiency improves only at many-chip scale.
 ## 28. Constellation Design and Relative Dynamics
 
 > *Abstract.* This chapter treats the relative dynamics of the tight formation, the Clohessy-Wiltshire relations and the station-keeping they imply.
+
+![Bounded relative motion in the rotating frame traces the two-to-one along-track to radial ellipse of the Clohessy-Wiltshire equations.](schematics/sch_relative_motion.png)
 
 *Sources: the relative-motion (Clohessy-Wiltshire) equations and constellation geometry follow Curtis [16] and Vallado [17].*
 
