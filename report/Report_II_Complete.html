@@ -501,6 +501,23 @@ full survivability, integration, and economic treatment that makes up the remain
 <p>\[A\,n_s = \frac{Q_{\mathrm{total}}}{\varepsilon\,\sigma\,T_{\mathrm{rad}}^4}
 = \frac{1450}{0.85 \times 5.67\times 10^{-8}\times (294.45)^4}\ \mathrm{m^2} \approx 4\ \mathrm{m^2}, \tag{2A.9}\]</p>
 <p>which recovers the four-square-meter single-sided emitter of the baseline and confirms the stated operating point. The design implication is that radiator area is set by the fourth power of the chosen panel temperature, so the cheapest lever for margin is a colder panel through higher emissivity or more area, not a lower junction-to-case resistance, which the package fixes.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p><strong>Margin as a function of chain resistance.</strong> Starting from the junction relation (2A.4) and the radiator balance (2A.2), show that the junction margin against the limit \(T_{j,\mathrm{lim}}\) can be written as
+\[\Delta T = T_{j,\mathrm{lim}} - \left(\frac{Q_{\mathrm{total}}}{\varepsilon\,\sigma\,A\,n_s}\right)^{1/4} - P_{\mathrm{chip}}\,R_{\mathrm{th}}.\]
+Using this expression, determine the chain resistance \(R_{\mathrm{th}}\) at which the margin vanishes, given the chapter's reference values \(Q_{\mathrm{total}} = 1450\ \mathrm{W}\), \(\varepsilon = 0.85\), \(A\,n_s = 4\ \mathrm{m^2}\), \(P_{\mathrm{chip}} = 300\ \mathrm{W}\), and \(T_{j,\mathrm{lim}} = 125\ ^\circ\mathrm{C}\). State how much resistance headroom the baseline chain of (2A.3) retains.</p>
+</li>
+<li>
+<p><strong>Sizing the radiator for a colder panel.</strong> The closing argument of the chapter notes that radiator area is set by the fourth power of the chosen panel temperature. Using the sizing inversion (2A.9) with \(Q_{\mathrm{total}} = 1450\ \mathrm{W}\) and \(\varepsilon = 0.85\), compute the single-sided emitting area \(A\,n_s\) required to settle the panel at \(T_{\mathrm{rad}} = 0\ ^\circ\mathrm{C}\) rather than at the baseline \(21.3\ ^\circ\mathrm{C}\). By what factor does the required area change relative to the baseline four square meters, and using (2A.4) by how many degrees does the junction margin improve if the chain resistance is held fixed at \(0.300\ \mathrm{K/W}\).</p>
+</li>
+<li>
+<p><strong>Quartic response of the radiator to load.</strong> Using the cold-background balance (2A.2), show that for fixed \(\varepsilon\), \(A\), and \(n_s\) the radiator temperature obeys \(T_{\mathrm{rad}} \propto Q_{\mathrm{total}}^{1/4}\), and confirm the chapter's statement that doubling the load raises \(T_{\mathrm{rad}}\) by the factor \(2^{1/4}\). Then evaluate the absolute temperature rise of the baseline panel (starting from \(T_{\mathrm{rad}} = 21.3\ ^\circ\mathrm{C} = 294.45\ \mathrm{K}\)) if \(Q_{\mathrm{total}}\) doubles to \(2900\ \mathrm{W}\), and state the resulting reduction in junction margin using (2A.4) with \(P_{\mathrm{chip}} = 300\ \mathrm{W}\) and \(R_{\mathrm{th}} = 0.300\ \mathrm{K/W}\).</p>
+</li>
+<li>
+<p><strong>Warm-sink sensitivity bound.</strong> Equation (2A.8) gives the sensitivity of the radiator temperature to the sink temperature as \(\partial T_{\mathrm{rad}}/\partial T_{\mathrm{sink}} = (T_{\mathrm{sink}}/T_{\mathrm{rad}})^3\). Taking the baseline panel temperature \(T_{\mathrm{rad}} = 294.45\ \mathrm{K}\) as approximately fixed, use this sensitivity to estimate the first-order rise in \(T_{\mathrm{rad}}\) produced by a sink at \(T_{\mathrm{sink}} = 250\ \mathrm{K}\) acting over that interval, and discuss in light of the cold-background assumption behind (2A.2) whether the baseline margin of \(13.7\ ^\circ\mathrm{C}\) from (2A.4) would survive such a sink. [expect a sensitivity of order \(0.6\)]</p>
+</li>
+</ol>
 <h2 id="3-reference-architecture-and-scope">3. Reference Architecture and Scope</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter fixes the reference architecture used throughout the book, an eighty-one-satellite, tight-formation constellation in a dawn-dusk sun-synchronous orbit, and states the scope and boundaries of the analysis.</p>
@@ -739,6 +756,21 @@ cadence over a given ground station (Chapter 14).</p>
 T = 2\pi\sqrt{\frac{(7.021\times10^6)^3}{3.986\times10^{14}}} = 5854.8\ \mathrm{s} = 97.6\ \mathrm{min}.\]</p>
 <p>The orbital speed is about 7.5 km/s and the period about 97.6 minutes, giving roughly 14.8 orbits
 per day. These values are reproduced exactly by <code>orbital_dc.orbit.velocity(650)</code> and <code>period(650)</code>.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the circular-speed relation (4.1) and the period relation (4.2), show that the orbital speed and period of a circular orbit are related by \(v = 2\pi a / T\), and use this to derive Kepler's third law in the form \(T^2 = (4\pi^2/\mu)\,a^3\). Then show that the specific energy (4.3) of a circular orbit can be written purely in terms of the speed as \(\mathcal{E} = -v^2/2\), and explain why an energy loss therefore forces a decrease in \(a\), consistent with the orbital-decay argument noted after (4.3).</p>
+</li>
+<li>
+<p>Using the worked-example reference values (\(\mu = 3.986\times10^{14}\ \mathrm{m^3/s^2}\), \(a = 7.021\times10^6\) m) and the circular-speed and period relations (4.1) and (4.2), estimate the circular speed, the orbital period, and the number of orbits completed per day. Then, using \(\Delta\lambda = \omega_\oplus T\) with \(\omega_\oplus = 7.292\times10^{-5}\) rad/s, estimate the westward step of successive equator crossings. [expect \(v \approx 7.5\) km/s, \(T \approx 98\) min, near 15 orbits/day, \(\Delta\lambda \approx 24.5^\circ\) per revolution]</p>
+</li>
+<li>
+<p>The reference orbit lies at altitude \(h = 650\) km. Consider raising the altitude to \(h = 1200\) km, with \(R_E\) taken as in the worked example so that \(a = R_E + h\). Using the period relation (4.2), determine by what factor the orbital period changes between the two altitudes, and using (4.1) determine by what factor the circular speed changes. State whether the higher orbit completes more or fewer orbits per day.</p>
+</li>
+<li>
+<p>A circular-orbit constellation is to be sized so that its ground track repeats after an integer number of nodal days. Using the repeat condition \(k\,T = d\,(2\pi/\omega_\oplus)\) from the ground-track discussion together with the period relation (4.2), derive an expression for the semi-major axis \(a\) that produces exactly \(k\) orbits in \(d\) nodal days, in terms of \(\mu\), \(\omega_\oplus\), \(k\), and \(d\). Then, using the reference values, evaluate \(a\) for the case \(k = 15\), \(d = 1\) and compare the result to the reference orbit at \(a = 7.021\times10^6\) m.</p>
+</li>
+</ol>
 <h2 id="5-sun-synchronous-orbits-and-j2-precession">5. Sun-Synchronous Orbits and J2 Precession</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter derives the secular nodal precession caused by Earth's oblateness and the inclination that makes an orbit sun-synchronous, and confirms the reference value of about ninety-eight degrees.</p>
@@ -788,6 +820,21 @@ cycling, a decisive advantage for a high-power, thermally sensitive payload.</p>
 <p><strong>Sensitivity to altitude.</strong> Differentiating (5.5) shows how tightly the inclination must be held as the altitude is chosen. Writing \(\cos i \propto a^2 / n = a^2 a^{3/2} = a^{7/2}\) after inserting (5.6), the synchronization condition becomes</p>
 <p>\[\cos i = -\frac{2\,\dot\Omega_{\mathrm{sun}}}{3\, J_2\, R_E^2}\,\frac{a^{7/2}}{\sqrt{\mu}}, \tag{5.7}\]</p>
 <p>which makes explicit the strong \(a^{7/2}\) growth that drives \(i\) from \(96.3^\circ\) toward \(98.6^\circ\) across the low-Earth-orbit band. The design implication is that the sun-synchronous inclination is a slowly varying but firmly dictated function of the chosen altitude; once a thermal or power requirement sets the altitude, the inclination is not a free parameter but is fixed to within a small fraction of a degree by (5.7).</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the secular disturbing function (5.3), show that Lagrange's planetary equation for the node (5.4) reduces to the precession rate (5.1) for a near-circular orbit. Carry out the derivative \(\partial\bar R/\partial i\) explicitly, demonstrate that the resulting \(\sin i\) in the numerator cancels the \(\sin i\) in the denominator of (5.4), and confirm that the surviving dependence is \(\cos i\) with the leading coefficient \(-\tfrac{3}{2}\,n\,J_2\,(R_E/a)^2\). State clearly where the approximation \(p = a(1-e^2) \approx a\) enters.</p>
+</li>
+<li>
+<p>Using (5.6) with \(\mu = 3.986\times10^{14}\ \mathrm{m^3/s^2}\) and \(R_E = 6378\) km, compute the mean motion \(n\) for a circular orbit at altitude \(h = 650\) km, then substitute that \(n\) into the synchronization condition (5.5) together with \(J_2 = 1.083\times10^{-3}\) and \(\dot\Omega_{\mathrm{sun}} = 1.991\times10^{-7}\ \mathrm{rad/s}\) to find \(\cos i\) and the sun-synchronous inclination \(i\). [expect \(n \approx 1.07\times10^{-3}\ \mathrm{rad/s}\), \(\cos i \approx -0.14\), \(i \approx 98^\circ\)]</p>
+</li>
+<li>
+<p>The chapter states that the required sun-synchronous inclination rises from about \(96.3^\circ\) at 200 km to about \(98.6^\circ\) at 800 km. Using the consolidated form (5.7), in which \(\cos i \propto a^{7/2}\), determine by what factor \(\cos i\) changes between these two altitudes, taking \(R_E = 6378\) km. Confirm that the sign of the change is consistent with the inclination moving farther from \(90^\circ\) as altitude increases, and explain in one or two sentences why the \(a^2\) term in (5.5) dominates the falling \(n\).</p>
+</li>
+<li>
+<p>A thermal requirement forces the reference orbit to be lowered from 650 km to 600 km. Using (5.7), estimate the resulting change in \(\cos i\) and hence the change in inclination, holding \(\dot\Omega_{\mathrm{sun}}\), \(J_2\), \(R_E\), and \(\mu\) at their chapter values. Comment on the design statement that, once altitude is set by a power or thermal constraint, the sun-synchronous inclination is fixed to within a small fraction of a degree rather than being a free parameter.</p>
+</li>
+</ol>
 <h2 id="6-eclipse-geometry-and-the-dawn-dusk-advantage">6. Eclipse Geometry and the Dawn-Dusk Advantage</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter derives the beta angle and the sunlit fraction of the orbit from the cylindrical-shadow geometry, and shows why the dawn-dusk orbit stays sunlit year round.</p>
@@ -845,6 +892,21 @@ single favorable date.</p>
 <p>\[t_E = \frac{2\psi}{2\pi}\,T = \frac{\psi}{\pi}\,T. \tag{6.9}\]</p>
 <p><strong>Worked example.</strong> At \(h = 650\) km, \(r = 7021\) km and \(\beta^\ast = 65.1^\circ\), as stated in the chapter. For the dawn-dusk orbit the beta angle never falls below \(66.6^\circ\), so \(|\beta| > \beta^\ast\) throughout the year; (6.7) then has no real solution for \(\psi\), the eclipse arc vanishes, \(t_E = 0\), and the sunlit fraction \(f_{\mathrm{sun}} \to 1\), consistent with the chapter's statement that illumination exceeds ninety-five percent.</p>
 <p><strong>Design implication.</strong> Because the eclipse duration collapses to zero whenever \(|\beta|\) exceeds \(\beta^\ast\), holding the dawn-dusk node removes the eclipse load term from the power and energy-storage budgets, so the battery is sized for contingency and load transients rather than for nightly discharge.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the projected-geometry result (6.6), \(d_\perp(\theta) = r\sqrt{1 - \cos^2\beta\,\cos^2\theta}\), show that the boundary condition \(d_\perp = R_E\) on the anti-solar half of the orbit leads to (6.7), and hence to the eclipse half-angle of (6.3). Then show that demanding a real solution for \(\psi\) reproduces the critical beta angle of (6.1), so that \(\beta^{*} = \arcsin(R_E/(R_E + h))\) is exactly the limit \(\cos\psi = 1\) of the eclipse condition.</p>
+</li>
+<li>
+<p>A circular orbit is placed at altitude \(h = 650\) km, for which \(r = 7021\) km and \(R_E = 6371\) km. Using (6.1), confirm the critical beta angle stated in the chapter, then use (6.3) to evaluate the eclipse half-angle \(\psi\) for a fixed beta angle of \(\beta = 60^\circ\) (a value below \(\beta^{*}\), so the orbit does enter shadow). Convert this arc to a sunlit fraction with (6.2). [expect \(\beta^{*} \approx 65^\circ\) and \(f_{\mathrm{sun}}\) somewhat below 1]</p>
+</li>
+<li>
+<p>For the same orbit at \(h = 650\) km, use Kepler's third law (6.8) with \(\mu_\oplus = 3.986 \times 10^{5}\ \mathrm{km^3\,s^{-2}}\) to estimate the orbital period \(T\), and then use (6.9) together with your \(\psi\) from Problem 2 to estimate the eclipse duration \(t_E\) in minutes at \(\beta = 60^\circ\). State, using the worked example of the chapter, what \(t_E\) becomes once the dawn-dusk orbit holds \(|\beta|\) above \(\beta^{*}\) at all times.</p>
+</li>
+<li>
+<p>The dawn-dusk orbit keeps \(|\beta|\) oscillating between \(90^\circ - \varepsilon\) and \(90^\circ\) over the year, with \(\varepsilon = 23.44^\circ\), so its lowest beta angle is \(66.6^\circ\). Treating altitude as the free variable, determine by how much the altitude \(h\) would have to be reduced before the critical beta angle \(\beta^{*}\) of (6.1) rises to meet this \(66.6^\circ\) lower bound, that is, the altitude at which the year-round eclipse-free margin just vanishes. By what factor does the quantity \(R_E/(R_E + h)\) change between \(h = 650\) km and this limiting altitude?</p>
+</li>
+</ol>
 <h2 id="7-the-neutral-atmosphere-and-orbital-decay">7. The Neutral Atmosphere and Orbital Decay</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter derives the orbital-decay rate from the energy balance under atmospheric drag and integrates it to a mission lifetime, a result that decides compliance with the five-year disposal rule.</p>
@@ -899,6 +961,21 @@ mass and economic budgets.</p>
 <p>Equation (7.7) shows transparently that lifetime scales inversely with both the ballistic factor and the ambient density, the latter being the term that swings by two orders of magnitude across the solar cycle.</p>
 <p><strong>Worked example.</strong> Take the reference bus with \(B = C_D (A/m) = 2.2 \times 0.0084 \approx 0.0185\ \mathrm{m^2/kg}\) at \(a_0 \approx 7028\ \mathrm{km}\) and \(\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}\), so that \(\sqrt{\mu a_0} \approx 5.3\times 10^{10}\ \mathrm{m^2/s}\). With a representative scale height of order tens of kilometres, (7.7) returns lifetimes in the decade-to-century range as the density \(\rho_0\) is swept across its solar-cycle band, consistent with the integrated result of roughly twenty-two years at moderate activity reported above.</p>
 <p><strong>Design implication.</strong> Equation (7.7) makes the sensitivity explicit; since lifetime falls linearly with the area-to-mass ratio and with ambient density, a designer cannot passively meet the five-year rule across the solar cycle, and the de-orbit propellant budget must be sized to the worst case rather than to a nominal density.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the orbit-averaged decay relation (7.3), show that the per-revolution contraction of the semi-major axis can be written \(\Delta a_{\mathrm{rev}} = -2\pi C_D (A/m)\,\rho\, a^2\). Use the circular-orbit period \(T = 2\pi\sqrt{a^3/\mu}\) and the circular speed \(v = \sqrt{\mu/a}\), and state the assumption about how \(\rho\) and \(a\) change over a single revolution that makes this step exact.</p>
+</li>
+<li>
+<p>Using the closed-form lifetime estimate (7.7) with the reference-bus ballistic factor \(B = C_D(A/m) = 0.0185\ \mathrm{m^2/kg}\), \(\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}\), \(a_0 \approx 7028\ \mathrm{km}\), and a scale height \(H = 60\ \mathrm{km}\), estimate the natural lifetime for an ambient density \(\rho_0 = 1.0\times 10^{-13}\ \mathrm{kg/m^3}\). Then report the lifetime obtained when \(\rho_0\) is increased by a factor of one hundred to represent the swing from solar minimum to solar maximum described in the chapter, and state the factor by which the lifetime changes.</p>
+</li>
+<li>
+<p>The chapter states that lifetime falls linearly with both the area-to-mass ratio and the ambient density (7.7). A design revision adds deployable radiators that raise the area-to-mass ratio from \(0.0084\ \mathrm{m^2/kg}\) to \(0.0126\ \mathrm{m^2/kg}\) while the bus is simultaneously flown during a period when the ambient density is a factor of three higher than the reference value. By what overall factor does the natural lifetime change relative to the reference case at the reference density, with \(C_D\) held at \(2.2\)?</p>
+</li>
+<li>
+<p>Using the scale-height definition (7.4) and the local exponential profile (7.5), derive an expression for the altitude interval \(\Delta h\) over which the atmospheric density falls by a factor of ten, in terms of the scale height \(H\). Then, taking \(H = 60\ \mathrm{km}\), estimate \(\Delta h\), and explain in one or two sentences why this exponential structure justifies the log-linear interpolation between the NRLMSIS density anchors used in the chapter.</p>
+</li>
+</ol>
 <h2 id="8-the-ionizing-radiation-environment">8. The Ionizing-Radiation Environment</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter treats the two distinct radiation effects, accumulated dose behind shielding and stochastic single-event upsets, and shows that dose is comfortably survivable while upsets impose a bounded throughput tax.</p>
@@ -943,6 +1020,21 @@ twenty percent, which must be carried explicitly in any efficiency figure.</p>
 <p>\[\tau = \frac{c_{\mathrm{ECC}}\, R_{\mathrm{SEU}}}{r_{\mathrm{cyc}}} = \frac{c_{\mathrm{ECC}}\, \sigma_{\mathrm{SEU}}\, \phi\, N_{\mathrm{bits}}}{r_{\mathrm{cyc}}}, \tag{8.5}\]</p>
 <p>where \(c_{\mathrm{ECC}}\) is the average cycles charged per detected upset and \(r_{\mathrm{cyc}}\) is the processor cycle rate, so \(\tau\) is dimensionless. The tax scales linearly with flux, so it peaks in the South Atlantic Anomaly and the polar horns and falls to a small floor elsewhere, consistent with the bounded ten to twenty percent figure carried in the efficiency budget.</p>
 <p><strong>Design implication.</strong> Shield to the dose floor rather than to an arbitrary thickness, since mass past a centimetre or two buys almost no margin; then size the compute overhead from Eq. (8.5) so that the upset tax is budgeted explicitly rather than absorbed silently into throughput claims.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the dose-depth law (8.1) and its time integral (8.2), show that the shielding thickness at which the attenuated electron term equals a fraction \(\epsilon\) of the proton-and-bremsstrahlung floor is the closing-thickness expression (8.3), \(x^{*} = \lambda \ln\!\left( D_0 / (\epsilon\, D_\infty) \right)\). Then show that adding one further attenuation length \(\lambda\) of aluminium beyond \(x^{*}\) reduces the residual electron term by the factor \(e^{-1}\), and explain in one or two sentences why this is the quantitative statement of the chapter's claim that mass past a centimetre or two buys almost no margin.</p>
+</li>
+<li>
+<p>Using the floor estimate (8.4), \(D_\infty \approx 212\) rad(Si) yr\(^{-1}\), and the five-year cumulative dose of approximately 1.06 krad(Si) at \(x = 10\) mm from (8.2), estimate the electron-attenuation prefactor \(D_0\) implied by the chapter's calibration with \(\lambda \approx 1.7\) mm. Treat the 1.06 krad(Si) as the full five-year dose and the floor as \(212\) rad(Si) yr\(^{-1}\) acting over the same five years, and solve (8.2) for \(D_0\). Comment on the sign and magnitude of the residual electron term at 10 mm relative to the floor.</p>
+</li>
+<li>
+<p>The reference mission's high-bandwidth memory first showed irregularities at 2 krad(Si) and exhibited no hard failures up to 15 krad(Si). Using the cumulative-dose law (8.2) with the constants determined in Problem 2 (or, equivalently, with the floor-dominated approximation \(D(x,T) \approx D_\infty T\) valid for \(x \ge 10\) mm), estimate the mission lifetime at \(x = 10\) mm of aluminium that would be required to reach each of these two thresholds. By what factor do the two lifetimes differ, and how does that factor compare with the chapter's stated order-of-magnitude margin to the no-hard-failure level?</p>
+</li>
+<li>
+<p>The throughput tax is given by (8.5), \(\tau = c_{\mathrm{ECC}}\, \sigma_{\mathrm{SEU}}\, \phi\, N_{\mathrm{bits}} / r_{\mathrm{cyc}}\). Treating \(c_{\mathrm{ECC}}\), \(\sigma_{\mathrm{SEU}}\), \(N_{\mathrm{bits}}\), and \(r_{\mathrm{cyc}}\) as fixed by the hardware, show that \(\tau\) scales linearly with the particle flux \(\phi\). The chapter states that the tax peaks in the South Atlantic Anomaly and the polar horns and falls to a small floor elsewhere, consistent with a bounded ten to twenty percent figure. If the orbit-averaged tax is to be held at the lower end of that band when the flux inside the anomaly is some multiple of the quiescent flux, by what factor must the quiescent-region flux be smaller than the anomaly flux for the time-averaged tax to remain within the bounded band, expressed symbolically in terms of the fraction of orbital time spent in each region.</p>
+</li>
+</ol>
 <h2 id="9-the-orbital-debris-environment">9. The Orbital-Debris Environment</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter quantifies the debris hazard at the reference altitude: the catastrophic-impact probability for the cluster and the way a single fragmentation couples to neighbours as the spacing tightens.</p>
@@ -980,6 +1072,21 @@ exact orbit and epoch, as noted in Chapter 24.</p>
 <p><strong>Per-satellite versus fleet risk.</strong> It is often useful to separate the single-vehicle exposure from the aggregate. Writing \(\lambda_1 = \Phi A t\) for one satellite, the fleet survival probability is the product of independent survivals,</p>
 <p>\[P(K = 0) = \left(e^{-\lambda_1}\right)^{N} = e^{-N\lambda_1}, \tag{9.5}\]</p>
 <p>which recovers Equation (9.1) and confirms the independence assumption is what permits the simple exponent \(N\lambda_1\). The design implication is direct: since fleet risk grows as the product \(N\lambda_1\), halving the tumbling-averaged silhouette \(A\) buys the same risk reduction as halving either the node count or the mission duration.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the binomial zero-impact probability in Equation (9.2), show that in the limit of infinitely many short slices at fixed product \(mp = \Phi A N t\) the cluster catastrophic probability reduces to Equation (9.1). State precisely where the chapter's independence assumption enters, and use Equation (9.5) to argue that the same exponent \(N\lambda_1\) is obtained whether one groups the fleet into a single Poisson process or treats each satellite as an independent survivor.</p>
+</li>
+<li>
+<p>Using the per-satellite exposure \(\lambda_1 = \Phi A t\) defined just above Equation (9.5) and the chapter's reference values \(\Phi = 3\times10^{-5}\ \mathrm{m^{-2}yr^{-1}}\), \(A = 15\ \mathrm{m^2}\), and \(t = 5\ \mathrm{yr}\), estimate the catastrophic-impact probability for a single satellite over the mission. Then form the fleet mean for \(N = 81\) from Equation (9.3) and confirm it matches the worked value in Equation (9.4). [expect \(\Lambda\) of order \(10^{-1}\)]</p>
+</li>
+<li>
+<p>The chapter quotes a flux model band corresponding to a probability range from six to forty-six percent about the nominal seventeen percent. Treating the nominal mean as \(\Lambda = 0.182\) from Equation (9.4) and holding \(A\), \(N\), and \(t\) fixed, determine the two flux values \(\Phi\) that reproduce the lower and upper ends of that probability band using Equation (9.1). Report each as a multiple of the nominal flux.</p>
+</li>
+<li>
+<p>A revised design halves the tumbling-averaged silhouette to \(A = 7.5\ \mathrm{m^2}\) while leaving \(\Phi\), \(N\), and \(t\) unchanged. Using the linearity of Equation (9.3), find the new mean \(\Lambda\) and, using Equation (9.1), the new cluster probability \(P(K\ge 1)\). State the factor by which the mean changes, and explain with reference to the design implication stated after Equation (9.5) why this is equivalent to halving either the node count or the mission duration.</p>
+</li>
+</ol>
 <h1 id="part-iii-spacecraft-subsystems">PART III, SPACECRAFT SUBSYSTEMS</h1>
 <h2 id="10-thermal-control">10. Thermal Control</h2>
 <blockquote>
@@ -1045,6 +1152,21 @@ first report assumed.</p>
 <p>\[P_{\max} = \frac{125\ \mathrm{C}}{0.30\ \mathrm{K/W}} \approx 417\ \mathrm{W}. \tag{10.7}\]</p>
 <p>This reproduces the 417 W threshold and confirms that no radiator size relaxes it, since \(R_{th}\) acts before the heat reaches the panel.</p>
 <p><strong>Design implication.</strong> Radiator mass scales linearly with plant power and the chip interface caps any single device near 417 W passively; an orbital data center must therefore plan for kilometer-scale panels and adopt pumped-loop or loop-heat-pipe cooling at the chip from the outset.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>The chapter states that the radiator area is linear in heat load, with no economy of scale. Starting from the steady-state panel energy balance (10.4), derive the sizing relation (10.3) explicitly, stating where the cosmic-microwave-background sink term is dropped and justifying that step with the chapter's estimate of \(T_{\mathrm{CMB}}^4/T^4\). Then show that the area per unit power, \(A_{\mathrm{rad}}/Q\), is independent of \(Q\), and explain in one sentence why this rules out a per-watt cooling advantage for a larger plant.</p>
+</li>
+<li>
+<p>Using (10.3) and the worked example reference values (\(\varepsilon = 0.90\), \(n_s = 2\), \(f_p = 0.12\), operating temperature \(T = 20\ \mathrm{C}\), with \(\sigma\) defined in (10.2)), estimate the radiator area required to reject a heat load of \(Q = 2.5\ \mathrm{MW}\). Report the per-side flux \(\varepsilon\sigma T^4\) and the net flux \(\varepsilon\sigma T^4 n_s (1 - f_p)\) that you use, and compare your result to the industry rule of roughly 1,200 m² per megawatt quoted in the chapter. [expect order \(10^3\ \mathrm{m^2}\)]</p>
+</li>
+<li>
+<p>The chapter reports that running the silicon hotter buys back radiator area through the \(T^4\) dependence, formalized by the sensitivity relation (10.5). Using (10.5), estimate the fractional change in required area if the operating temperature is raised from \(20\ \mathrm{C}\) to \(60\ \mathrm{C}\), working in absolute temperature. Then, to test the accuracy of the linearized estimate, recompute the area ratio directly from (10.3) at the two temperatures and state by what factor the area changes. Comment on whether the linear approximation in (10.5) over- or under-estimates the saving across this finite temperature step.</p>
+</li>
+<li>
+<p>The passive thermal chain imposes a second limit independent of radiator size. Using the conductive chain model \(T_j = T_{\mathrm{rad}} + Q\,R_{th}\) and the passive ceiling (10.6) with the chapter's junction budget \(\Delta T_{\max} = 125\ \mathrm{C}\), determine the maximum passively coolable chip power for the baseline chain \(R_{th} = 0.30\ \mathrm{K/W}\), and confirm it matches the threshold in (10.7). Then size the interface: by what factor must \(R_{th}\) be reduced so that a single device dissipating \(1200\ \mathrm{W}\) can be held within the same junction budget, and state the corresponding target value of \(R_{th}\).</p>
+</li>
+</ol>
 <h2 id="11-electrical-power">11. Electrical Power</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter sizes the electrical-power subsystem for the dawn-dusk orbit, where near-continuous sunlight makes the battery small and the array sizing the dominant term.</p>
@@ -1083,6 +1205,21 @@ Chapter 6.</p>
 <p>\[A = \frac{P_L}{S_0\,\eta(T,\mathrm{life})\,\kappa_{\mathrm{pack}}\,\eta_{\mathrm{path}}}, \tag{11.6}\]</p>
 <p>which at the end-of-life value of \(253\ \mathrm{W/m^2}\) delivered to the load means each megawatt of demand needs roughly \(3953\ \mathrm{m^2}\) of array.</p>
 <p><strong>Design implication.</strong> Because the array area scales inversely with the temperature-depressed end-of-life efficiency, the panel thermal design and the radiation-tolerant cell selection are leveraged directly into deployed area and structural mass; cooling or de-rating the array is a sizing decision, not a comfort margin.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the multiplicative radiation-degradation model (11.2), show that the implied annual degradation rate is \(d = 1 - (\eta_{\mathrm{life}}/\eta_{\mathrm{BOL}})^{1/N}\), and that for small \(d\) the five-year end-of-life efficiency is approximately \(\eta_{\mathrm{life}} \approx \eta_{\mathrm{BOL}}(1 - Nd)\). Using \(\eta_{\mathrm{BOL}} = 0.296\), \(\eta_{\mathrm{life}} = 0.275\), and \(N = 5\), evaluate the exact rate from (11.2) and compare it with the linearized estimate, commenting on the size of the discrepancy.</p>
+</li>
+<li>
+<p>Using the load relation (11.1) with the chapter's reference values (\(S_0 = 1361\ \mathrm{W/m^2}\), \(\kappa_{\mathrm{pack}} = 0.85\), \(\eta_{\mathrm{path}} = 0.88\), \(k_T = -0.0023\ \mathrm{per\ C}\), \(\eta_{\mathrm{life}} = 0.275\)), estimate the power delivered to the load per square metre of array at a beginning-of-life operating temperature of 28 C. Then repeat at the 70 C end-of-life point and report the ratio of the two delivered-power densities. [expect the 70 C value to be near the \(253\ \mathrm{W/m^2}\) of the worked example]</p>
+</li>
+<li>
+<p>Size the array for a \(5\ \mathrm{MW}\) load using the sizing closure (11.6) at the end-of-life delivered density of \(253\ \mathrm{W/m^2}\). Then, treating the area as inversely proportional to \(\eta(T,\mathrm{life})\) through (11.6) and (11.3), determine by what factor the required area changes if the panel can be operated at 40 C instead of 70 C, with all other quantities held fixed. [expect order \(10^4\ \mathrm{m^2}\) for the baseline area]</p>
+</li>
+<li>
+<p>Using the radiative-balance result (11.5) with \(\alpha = 0.90\), \(\varepsilon_f + \varepsilon_b = 1.6\), \(\sigma = 5.67\times 10^{-8}\ \mathrm{W\,m^{-2}\,K^{-4}}\), \(S_0 = 1361\ \mathrm{W/m^2}\), and \(\kappa_{\mathrm{pack}} = 0.85\), carry out one fixed-point iteration for the equilibrium temperature: begin from the 70 C operating point, evaluate \(\eta\) from (11.1) at that temperature, substitute into (11.5) to obtain an updated \(T\), and then re-evaluate \(\eta\) at the updated temperature. Report the temperature after the iteration and state whether a hotter panel raises or lowers the equilibrium temperature, consistent with the coupling noted after (11.5).</p>
+</li>
+</ol>
 <h2 id="12-structures-and-mass">12. Structures and Mass</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter estimates the structural and mass properties, the inertia tensor, the structural mass set by launch loads, and the panel modal frequency, that feed the attitude and integration analyses.</p>
@@ -1127,6 +1264,21 @@ The reference four-chip satellite closes at roughly 270 to 290 kg dry.</p>
 <p>\[A_{\mathrm{member,\,min}} = \frac{F_s\, m\, g_{\mathrm{load}}\, g_0}{\sigma_y}, \tag{12.6}\]</p>
 <p>so the required cross-section scales linearly with supported mass and load factor and inversely with material strength.</p>
 <p><strong>Design implication.</strong> Because inertia grows with the square of panel length and offset while the launch-driven member area grows only linearly with mass, large deployed structures are dominated by their inertial and modal penalties rather than by static strength; the mass budget should therefore be tightened at the geometry stage, before member sizing.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the volume integral (12.2), show that the principal moment about the \(y\) axis of a uniform rectangular solid is \(I_y = \tfrac{m}{12}(d_x^2 + d_z^2)\). Identify the squared distance from the \(y\) axis that replaces \(y^2 + z^2\), carry out the three integrations using \(\int_{-d/2}^{d/2} s^2\,ds = d^3/12\), and confirm that your result is the cyclic permutation of (12.3). Then add the three principal moments and state the form of \(I_x + I_y + I_z\) in terms of \(d_x, d_y, d_z\).</p>
+</li>
+<li>
+<p>A deployed solar wing of mass \(m = 30\ \mathrm{kg}\) and length \(L = 6\ \mathrm{m}\) is mounted with its centroid at an offset \(o = 4\ \mathrm{m}\) from the bus axis. Using the parallel-axis relation (12.4), evaluate the moment of inertia this single wing contributes about the bus axis. Then report separately the centroidal term \(mL^2/12\) and the offset term \(mo^2\), and state which dominates. Compare the total with the chapter's statement that the maximum principal moment of the reference satellite is on the order of a few hundred kilogram-meters squared. [expect the offset term to dominate]</p>
+</li>
+<li>
+<p>Using the minimum-area relation (12.6), size a single primary member. Take a tributary mass \(m = 80\ \mathrm{kg}\), the chapter's quasi-static load factor \(g_{\mathrm{load}} = 8.5\), standard gravity \(g_0 = 9.81\ \mathrm{m\,s^{-2}}\), an aluminium yield strength \(\sigma_y = 270\ \mathrm{MPa}\), and a factor of safety \(F_s = 1.25\). Compute the minimum cross-sectional area \(A_{\mathrm{member,\,min}}\) in square millimeters. Then, using (12.5), state by what factor the strength margin \(\mathrm{MS}\) above zero increases if the actual member area is doubled relative to \(A_{\mathrm{member,\,min}}\).</p>
+</li>
+<li>
+<p>The chapter's design implication states that inertia grows with the square of panel length while the launch-driven member area grows only linearly with mass. Treat a deployed panel as a uniform plate whose mass is proportional to its area, so that for fixed thickness and offset the mass scales as \(m \propto L^2\). Using (12.4) with the offset term neglected, and (12.6), determine the factor by which the centroidal inertia contribution \(mL^2/12\) changes and the factor by which the required member area \(A_{\mathrm{member,\,min}}\) changes when the panel length \(L\) is increased by 50 percent. Use the comparison to justify the chapter's recommendation that the mass budget be tightened at the geometry stage rather than at member sizing.</p>
+</li>
+</ol>
 <h2 id="13-attitude-determination-and-control-optical-pointing">13. Attitude Determination and Control; Optical Pointing</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter treats attitude determination and control and the much finer pointing the optical links demand, showing why a fast-steering mirror is required on top of the spacecraft bus.</p>
@@ -1163,6 +1315,21 @@ link and any long inter-satellite hop.</p>
 <p><strong>Linearizing the pointing-loss penalty.</strong> Expanding the received-power factor \(L_{\mathrm{point}} = \exp(-2\theta_{\mathrm{err}}^2/\theta_{\mathrm{div}}^2)\) for small jitter gives</p>
 <p>\[L_{\mathrm{point}} \approx 1 - 2\left(\frac{\theta_{\mathrm{err}}}{\theta_{\mathrm{div}}}\right)^2, \tag{13.5}\]</p>
 <p>so holding loss below a budget \(\epsilon\) requires \(\theta_{\mathrm{err}} \le \theta_{\mathrm{div}}\sqrt{\epsilon/2}\). The design implication is direct: tighter, higher-gain beams shrink \(\theta_{\mathrm{div}}\) and therefore tighten the residual-jitter requirement linearly, which is the quantitative reason the bus alone cannot close the long links and a fine-steering mirror, slaved to the received beacon, is mandatory.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the general gravity-gradient torque (13.2), \(\boldsymbol{\tau}_{\mathrm{gg}} = 3 n^2\, \hat{\mathbf{r}} \times (\mathbf{I}\,\hat{\mathbf{r}})\), resolve the local vertical for a single-axis pitch offset \(\theta\) as \(\hat{\mathbf{r}} = (\sin\theta,\, 0,\, \cos\theta)\) in the principal frame and show that the only surviving torque component reduces to (13.3), \(\tau_{\mathrm{gg}} = \tfrac{3}{2}\, n^2\, (I_z - I_x)\, \sin 2\theta\). State the two pitch angles in \([0^\circ, 90^\circ]\) at which the torque vanishes and the angle at which it is maximum, and explain why this result motivates flying the bus with its minimum-inertia axis along the local vertical.</p>
+</li>
+<li>
+<p>Using the mean motion at the reference altitude from (13.4), \(n \approx 1.07\times10^{-3}\ \mathrm{rad\,s^{-1}}\), and the peak gravity-gradient torque from (13.3), estimate the maximum disturbance torque (\(\theta = 45^\circ\)) for an inertia asymmetry \(|I_z - I_x| = 100\ \mathrm{kg\,m^2}\). Confirm that the result is consistent with the order \(10^{-4}\ \mathrm{N\,m}\) quoted in the chapter. [expect order \(10^{-4}\ \mathrm{N\,m}\)]</p>
+</li>
+<li>
+<p>The pointing-loss factor is \(L_{\mathrm{point}} = \exp(-2\theta_{\mathrm{err}}^2/\theta_{\mathrm{div}}^2)\), and its small-jitter linearization (13.5) gives \(\theta_{\mathrm{err}} \le \theta_{\mathrm{div}}\sqrt{\epsilon/2}\) for a fractional power-loss budget \(\epsilon\). For the diffraction-limited divergence \(\Theta \approx 2.44\,\lambda/D\), take the full divergence as \(\theta_{\mathrm{div}} = \Theta\) and size the maximum allowable residual jitter \(\theta_{\mathrm{err}}\) for a link operating at \(\lambda = 1.55\ \mu\mathrm{m}\) through an aperture \(D = 0.10\ \mathrm{m}\), holding the pointing loss to \(\epsilon = 0.10\). Compare your result to the two-arcsecond (roughly ten-microradian) attitude knowledge a star tracker provides, and state whether the bus alone can meet the requirement.</p>
+</li>
+<li>
+<p>Two laser links are to be assessed with the same transmit aperture \(D = 0.10\ \mathrm{m}\) and wavelength \(\lambda = 1.55\ \mu\mathrm{m}\): a 150-m neighbor hop and a long inter-satellite hop. Using the divergence relation \(\Theta \approx 2.44\,\lambda/D\), compute the beam footprint (diameter) at 150 m and confirm the chapter's claim that the neighbor link is geometrically trivial because the spot is millimeters wide. Then, using the linearized requirement \(\theta_{\mathrm{err}} \le \theta_{\mathrm{div}}\sqrt{\epsilon/2}\) from (13.5), state by what factor the residual-jitter requirement tightens if a redesign doubles the aperture to \(D = 0.20\ \mathrm{m}\) at fixed \(\epsilon\), and explain why tighter beams force reliance on a fine-steering mirror slaved to the received beacon.</p>
+</li>
+</ol>
 <h2 id="14-communications-inter-satellite-and-ground">14. Communications: Inter-Satellite and Ground</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter develops the inter-satellite and ground communications link budgets and shows how the inverse-square behaviour of an optical beam forces the satellites into a tight formation.</p>
@@ -1210,6 +1377,21 @@ beyond roughly 3,000 km, a genuine advantage for long-haul, latency-sensitive tr
 <p>With the chapter values \(\theta_e = 1\ \mu\mathrm{rad}\) and \(\theta_{\mathrm{div}} = 15\ \mu\mathrm{rad}\), the exponent is \(-2(1/15)^2 \approx -8.9\times10^{-3}\), a pointing loss near \(0.04\) dB; the quadratic sensitivity in Eq. (14.4) shows why jitter approaching the divergence angle degrades the budget sharply.</p>
 <p><strong>Latency crossover.</strong> A path of length \(d\) costs time \(t_{\mathrm{fiber}} = n_{\mathrm{fiber}}\,d/c\) in fiber versus \(t_{\mathrm{vac}} = d/c\) across a vacuum mesh, so the optical mesh saves \(\Delta t = (n_{\mathrm{fiber}}-1)\,d/c\) per unit path, a fixed fractional advantage of about forty-seven percent that grows linearly with distance and dominates beyond the few-thousand-kilometre scale noted in the chapter.</p>
 <p><strong>Design implication.</strong> Because loss climbs twenty decibels per decade while pointing loss grows quadratically with jitter, link closure at a one-watt terminal is won far more cheaply by shortening range than by raising power, which is the physical mandate for the tight formation.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the spreading argument that leads to Eq. (14.2), show that the product of transmit and receive telescope gains for two identical circular apertures of diameter \(D\), combined with the free-space loss of Eq. (14.1), gives a net range dependence \(G_{\mathrm{tx}}G_{\mathrm{rx}}/L_{\mathrm{fs}} \propto (D^2/(\lambda R))^2\). Use this to explain, in terms of the exponents on \(D\), \(\lambda\), and \(R\), why doubling each aperture diameter buys the same received-power improvement as halving the range.</p>
+</li>
+<li>
+<p>Using the free-space-loss expression of Eq. (14.3), evaluate \(L_{\mathrm{fs}}\) in decibels at the chapter's reference wavelength of 1550 nm for the two ranges named in the text, 1,000 km and 10,000 km. Confirm from your two values that the difference matches the twenty-decibel-per-decade slope stated in Eq. (14.3), and comment on how this slope is consistent with the quoted jump from 34 mW to 3.41 W in required transmit power across the same decade of range.</p>
+</li>
+<li>
+<p>The pointing loss of Eq. (14.4) is evaluated in the chapter at \(\theta_e = 1\ \mu\mathrm{rad}\) against a divergence of \(\theta_{\mathrm{div}} = 15\ \mu\mathrm{rad}\), giving about 0.04 dB. By what factor does the pointing loss in decibels change if pointing jitter degrades so that \(\theta_e\) rises to \(5\ \mu\mathrm{rad}\) while \(\theta_{\mathrm{div}}\) is held fixed? Using the quadratic form of Eq. (14.4), state the general rule for how the decibel pointing loss scales with \(\theta_e\), and use it to explain the chapter's statement that jitter approaching the divergence angle degrades the budget sharply.</p>
+</li>
+<li>
+<p>Size the ground segment for cloud-cover availability. Using the site-diversity relation \(1 - (1 - p_{\mathrm{clear}})^n\) from the chapter, and the chapter's statement that four stations reach roughly ninety-six percent, first infer the single-site clear-sky probability \(p_{\mathrm{clear}}\) consistent with that figure. Then determine the smallest number of independent stations \(n\) needed to raise the at-least-one-clear probability above ninety-nine percent. Separately, using the latency-crossover result of the chapter, state the fixed fractional time advantage of the vacuum mesh over fiber that follows from \(n_{\mathrm{fiber}} = 1.4675\), and confirm it is the forty-seven percent quoted in the latency-crossover discussion.</p>
+</li>
+</ol>
 <h2 id="15-propulsion-and-end-of-life-disposal">15. Propulsion and End-of-Life Disposal</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter sizes the propulsion subsystem and the controlled end-of-life disposal, and shows that the de-orbit maneuver dominates the mission velocity budget.</p>
@@ -1248,6 +1430,21 @@ makes de-orbit slow and requires coordination with the formation.</p>
 <p>\[m_p = m_{\mathrm{dry}}\left(e^{\Delta v/(I_{sp} g_0)} - 1\right), \tag{15.5}\]</p>
 <p>which is the sizing relation quoted in the chapter. The exponential dependence on \(\Delta v/(I_{sp} g_0)\) explains why a high specific impulse is decisive: for the total budget of 190 m/s on the 375-kg dry bus, a hydrazine system at modest \(I_{sp}\) needs about 34 kg of propellant, whereas an electric system, with an order-of-magnitude larger \(I_{sp}\), drives the exponent close to zero so that \(m_p \approx m_{\mathrm{dry}}\,\Delta v/(I_{sp} g_0)\) and the requirement falls to roughly 5 kg.</p>
 <p><strong>Design implication.</strong> Because the de-orbit term dominates the velocity budget and propellant scales exponentially with it, the disposal maneuver, not station-keeping, sets the propulsion architecture; selecting high specific impulse minimizes wet mass at the cost of de-orbit duration, which must be reconciled with the regulatory window and with formation safety.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the vis-viva equation (15.2), show that the speed at the apogee of the de-orbit transfer ellipse can be written as \(v_{\mathrm{apo}} = v_{c1}\sqrt{2 r_2/(r_1 + r_2)}\), where \(v_{c1} = \sqrt{\mu/r_1}\) is the circular speed at the initial radius and \(a_t = (r_1 + r_2)/2\) is the transfer semi-major axis. Then take the limit \(r_2 \to r_1\) and interpret the resulting value of \(\Delta v_{\mathrm{deorbit}}\) from (15.1) physically.</p>
+</li>
+<li>
+<p>Using the de-orbit relation (15.1) and the worked-example reference values \(r_1 = 7.021\times10^6\) m and \(v_{c1} = 7534.8\) m/s, compute the de-orbit impulse required to lower the perigee instead to \(120\) km, for which \(r_2 = 6.491\times10^6\) m. Compare your result to the chapter value of \(131.6\) m/s for a \(180\)-km perigee, and state by what factor the de-orbit term changes.</p>
+</li>
+<li>
+<p>Using the propellant sizing relation (15.5) with the chapter's total budget \(\Delta v = 190\) m/s and dry mass \(m_{\mathrm{dry}} = 375\) kg, size the propellant mass \(m_p\) for a hydrazine system whose specific impulse is \(I_{sp} = 220\) s, taking \(g_0 = 9.81\) m/s\(^2\). Then evaluate the small-argument approximation \(m_p \approx m_{\mathrm{dry}}\,\Delta v/(I_{sp} g_0)\) quoted in the chapter and report the fractional error it introduces at this \(I_{sp}\). [expect order \(10\,\)kg]</p>
+</li>
+<li>
+<p>The chapter notes that propellant scales exponentially with \(\Delta v\) through (15.5), while the de-orbit term dominates the budget. Treating \(m_{\mathrm{dry}}\), \(I_{sp}\), and \(g_0\) as fixed, derive an expression for the sensitivity \(dm_p/d(\Delta v)\) and use it to estimate the additional propellant mass incurred by a \(20\) m/s increase in the velocity budget for the hydrazine system of Problem 3. Comment on whether this sensitivity argument strengthens the chapter's design implication that disposal, not station-keeping, sets the propulsion architecture.</p>
+</li>
+</ol>
 <h2 id="16-reliability-and-constellation-availability">16. Reliability and Constellation Availability</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter develops reliability and constellation availability: exponential survival, k-of-n redundancy, and the continuous replenishment needed to hold capacity over the mission.</p>
@@ -1302,6 +1499,21 @@ economics of Chapter 21. These figures are produced by <code>orbital_dc.reliabil
 <p>For a constellation of 81 units at a five-year design life, \(\dot{N}_{\mathrm{repl}} = 81/5 \approx 16\) units per year, consistent with the roughly twenty percent annual rate stated above. The deployed count then follows from inverting the availability constraint. A mean-capacity lower bound, holding the expected number of survivors at \(n_{\mathrm{required}}\) for per-unit reliability \(p\) and availability target \(A\), is</p>
 <p>\[n_{\mathrm{deployed}} \gtrsim \frac{A\,n_{\mathrm{required}}}{p}, \tag{16.7}\]</p>
 <p>which for the figures above gives about 80. The stricter requirement, that the probability of at least \(n_{\mathrm{required}}\) survivors itself reach \(A\) evaluated from the binomial tail (16.2), is what <code>spares_for_availability</code> applies and raises the figure to about 89, the value quoted earlier. The design implication is that survival reliability, redundancy margin, and resupply cadence are not independent choices; fixing any two through Eqs. (16.6) and (16.7) determines the third and, with it, the recurring launch and manufacturing budget carried in the mission economics.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the constant-hazard reliability of Eq. (16.1), show that the median time to failure of a unit is \(t_{1/2} = \mathrm{MTBF}\,\ln 2\), and confirm using (16.4) that this median is strictly smaller than the mean lifetime. State in one sentence why a constant hazard produces a median that lies below the mean.</p>
+</li>
+<li>
+<p>Using Eq. (16.1) and the bus figures in the chapter, estimate the five-year survival probability of a unit whose mean time between failures is 100,000 hours. Then, using the mean-capacity bound (16.7), estimate the deployed count required to hold an availability of \(A = 0.95\) for \(n_{\mathrm{required}} = 75\) nodes at this per-unit reliability. [expect a deployed count on the order of 100 units]</p>
+</li>
+<li>
+<p>Using the renewal balance of Eq. (16.6), size the steady-state annual replacement count for a constellation of 120 deployed units at a design life of \(L = 7\) years, and express the result as a percentage of the fleet per year. By what factor does this annual replacement count change if the design life is extended from five years to ten years at fixed fleet size?</p>
+</li>
+<li>
+<p>The chapter notes that the expected number of survivors is \(\mathbb{E}[X] = np\) with variance \(np(1-p)\) from Eq. (16.5). For \(n = 81\) deployed units at \(p = 0.90\), compute \(\mathbb{E}[X]\) and the standard deviation, and determine how many standard deviations the required count \(k = 70\) sits below the mean. Using this margin, comment on why raising the per-unit reliability from \(p = 0.90\) to \(p = 0.95\) produces the large gain in the tail sum (16.2) reported in the chapter.</p>
+</li>
+</ol>
 <h2 id="17-compute-and-workload">17. Compute and Workload</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter relates peak hardware capability to the compute that is actually delivered, after utilization, the radiation tax, and thermal throttling are accounted for.</p>
@@ -1348,6 +1560,21 @@ realistic utilization is several times the headline peak figure.</p>
 <p>Equation (17.7) makes the inverse dependence explicit: because \(\mathrm{MFU}\) for inference decode sits in the eight to ten percent regime quoted in this chapter, the cost per useful petaflop-hour is roughly an order of magnitude above the naive peak figure, before any further radiation derating.</p>
 <p><strong>Worked example.</strong> Take the inference regime with \(\mathrm{MFU} = 0.10\) and suppose a radiation availability \(a_r = 0.95\). Equation (17.1) gives a delivered fraction of \(0.10 \times 0.95 = 0.095\), so the platform yields about \(9.5\) percent of its installed peak. By (17.6), a compute-direct overhead ratio of \(1.2\) becomes an effective figure of \(1.2 / 0.95 \approx 1.26\). By (17.7), the unit cost is inflated by the reciprocal \(1/0.095 \approx 10.5\) relative to a peak-rated quote.</p>
 <p><strong>Design implication.</strong> Size the platform on the delivered product of (17.1), not on installed peak, and attack whichever single factor is largest; for an inference-dominated orbital data center that factor is utilization, so memory-bandwidth provisioning and active cooling that lowers \(R_{\theta}\) in (17.5) return more delivered work per dollar than adding raw peak silicon.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>The chapter writes the model-FLOPs utilization and radiation availability as \(\mathrm{MFU} = 1 - \ell_u\) and \(a_r = 1 - \ell_r\) and states in (17.2) that the throughput penalties add to first order. Starting from the exact delivered rate (17.1), expand the product \((1 - \ell_u)(1 - \ell_r)\) and show that the leading correction dropped in passing to (17.2) is the single term \(\ell_u \ell_r\). Then derive a general expression for the fractional error of the additive approximation (17.2) relative to the exact (17.1), and state in one sentence why the approximation is most trustworthy when one loss fraction dominates the other.</p>
+</li>
+<li>
+<p>Using the worked-example reference values of the chapter, \(\mathrm{MFU} = 0.10\) for inference decode and \(a_r = 0.95\), apply (17.1) to report the delivered fraction of installed peak. Then apply (17.7) to state the factor by which the unit cost of useful work is inflated relative to a peak-rated quote, and apply (17.6) to convert a compute-direct overhead ratio of \(1.2\) into an effective power-usage effectiveness. [expect a delivered fraction near 0.095 and a cost inflation near a factor of 10]</p>
+</li>
+<li>
+<p>Consider the throttled fixed point (17.5). Two accelerators share the same throttle gain \(\beta\), the same junction-to-radiator resistance \(R_{\theta}\), the same requested utilization \(u_0\), and operate over the same radiator temperature \(T_{\mathrm{rad}}\), but one is the 700-W part and the other is a low-power part as contrasted in the chapter. Using (17.5), show that the throttled effective utilization depends on the part only through the product \(\beta R_{\theta} P_{\mathrm{peak}}\) in the denominator. By what factor does the denominator of (17.5) change if \(P_{\mathrm{peak}}\) is reduced by a factor of seven while \(\beta\), \(R_{\theta}\), and \(u_0\) are held fixed, and what does this imply for the effective utilization of the lower-power part relative to the high-power part?</p>
+</li>
+<li>
+<p>The chapter states that chip-level active cooling acts on (17.5) by lowering the junction-to-radiator thermal resistance \(R_{\theta}\). For a fixed high-power accelerator with given \(u_0\), \(\beta\), \(T_{\mathrm{rad}}\), and \(P_{\mathrm{peak}}\) in the throttling regime, derive from (17.5) the value of \(R_{\theta}\) required to recover a target throttled utilization \(u_{\mathrm{eff}}^{\star}\), expressed in terms of the chapter's symbols. Then, using your result, explain why design effort spent lowering \(R_{\theta}\) returns more delivered work for a high-\(P_{\mathrm{peak}}\) part than for a low-\(P_{\mathrm{peak}}\) part, and connect this to the design implication that utilization is the largest single factor for an inference-dominated orbital data center.</p>
+</li>
+</ol>
 <h1 id="part-iv-integration-simulation-and-results">PART IV, INTEGRATION, SIMULATION, AND RESULTS</h1>
 <h2 id="18-the-integrated-system-model">18. The Integrated System Model</h2>
 <blockquote>
@@ -1394,6 +1621,23 @@ shielding dominate, and the design closes at roughly 270 to 290 kg dry.</p>
 <p>so the wet mass is the dry mass amplified by the propulsive factor.</p>
 <p><strong>Worked example.</strong> Take a structural fraction \(f_{\mathrm{str}} = 0.20\). Equation (18.4) then gives an amplification \(1/(1 - 0.20) = 1.25\), so a payload-and-bus term of \(m_0 \approx 224\) kg closes at \(m_{\mathrm{dry}} \approx 280\) kg, inside the stated 270 to 290 kg range for the reference four-chip satellite.</p>
 <p><strong>Design implication.</strong> Because the structural and contingency fractions multiply the entire budget, the cheapest mass savings come from lowering those fractions rather than from trimming any single subsystem; the model exposes this leverage directly through the \(1/(1 - f_{\mathrm{str}})\) amplifier.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>The mass fixed point of (18.3) collects every kilogram fixed by physics into \(m_0\) and lets the structure scale as \(f_{\mathrm{str}}\,m_{\mathrm{dry}}\). Starting from (18.3), show that the closed form (18.4) follows, and then show that the marginal sensitivity of the dry mass to the payload-and-bus term is \(\partial m_{\mathrm{dry}} / \partial m_0 = 1/(1 - f_{\mathrm{str}})\), so that the structural amplifier acts identically on the closed mass and on its derivative. Comment on the behavior of both quantities as \(f_{\mathrm{str}} \to 1\) and relate this to the design implication stated in the chapter.</p>
+</li>
+<li>
+<p>Using the worked example values of the chapter, namely a payload-and-bus term \(m_0 \approx 224\) kg and a structural fraction \(f_{\mathrm{str}} = 0.20\), evaluate the structural amplification \(1/(1 - f_{\mathrm{str}})\) of (18.4) and the resulting dry mass \(m_{\mathrm{dry}}\). Confirm that the result lies inside the reference four-chip range stated in the chapter. [expect \(m_{\mathrm{dry}}\) of order \(280\) kg]</p>
+</li>
+<li>
+<p>The chapter notes that the structural and contingency fractions multiply the entire budget, so savings there propagate through the whole design. Using (18.4), determine by what factor the dry mass changes if the structural fraction is reduced from \(f_{\mathrm{str}} = 0.20\) to \(f_{\mathrm{str}} = 0.12\), holding the payload-and-bus term \(m_0\) fixed. Express the answer as the ratio of the two amplification factors, and state in words why trimming a fraction is more effective than trimming any single subsystem mass inside \(m_0\).</p>
+</li>
+<li>
+<p>Once the dry mass is fixed, the wet mass follows from the propulsive amplifier of (18.6), \(m_{\mathrm{wet}} = m_{\mathrm{dry}}\exp\!\left(\Delta v / (I_{sp}\,g_0)\right)\). Treating \(m_{\mathrm{dry}}\) as the closed value from (18.4), show that the wet mass can be written as a product of the two amplifiers acting on the payload-and-bus term,
+\[ m_{\mathrm{wet}} = \frac{m_0}{1 - f_{\mathrm{str}}}\,\exp\!\left(\frac{\Delta v}{I_{sp}\,g_0}\right), \]
+and identify which factor is the structural amplification and which is the propulsive amplification. Then explain, using (18.5), why a higher dry mass at fixed drag area \(A_d\) and drag coefficient \(C_D\) raises the ballistic coefficient \(\beta\) and therefore slows the natural decay.</p>
+</li>
+</ol>
 <h2 id="18a-computational-methods-and-numerical-solvers">18A. Computational Methods and Numerical Solvers</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter documents the numerical methods, root-finding and time integration, used to solve the governing equations, and the checks that anchor them to known results.</p>
@@ -1527,6 +1771,21 @@ the chip power itself, undisclosed by the vendor and treated as a 150-to-200-wat
 <p>Each fractional input uncertainty enters weighted by the square of its exponent, so a variable that appears linearly (\(a_j=1\)) contributes its fractional spread directly, while one entering quadratically contributes twice as strongly.</p>
 <p><strong>Worked example.</strong> Take the catastrophic-impact probability as a product of debris flux and exposed area over the mission, all with exponent unity. With the chip-power band of 150 to 200 watts, the symmetric fractional spread about the 175-watt midpoint is \(25/175 \approx 0.143\). If a second independent input carries a comparable \(0.143\) fractional spread, then by (19.4) the output fractional uncertainty is \(\sqrt{0.143^2 + 0.143^2} \approx 0.20\), about twenty percent, before the lognormal density term is added by sampling.</p>
 <p><strong>Design implication.</strong> Because uncertainties add in quadrature, the output band is set almost entirely by the one or two widest inputs; tightening the dominant solar-activity and utilization terms narrows the headline bands far more than refining any well-known parameter.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the first-order Taylor expansion (19.2) and the general correlated variance result (19.3), show that for a pure power-law monomial \(y = c\,\prod_{j} x_j^{a_j}\) with independent inputs the linear-propagation formula (19.1) reduces to the relative-error rule (19.4). In your derivation, evaluate the partial derivative \(\partial y/\partial x_j\) explicitly and state where the independence assumption enters.</p>
+</li>
+<li>
+<p>Using the relative-error rule (19.4) and the chip-power band of 150 to 200 watts, compute the symmetric fractional spread of chip power about its midpoint. Then, treating the catastrophic-impact probability as a product of debris flux and exposed area over the mission with all exponents equal to unity, estimate the output fractional uncertainty if a single additional independent input carries a fractional spread of 0.10, before the lognormal density term is added by sampling.</p>
+</li>
+<li>
+<p>The chapter states that the same satellite decays in four years at solar maximum and lasts over three hundred years at solar minimum, with atmospheric density moving by up to a factor of one hundred across the solar cycle. Using these reference values, estimate the local sensitivity index defined in the chapter as the ratio of the output swing to the baseline, taking natural lifetime as the output and the solar-maximum value as the baseline. Comment on why linear error propagation (19.1) is inadequate for this input and why the chapter supplements it with Monte-Carlo sampling.</p>
+</li>
+<li>
+<p>Consider an output formed as a product of three independent inputs, all entering with exponent unity, where two of the inputs carry a fractional spread of 0.143 each and the third is a well-known parameter with a fractional spread of 0.02. Using (19.4), determine the output fractional uncertainty, and then determine by what factor the output fractional uncertainty changes if the third input is refined to a fractional spread of zero. Use the result to justify the chapter's design implication that the output band is set almost entirely by the one or two widest inputs.</p>
+</li>
+</ol>
 <h2 id="20-results-reference-design-point-and-constellation">20. Results: Reference Design Point and Constellation</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter collects the reference design-point and constellation results, the numbers that the rest of the book derives and the open model reproduces.</p>
@@ -1658,6 +1917,21 @@ at the reliability-driven rate of Chapter 16, is a first-order operating expense
 <p>\[ \text{PFLOP-hours}_{\mathrm{yr}} = P_{\mathrm{peak}}\,\eta_{\mathrm{th}}\,u\,A_{\mathrm{op}}\,(8760\ \mathrm{h}). \tag{21.6}\]</p>
 <p>Because \(\mathrm{LCOE}\propto 1/(\eta_{\mathrm{th}}\,u\,A_{\mathrm{op}})\), the levelized cost is hyperbolic in each derating term; a chip that throttles to \(\eta_{\mathrm{th}}=0.5\) doubles the cost of every delivered petaflop-hour regardless of its peak specification.</p>
 <p><strong>Design implication.</strong> The economics are governed by hardware cost, lifetime, and the multiplicative utilization chain rather than by the headline launch price, so design effort returns more when spent raising sustained utilization and availability than when spent chasing marginal dollar-per-kilogram gains below the cross-over.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the per-satellite cost split (21.2), show that the launch term and the hardware term are equal at the cross-over price given by (21.3), and prove that the partial derivative of \(C_{\mathrm{sat}}\) with respect to \(p_{\mathrm{launch}}\) equals \(m_{\mathrm{launch}}\) and is independent of \(p_{\mathrm{launch}}\). Use this constant-slope result to explain why, once \(p_{\mathrm{launch}} \ll p^{*}\), further reductions in launch price return little, and identify the hardware floor onto which \(C_{\mathrm{sat}}\) flattens.</p>
+</li>
+<li>
+<p>Using the cross-over relation (21.3) with the chapter's reference values \(C_{\mathrm{hw}} \approx 1.1\times 10^{6}\ \mathrm{USD}\) and \(m_{\mathrm{launch}} = 415\ \mathrm{kg}\), estimate the cross-over price \(p^{*}\). Then, using (21.2), estimate the total per-satellite cost \(C_{\mathrm{sat}}\) at a launch price of \(p_{\mathrm{launch}} = 600\ \mathrm{USD/kg}\) and report the launch term as a fraction of \(C_{\mathrm{sat}}\), confirming the chapter's statement that below roughly 600 USD/kg the launch term is a small correction. [expect \(p^{*}\) of order \(10^{3}\ \mathrm{USD/kg}\)]</p>
+</li>
+<li>
+<p>Starting from the discounted present value of \(n\) equal annual payments in (21.4), derive the capital-recovery factor (21.5) by inverting for the annuity per unit principal. Then show that in the limit \(r \to 0\) the factor reduces to \(\mathrm{CRF} \to 1/n\), recovering straight-line amortization, and argue that for \(r > 0\) the factor exceeds \(1/n\).</p>
+</li>
+<li>
+<p>Using the useful-compute chain (21.6) and the proportionality \(\mathrm{LCOE} \propto 1/(\eta_{\mathrm{th}}\, u\, A_{\mathrm{op}})\) implied by (21.1) and (21.6), determine by what factor the levelized cost of compute changes if a chip throttles from \(\eta_{\mathrm{th}} = 1.0\) to \(\eta_{\mathrm{th}} = 0.5\) while \(u\) and \(A_{\mathrm{op}}\) are held fixed. Then size the throttling factor \(\eta_{\mathrm{th}}\) required to offset a drop in model-FLOPs utilization from \(u = 0.6\) to \(u = 0.4\) so that the annual useful PFLOP-hours of (21.6) are unchanged, holding \(P_{\mathrm{peak}}\) and \(A_{\mathrm{op}}\) fixed. [expect the cost to double in the first part]</p>
+</li>
+</ol>
 <h2 id="22-the-launch-cost-parity-prediction">22. The Launch-Cost-Parity Prediction</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter tests the launch-cost-parity assumption that underwrites the business case, and finds that most sampled futures never reach the target price within the horizon, with parity, where it arrives, falling later than the headline date.</p>
@@ -1708,6 +1982,21 @@ business case is gated by hardware cost, lifetime, and utilization.</p>
 <p>where \(p\) is payload per launch and \(R(\tau)\) is the launches-per-year ramp. The parity year \(t^\ast\) is the time at which \(m(t^\ast)\) first equals the mass required by (22.3); combining (22.3) and (22.4) shows that \(t^\ast\) depends jointly on the learning exponent, the starting price, the payload, and the integrated cadence, which is why sampling these four inputs spreads parity across a wide band rather than fixing a single date.</p>
 <p><strong>Worked estimate.</strong> Take \(L = 0.20\), so \(b \approx 0.322\) and \(1/b \approx 3.1\). If the effective price must fall by roughly a factor of ten to approach the target, then from (22.3) the cumulative mass must rise by a factor of about \(10^{3.1} \approx 1.3 \times 10^3\) over its reference value, which at a payload near 200 tonnes per flight calls for many hundreds of flights even before the slower logistic tail.</p>
 <p><strong>Design implication.</strong> Because required mass scales as the target price raised to the power \(-1/b\), the parity date is acutely sensitive to the learning rate and the starting price; a planner should treat parity as a distribution conditioned on those inputs, not a fixed milestone, and should not commit capital on the assumption that the headline date will arrive.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the Wright relation (22.1) and the definition of the learning rate as the fractional price reduction per doubling of cumulative launched mass, show that the exponent satisfies \(b = -\ln(1-L)/\ln 2\) as in (22.2). Then show that the cumulative-mass ratio required to reach a target price, equation (22.3), can be written as \(m/m_0 = (C_0/C^\ast)^{1/b}\), and explain why a learning rate that is smaller than assumed makes this ratio larger for a fixed target price.</p>
+</li>
+<li>
+<p>Using (22.2), evaluate the learning exponent \(b\) and the inverse exponent \(1/b\) at the two ends of the sampled learning-rate range, \(L = 0.15\) and \(L = 0.25\). For each case, use (22.3) to find the factor by which cumulative launched mass must rise to drive the effective price down by a factor of ten toward the 200 dollars per kilogram target. Comment on how much the required mass factor changes across the sampled learning-rate range. [At \(L=0.20\) the chapter gives a factor near \(1.3\times 10^3\).]</p>
+</li>
+<li>
+<p>The chapter's worked estimate takes the effective price to fall by roughly a factor of ten to approach the target. Treat the 2026 effective price as the reference price \(C_0\) in (22.1) and use the sampled range of 1,200 to 3,500 dollars per kilogram. For each end of that range, compute the actual price ratio \(C_0/C^\ast\) needed to reach \(C^\ast = 200\) dollars per kilogram, then use (22.3) with \(L = 0.20\) to find the required cumulative-mass ratio \(m/m_0\) at each end. Discuss how the choice of starting price alone, holding the learning rate fixed, shifts the required cumulative mass.</p>
+</li>
+<li>
+<p>Using the required cumulative-mass ratio from the chapter's worked estimate (\(m/m_0 \approx 1.3\times 10^3\) at \(L = 0.20\)) together with the cadence model (22.4), size the number of flights needed to accumulate the required mass. Take a payload of \(p = 200\) tonnes per launch, take the reference mass \(m_0\) to be the additional cumulative mass already implied near the start of the ramp, and use the chapter's stated figure of roughly 370,000 tonnes of additional cumulative launched mass to the target. Estimate the number of launches this implies at 200 tonnes per flight, and compare your figure with the chapter's order of 1,800 Starship launches. Then, holding the required mass fixed, state by what factor the number of launches changes if the payload is reduced from 250 tonnes to 150 tonnes, the two ends of the sampled payload range.</p>
+</li>
+</ol>
 <h2 id="23-capability-and-risk-trajectory-2027-2035">23. Capability and Risk Trajectory, 2027-2035</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter synthesizes the preceding analysis into a defensible capability and risk trajectory through the early 2030s, and names the gating demonstrations.</p>
@@ -1851,6 +2140,21 @@ produced by the open code and is reproduced by the validation suite.</p>
 <p><strong>Levelized cost as a normalized figure of merit.</strong> The finance result is most useful when read as compute per unit cost. Writing \(C_{\text{life}}\) for the lifecycle cost, \(Q\) for the delivered useful compute rate, and \(T_{\text{op}}\) for the operating horizon,</p>
 <p>\[ \mathrm{LCC} = \frac{C_{\text{life}}}{Q \, T_{\text{op}}}, \tag{26.5}\]</p>
 <p>so the roughly one hundred dollars per useful petaflop-hour of Table T11 places the dominant leverage on \(Q\), the throttled compute, rather than on launch price alone. Design implication: because \(\mathrm{PUE}_{\text{elec}}\) and the throttled \(Q\) enter the cost through (26.2) and (26.5), reducing parasitic overhead and thermal throttling improves the economics more than equivalent reductions in launch price, while the lifetime inequality (26.4) fixes disposal mass and propellant before any of that economics is realized.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the power-summation rule of the chapter, show that the electrical power-usage effectiveness can be written purely in terms of the contingency margin, the compute load, and the subsystem sum, namely that combining (26.1) and (26.2) gives \(\mathrm{PUE}_{\text{elec}} = (1+m)\left(1 + \sum_i P_i / P_{\text{IT}}\right)\). Using this form, state by inspection how \(\mathrm{PUE}_{\text{elec}}\) responds in the limit where the fixed subsystem allocations become negligible compared with the accelerator draw, and confirm that the reference design point reproduces the tabulated value of 1.58.</p>
+</li>
+<li>
+<p>Recompute the total electrical demand using (26.1) for a design point in which the number of accelerators is doubled to eight while every other input is held at its reference value (200 W per accelerator, the same avionics, attitude-control, communications, and thermal-control allocations summing to 300 W, and \(m = 0.15\)). Report the new \(P_{\text{elec}}\) and the new \(\mathrm{PUE}_{\text{elec}}\) from (26.2), and state by what factor the electrical demand increases relative to the four-accelerator reference value of 1,265 W. [expect \(\mathrm{PUE}_{\text{elec}}\) to fall below the reference 1.58]</p>
+</li>
+<li>
+<p>The disposal decision turns on the ballistic coefficient through (26.3) and the lifetime inequality (26.4). For the reference dry mass near 220 kg, treat the natural lifetime as scaling inversely with the ballistic coefficient as described in the chapter, and determine the factor by which \(\beta\) would have to be reduced to bring the natural lifetime down to the regulatory limit \(T_{\text{rule}} = 5\) yr, taking the natural lifetime at the upper end of the quoted twelve-to-twenty-two-year band. Then, using (26.3), state by what factor the drag area \(A\) must increase to achieve that reduction in \(\beta\) at fixed dry mass and fixed drag coefficient, and comment on whether passive area increase alone removes the need for the 132 m/s de-orbit burn of (26.4).</p>
+</li>
+<li>
+<p>Using the levelized-cost definition (26.5), size the sensitivity of the figure of merit to the throttled compute. Holding the lifecycle cost \(C_{\text{life}}\) and the operating horizon \(T_{\text{op}}\) fixed at their reference values, and taking the delivered useful compute rate \(Q\) as the roughly two-thirds of a petaflop quoted in the chapter against a levelized cost of about one hundred dollars per useful petaflop-hour, determine the new levelized cost if thermal throttling were relieved enough to raise \(Q\) by twenty percent. Compare this with the change produced by a twenty-percent reduction in launch price, and use the structure of (26.5) together with the role of \(\mathrm{PUE}_{\text{elec}}\) in (26.2) to justify the chapter's design implication that reducing parasitic overhead and throttling improves the economics more than an equivalent reduction in launch price.</p>
+</li>
+</ol>
 <h2 id="27-detailed-results-tables">27. Detailed Results Tables</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter tabulates the detailed numerical results that support the figures and conclusions of the preceding parts.</p>
@@ -2456,6 +2760,21 @@ problem at this density, and it is the operational face of the formation paradox
 <p>\[t_{\mathrm{budget}} = \sqrt{\frac{2\,\Delta y_{\max}}{3\,\delta a_{\mathrm{drag}}}} = \sqrt{\frac{2(150)}{3(10^{-7})}}\ \mathrm{s} \approx 3.2\times 10^{4}\ \mathrm{s}, \tag{28.4}\]</p>
 <p>about nine hours, consistent with the chapter's statement that margin is consumed within hours to days.</p>
 <p><strong>Design implication.</strong> Because uncorrected along-track error grows as \(t^2\) while the control budget is fixed at the 150-m spacing, the formation must close its relative-navigation and thrust loop on a timescale well inside \(t_{\mathrm{budget}}\); this sets the required cadence of differential drag estimation and of the autonomous station-keeping maneuvers rather than the total propellant.</p>
+<p><strong>Problems.</strong></p>
+<ol>
+<li>
+<p>Starting from the rotating-frame acceleration (28.2) with \(\mathbf{n} = n\,\hat{\mathbf{z}}\), show that expanding the radial gravitational term \(-\mu/(r_0+x)^2\) to first order in \(x\) gives \(-n^2 r_0 + 2 n^2 x\), and that the constant part cancels against the centrifugal term acting on the reference radius. Identify which term in (28.1) the surviving \(2 n^2 x\) contribution corresponds to, and confirm that the cross-track equation \(\ddot z + n^2 z = a_z\) describes simple harmonic motion at the orbital rate \(n\).</p>
+</li>
+<li>
+<p>Using the secular along-track growth (28.3), estimate the time at which the along-track offset reaches the 150-m spacing budget for a differential drag acceleration \(\delta a_{\mathrm{drag}} = 1\times 10^{-7}\ \mathrm{m\,s^{-2}}\), following the inversion in (28.4). Then repeat the estimate for the case in which differential drag is ten times larger, \(\delta a_{\mathrm{drag}} = 1\times 10^{-6}\ \mathrm{m\,s^{-2}}\), and report the new budget time. [expect \(t_{\mathrm{budget}}\) of order \(10^4\) s in the first case]</p>
+</li>
+<li>
+<p>The chapter states that differential atmospheric drag varies by a factor of one hundred over the solar cycle. Using the quadratic scaling of (28.3) and the inversion of (28.4), determine by what factor the budget time \(t_{\mathrm{budget}}\) changes when \(\delta a_{\mathrm{drag}}\) increases by a factor of one hundred from solar minimum to solar maximum. State whether the formation must close its relative-navigation and thrust loop more or less frequently at solar maximum, and explain in one sentence why this sets the maneuver cadence rather than the total propellant.</p>
+</li>
+<li>
+<p>Size the maximum tolerable constant differential along-track acceleration \(\delta a\) such that the along-track offset (28.3) remains below the 150-m spacing budget over a control interval of one orbital period \(T = 2\pi/n\). Express your answer in terms of \(\Delta y_{\max}\) and \(n\), and then evaluate it for a reference orbit with mean motion \(n = 1.1\times 10^{-3}\ \mathrm{rad\,s^{-1}}\).</p>
+</li>
+</ol>
 <h2 id="29-comparison-with-terrestrial-data-centers">29. Comparison with Terrestrial Data Centers</h2>
 <blockquote>
 <p><em>Abstract.</em> This chapter sets the orbital architecture against terrestrial hyperscale data centers, dimension by dimension, to locate where each genuinely differs.</p>
