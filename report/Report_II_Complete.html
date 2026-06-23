@@ -247,6 +247,106 @@ Appendix C: data sources and confidence · Appendix D: reproduction and code</p>
 </tr>
 </tbody>
 </table>
+<h2 id="abbreviations">Abbreviations</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADCS</td>
+<td>attitude determination and control</td>
+<td>LCOE</td>
+<td>levelized cost of compute</td>
+</tr>
+<tr>
+<td>AM0</td>
+<td>air-mass-zero solar spectrum</td>
+<td>LEO</td>
+<td>low Earth orbit</td>
+</tr>
+<tr>
+<td>BOL / EOL</td>
+<td>beginning / end of life</td>
+<td>MFU</td>
+<td>model-FLOPs utilization</td>
+</tr>
+<tr>
+<td>CAPEX / OPEX</td>
+<td>capital / operating expenditure</td>
+<td>MTBF</td>
+<td>mean time between failures</td>
+</tr>
+<tr>
+<td>CRF</td>
+<td>capital-recovery factor</td>
+<td>NPV / IRR</td>
+<td>net present value / internal rate of return</td>
+</tr>
+<tr>
+<td>ECC</td>
+<td>error-correcting code</td>
+<td>PUE</td>
+<td>power-usage effectiveness</td>
+</tr>
+<tr>
+<td>FSO / ISL</td>
+<td>free-space optical / inter-satellite link</td>
+<td>SAA</td>
+<td>South Atlantic Anomaly</td>
+</tr>
+<tr>
+<td>FSPL</td>
+<td>free-space path loss</td>
+<td>SEU</td>
+<td>single-event upset</td>
+</tr>
+<tr>
+<td>GPU / TPU</td>
+<td>graphics / tensor processing unit</td>
+<td>SSO</td>
+<td>sun-synchronous orbit</td>
+</tr>
+<tr>
+<td>HBM</td>
+<td>high-bandwidth memory</td>
+<td>TID</td>
+<td>total ionizing dose</td>
+</tr>
+<tr>
+<td>IR</td>
+<td>infrared</td>
+<td>TIM</td>
+<td>thermal interface material</td>
+</tr>
+<tr>
+<td>\(J_2\)</td>
+<td>second zonal gravity harmonic</td>
+<td>TMR</td>
+<td>triple modular redundancy</td>
+</tr>
+<tr>
+<td>RAAN</td>
+<td>right ascension of the ascending node</td>
+<td>TRL</td>
+<td>technology-readiness level</td>
+</tr>
+</tbody>
+</table>
+<h2 id="notation-and-conventions">Notation and Conventions</h2>
+<p>This book uses SI units throughout unless a quantity is stated otherwise; temperatures are given in
+degrees Celsius or kelvin as marked, and angles in degrees unless radians are specified. The Earth
+gravitational parameter is \(\mu = G M_\oplus\), and the standard physical constants are those listed
+above. Display equations are numbered by chapter, so a tag such as (10.3) refers to the third numbered
+equation of Chapter 10. Vectors are set in bold and an overdot denotes a time derivative. Numbers that
+are demonstrated or computed from the model are stated directly; forward-looking quantities, such as
+future launch prices and parity dates, are flagged as projections and given with uncertainty bands
+rather than as single values. Cross-references name the chapter by its number.</p>
 <hr />
 <h1 id="part-i-introduction-and-context">PART I, INTRODUCTION AND CONTEXT</h1>
 <h2 id="1-introduction-and-motivation">1. Introduction and Motivation</h2>
@@ -2754,4 +2854,39 @@ geometric series,</p>
 <p>\[\mathrm{CRF} = \frac{X}{C} = \frac{r(1+r)^n}{(1+r)^n - 1},\]</p>
 <p>used in the levelized-cost-of-compute formula (21.1) to annualize the satellite hardware and launch
 cost over its operational life.</p>
+<h2 id="glossary">Glossary</h2>
+<p><strong>Albedo.</strong> The fraction of incident sunlight an illuminated body reflects; Earth's mean value of
+about 0.30 sets the reflected-solar load on a spacecraft surface.</p>
+<p><strong>Beta angle.</strong> The angle between the orbital plane and the Sun line; a large beta keeps the orbit
+out of Earth's shadow.</p>
+<p><strong>Dawn-dusk orbit.</strong> A sun-synchronous orbit whose plane lies near the day-night terminator, giving
+near-continuous sunlight.</p>
+<p><strong>De-orbit.</strong> The controlled lowering of an orbit at end of life so the spacecraft re-enters within
+the regulatory window.</p>
+<p><strong>Emissivity.</strong> The efficiency, between zero and one, with which a surface radiates thermal energy
+relative to a black body.</p>
+<p><strong>Free-space path loss.</strong> The geometric fall-off of received signal power with the square of range.</p>
+<p><strong>Ground track.</strong> The locus of sub-satellite points traced on Earth's surface over an orbit.</p>
+<p><strong>Hohmann transfer.</strong> The two-burn maneuver between two coplanar circular orbits that minimizes the
+velocity change.</p>
+<p><strong>Junction temperature.</strong> The temperature of the active silicon in a processor, bounded by an
+allowable maximum.</p>
+<p><strong>k-of-n redundancy.</strong> A system that functions when at least k of n identical units survive.</p>
+<p><strong>Levelized cost of compute.</strong> The discounted lifetime cost divided by the useful computation
+delivered, the orbital analogue of a levelized cost of energy.</p>
+<p><strong>Link budget.</strong> The accounting of gains and losses that determines whether an optical or radio link
+closes at a given range and data rate.</p>
+<p><strong>Model-FLOPs utilization.</strong> The fraction of a processor's peak floating-point capability actually
+used by a workload.</p>
+<p><strong>Nodal precession.</strong> The drift of the orbital plane's ascending node caused by Earth's oblateness.</p>
+<p><strong>Single-event upset.</strong> A transient bit flip in memory or logic caused by a single energetic
+particle.</p>
+<p><strong>Station-keeping.</strong> The propulsive effort that holds a satellite in its assigned relative position.</p>
+<p><strong>Sun-synchronous orbit.</strong> An orbit whose nodal precession matches Earth's mean motion about the Sun,
+fixing the local solar time of the ground track.</p>
+<p><strong>Total ionizing dose.</strong> The cumulative ionizing energy deposited in a material over the mission,
+the slow-accumulation part of the radiation environment.</p>
+<p><strong>View factor.</strong> The fraction of a surface's hemispherical field of view occupied by another body,
+here Earth, setting the radiative coupling between them.</p>
+<p><strong>Vis-viva.</strong> The energy relation giving orbital speed as a function of radius and semi-major axis.</p>
 </body></html>

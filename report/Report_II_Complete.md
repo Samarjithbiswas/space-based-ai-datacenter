@@ -120,6 +120,35 @@ Appendix C: data sources and confidence · Appendix D: reproduction and code
 | $T_{\mathrm{CMB}}$ | $2.725\ \mathrm{K}$ |
 | $a_{\mathrm{alb}},\ q_{\mathrm{IR}}$ | $0.30$, $237\ \mathrm{W/m^2}$ |
 
+## Abbreviations
+
+| | | | |
+| --- | --- | --- | --- |
+| ADCS | attitude determination and control | LCOE | levelized cost of compute |
+| AM0 | air-mass-zero solar spectrum | LEO | low Earth orbit |
+| BOL / EOL | beginning / end of life | MFU | model-FLOPs utilization |
+| CAPEX / OPEX | capital / operating expenditure | MTBF | mean time between failures |
+| CRF | capital-recovery factor | NPV / IRR | net present value / internal rate of return |
+| ECC | error-correcting code | PUE | power-usage effectiveness |
+| FSO / ISL | free-space optical / inter-satellite link | SAA | South Atlantic Anomaly |
+| FSPL | free-space path loss | SEU | single-event upset |
+| GPU / TPU | graphics / tensor processing unit | SSO | sun-synchronous orbit |
+| HBM | high-bandwidth memory | TID | total ionizing dose |
+| IR | infrared | TIM | thermal interface material |
+| $J_2$ | second zonal gravity harmonic | TMR | triple modular redundancy |
+| RAAN | right ascension of the ascending node | TRL | technology-readiness level |
+
+## Notation and Conventions
+
+This book uses SI units throughout unless a quantity is stated otherwise; temperatures are given in
+degrees Celsius or kelvin as marked, and angles in degrees unless radians are specified. The Earth
+gravitational parameter is $\mu = G M_\oplus$, and the standard physical constants are those listed
+above. Display equations are numbered by chapter, so a tag such as (10.3) refers to the third numbered
+equation of Chapter 10. Vectors are set in bold and an overdot denotes a time derivative. Numbers that
+are demonstrated or computed from the model are stated directly; forward-looking quantities, such as
+future launch prices and parity dates, are flagged as projections and given with uncertainty bands
+rather than as single values. Cross-references name the chapter by its number.
+
 ---
 
 # PART I, INTRODUCTION AND CONTEXT
@@ -2655,5 +2684,61 @@ $$\mathrm{CRF} = \frac{X}{C} = \frac{r(1+r)^n}{(1+r)^n - 1},$$
 
 used in the levelized-cost-of-compute formula (21.1) to annualize the satellite hardware and launch
 cost over its operational life.
+
+## Glossary
+
+**Albedo.** The fraction of incident sunlight an illuminated body reflects; Earth's mean value of
+about 0.30 sets the reflected-solar load on a spacecraft surface.
+
+**Beta angle.** The angle between the orbital plane and the Sun line; a large beta keeps the orbit
+out of Earth's shadow.
+
+**Dawn-dusk orbit.** A sun-synchronous orbit whose plane lies near the day-night terminator, giving
+near-continuous sunlight.
+
+**De-orbit.** The controlled lowering of an orbit at end of life so the spacecraft re-enters within
+the regulatory window.
+
+**Emissivity.** The efficiency, between zero and one, with which a surface radiates thermal energy
+relative to a black body.
+
+**Free-space path loss.** The geometric fall-off of received signal power with the square of range.
+
+**Ground track.** The locus of sub-satellite points traced on Earth's surface over an orbit.
+
+**Hohmann transfer.** The two-burn maneuver between two coplanar circular orbits that minimizes the
+velocity change.
+
+**Junction temperature.** The temperature of the active silicon in a processor, bounded by an
+allowable maximum.
+
+**k-of-n redundancy.** A system that functions when at least k of n identical units survive.
+
+**Levelized cost of compute.** The discounted lifetime cost divided by the useful computation
+delivered, the orbital analogue of a levelized cost of energy.
+
+**Link budget.** The accounting of gains and losses that determines whether an optical or radio link
+closes at a given range and data rate.
+
+**Model-FLOPs utilization.** The fraction of a processor's peak floating-point capability actually
+used by a workload.
+
+**Nodal precession.** The drift of the orbital plane's ascending node caused by Earth's oblateness.
+
+**Single-event upset.** A transient bit flip in memory or logic caused by a single energetic
+particle.
+
+**Station-keeping.** The propulsive effort that holds a satellite in its assigned relative position.
+
+**Sun-synchronous orbit.** An orbit whose nodal precession matches Earth's mean motion about the Sun,
+fixing the local solar time of the ground track.
+
+**Total ionizing dose.** The cumulative ionizing energy deposited in a material over the mission,
+the slow-accumulation part of the radiation environment.
+
+**View factor.** The fraction of a surface's hemispherical field of view occupied by another body,
+here Earth, setting the radiative coupling between them.
+
+**Vis-viva.** The energy relation giving orbital speed as a function of radius and semi-major axis.
 
 

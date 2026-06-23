@@ -70,6 +70,52 @@ def preprocess(md: str) -> str:
     return md
 
 
+INDEX_TERMS = [
+    "Clohessy-Wiltshire", "Stefan-Boltzmann", "Newton-Raphson", "sun-synchronous",
+    "Hohmann transfer", "nodal precession", "single-event upset", "total ionizing dose",
+    "free-space path loss", "junction temperature", "thermal resistance", "view factor",
+    "specific impulse", "rocket equation", "two-body", "angular momentum", "vis-viva",
+    "semi-major axis", "mean motion", "eccentricity", "inclination", "ground track",
+    "orbital decay", "atmospheric drag", "drag coefficient", "beta angle", "eclipse",
+    "dawn-dusk", "albedo", "emissivity", "radiator", "lumped capacitance", "solar array",
+    "fast-steering mirror", "pointing loss", "telescope gain", "link budget",
+    "debris", "collision probability", "k-of-n", "reliability", "station-keeping",
+    "de-orbit", "reentry", "propellant", "Monte-Carlo", "learning curve",
+    "levelized cost", "net present value", "capital-recovery factor", "throughput tax",
+    "utilization", "error-correcting", "checkpointing", "gravitational parameter",
+    "cosmic microwave background", "parasitic load", "technology-readiness",
+]
+
+
+def add_index(path):
+    """Inject \\index entries for key terms (first safe prose occurrence) and add \\printindex,
+    so Overleaf's makeindex produces a page-numbered subject index. Book build only."""
+    tex = path.read_text(encoding="utf-8")
+    if "\\printindex" not in tex:
+        tex = tex.replace(
+            "\\end{document}",
+            "\\cleardoublepage\n\\addcontentsline{toc}{chapter}{Index}\n\\printindex\n\\end{document}", 1)
+    lines = tex.splitlines()
+    # index only the real body chapters: from Chapter 1 to the back matter
+    lo = next((i for i, l in enumerate(lines) if l.startswith("\\chapter{1.")), 0)
+    hi = next((i for i, l in enumerate(lines)
+               if l.strip() == "\\backmatter" or l.startswith("\\chapter{References")), len(lines))
+    done = set()
+    for i in range(lo, hi):
+        ln = lines[i]; s = ln.strip()
+        if (not s or s[0] in "%\\" or any(ch in ln for ch in "${}&|_^~")):
+            continue
+        for t in INDEX_TERMS:
+            if t in done:
+                continue
+            m = re.search(r"(?<![\w-])" + re.escape(t) + r"(?![\w-])", ln, re.IGNORECASE)
+            if m:
+                lines[i] = ln[:m.end()] + "\\index{" + t + "}" + ln[m.end():]
+                ln = lines[i]; done.add(t)
+    path.write_text("\n".join(lines), encoding="utf-8")
+    print(f"index: {len(done)}/{len(INDEX_TERMS)} terms placed")
+
+
 def build():
     md = preprocess(SRC.read_text(encoding="utf-8"))
     tmp = HERE / "_book_src.md"
@@ -95,6 +141,7 @@ def build():
     ]
     pypandoc.convert_file(str(tmp), "latex", outputfile=str(OUT_TEX), extra_args=extra)
     tmp.unlink()
+    add_index(OUT_TEX)
 
     # Copy figure directories into the bundle so paths resolve on Overleaf.
     for d in FIG_DIRS:
