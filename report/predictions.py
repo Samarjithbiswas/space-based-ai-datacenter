@@ -34,22 +34,24 @@ PARITY = 200.0          # USD/kg target
 FLOOR = 30.0            # marginal cost floor
 
 
-def price_path(P0, LR, payload_t, peak_cad, M0=3000.0, t_mid=2030.0, k=1.3):
-    """Return price(t) over YEARS for one parameter set."""
+def price_path(P0, LR, payload_t, peak_cad, M0=3000.0, t_mid=2030.0, k=1.3, years=None):
+    """Return price(t) over `years` (default YEARS) for one parameter set."""
+    yr = YEARS if years is None else years
     b = np.log2(1 - LR)
-    cad = peak_cad / (1 + np.exp(-(YEARS - t_mid) / k))      # launches/yr (logistic)
+    cad = peak_cad / (1 + np.exp(-(yr - t_mid) / k))         # launches/yr (logistic)
     annual_mass = payload_t * cad
     cum = M0 + np.cumsum(annual_mass)                         # cumulative launched mass [t]
     price = P0 * (cum / M0) ** b
     return np.maximum(price, FLOOR)
 
 
-def parity_year(price):
+def parity_year(price, years=None):
+    yr = YEARS if years is None else years
     idx = np.where(price <= PARITY)[0]
-    return YEARS[idx[0]] if len(idx) else np.nan
+    return yr[idx[0]] if len(idx) else np.nan
 
 
-def monte_carlo(n=20000, seed=7):
+def monte_carlo(n=20000, seed=7, years=None):
     rng = np.random.default_rng(seed)
     LR = rng.uniform(0.15, 0.25, n)            # learning rate
     P0 = rng.uniform(1200, 3500, n)            # 2026 effective $/kg
@@ -57,12 +59,19 @@ def monte_carlo(n=20000, seed=7):
     peak = rng.uniform(80, 220, n)             # peak launches/yr
     yrs, paths = [], []
     for i in range(n):
-        p = price_path(P0[i], LR[i], payload[i], peak[i])
-        yrs.append(parity_year(p))
+        p = price_path(P0[i], LR[i], payload[i], peak[i], years=years)
+        yrs.append(parity_year(p, years=years))
         if i < 400:
             paths.append(p)
     yrs = np.array(yrs, float)
     return yrs, np.array(paths)
+
+
+def horizon_sensitivity():
+    """Reach fraction and conditional median when the horizon is extended to 2060."""
+    yrs, _ = monte_carlo(years=np.arange(2026, 2061))
+    valid = yrs[~np.isnan(yrs)]
+    return float(np.mean(~np.isnan(yrs))), float(np.median(valid))
 
 
 def main():
@@ -96,6 +105,8 @@ def main():
     print(f"  Scenarios reaching $200/kg by 2050 = {reach_frac*100:.0f}%  ({(1-reach_frac)*100:.0f}% never reach it)")
     print(f"  Conditional parity year   P5 = {pct[5]:.0f}   P50 = {pct[50]:.0f}   P95 = {pct[95]:.0f}")
     print(f"  P(parity by 2035) = {frac_2035*100:.0f}%")
+    reach_2060, med_2060 = horizon_sensitivity()
+    print(f"  Extending horizon to 2060: reach = {reach_2060*100:.0f}%, conditional median = {med_2060:.0f}")
     print(f"  (Suncatcher headline: '<=$200/kg by ~2035')")
     print("=" * 64)
     return pct, frac_2035, reach_frac

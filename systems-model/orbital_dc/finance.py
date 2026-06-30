@@ -42,7 +42,7 @@ def lcoe_per_pflop_hr(capex_usd: float, opex_yr_usd: float, delivered_pflops: fl
                       rate: float = 0.10, life_years: int = 5, utilization: float = 0.8) -> float:
     """Levelized cost of compute [$/PFLOP-hr]:
         (CRF * CAPEX + OPEX) / (annual useful PFLOP-hours)."""
-    annual_pflop_hr = delivered_pflops * 8766.0 * utilization
+    annual_pflop_hr = delivered_pflops * 8760.0 * utilization
     crf = capital_recovery_factor(rate, life_years)
     return float((crf * capex_usd + opex_yr_usd) / annual_pflop_hr)
 

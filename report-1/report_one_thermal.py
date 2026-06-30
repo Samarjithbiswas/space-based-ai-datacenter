@@ -101,9 +101,11 @@ def main():
     print("\nOne heat pipe out (8 -> 7)")
     print(f"  dR = +{dR:.4f}, T_j = {Tj_fail:.1f} C, margin {J_LIMIT - Tj_fail:.1f} C")
 
-    P_max = (J_LIMIT - T_rad) / R_after
-    print("\nMax chip power inside the budget")
-    print(f"  P_max = ({J_LIMIT:.0f} - {T_rad:.1f}) / {R_after:.3f} = {P_max:.0f} W")
+    # passive wall: the interface rise P*R_th alone reaches the 125 C budget, so no
+    # radiator size can relax it. P_max = J_LIMIT / R_th.
+    P_max = J_LIMIT / R_after
+    print("\nPassive wall (interface rise alone hits the budget)")
+    print(f"  P_max = {J_LIMIT:.0f} / {R_after:.3f} = {P_max:.0f} W  (no radiator size relaxes it)")
 
     F, solar, albedo, earth_ir = external_loads()
     print("\nExternal loads (alpha_s = 0.15)")
@@ -117,7 +119,7 @@ def main():
     assert abs(T_rad - 21.3) < 0.3
     assert abs(Tj - 111.3) < 0.5
     assert abs(Tj_fail - 114.8) < 0.5
-    assert abs(P_max - 346) < 5
+    assert abs(P_max - 417) < 5
     assert abs(F - 0.290) < 0.005
     print(f"\n{bar}\nchecks ok\n{bar}")
 

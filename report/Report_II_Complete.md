@@ -6,7 +6,7 @@
 **Author:** Samarjith Biswas, PhD
 **Date:** June 2026
 **Reference architecture:** Google Project Suncatcher (arXiv:2511.19468)
-**Companion code:** github.com/Samarjithbiswas/space-based-ai-datacenter (20-module model, 118 tests)
+**Companion code:** github.com/Samarjithbiswas/space-based-ai-datacenter (20-module model, 122 tests)
 
 ---
 
@@ -1367,11 +1367,13 @@ $$G = \left(\frac{\pi D}{\lambda}\right)^2, \qquad L_{\mathrm{fs}} = \left(\frac
 and the received power in decibels is $P_{\mathrm{rx}} = P_{\mathrm{tx}} + G_{\mathrm{tx}} +
 G_{\mathrm{rx}} - L_{\mathrm{fs}} - L_{\mathrm{point}} - L_{\mathrm{atm}} - L_{\mathrm{optics}}$.
 
-**Why the formation is tight.** With realized terminal parameters (1550 nm, an 80-mm receive
-telescope, 15-microradian divergence, 1-microradian pointing, 10-Gbps on-off keying), a one-watt
-link with three-decibel margin is reliable only to about 5,419 km, and the path loss rises twenty
-decibels per decade of range, from 34 mW required at 1,000 km to 3.41 W at 10,000 km, against a
-commercial terminal limit near one watt. The reference architecture needs roughly ten terabits per
+**Why the formation is tight.** A representative 1550 nm inter-satellite terminal (an 80-mm receive
+telescope, 15-microradian divergence, 1-microradian pointing, 10-Gbps on-off keying) at one watt with
+three-decibel margin gives a reliable range of order 5,000 km; the analysis anchors to the published
+design point of about 5,419 km from the free-space optical satellite-link study of Liang et al. [6].
+Because free-space path loss rises twenty decibels per decade of range, the required power scales as the
+inverse square, from 34 mW at 1,000 km to 3.41 W at 10,000 km, against a commercial terminal limit near
+one watt. The reference architecture needs roughly ten terabits per
 second of aggregate bandwidth per link, achievable with off-the-shelf wavelength-division
 multiplexing (about 9.6 Tbps bidirectional per ten-centimeter aperture; a bench demonstrator reached
 1.6 Tbps) only by flying the satellites about 150 m apart. The tight cluster is forced by the
@@ -1612,7 +1614,7 @@ over an orbit while a time-varying compute load heats the die; when the junction
 its throttle threshold, the effective utilization (and thus both power and delivered work) is scaled
 back, and the loop settles to a throttled operating point. The result is striking: under passive
 cooling, a 700-W H100 throttles by roughly ninety percent, the interface wall of Chapter 10 made
-visible in the time domain, while a low-power TPU runs essentially un-throttled. This is the
+visible in the time domain, while a low-power TPU throttles only about fourteen percent. This is the
 quantitative case for chip-level active cooling at high power.
 
 **Effective efficiency.** The appropriate efficiency metric is an effective power-usage effectiveness that
@@ -2081,7 +2083,7 @@ that price is therefore not a near-certainty awaiting a date; under most defensi
 not arrive within the horizon. Conditional on the minority of scenarios that do reach it, the median
 parity year is near 2044 (Fig. 22.1), with a fifth percentile of about 2037 and essentially no
 probability of reaching parity by 2035. Extending the horizon to 2060 raises the reaching fraction only
-to about nine percent and moves the conditional median to the end of the 2040s, so the conclusion is not
+to about ten percent and moves the conditional median to about 2050, so the conclusion is not
 an artifact of where the horizon is drawn. The vendor's 2035 date sits beyond the optimistic edge of the
 distribution and requires its specific aggressive anchors, full reusability at 200 tonnes and roughly
 two million dollars marginal cost, sustained twenty-percent learning from a low starting price, and a
