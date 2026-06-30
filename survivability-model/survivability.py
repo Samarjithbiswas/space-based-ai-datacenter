@@ -163,7 +163,7 @@ def drag_delta_v(alt_km: float, area_to_mass: float, years: float = 5.0,
     return float(a_drag * years * 3.15576e7)
 
 
-def propellant_mass(delta_v: float, isp_s: float, dry_mass_kg: float = 375.0) -> float:
+def propellant_mass(delta_v: float, isp_s: float, dry_mass_kg: float = 220.0) -> float:
     """Propellant mass [kg] from the rocket equation, m_p = m_dry*(exp(dv/(Isp*g0)) - 1)."""
     return float(dry_mass_kg * (np.exp(delta_v / (isp_s * G0)) - 1))
 
@@ -201,7 +201,7 @@ def _tab(fig, label):
              color="white", bbox=dict(boxstyle="round,pad=0.32", fc=NAVY, ec="none"))
 
 
-def figure_decay(bus_area_to_mass=3.5 / 415):
+def figure_decay(bus_area_to_mass=3.5 / 233):
     alts = np.linspace(450, 800, 24)
     fig, ax = plt.subplots(figsize=(8.6, 5.3))
     dmin = [orbital_lifetime(h, bus_area_to_mass, "min") for h in alts]
@@ -319,7 +319,7 @@ def figure_radiation():
     fig.savefig(FIGDIR / "fig4_radiation.png"); plt.close(fig)
 
 
-def figure_deltav(bus_area_to_mass=3.5 / 415, dry_mass=375.0):
+def figure_deltav(bus_area_to_mass=3.5 / 233, dry_mass=220.0):
     dv_d = drag_delta_v(650, bus_area_to_mass)
     dv_f, dv_c = 8.0, 20 * 5 * 0.05
     dv_o = deorbit_delta_v(650)
@@ -348,7 +348,7 @@ def figure_deltav(bus_area_to_mass=3.5 / 415, dry_mass=375.0):
     fig.savefig(FIGDIR / "fig5_deltav.png"); plt.close(fig)
 
 
-def figure_launch_cost(launch_mass=415.0, hardware_usd=1.1e6):
+def figure_launch_cost(launch_mass=233.0, hardware_usd=1.1e6):
     price = np.array([3770, 1500, 600, 300, 200, 100, 30])
     fig = plt.figure(figsize=(9.4, 4.9))
     gs = gridspec.GridSpec(1, 2, width_ratios=[1.1, 1], wspace=0.32)
@@ -405,7 +405,7 @@ def main():
     figure_decay(); figure_thermal_wall(); figure_debris()
     figure_radiation(); figure_deltav(); figure_launch_cost(); figure_risk_matrix()
 
-    am = 3.5 / 415
+    am = 3.5 / 233
     print("=" * 70)
     print(" ORBITAL AI DATA-CENTER SURVIVABILITY  -  HEADLINE NUMBERS")
     print("=" * 70)

@@ -41,14 +41,14 @@ check("tid_dose_rate(10 mm)*5 yr",     s.tid_dose_rate(10) * 5,          1054.0,
 
 # --- delta-v / propulsion ---
 check("deorbit_delta_v(650 km)",       s.deorbit_delta_v(650),           131.6,   0.5, "m/s")
-check("propellant_mass(189.5, 220)",   s.propellant_mass(189.5, 220),    34.4,    0.3, "kg")
-check("propellant_mass(189.5, 1500)",  s.propellant_mass(189.5, 1500),   4.9,     0.2, "kg")
+check("propellant_mass(189.5, 220)",   s.propellant_mass(189.5, 220),    20.2,    0.3, "kg")
+check("propellant_mass(189.5, 1500)",  s.propellant_mass(189.5, 1500),   2.85,    0.2, "kg")
 
 # --- orbital decay (numerical; loose band reflects solar-cycle uncertainty) ---
-life = s.orbital_lifetime(650, 3.5 / 415, "mod")
-ok = 18.0 <= life <= 26.0
+life = s.orbital_lifetime(650, 3.5 / 233, "mod")
+ok = 8.0 <= life <= 18.0
 CASES.append(ok)
-print(f"  [{'PASS' if ok else 'FAIL'}] orbital_lifetime(650 km, mod)          = {life:11.4f} yr      (expected 18-26)")
+print(f"  [{'PASS' if ok else 'FAIL'}] orbital_lifetime(650 km, mod)          = {life:11.4f} yr      (expected 8-18)")
 
 # --- internal consistency: SB law and rocket equation round-trips ---
 T = 293.15

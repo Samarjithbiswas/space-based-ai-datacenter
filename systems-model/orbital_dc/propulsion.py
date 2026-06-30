@@ -37,6 +37,6 @@ def delta_v_budget(alt_km: float, area_to_mass: float, years: float = 5.0,
             "deorbit": deorbit, "margin": total - sub, "total": total}
 
 
-def propellant_mass(delta_v: float, isp_s: float, dry_mass_kg: float = 375.0) -> float:
+def propellant_mass(delta_v: float, isp_s: float, dry_mass_kg: float = 220.0) -> float:
     """Propellant [kg] from Tsiolkovsky, m_p = m_dry*(exp(dv/(Isp*g0)) - 1)."""
     return float(dry_mass_kg * (np.exp(delta_v / (isp_s * G0)) - 1))

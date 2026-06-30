@@ -327,7 +327,7 @@ constellation}\label{an-engineering-analysis-of-a-space-based-ai-compute-constel
 \textbf{Reference architecture:} Google Project Suncatcher
 (arXiv:2511.19468) \textbf{Companion code:}
 github.com/Samarjithbiswas/space-based-ai-datacenter (20-module model,
-118 tests)
+122 tests)
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1887,9 +1887,9 @@ rule.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Atmospheric drag slowly removes orbital energy, so the orbit spirals inward; the natural lifetime is about two decades at moderate solar activity.}]{schematics/sch_decay_spiral.png}}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Atmospheric drag slowly removes orbital energy, so the orbit spirals inward; the natural lifetime is about twelve years at moderate solar activity.}]{schematics/sch_decay_spiral.png}}
 \caption{Atmospheric drag slowly removes orbital energy, so the orbit
-spirals inward; the natural lifetime is about two decades at moderate
+spirals inward; the natural lifetime is about twelve years at moderate
 solar activity.}
 \end{figure}
 
@@ -1947,14 +1947,14 @@ explicitly as a band rather than collapsed to a point.
 
 \textbf{Numerical solution and result.} Equation (7.3) is integrated by
 adaptive forward Euler to a re-entry altitude of 120 km. For the
-reference bus, with an area-to-mass ratio of \(0.0084\ \mathrm{m^2/kg}\)
+reference bus, with an area-to-mass ratio of \(0.015\ \mathrm{m^2/kg}\)
 and \(C_D = 2.2\), the natural lifetime at 650 km is approximately
-\textbf{twenty-two years} at moderate solar activity, about four years
-at solar maximum, and over three hundred years at solar minimum (Fig.
-7.1). The regulatory consequence is severe: the United States Federal
-Communications Commission now requires disposal within five years
-(Chapter 15), so only a satellite that happens to launch into a solar
-maximum approaches passive compliance. \textbf{Active de-orbit
+\textbf{twelve years} at moderate solar activity, about two and a half
+years at solar maximum, and roughly one hundred seventy years at solar
+minimum (Fig. 7.1). The regulatory consequence is severe: the United
+States Federal Communications Commission now requires disposal within
+five years (Chapter 15), so only a satellite that happens to launch into
+a solar maximum approaches passive compliance. \textbf{Active de-orbit
 propulsion is therefore mandatory, not optional}, a conclusion that
 propagates into the mass and economic budgets.
 
@@ -2013,14 +2013,14 @@ both the ballistic factor and the ambient density, the latter being the
 term that swings by two orders of magnitude across the solar cycle.
 
 \textbf{Worked example.} Take the reference bus with
-\(B = C_D (A/m) = 2.2 \times 0.0084 \approx 0.0185\ \mathrm{m^2/kg}\) at
+\(B = C_D (A/m) = 2.2 \times 0.015 \approx 0.033\ \mathrm{m^2/kg}\) at
 \(a_0 \approx 7028\ \mathrm{km}\) and
 \(\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}\), so that
 \(\sqrt{\mu a_0} \approx 5.3\times 10^{10}\ \mathrm{m^2/s}\). With a
 representative scale height of order tens of kilometres, (7.7) returns
-lifetimes in the decade-to-century range as the density \(\rho_0\) is
+lifetimes in the few-years-to-century range as the density \(\rho_0\) is
 swept across its solar-cycle band, consistent with the integrated result
-of roughly twenty-two years at moderate activity reported above.
+of roughly twelve years at moderate activity reported above.
 
 \textbf{Design implication.} Equation (7.7) makes the sensitivity
 explicit; since lifetime falls linearly with the area-to-mass ratio and
@@ -2042,7 +2042,7 @@ sized to the worst case rather than to a nominal density.
   step exact.
 \item
   Using the closed-form lifetime estimate (7.7) with the reference-bus
-  ballistic factor \(B = C_D(A/m) = 0.0185\ \mathrm{m^2/kg}\),
+  ballistic factor \(B = C_D(A/m) = 0.033\ \mathrm{m^2/kg}\),
   \(\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}\),
   \(a_0 \approx 7028\ \mathrm{km}\), and a scale height
   \(H = 60\ \mathrm{km}\), estimate the natural lifetime for an ambient
@@ -2055,7 +2055,7 @@ sized to the worst case rather than to a nominal density.
   The chapter states that lifetime falls linearly with both the
   area-to-mass ratio and the ambient density (7.7). A design revision
   adds deployable radiators that raise the area-to-mass ratio from
-  \(0.0084\ \mathrm{m^2/kg}\) to \(0.0126\ \mathrm{m^2/kg}\) while the
+  \(0.015\ \mathrm{m^2/kg}\) to \(0.0225\ \mathrm{m^2/kg}\) while the
   bus is simultaneously flown during a period when the ambient density
   is a factor of three higher than the reference value. By what overall
   factor does the natural lifetime change relative to the reference case
@@ -2871,8 +2871,8 @@ slewing the whole flexible structure.
 thermal, power, attitude, shielding, avionics, payload, harness, and
 propellant into a dry and a launch mass, and from the dry mass and a
 drag area computes the ballistic coefficient that feeds the decay and Δv
-analyses. The reference four-chip satellite closes at roughly 270 to 290
-kg dry.
+analyses. The reference four-chip satellite closes at roughly 220 kg
+dry.
 
 \begin{figure}
 \centering
@@ -3192,14 +3192,17 @@ and the received power in decibels is
 \(P_{\mathrm{rx}} = P_{\mathrm{tx}} + G_{\mathrm{tx}} +
 G_{\mathrm{rx}} - L_{\mathrm{fs}} - L_{\mathrm{point}} - L_{\mathrm{atm}} - L_{\mathrm{optics}}\).
 
-\textbf{Why the formation is tight.} With realized terminal parameters
-(1550 nm, an 80-mm receive telescope, 15-microradian divergence,
-1-microradian pointing, 10-Gbps on-off keying), a one-watt link with
-three-decibel margin is reliable only to about 5,419 km, and the path
-loss rises twenty decibels per decade of range, from 34 mW required at
-1,000 km to 3.41 W at 10,000 km, against a commercial terminal limit
-near one watt. The reference architecture needs roughly ten terabits per
-second of aggregate bandwidth per link, achievable with off-the-shelf
+\textbf{Why the formation is tight.} A representative 1550 nm
+inter-satellite terminal (an 80-mm receive telescope, 15-microradian
+divergence, 1-microradian pointing, 10-Gbps on-off keying) at one watt
+with three-decibel margin gives a reliable range of order 5,000 km; the
+analysis anchors to the published design point of about 5,419 km from
+the free-space optical satellite-link study of Liang et al.~{[}6{]}.
+Because free-space path loss\index{free-space path loss} rises twenty decibels per decade of range,
+the required power scales as the inverse square, from 34 mW at 1,000 km
+to 3.41 W at 10,000 km, against a commercial terminal limit near one
+watt. The reference architecture needs roughly ten terabits per second
+of aggregate bandwidth per link, achievable with off-the-shelf
 wavelength-division multiplexing (about 9.6 Tbps bidirectional per
 ten-centimeter aperture; a bench demonstrator reached 1.6 Tbps) only by
 flying the satellites about 150 m apart. The tight cluster is forced by
@@ -3373,8 +3376,8 @@ window.
 Commission adopted a binding five-year disposal rule in 2022 (effective
 2024) for any satellite ending its mission in or transiting below 2,000
 km, replacing the earlier non-binding twenty-five-year guideline.
-Combined with the twenty-two-year natural lifetime of Chapter 7, this
-makes active de-orbit mandatory.
+Combined with the twelve-year natural lifetime of Chapter 7, this makes
+active de-orbit mandatory.
 
 \textbf{Controlled de-orbit by a Hohmann burn.} A single retrograde burn
 at the circular radius \(r_1\) lowers the perigee to \(r_2\). The
@@ -3391,14 +3394,14 @@ vis-viva the speed at its apogee (where the burn occurs) is
 \(r_1 = 7.021\times10^6\), \(r_2 = 6.551\times10^6\),
 \(v_{c1} = 7534.8\ \mathrm{m/s}\), giving
 \(\Delta v_{\mathrm{deorbit}} = 131.6\ \mathrm{m/s}\). This single term
-dominates the five-year budget of about 190 m/s (drag make-up
-\textasciitilde13, formation \textasciitilde8, collision avoidance
+dominates the five-year budget of about 202 m/s (drag make-up
+\textasciitilde24, formation \textasciitilde8, collision avoidance
 \textasciitilde5, de-orbit \textasciitilde132, plus margin).
 
 \textbf{Propellant.} The rocket equation, derived from momentum
 conservation \(m\,dv = -v_e\,dm\) with \(v_e = I_{sp} g_0\), gives
-\(m_p = m_{\mathrm{dry}}(e^{\Delta v/(I_{sp}g_0)} - 1)\). For 190 m/s on
-a 375-kg dry bus, this is about 34 kg with hydrazine or about 5 kg with
+\(m_p = m_{\mathrm{dry}}(e^{\Delta v/(I_{sp}g_0)} - 1)\). For 202 m/s on
+a 220-kg dry bus, this is about 22 kg with hydrazine or about 3 kg with
 electric propulsion. Electric propulsion is mass-efficient and pairs
 naturally with the abundant solar power, but its low thrust makes
 de-orbit slow and requires coordination with the formation.
@@ -3455,12 +3458,12 @@ m_p = m_{\mathrm{dry}}\left(e^{\Delta v/(I_{sp} g_0)} - 1\right), \tag{15.5}
 
 which is the sizing relation quoted in the chapter. The exponential
 dependence on \(\Delta v/(I_{sp} g_0)\) explains why a high specific
-impulse is decisive: for the total budget of 190 m/s on the 375-kg dry
-bus, a hydrazine system at modest \(I_{sp}\) needs about 34 kg of
+impulse is decisive: for the total budget of 202 m/s on the 220-kg dry
+bus, a hydrazine system at modest \(I_{sp}\) needs about 22 kg of
 propellant, whereas an electric system, with an order-of-magnitude
 larger \(I_{sp}\), drives the exponent close to zero so that
 \(m_p \approx m_{\mathrm{dry}}\,\Delta v/(I_{sp} g_0)\) and the
-requirement falls to roughly 5 kg.
+requirement falls to roughly 3 kg.
 
 \textbf{Design implication.} Because the de-orbit term dominates the
 velocity budget and propellant scales exponentially with it, the
@@ -3490,13 +3493,13 @@ window and with formation safety.
   state by what factor the de-orbit term changes.
 \item
   Using the propellant sizing relation (15.5) with the chapter's total
-  budget \(\Delta v = 190\) m/s and dry mass \(m_{\mathrm{dry}} = 375\)
+  budget \(\Delta v = 202\) m/s and dry mass \(m_{\mathrm{dry}} = 220\)
   kg, size the propellant mass \(m_p\) for a hydrazine system whose
   specific impulse is \(I_{sp} = 220\) s, taking \(g_0 = 9.81\)
   m/s\(^2\). Then evaluate the small-argument approximation
   \(m_p \approx m_{\mathrm{dry}}\,\Delta v/(I_{sp} g_0)\) quoted in the
   chapter and report the fractional error it introduces at this
-  \(I_{sp}\). {[}expect order \(10\,\)kg{]}
+  \(I_{sp}\). {[}expect order \(20\,\)kg{]}
 \item
   The chapter notes that propellant scales exponentially with
   \(\Delta v\) through (15.5), while the de-orbit term dominates the
@@ -3742,8 +3745,8 @@ temperature exceeds its throttle threshold, the effective utilization
 settles to a throttled operating point. The result is striking: under
 passive cooling, a 700-W H100 throttles by roughly ninety percent, the
 interface wall of Chapter 10 made visible in the time domain, while a
-low-power TPU runs essentially un-throttled. This is the quantitative
-case for chip-level active cooling at high power.
+low-power TPU throttles only about fourteen percent. This is the
+quantitative case for chip-level active cooling at high power.
 
 \textbf{Effective efficiency.} The appropriate efficiency metric is an
 effective power-usage effectiveness that folds in the radiation
@@ -3968,8 +3971,8 @@ The result is one self-consistent satellite, and aggregating over the
 cluster gives fleet compute, fleet power, capital expenditure, total
 cost of ownership, and capacity availability. The mass budget for the
 reference four-chip satellite is shown in Fig. 18.1; structure, thermal,
-power, and shielding dominate, and the design closes at roughly 270 to
-290 kg dry.
+power, and shielding dominate, and the design closes at roughly 220 kg
+dry.
 
 \begin{figure}
 \centering
@@ -4046,9 +4049,8 @@ so the wet mass is the dry mass amplified by the propulsive factor.
 \textbf{Worked example.} Take a structural fraction
 \(f_{\mathrm{str}} = 0.20\). Equation (18.4) then gives an amplification
 \(1/(1 - 0.20) = 1.25\), so a payload-and-bus term of
-\(m_0 \approx 224\) kg closes at \(m_{\mathrm{dry}} \approx 280\) kg,
-inside the stated 270 to 290 kg range for the reference four-chip
-satellite.
+\(m_0 \approx 176\) kg closes at \(m_{\mathrm{dry}} \approx 220\) kg for
+the reference four-chip satellite.
 
 \textbf{Design implication.} Because the structural and contingency
 fractions multiply the entire budget, the cheapest mass savings come
@@ -4146,7 +4148,7 @@ Solution
 \bottomrule\noalign{}
 \endlastfoot
 Radiator temperature & Newton-Raphson (4 iterations) & 21.3 C \\
-Natural lifetime at 650 km & Runge-Kutta decay integration & 19.6 yr \\
+Natural lifetime at 650 km & Runge-Kutta decay integration & 12.2 yr \\
 Eclipse temperature drop & Runge-Kutta transient & minus 0.6 C \\
 Controlled de-orbit delta-v & Hohmann (vis-viva) & 131.6 m/s \\
 Optical link range, 3 dB then 0 dB margin & Brent root & 5,419 then
@@ -4244,7 +4246,7 @@ global error of order \(h^4\),
 
 The fourth-order global scaling means that halving the step \(h\) cuts
 the integration error by roughly sixteen, which is the property that
-lets the 19.6 yr decay lifetime and the small eclipse temperature drop
+lets the 12.2 yr decay lifetime and the small eclipse temperature drop
 be resolved without an impractically fine grid. The design implication
 is direct: solver tolerance and step size, not only the physical inputs,
 set the precision of every lifetime and thermal-transient figure, so the
@@ -4304,13 +4306,13 @@ ratio of that swing to the baseline is a transparent local sensitivity
 index; where inputs interact, the full Monte-Carlo variance is the
 honest measure. Two sensitivities stand out. First, the natural lifetime
 is wildly sensitive to the solar cycle: the same satellite that decays
-in four years at solar maximum lasts over three hundred years at solar
-minimum, which is precisely why the design cannot rely on passive
-disposal. Second, delivered compute is sensitive to model-FLOPs
-utilization and to the radiation throughput tax, which is why the
-realistic cost of compute is several times the naive peak-based figure.
-The single weakest input is the chip power itself, undisclosed by the
-vendor and treated as a 150-to-200-watt band.
+in about two and a half years at solar maximum lasts roughly one hundred
+seventy years at solar minimum, which is precisely why the design cannot
+rely on passive disposal. Second, delivered compute is sensitive to
+model-FLOPs utilization and to the radiation throughput tax, which is
+why the realistic cost of compute is several times the naive peak-based
+figure. The single weakest input is the chip power itself, undisclosed
+by the vendor and treated as a 150-to-200-watt band.
 
 \begin{figure}
 \centering
@@ -4395,15 +4397,15 @@ headline bands far more than refining any well-known parameter.
   if a single additional independent input carries a fractional spread
   of 0.10, before the lognormal density term is added by sampling.
 \item
-  The chapter states that the same satellite decays in four years at
-  solar maximum and lasts over three hundred years at solar minimum,
-  with atmospheric density moving by up to a factor of one hundred
-  across the solar cycle. Using these reference values, estimate the
-  local sensitivity index defined in the chapter as the ratio of the
-  output swing to the baseline, taking natural lifetime as the output
-  and the solar-maximum value as the baseline. Comment on why linear
-  error propagation (19.1) is inadequate for this input and why the
-  chapter supplements it with Monte-Carlo sampling.
+  The chapter states that the same satellite decays in about two and a
+  half years at solar maximum and lasts roughly one hundred seventy
+  years at solar minimum, with atmospheric density moving by up to a
+  factor of one hundred across the solar cycle. Using these reference
+  values, estimate the local sensitivity index defined in the chapter as
+  the ratio of the output swing to the baseline, taking natural lifetime
+  as the output and the solar-maximum value as the baseline. Comment on
+  why linear error propagation (19.1) is inadequate for this input and
+  why the chapter supplements it with Monte-Carlo sampling.
 \item
   Consider an output formed as a product of three independent inputs,
   all entering with exponent unity, where two of the inputs carry a
@@ -4446,7 +4448,7 @@ Driver / chapter
 \bottomrule\noalign{}
 \endlastfoot
 Orbital period & 97.6 min & Ch. 4 \\
-Natural lifetime (moderate solar) & \textasciitilde22 yr & Ch. 7, fails
+Natural lifetime (moderate solar) & \textasciitilde12 yr & Ch. 7, fails
 5-yr rule \\
 Radiator area (1 MW, 20 C) & \textasciitilde1,508 m² & Ch. 10 \\
 Interface ΔT (700 W chip) & 210 C (\textgreater125 budget) & Ch. 10,
@@ -4459,7 +4461,7 @@ In-cluster cascade P (neighbor, 150 m) & \textasciitilde8.5\% & Ch. 13 /
 risk synthesis \\
 De-orbit Δv & 131.6 m/s (of \textasciitilde190 total) & Ch. 15 \\
 Passive H100 throttle loss & \textasciitilde90\% & Ch. 17 \\
-Reference dry mass & \textasciitilde270-290 kg & Ch. 12, 18 \\
+Reference dry mass & \textasciitilde220 kg & Ch. 12, 18 \\
 \end{longtable}
 }
 
@@ -4527,11 +4529,11 @@ Balancing the two yields the decay rate of the semi-major axis,
 \end{equation}
 
 The grouping \(A/m\) is the area-to-mass ratio, the single most
-important design variable here. A compact dry mass of roughly 270 to 290
-kg, as listed in Table 20.1, drives \(A/m\) low, which lengthens the
-lifetime toward the cited 22 years and is precisely why the design fails
-the 5-year passive-disposal rule and must carry the de-orbit budget of
-Chapter 15.
+important design variable here. The drag area of a few square metres
+over a dry mass of roughly 220 kg, as listed in Table 20.1, sets \(A/m\)
+and a natural lifetime near twelve years at moderate solar activity;
+this still exceeds the 5-year passive-disposal rule, which is precisely
+why the design must carry the de-orbit budget of Chapter 15.
 
 \textbf{Worked example, debris-risk scaling.} The catastrophic-collision
 probability over a mission accumulates as a Poisson process with hazard
@@ -4577,8 +4579,8 @@ launch plus hardware,
 \(C_{\mathrm{sat}} = p_{\mathrm{launch}}\, m_{\mathrm{launch}} + C_{\mathrm{hw}}\).
 Launch equals hardware at the cross-over price
 \(p^{*} = C_{\mathrm{hw}}/m_{\mathrm{launch}}\); with about 1.1 million
-dollars of hardware on a 415-kg satellite,
-\(p^{*} \approx 2{,}650\ \mathrm{USD/kg}\). Below this price, hardware
+dollars of hardware on a 233-kg satellite,
+\(p^{*} \approx 4{,}720\ \mathrm{USD/kg}\). Below this price, hardware
 dominates, and below roughly 600 USD/kg the launch term is a small
 correction. The economics are therefore gated by hardware cost,
 lifetime, utilization, and the radiation tax, not by the headline
@@ -4638,8 +4640,8 @@ p^{*} = \frac{C_{\mathrm{hw}}}{m_{\mathrm{launch}}}. \tag{21.3}
 
 With the chapter's reference values,
 \(C_{\mathrm{hw}} \approx 1.1\times 10^{6}\ \mathrm{USD}\) and
-\(m_{\mathrm{launch}} = 415\ \mathrm{kg}\), the cross-over evaluates to
-\(p^{*} = 1.1\times 10^{6}/415 \approx 2{,}650\ \mathrm{USD/kg}\),
+\(m_{\mathrm{launch}} = 233\ \mathrm{kg}\), the cross-over evaluates to
+\(p^{*} = 1.1\times 10^{6}/233 \approx 4{,}720\ \mathrm{USD/kg}\),
 consistent with the figure quoted in the body. The derivative
 \(\partial C_{\mathrm{sat}}/\partial p_{\mathrm{launch}} = m_{\mathrm{launch}}\)
 is constant, so once \(p_{\mathrm{launch}} \ll p^{*}\) the satellite
@@ -4705,7 +4707,7 @@ marginal dollar-per-kilogram gains below the cross-over.
 \item
   Using the cross-over relation (21.3) with the chapter's reference
   values \(C_{\mathrm{hw}} \approx 1.1\times 10^{6}\ \mathrm{USD}\) and
-  \(m_{\mathrm{launch}} = 415\ \mathrm{kg}\), estimate the cross-over
+  \(m_{\mathrm{launch}} = 233\ \mathrm{kg}\), estimate the cross-over
   price \(p^{*}\). Then, using (21.2), estimate the total per-satellite
   cost \(C_{\mathrm{sat}}\) at a launch price of
   \(p_{\mathrm{launch}} = 600\ \mathrm{USD/kg}\) and report the launch
@@ -4789,8 +4791,8 @@ Conditional on the minority of scenarios that do reach it, the median
 parity year is near 2044 (Fig. 22.1), with a fifth percentile of about
 2037 and essentially no probability of reaching parity by 2035.
 Extending the horizon to 2060 raises the reaching fraction only to about
-nine percent and moves the conditional median to the end of the 2040s,
-so the conclusion is not an artifact of where the horizon is drawn. The
+ten percent and moves the conditional median to about 2050, so the
+conclusion is not an artifact of where the horizon is drawn. The
 vendor's 2035 date sits beyond the optimistic edge of the distribution
 and requires its specific aggressive anchors, full reusability at 200
 tonnes and roughly two million dollars marginal cost, sustained
@@ -5267,17 +5269,17 @@ geometry yields an inertia of a few hundred kilogram-meters squared,
 from which the gravity-gradient torque is of order one ten-thousandth of
 a newton-meter. Summing all subsystems gives a dry mass near 220 kg
 (Table T9), from which the drag area sets a ballistic coefficient that
-feeds a natural lifetime of roughly twelve to twenty-two years depending
-on solar activity, failing the five-year rule and mandating the 132 m/s
-de-orbit burn of Table T7. The coupled thermal-throttle simulation
-returns the delivered useful compute (about two-thirds of a petaflop for
-this low-power, lightly throttled case), the ground-link model returns
-tens of terabytes per day of downlink at ninety-six-percent
-availability, and the finance model returns a levelized cost of roughly
-one hundred dollars per useful petaflop-hour (Table T11). Aggregating
-over the eighty-one-satellite cluster gives the fleet totals of Table
-T12. Every one of these numbers is produced by the open code and is
-reproduced by the validation suite.
+feeds a natural lifetime of roughly twelve years at moderate solar
+activity, which exceeds the five-year rule under nominal conditions and
+mandates the 132 m/s de-orbit burn of Table T7. The coupled
+thermal-throttle simulation returns the delivered useful compute (about
+two-thirds of a petaflop for this low-power, lightly throttled case),
+the ground-link model returns tens of terabytes per day of downlink at
+ninety-six-percent availability, and the finance model returns a
+levelized cost of roughly one hundred dollars per useful petaflop-hour
+(Table T11). Aggregating over the eighty-one-satellite cluster gives the
+fleet totals of Table T12. Every one of these numbers is produced by the
+open code and is reproduced by the validation suite.
 
 \textbf{From compute load to electrical demand.} The chapter assembles
 the bus power by summing the accelerator draw with the fixed subsystem
@@ -5323,8 +5325,8 @@ the regulatory limit \(T_{\text{rule}}\),
 T_{\text{nat}}(\beta) > T_{\text{rule}} \;\Longrightarrow\; \text{active disposal required}. \tag{26.4}
 \end{equation}
 
-For the reference point \(T_{\text{nat}}\) falls in the
-twelve-to-twenty-two-year band while \(T_{\text{rule}} = 5\) yr, so the
+For the reference point \(T_{\text{nat}}\) is near twelve years at
+moderate solar activity while \(T_{\text{rule}} = 5\) yr, so the
 inequality holds and the active de-orbit burn of Table T7 is mandated;
 the impulsive velocity increment of that burn is set by the
 perigee-lowering maneuver and amounts to the 132 m/s already quoted.
@@ -5379,12 +5381,12 @@ and propellant before any of that economics is realized.
   ballistic coefficient as described in the chapter, and determine the
   factor by which \(\beta\) would have to be reduced to bring the
   natural lifetime down to the regulatory limit \(T_{\text{rule}} = 5\)
-  yr, taking the natural lifetime at the upper end of the quoted
-  twelve-to-twenty-two-year band. Then, using (26.3), state by what
-  factor the drag area \(A\) must increase to achieve that reduction in
-  \(\beta\) at fixed dry mass and fixed drag coefficient, and comment on
-  whether passive area increase alone removes the need for the 132 m/s
-  de-orbit burn of (26.4).
+  yr, taking the natural lifetime near twelve years at moderate solar
+  activity. Then, using (26.3), state by what factor the drag area \(A\)
+  must increase to achieve that reduction in \(\beta\) at fixed dry mass
+  and fixed drag coefficient\index{drag coefficient}, and comment on whether passive area
+  increase alone removes the need for the 132 m/s de-orbit burn of
+  (26.4).
 \item
   Using the levelized-cost definition (26.5), size the sensitivity of
   the figure of merit to the throttled compute. Holding the lifecycle
@@ -5442,12 +5444,12 @@ Lifetime, moderate (yr)
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-400 & 7.67 & 92.4 & 70.2 & 5 \\
-500 & 7.62 & 94.5 & 68.0 & 7 \\
-600 & 7.56 & 96.5 & 66.1 & 13 \\
-650 & 7.53 & 97.6 & 65.2 & 20 \\
-700 & 7.51 & 98.6 & 64.3 & 32 \\
-800 & 7.46 & 100.7 & 62.7 & 97 \\
+400 & 7.67 & 92.4 & 70.2 & 3 \\
+500 & 7.62 & 94.5 & 68.0 & 4 \\
+600 & 7.56 & 96.5 & 66.1 & 8 \\
+650 & 7.53 & 97.6 & 65.2 & 12 \\
+700 & 7.51 & 98.6 & 64.3 & 20 \\
+800 & 7.46 & 100.7 & 62.7 & 60 \\
 1000 & 7.35 & 105.0 & 59.8 & 309 \\
 \end{longtable}
 }
@@ -5565,12 +5567,12 @@ dominates; electric propulsion is dramatically lighter.
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Drag make-up & 14.7 \\
+Drag make-up & 23.7 \\
 Formation keeping & 8.0 \\
 Collision avoidance & 5.0 \\
 Controlled de-orbit & 131.6 \\
-Margin (20 \%) & 31.9 \\
-\textbf{Total} & \textbf{191.2} \\
+Margin (20 \%) & 33.7 \\
+\textbf{Total} & \textbf{202.0} \\
 \end{longtable}
 }
 
@@ -5582,9 +5584,9 @@ Propulsion & Isp (s) & Propellant for total Δv (kg) \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Cold gas & 70 & 120 \\
-Hydrazine & 220 & 35 \\
-Electric & 1500 & 5 \\
+Cold gas & 70 & 75 \\
+Hydrazine & 220 & 22 \\
+Electric & 1500 & 3 \\
 \end{longtable}
 }
 
@@ -5672,7 +5674,7 @@ Effective PUE (per usable compute, incl.~radiation derate) & 1.84 \\
 Radiator area (m²) & 1.1 \\
 5-yr dose behind 10 mm (rad) & 1,054 \\
 Dose margin (vs 2 krad) & 1.9× \\
-Natural lifetime (yr) & 11.5 \\
+Natural lifetime (yr) & 12.2 \\
 Debris P (5 yr) & 0.17 \\
 Delivered (PFLOPS) & 0.67 \\
 Throttle loss & 14 \% \\

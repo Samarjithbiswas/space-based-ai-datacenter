@@ -12,7 +12,7 @@ row("Alt (km)", "v (km/s)", "Period (min)", "beta* (deg)", "Lifetime mod (yr)")
 row(*["---"]*5)
 for h in [400, 500, 600, 650, 700, 800, 1000]:
     row(h, f"{orbit.velocity(h)/1e3:.2f}", f"{orbit.period(h)/60:.1f}",
-        f"{orbit.critical_beta(h):.1f}", f"{orbit.lifetime_years(h,3.5/375,'mod'):.0f}")
+        f"{orbit.critical_beta(h):.1f}", f"{orbit.lifetime_years(h,3.5/233,'mod'):.0f}")
 
 P("\n### T2 Radiator area (m2) vs heat load and temperature (double-sided)")
 row("Heat load", "20 C", "40 C", "60 C"); row(*["---"]*4)
@@ -42,12 +42,12 @@ for d in [100,150,200,300,500,1000]:
     row(d, f"{debris.cascade_neighbor_probability(d)*100:.1f}")
 
 P("\n### T7 Per-satellite delta-v budget and propellant")
-dv = propulsion.delta_v_budget(650, 3.5/375)
+dv = propulsion.delta_v_budget(650, 3.5/233)
 for k,v in dv.items(): row(k.replace('_',' '), f"{v:.1f} m/s")
 P("")
 row("Propulsion","Isp (s)","Propellant (kg) for total dv"); row(*["---"]*3)
 for s,isp in [("Cold gas",70),("Hydrazine",220),("Electric",1500)]:
-    row(s,isp,f"{propulsion.propellant_mass(dv['total'],isp,375):.0f}")
+    row(s,isp,f"{propulsion.propellant_mass(dv['total'],isp,220):.0f}")
 
 P("\n### T8 Optical link budget vs range (D=0.1 m, lambda=1.55 um)")
 row("Range","Telescope gain (dB)","Free-space loss (dB)"); row(*["---"]*3)

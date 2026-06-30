@@ -22,6 +22,6 @@ CLUSTER_RADIUS_M = 1000.0
 SPACING_M = 150.0        # representative next-nearest spacing (100-200 m)
 DISPOSAL_RULE_YR = 5.0   # FCC 22-74 (2022, effective 2024)
 
-# --- reference bus (mass budget from the Part I study) ---
-DRY_MASS_KG = 375.0
-LAUNCH_MASS_KG = 415.0
+# --- reference bus (matches the integrated mass budget from system.DesignPoint.solve) ---
+DRY_MASS_KG = 220.0
+LAUNCH_MASS_KG = 233.0

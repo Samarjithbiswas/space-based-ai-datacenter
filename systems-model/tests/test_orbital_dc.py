@@ -51,8 +51,8 @@ def test_deorbit_dv():
     assert propulsion.deorbit_delta_v(650) == pytest.approx(131.6, abs=0.5)
 
 def test_propellant():
-    assert propulsion.propellant_mass(189.5, 220) == pytest.approx(34.4, abs=0.3)
-    assert propulsion.propellant_mass(189.5, 1500) == pytest.approx(4.9, abs=0.2)
+    assert propulsion.propellant_mass(189.5, 220) == pytest.approx(20.2, abs=0.3)
+    assert propulsion.propellant_mass(189.5, 1500) == pytest.approx(2.85, abs=0.2)
 
 def test_comms_gain_loss():
     assert comms.telescope_gain_dB(0.1) == pytest.approx(106.2, abs=1.0)
@@ -66,7 +66,7 @@ def test_power_array():
     assert power.array_power(1.0, "eol", 70.0) == pytest.approx(253.0, abs=5.0)
 
 def test_economics_crossover():
-    assert economics.launch_crossover_usd_per_kg() == pytest.approx(2650.6, abs=5.0)
+    assert economics.launch_crossover_usd_per_kg() == pytest.approx(4721.0, abs=5.0)
 
 def test_adcs_requires_fsm():
     p = adcs.pointing_budget()
@@ -80,7 +80,7 @@ def test_velocity_decreases_with_altitude(alt):
 
 @pytest.mark.parametrize("alt", [500, 600, 650, 700, 800])
 def test_lifetime_increases_with_altitude(alt):
-    am = 3.5 / 375
+    am = 3.5 / 233
     assert orbit.lifetime_years(alt, am, "mod") > orbit.lifetime_years(alt - 50, am, "mod")
 
 @pytest.mark.parametrize("scen", ["min", "mod", "max"])
@@ -262,7 +262,7 @@ def test_solver_radiator_temperature():
     assert T == pytest.approx(21.4, abs=0.6) and it < 20
 
 def test_solver_lifetime_rk4():
-    assert 14 < solvers.solve_orbital_lifetime(650, 3.5/375, "mod") < 30
+    assert 8 < solvers.solve_orbital_lifetime(650, 3.5/233, "mod") < 18
 
 def test_solver_eclipse_drop():
     assert solvers.solve_eclipse_transient(300.0)["delta_T_C"] == pytest.approx(-0.6, abs=0.3)

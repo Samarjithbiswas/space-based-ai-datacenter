@@ -12,7 +12,7 @@ def monte_carlo(n: int = 5000, seed: int = 7) -> dict:
     MFU, and launch price. Returns 5/50/95th percentiles of the headline outputs.
     """
     rng = np.random.default_rng(seed)
-    A_to_M = 3.5 / 375.0
+    A_to_M = 3.5 / 233.0    # drag area / launch mass; natural decay retains unburned propellant
     scenarios = ["min", "mod", "max"]
     # lifetime and drag-driven delta-v depend only on the (fixed-A/m) solar scenario,
     # so precompute the 3 cases once instead of re-integrating the ODE n times.

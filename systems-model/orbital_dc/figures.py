@@ -126,7 +126,7 @@ def fig_mass_budget():
 
 def fig_montecarlo(n=3000):
     rng = np.random.default_rng(1)
-    A = 3.5 / 375.0
+    A = 3.5 / 233.0
     from . import debris
     scenarios = ["min", "mod", "max"]
     life_lut = {s: orbit.lifetime_years(650, A, s) for s in scenarios}

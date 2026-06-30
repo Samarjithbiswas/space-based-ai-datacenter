@@ -18,9 +18,9 @@ chk("orbit.velocity(650)",            orbit.velocity(650),            7534.76, 1
 chk("orbit.period(650)/60",           orbit.period(650) / 60,         97.58,   0.1, "min")
 chk("orbit.sso_inclination(650)",     orbit.sso_inclination(650),     97.8,    0.6, "deg")
 chk("orbit.critical_beta(650)",       orbit.critical_beta(650),       65.15,   0.2, "deg")
-life = orbit.lifetime_years(650, 3.5/375, "mod")
-ok = 16 <= life <= 30; C.append(ok)
-print(f"  [{'PASS' if ok else 'FAIL'}] orbit.lifetime_years(650,mod)              = {life:12.4f} yr     (exp 16-30)")
+life = orbit.lifetime_years(650, 3.5/233, "mod")
+ok = 8 <= life <= 18; C.append(ok)
+print(f"  [{'PASS' if ok else 'FAIL'}] orbit.lifetime_years(650,mod)              = {life:12.4f} yr     (exp 8-18)")
 
 # thermal (Part I reproduction)
 b = thermal.report_i_baseline()
@@ -43,13 +43,13 @@ chk("radiation.cumulative_tid(10,5)", radiation.cumulative_tid(10, 5), 1054.0, 2
 chk("debris.collision_prob(15,81,5)", debris.collision_probability(15, 81, 5)*100, 16.66, 0.3, "%")
 chk("debris.cascade_neighbor(150)",   debris.cascade_neighbor_probability(150)*100, 8.51, 0.2, "%")
 chk("propulsion.deorbit_dv(650)",     propulsion.deorbit_delta_v(650), 131.6,  0.5, "m/s")
-chk("propulsion.propellant(189.5,1500)", propulsion.propellant_mass(189.5,1500), 4.9, 0.2, "kg")
+chk("propulsion.propellant(189.5,1500)", propulsion.propellant_mass(189.5,1500), 2.85, 0.2, "kg")
 
 # reliability
 chk("reliability R(5yr,50000h)",      reliability.reliability(5, 50000), 0.417, 0.01)
 
 # economics
-chk("economics.launch_crossover",     economics.launch_crossover_usd_per_kg(), 2650.6, 5.0, "$/kg")
+chk("economics.launch_crossover",     economics.launch_crossover_usd_per_kg(), 4721.0, 5.0, "$/kg")
 
 # integrated system closes
 s = DesignPoint().solve()

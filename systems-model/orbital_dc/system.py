@@ -73,7 +73,8 @@ class DesignPoint:
         launch_mass = dry_mass + prop_m + 10.0
 
         # --- lifetime / debris ---
-        life = orbit.lifetime_years(self.alt_km, a_to_m, self.scenario)
+        # natural decay assumes the satellite is abandoned with its propellant, so use launch mass
+        life = orbit.lifetime_years(self.alt_km, DRAG_AREA_M2 / launch_mass, self.scenario)
         p_debris5 = debris.collision_probability(15.0, N_SATS, 5.0)
         cascade = debris.cascade_neighbor_probability(SPACING_M)
 

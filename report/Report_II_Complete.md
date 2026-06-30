@@ -793,7 +793,7 @@ $$t_E = \frac{2\psi}{2\pi}\,T = \frac{\psi}{\pi}\,T. \tag{6.9}$$
 
 > *Abstract.* This chapter derives the orbital-decay rate from the energy balance under atmospheric drag and integrates it to a mission lifetime, a result that decides compliance with the five-year disposal rule.
 
-![Atmospheric drag slowly removes orbital energy, so the orbit spirals inward; the natural lifetime is about two decades at moderate solar activity.](schematics/sch_decay_spiral.png)
+![Atmospheric drag slowly removes orbital energy, so the orbit spirals inward; the natural lifetime is about twelve years at moderate solar activity.](schematics/sch_decay_spiral.png)
 
 *Sources: density from the NRLMSIS empirical model [11]; the drag and orbit-averaged decay treatment
 follows Curtis [16] and the space-environment texts of Tribble [22] and Pisacane [23].*
@@ -835,9 +835,9 @@ explicitly as a band rather than collapsed to a point.
 
 **Numerical solution and result.** Equation (7.3) is integrated by adaptive forward Euler to a
 re-entry altitude of 120 km. For the reference bus, with an area-to-mass ratio of
-$0.0084\ \mathrm{m^2/kg}$ and $C_D = 2.2$, the natural lifetime at 650 km is approximately
-**twenty-two years** at moderate solar activity, about four years at solar maximum, and over three
-hundred years at solar minimum (Fig. 7.1). The regulatory consequence is severe: the United States
+$0.015\ \mathrm{m^2/kg}$ and $C_D = 2.2$, the natural lifetime at 650 km is approximately
+**twelve years** at moderate solar activity, about two and a half years at solar maximum, and roughly
+one hundred seventy years at solar minimum (Fig. 7.1). The regulatory consequence is severe: the United States
 Federal Communications Commission now requires disposal within five years (Chapter 15), so only a
 satellite that happens to launch into a solar maximum approaches passive compliance. **Active
 de-orbit propulsion is therefore mandatory, not optional**, a conclusion that propagates into the
@@ -866,7 +866,7 @@ $$t_{\mathrm{life}} \approx \frac{H}{B\,\rho_0\,\sqrt{\mu\, a_0}}. \tag{7.7}$$
 
 Equation (7.7) shows transparently that lifetime scales inversely with both the ballistic factor and the ambient density, the latter being the term that swings by two orders of magnitude across the solar cycle.
 
-**Worked example.** Take the reference bus with $B = C_D (A/m) = 2.2 \times 0.0084 \approx 0.0185\ \mathrm{m^2/kg}$ at $a_0 \approx 7028\ \mathrm{km}$ and $\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}$, so that $\sqrt{\mu a_0} \approx 5.3\times 10^{10}\ \mathrm{m^2/s}$. With a representative scale height of order tens of kilometres, (7.7) returns lifetimes in the decade-to-century range as the density $\rho_0$ is swept across its solar-cycle band, consistent with the integrated result of roughly twenty-two years at moderate activity reported above.
+**Worked example.** Take the reference bus with $B = C_D (A/m) = 2.2 \times 0.015 \approx 0.033\ \mathrm{m^2/kg}$ at $a_0 \approx 7028\ \mathrm{km}$ and $\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}$, so that $\sqrt{\mu a_0} \approx 5.3\times 10^{10}\ \mathrm{m^2/s}$. With a representative scale height of order tens of kilometres, (7.7) returns lifetimes in the few-years-to-century range as the density $\rho_0$ is swept across its solar-cycle band, consistent with the integrated result of roughly twelve years at moderate activity reported above.
 
 **Design implication.** Equation (7.7) makes the sensitivity explicit; since lifetime falls linearly with the area-to-mass ratio and with ambient density, a designer cannot passively meet the five-year rule across the solar cycle, and the de-orbit propellant budget must be sized to the worst case rather than to a nominal density.
 
@@ -875,9 +875,9 @@ Equation (7.7) shows transparently that lifetime scales inversely with both the 
 
 1. Starting from the orbit-averaged decay relation (7.3), show that the per-revolution contraction of the semi-major axis can be written $\Delta a_{\mathrm{rev}} = -2\pi C_D (A/m)\,\rho\, a^2$. Use the circular-orbit period $T = 2\pi\sqrt{a^3/\mu}$ and the circular speed $v = \sqrt{\mu/a}$, and state the assumption about how $\rho$ and $a$ change over a single revolution that makes this step exact.
 
-2. Using the closed-form lifetime estimate (7.7) with the reference-bus ballistic factor $B = C_D(A/m) = 0.0185\ \mathrm{m^2/kg}$, $\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}$, $a_0 \approx 7028\ \mathrm{km}$, and a scale height $H = 60\ \mathrm{km}$, estimate the natural lifetime for an ambient density $\rho_0 = 1.0\times 10^{-13}\ \mathrm{kg/m^3}$. Then report the lifetime obtained when $\rho_0$ is increased by a factor of one hundred to represent the swing from solar minimum to solar maximum described in the chapter, and state the factor by which the lifetime changes.
+2. Using the closed-form lifetime estimate (7.7) with the reference-bus ballistic factor $B = C_D(A/m) = 0.033\ \mathrm{m^2/kg}$, $\mu = 3.986\times 10^{14}\ \mathrm{m^3/s^2}$, $a_0 \approx 7028\ \mathrm{km}$, and a scale height $H = 60\ \mathrm{km}$, estimate the natural lifetime for an ambient density $\rho_0 = 1.0\times 10^{-13}\ \mathrm{kg/m^3}$. Then report the lifetime obtained when $\rho_0$ is increased by a factor of one hundred to represent the swing from solar minimum to solar maximum described in the chapter, and state the factor by which the lifetime changes.
 
-3. The chapter states that lifetime falls linearly with both the area-to-mass ratio and the ambient density (7.7). A design revision adds deployable radiators that raise the area-to-mass ratio from $0.0084\ \mathrm{m^2/kg}$ to $0.0126\ \mathrm{m^2/kg}$ while the bus is simultaneously flown during a period when the ambient density is a factor of three higher than the reference value. By what overall factor does the natural lifetime change relative to the reference case at the reference density, with $C_D$ held at $2.2$?
+3. The chapter states that lifetime falls linearly with both the area-to-mass ratio and the ambient density (7.7). A design revision adds deployable radiators that raise the area-to-mass ratio from $0.015\ \mathrm{m^2/kg}$ to $0.0225\ \mathrm{m^2/kg}$ while the bus is simultaneously flown during a period when the ambient density is a factor of three higher than the reference value. By what overall factor does the natural lifetime change relative to the reference case at the reference density, with $C_D$ held at $2.2$?
 
 4. Using the scale-height definition (7.4) and the local exponential profile (7.5), derive an expression for the altitude interval $\Delta h$ over which the atmospheric density falls by a factor of ten, in terms of the scale height $H$. Then, taking $H = 60\ \mathrm{km}$, estimate $\Delta h$, and explain in one or two sentences why this exponential structure justifies the log-linear interpolation between the NRLMSIS density anchors used in the chapter.
 
@@ -1238,7 +1238,7 @@ on slewing the whole flexible structure.
 **Mass closure.** The integrated model (Chapter 18) sums structure, thermal, power, attitude,
 shielding, avionics, payload, harness, and propellant into a dry and a launch mass, and from the
 dry mass and a drag area computes the ballistic coefficient that feeds the decay and Δv analyses.
-The reference four-chip satellite closes at roughly 270 to 290 kg dry.
+The reference four-chip satellite closes at roughly 220 kg dry.
 
 ![Fig. 12.1  Reference satellite dry-mass breakdown by subsystem, closed self-consistently by the integrated model.](figures2/figA8_mass.png)
 
@@ -1445,7 +1445,7 @@ de-orbit the satellite within the regulatory window.
 **The disposal rule.** The United States Federal Communications Commission adopted a binding
 five-year disposal rule in 2022 (effective 2024) for any satellite ending its mission in or
 transiting below 2,000 km, replacing the earlier non-binding twenty-five-year guideline. Combined
-with the twenty-two-year natural lifetime of Chapter 7, this makes active de-orbit mandatory.
+with the twelve-year natural lifetime of Chapter 7, this makes active de-orbit mandatory.
 
 **Controlled de-orbit by a Hohmann burn.** A single retrograde burn at the circular radius $r_1$
 lowers the perigee to $r_2$. The transfer ellipse has semi-major axis $a_t = (r_1+r_2)/2$, and by
@@ -1456,12 +1456,12 @@ $$\Delta v_{\mathrm{deorbit}} = v_{c1}\left(1 - \sqrt{\frac{2 r_2}{r_1 + r_2}}\r
 
 **Worked example:** from 650 km to a 180-km perigee, $r_1 = 7.021\times10^6$, $r_2 = 6.551\times10^6$,
 $v_{c1} = 7534.8\ \mathrm{m/s}$, giving $\Delta v_{\mathrm{deorbit}} = 131.6\ \mathrm{m/s}$. This
-single term dominates the five-year budget of about 190 m/s (drag make-up ~13, formation ~8,
+single term dominates the five-year budget of about 202 m/s (drag make-up ~24, formation ~8,
 collision avoidance ~5, de-orbit ~132, plus margin).
 
 **Propellant.** The rocket equation, derived from momentum conservation $m\,dv = -v_e\,dm$ with
-$v_e = I_{sp} g_0$, gives $m_p = m_{\mathrm{dry}}(e^{\Delta v/(I_{sp}g_0)} - 1)$. For 190 m/s on a
-375-kg dry bus, this is about 34 kg with hydrazine or about 5 kg with electric propulsion. Electric
+$v_e = I_{sp} g_0$, gives $m_p = m_{\mathrm{dry}}(e^{\Delta v/(I_{sp}g_0)} - 1)$. For 202 m/s on a
+220-kg dry bus, this is about 22 kg with hydrazine or about 3 kg with electric propulsion. Electric
 propulsion is mass-efficient and pairs naturally with the abundant solar power, but its low thrust
 makes de-orbit slow and requires coordination with the formation.
 
@@ -1486,7 +1486,7 @@ the Tsiolkovsky rocket equation. Writing the mass ratio as $m_0/m_{\mathrm{dry}}
 
 $$m_p = m_{\mathrm{dry}}\left(e^{\Delta v/(I_{sp} g_0)} - 1\right), \tag{15.5}$$
 
-which is the sizing relation quoted in the chapter. The exponential dependence on $\Delta v/(I_{sp} g_0)$ explains why a high specific impulse is decisive: for the total budget of 190 m/s on the 375-kg dry bus, a hydrazine system at modest $I_{sp}$ needs about 34 kg of propellant, whereas an electric system, with an order-of-magnitude larger $I_{sp}$, drives the exponent close to zero so that $m_p \approx m_{\mathrm{dry}}\,\Delta v/(I_{sp} g_0)$ and the requirement falls to roughly 5 kg.
+which is the sizing relation quoted in the chapter. The exponential dependence on $\Delta v/(I_{sp} g_0)$ explains why a high specific impulse is decisive: for the total budget of 202 m/s on the 220-kg dry bus, a hydrazine system at modest $I_{sp}$ needs about 22 kg of propellant, whereas an electric system, with an order-of-magnitude larger $I_{sp}$, drives the exponent close to zero so that $m_p \approx m_{\mathrm{dry}}\,\Delta v/(I_{sp} g_0)$ and the requirement falls to roughly 3 kg.
 
 **Design implication.** Because the de-orbit term dominates the velocity budget and propellant scales exponentially with it, the disposal maneuver, not station-keeping, sets the propulsion architecture; selecting high specific impulse minimizes wet mass at the cost of de-orbit duration, which must be reconciled with the regulatory window and with formation safety.
 
@@ -1497,7 +1497,7 @@ which is the sizing relation quoted in the chapter. The exponential dependence o
 
 2. Using the de-orbit relation (15.1) and the worked-example reference values $r_1 = 7.021\times10^6$ m and $v_{c1} = 7534.8$ m/s, compute the de-orbit impulse required to lower the perigee instead to $120$ km, for which $r_2 = 6.491\times10^6$ m. Compare your result to the chapter value of $131.6$ m/s for a $180$-km perigee, and state by what factor the de-orbit term changes.
 
-3. Using the propellant sizing relation (15.5) with the chapter's total budget $\Delta v = 190$ m/s and dry mass $m_{\mathrm{dry}} = 375$ kg, size the propellant mass $m_p$ for a hydrazine system whose specific impulse is $I_{sp} = 220$ s, taking $g_0 = 9.81$ m/s$^2$. Then evaluate the small-argument approximation $m_p \approx m_{\mathrm{dry}}\,\Delta v/(I_{sp} g_0)$ quoted in the chapter and report the fractional error it introduces at this $I_{sp}$. [expect order $10\,$kg]
+3. Using the propellant sizing relation (15.5) with the chapter's total budget $\Delta v = 202$ m/s and dry mass $m_{\mathrm{dry}} = 220$ kg, size the propellant mass $m_p$ for a hydrazine system whose specific impulse is $I_{sp} = 220$ s, taking $g_0 = 9.81$ m/s$^2$. Then evaluate the small-argument approximation $m_p \approx m_{\mathrm{dry}}\,\Delta v/(I_{sp} g_0)$ quoted in the chapter and report the fractional error it introduces at this $I_{sp}$. [expect order $20\,$kg]
 
 4. The chapter notes that propellant scales exponentially with $\Delta v$ through (15.5), while the de-orbit term dominates the budget. Treating $m_{\mathrm{dry}}$, $I_{sp}$, and $g_0$ as fixed, derive an expression for the sensitivity $dm_p/d(\Delta v)$ and use it to estimate the additional propellant mass incurred by a $20$ m/s increase in the velocity budget for the hydrazine system of Problem 3. Comment on whether this sensitivity argument strengthens the chapter's design implication that disposal, not station-keeping, sets the propulsion architecture.
 
@@ -1708,7 +1708,7 @@ and the levelized cost of compute.
 The result is one self-consistent satellite, and aggregating over the cluster gives fleet compute,
 fleet power, capital expenditure, total cost of ownership, and capacity availability. The mass
 budget for the reference four-chip satellite is shown in Fig. 18.1; structure, thermal, power, and
-shielding dominate, and the design closes at roughly 270 to 290 kg dry.
+shielding dominate, and the design closes at roughly 220 kg dry.
 
 ![Fig. 18.1, Integrated dry-mass budget, closed self-consistently by the system model.](systems_figs/fig_mass_budget.png)
 
@@ -1743,7 +1743,7 @@ $$ m_{\mathrm{wet}} = m_{\mathrm{dry}}\,\exp\!\left(\frac{\Delta v}{I_{sp}\,g_0}
 
 so the wet mass is the dry mass amplified by the propulsive factor.
 
-**Worked example.** Take a structural fraction $f_{\mathrm{str}} = 0.20$. Equation (18.4) then gives an amplification $1/(1 - 0.20) = 1.25$, so a payload-and-bus term of $m_0 \approx 224$ kg closes at $m_{\mathrm{dry}} \approx 280$ kg, inside the stated 270 to 290 kg range for the reference four-chip satellite.
+**Worked example.** Take a structural fraction $f_{\mathrm{str}} = 0.20$. Equation (18.4) then gives an amplification $1/(1 - 0.20) = 1.25$, so a payload-and-bus term of $m_0 \approx 176$ kg closes at $m_{\mathrm{dry}} \approx 220$ kg for the reference four-chip satellite.
 
 **Design implication.** Because the structural and contingency fractions multiply the entire budget, the cheapest mass savings come from lowering those fractions rather than from trimming any single subsystem; the model exposes this leverage directly through the $1/(1 - f_{\mathrm{str}})$ amplifier.
 
@@ -1777,7 +1777,7 @@ reference mission end to end produces one consistent solution set.
 | Quantity | Numerical method | Solution |
 | --- | --- | --- |
 | Radiator temperature | Newton-Raphson (4 iterations) | 21.3 C |
-| Natural lifetime at 650 km | Runge-Kutta decay integration | 19.6 yr |
+| Natural lifetime at 650 km | Runge-Kutta decay integration | 12.2 yr |
 | Eclipse temperature drop | Runge-Kutta transient | minus 0.6 C |
 | Controlled de-orbit delta-v | Hohmann (vis-viva) | 131.6 m/s |
 | Optical link range, 3 dB then 0 dB margin | Brent root | 5,419 then 7,655 km |
@@ -1837,7 +1837,7 @@ whose stage combination matches the Taylor series of the exact flow through $h^4
 
 $$ \tau_{n} = O(h^5), \qquad \max_n \lVert y_n - y(t_n) \rVert = O(h^4). \tag{18A.5}$$
 
-The fourth-order global scaling means that halving the step $h$ cuts the integration error by roughly sixteen, which is the property that lets the 19.6 yr decay lifetime and the small eclipse temperature drop be resolved without an impractically fine grid. The design implication is direct: solver tolerance and step size, not only the physical inputs, set the precision of every lifetime and thermal-transient figure, so the step must be chosen against the order estimate in (18A.5) before a margin is trusted.
+The fourth-order global scaling means that halving the step $h$ cuts the integration error by roughly sixteen, which is the property that lets the 12.2 yr decay lifetime and the small eclipse temperature drop be resolved without an impractically fine grid. The design implication is direct: solver tolerance and step size, not only the physical inputs, set the precision of every lifetime and thermal-transient figure, so the step must be chosen against the order estimate in (18A.5) before a margin is trusted.
 
 ## 19. Uncertainty Quantification and Sensitivity
 
@@ -1875,8 +1875,8 @@ fiftieth, and ninety-fifth percentiles rather than as single numbers (Fig. 19.1)
 (`montecarlo.one_at_a_time`) that holds all but one input at its central value and records the output
 swing. The ratio of that swing to the baseline is a transparent local sensitivity index; where inputs
 interact, the full Monte-Carlo variance is the honest measure. Two sensitivities stand out. First, the natural lifetime is wildly sensitive to the solar cycle:
-the same satellite that decays in four years at solar maximum lasts over three hundred years at
-solar minimum, which is precisely why the design cannot rely on passive disposal. Second, delivered
+the same satellite that decays in about two and a half years at solar maximum lasts roughly one
+hundred seventy years at solar minimum, which is precisely why the design cannot rely on passive disposal. Second, delivered
 compute is sensitive to model-FLOPs utilization and to the radiation throughput tax, which is why
 the realistic cost of compute is several times the naive peak-based figure. The single weakest input is
 the chip power itself, undisclosed by the vendor and treated as a 150-to-200-watt band.
@@ -1911,7 +1911,7 @@ Each fractional input uncertainty enters weighted by the square of its exponent,
 
 2. Using the relative-error rule (19.4) and the chip-power band of 150 to 200 watts, compute the symmetric fractional spread of chip power about its midpoint. Then, treating the catastrophic-impact probability as a product of debris flux and exposed area over the mission with all exponents equal to unity, estimate the output fractional uncertainty if a single additional independent input carries a fractional spread of 0.10, before the lognormal density term is added by sampling.
 
-3. The chapter states that the same satellite decays in four years at solar maximum and lasts over three hundred years at solar minimum, with atmospheric density moving by up to a factor of one hundred across the solar cycle. Using these reference values, estimate the local sensitivity index defined in the chapter as the ratio of the output swing to the baseline, taking natural lifetime as the output and the solar-maximum value as the baseline. Comment on why linear error propagation (19.1) is inadequate for this input and why the chapter supplements it with Monte-Carlo sampling.
+3. The chapter states that the same satellite decays in about two and a half years at solar maximum and lasts roughly one hundred seventy years at solar minimum, with atmospheric density moving by up to a factor of one hundred across the solar cycle. Using these reference values, estimate the local sensitivity index defined in the chapter as the ratio of the output swing to the baseline, taking natural lifetime as the output and the solar-maximum value as the baseline. Comment on why linear error propagation (19.1) is inadequate for this input and why the chapter supplements it with Monte-Carlo sampling.
 
 4. Consider an output formed as a product of three independent inputs, all entering with exponent unity, where two of the inputs carry a fractional spread of 0.143 each and the third is a well-known parameter with a fractional spread of 0.02. Using (19.4), determine the output fractional uncertainty, and then determine by what factor the output fractional uncertainty changes if the third input is refined to a fractional spread of zero. Use the result to justify the chapter's design implication that the output band is set almost entirely by the one or two widest inputs.
 
@@ -1925,7 +1925,7 @@ Table 20.1 and the supporting figures.
 | Quantity | Result | Driver / chapter |
 |---|---|---|
 | Orbital period | 97.6 min | Ch. 4 |
-| Natural lifetime (moderate solar) | ~22 yr | Ch. 7, fails 5-yr rule |
+| Natural lifetime (moderate solar) | ~12 yr | Ch. 7, fails 5-yr rule |
 | Radiator area (1 MW, 20 C) | ~1,508 m² | Ch. 10 |
 | Interface ΔT (700 W chip) | 210 C (>125 budget) | Ch. 10, active cooling needed |
 | 5-yr dose behind 10 mm Al | ~1.06 krad(Si) | Ch. 8, large margin |
@@ -1933,7 +1933,7 @@ Table 20.1 and the supporting figures.
 | In-cluster cascade P (neighbor, 150 m) | ~8.5% | Ch. 13 / risk synthesis |
 | De-orbit Δv | 131.6 m/s (of ~190 total) | Ch. 15 |
 | Passive H100 throttle loss | ~90% | Ch. 17 |
-| Reference dry mass | ~270-290 kg | Ch. 12, 18 |
+| Reference dry mass | ~220 kg | Ch. 12, 18 |
 
 The debris and radiation results, central to the survivability case, are shown in Figs. 20.1 and
 20.2. The debris figure shows both the cluster-level catastrophic probability over the mission and
@@ -1966,7 +1966,7 @@ and the drag force on a body of mass $m$, cross-section $A$, and drag coefficien
 
 $$ \frac{da}{dt} = -\,C_D\,\frac{A}{m}\,\rho\, \sqrt{\mu\, a}. \tag{20.4}$$
 
-The grouping $A/m$ is the area-to-mass ratio, the single most important design variable here. A compact dry mass of roughly 270 to 290 kg, as listed in Table 20.1, drives $A/m$ low, which lengthens the lifetime toward the cited 22 years and is precisely why the design fails the 5-year passive-disposal rule and must carry the de-orbit budget of Chapter 15.
+The grouping $A/m$ is the area-to-mass ratio, the single most important design variable here. The drag area of a few square metres over a dry mass of roughly 220 kg, as listed in Table 20.1, sets $A/m$ and a natural lifetime near twelve years at moderate solar activity; this still exceeds the 5-year passive-disposal rule, which is precisely why the design must carry the de-orbit budget of Chapter 15.
 
 **Worked example, debris-risk scaling.** The catastrophic-collision probability over a mission accumulates as a Poisson process with hazard rate proportional to the swept cross-section. If a single satellite carries probability $p_1$, then for a cluster of $N$ effectively independent members the cluster-level probability is
 
@@ -1988,7 +1988,7 @@ bookkeeping.
 **Cost structure and the launch cross-over.** Per-satellite cost is launch plus hardware,
 $C_{\mathrm{sat}} = p_{\mathrm{launch}}\, m_{\mathrm{launch}} + C_{\mathrm{hw}}$. Launch equals
 hardware at the cross-over price $p^{*} = C_{\mathrm{hw}}/m_{\mathrm{launch}}$; with about 1.1
-million dollars of hardware on a 415-kg satellite, $p^{*} \approx 2{,}650\ \mathrm{USD/kg}$. Below
+million dollars of hardware on a 233-kg satellite, $p^{*} \approx 4{,}720\ \mathrm{USD/kg}$. Below
 this price, hardware dominates, and below roughly 600 USD/kg the launch term is a small correction.
 The economics are therefore gated by hardware cost, lifetime, utilization, and the radiation tax, 
 not by the headline dollar-per-kilogram figure that dominates public discussion.
@@ -2022,7 +2022,7 @@ The two contributions are equal when $p_{\mathrm{launch}}\, m_{\mathrm{launch}} 
 
 $$ p^{*} = \frac{C_{\mathrm{hw}}}{m_{\mathrm{launch}}}. \tag{21.3}$$
 
-With the chapter's reference values, $C_{\mathrm{hw}} \approx 1.1\times 10^{6}\ \mathrm{USD}$ and $m_{\mathrm{launch}} = 415\ \mathrm{kg}$, the cross-over evaluates to $p^{*} = 1.1\times 10^{6}/415 \approx 2{,}650\ \mathrm{USD/kg}$, consistent with the figure quoted in the body. The derivative $\partial C_{\mathrm{sat}}/\partial p_{\mathrm{launch}} = m_{\mathrm{launch}}$ is constant, so once $p_{\mathrm{launch}} \ll p^{*}$ the satellite cost flattens onto the hardware floor and further reductions in launch price return little.
+With the chapter's reference values, $C_{\mathrm{hw}} \approx 1.1\times 10^{6}\ \mathrm{USD}$ and $m_{\mathrm{launch}} = 233\ \mathrm{kg}$, the cross-over evaluates to $p^{*} = 1.1\times 10^{6}/233 \approx 4{,}720\ \mathrm{USD/kg}$, consistent with the figure quoted in the body. The derivative $\partial C_{\mathrm{sat}}/\partial p_{\mathrm{launch}} = m_{\mathrm{launch}}$ is constant, so once $p_{\mathrm{launch}} \ll p^{*}$ the satellite cost flattens onto the hardware floor and further reductions in launch price return little.
 
 **The capital-recovery factor as a geometric sum.** Annualizing a capital cost requires the level payment $A$ whose discounted stream over $n$ years equals the principal. Writing the present value of $n$ equal payments and summing the geometric series gives
 
@@ -2047,7 +2047,7 @@ Because $\mathrm{LCOE}\propto 1/(\eta_{\mathrm{th}}\,u\,A_{\mathrm{op}})$, the l
 
 1. Starting from the per-satellite cost split (21.2), show that the launch term and the hardware term are equal at the cross-over price given by (21.3), and prove that the partial derivative of $C_{\mathrm{sat}}$ with respect to $p_{\mathrm{launch}}$ equals $m_{\mathrm{launch}}$ and is independent of $p_{\mathrm{launch}}$. Use this constant-slope result to explain why, once $p_{\mathrm{launch}} \ll p^{*}$, further reductions in launch price return little, and identify the hardware floor onto which $C_{\mathrm{sat}}$ flattens.
 
-2. Using the cross-over relation (21.3) with the chapter's reference values $C_{\mathrm{hw}} \approx 1.1\times 10^{6}\ \mathrm{USD}$ and $m_{\mathrm{launch}} = 415\ \mathrm{kg}$, estimate the cross-over price $p^{*}$. Then, using (21.2), estimate the total per-satellite cost $C_{\mathrm{sat}}$ at a launch price of $p_{\mathrm{launch}} = 600\ \mathrm{USD/kg}$ and report the launch term as a fraction of $C_{\mathrm{sat}}$, confirming the chapter's statement that below roughly 600 USD/kg the launch term is a small correction. [expect $p^{*}$ of order $10^{3}\ \mathrm{USD/kg}$]
+2. Using the cross-over relation (21.3) with the chapter's reference values $C_{\mathrm{hw}} \approx 1.1\times 10^{6}\ \mathrm{USD}$ and $m_{\mathrm{launch}} = 233\ \mathrm{kg}$, estimate the cross-over price $p^{*}$. Then, using (21.2), estimate the total per-satellite cost $C_{\mathrm{sat}}$ at a launch price of $p_{\mathrm{launch}} = 600\ \mathrm{USD/kg}$ and report the launch term as a fraction of $C_{\mathrm{sat}}$, confirming the chapter's statement that below roughly 600 USD/kg the launch term is a small correction. [expect $p^{*}$ of order $10^{3}\ \mathrm{USD/kg}$]
 
 3. Starting from the discounted present value of $n$ equal annual payments in (21.4), derive the capital-recovery factor (21.5) by inverting for the annuity per unit principal. Then show that in the limit $r \to 0$ the factor reduces to $\mathrm{CRF} \to 1/n$, recovering straight-line amortization, and argue that for $r > 0$ the factor exceeds $1/n$.
 
@@ -2307,8 +2307,8 @@ years, comfortably within the memory tolerance (Table T4). The structural mass i
 of the supported mass, and the geometry yields an inertia of a few hundred kilogram-meters squared,
 from which the gravity-gradient torque is of order one ten-thousandth of a newton-meter. Summing all
 subsystems gives a dry mass near 220 kg (Table T9), from which the drag area sets a ballistic
-coefficient that feeds a natural lifetime of roughly twelve to twenty-two years depending on solar
-activity, failing the five-year rule and mandating the 132 m/s de-orbit burn of Table T7. The
+coefficient that feeds a natural lifetime of roughly twelve years at moderate solar
+activity, which exceeds the five-year rule under nominal conditions and mandates the 132 m/s de-orbit burn of Table T7. The
 coupled thermal-throttle simulation returns the delivered useful compute (about two-thirds of a
 petaflop for this low-power, lightly throttled case), the ground-link model returns tens of
 terabytes per day of downlink at ninety-six-percent availability, and the finance model returns a
@@ -2335,7 +2335,7 @@ a larger $\beta$ means a denser, more compact body that lingers longer at altitu
 
 $$ T_{\text{nat}}(\beta) > T_{\text{rule}} \;\Longrightarrow\; \text{active disposal required}. \tag{26.4}$$
 
-For the reference point $T_{\text{nat}}$ falls in the twelve-to-twenty-two-year band while $T_{\text{rule}} = 5$ yr, so the inequality holds and the active de-orbit burn of Table T7 is mandated; the impulsive velocity increment of that burn is set by the perigee-lowering maneuver and amounts to the 132 m/s already quoted.
+For the reference point $T_{\text{nat}}$ is near twelve years at moderate solar activity while $T_{\text{rule}} = 5$ yr, so the inequality holds and the active de-orbit burn of Table T7 is mandated; the impulsive velocity increment of that burn is set by the perigee-lowering maneuver and amounts to the 132 m/s already quoted.
 
 **Levelized cost as a normalized figure of merit.** The finance result is most useful when read as compute per unit cost. Writing $C_{\text{life}}$ for the lifecycle cost, $Q$ for the delivered useful compute rate, and $T_{\text{op}}$ for the operating horizon,
 
@@ -2350,7 +2350,7 @@ so the roughly one hundred dollars per useful petaflop-hour of Table T11 places 
 
 2. Recompute the total electrical demand using (26.1) for a design point in which the number of accelerators is doubled to eight while every other input is held at its reference value (200 W per accelerator, the same avionics, attitude-control, communications, and thermal-control allocations summing to 300 W, and $m = 0.15$). Report the new $P_{\text{elec}}$ and the new $\mathrm{PUE}_{\text{elec}}$ from (26.2), and state by what factor the electrical demand increases relative to the four-accelerator reference value of 1,265 W. [expect $\mathrm{PUE}_{\text{elec}}$ to fall below the reference 1.58]
 
-3. The disposal decision turns on the ballistic coefficient through (26.3) and the lifetime inequality (26.4). For the reference dry mass near 220 kg, treat the natural lifetime as scaling inversely with the ballistic coefficient as described in the chapter, and determine the factor by which $\beta$ would have to be reduced to bring the natural lifetime down to the regulatory limit $T_{\text{rule}} = 5$ yr, taking the natural lifetime at the upper end of the quoted twelve-to-twenty-two-year band. Then, using (26.3), state by what factor the drag area $A$ must increase to achieve that reduction in $\beta$ at fixed dry mass and fixed drag coefficient, and comment on whether passive area increase alone removes the need for the 132 m/s de-orbit burn of (26.4).
+3. The disposal decision turns on the ballistic coefficient through (26.3) and the lifetime inequality (26.4). For the reference dry mass near 220 kg, treat the natural lifetime as scaling inversely with the ballistic coefficient as described in the chapter, and determine the factor by which $\beta$ would have to be reduced to bring the natural lifetime down to the regulatory limit $T_{\text{rule}} = 5$ yr, taking the natural lifetime near twelve years at moderate solar activity. Then, using (26.3), state by what factor the drag area $A$ must increase to achieve that reduction in $\beta$ at fixed dry mass and fixed drag coefficient, and comment on whether passive area increase alone removes the need for the 132 m/s de-orbit burn of (26.4).
 
 4. Using the levelized-cost definition (26.5), size the sensitivity of the figure of merit to the throttled compute. Holding the lifecycle cost $C_{\text{life}}$ and the operating horizon $T_{\text{op}}$ fixed at their reference values, and taking the delivered useful compute rate $Q$ as the roughly two-thirds of a petaflop quoted in the chapter against a levelized cost of about one hundred dollars per useful petaflop-hour, determine the new levelized cost if thermal throttling were relieved enough to raise $Q$ by twenty percent. Compare this with the change produced by a twenty-percent reduction in launch price, and use the structure of (26.5) together with the role of $\mathrm{PUE}_{\text{elec}}$ in (26.2) to justify the chapter's design implication that reducing parasitic overhead and throttling improves the economics more than an equivalent reduction in launch price.
 
@@ -2368,12 +2368,12 @@ rule at moderate solar activity.
 
 | Alt (km) | v (km/s) | Period (min) | β* (deg) | Lifetime, moderate (yr) |
 | --- | --- | --- | --- | --- |
-| 400 | 7.67 | 92.4 | 70.2 | 5 |
-| 500 | 7.62 | 94.5 | 68.0 | 7 |
-| 600 | 7.56 | 96.5 | 66.1 | 13 |
-| 650 | 7.53 | 97.6 | 65.2 | 20 |
-| 700 | 7.51 | 98.6 | 64.3 | 32 |
-| 800 | 7.46 | 100.7 | 62.7 | 97 |
+| 400 | 7.67 | 92.4 | 70.2 | 3 |
+| 500 | 7.62 | 94.5 | 68.0 | 4 |
+| 600 | 7.56 | 96.5 | 66.1 | 8 |
+| 650 | 7.53 | 97.6 | 65.2 | 12 |
+| 700 | 7.51 | 98.6 | 64.3 | 20 |
+| 800 | 7.46 | 100.7 | 62.7 | 60 |
 | 1000 | 7.35 | 105.0 | 59.8 | 309 |
 
 **Table T2, Radiator area (m²) versus heat load and operating temperature** (double-sided,
@@ -2438,18 +2438,18 @@ dramatically lighter.
 
 | Δv component | Value (m/s) |
 | --- | --- |
-| Drag make-up | 14.7 |
+| Drag make-up | 23.7 |
 | Formation keeping | 8.0 |
 | Collision avoidance | 5.0 |
 | Controlled de-orbit | 131.6 |
-| Margin (20 %) | 31.9 |
-| **Total** | **191.2** |
+| Margin (20 %) | 33.7 |
+| **Total** | **202.0** |
 
 | Propulsion | Isp (s) | Propellant for total Δv (kg) |
 | --- | --- | --- |
-| Cold gas | 70 | 120 |
-| Hydrazine | 220 | 35 |
-| Electric | 1500 | 5 |
+| Cold gas | 70 | 75 |
+| Hydrazine | 220 | 22 |
+| Electric | 1500 | 3 |
 
 **Table T8, Optical link budget versus range** (D = 0.1 m, λ = 1.55 µm). The +20 dB per decade of
 range, against a fixed ~106 dB telescope gain, is why the cluster must be tight.
@@ -2502,7 +2502,7 @@ electrical PUE near 1.6; efficiency improves only at many-chip scale.
 | Radiator area (m²) | 1.1 |
 | 5-yr dose behind 10 mm (rad) | 1,054 |
 | Dose margin (vs 2 krad) | 1.9× |
-| Natural lifetime (yr) | 11.5 |
+| Natural lifetime (yr) | 12.2 |
 | Debris P (5 yr) | 0.17 |
 | Delivered (PFLOPS) | 0.67 |
 | Throttle loss | 14 % |

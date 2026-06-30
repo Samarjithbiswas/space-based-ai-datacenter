@@ -236,7 +236,7 @@ def solve_cost_parity_distribution(n=4000, seed=7):
 # =====================================================================================
 def solve_reference_mission():
     """Chain the solvers into one consistent solution for the reference design point."""
-    am = 3.5 / 375.0
+    am = 3.5 / 233.0
     T_rad_C, nr_it = solve_radiator_temperature(1450.0, 4.0, 0.85, sides=1)
     life = solve_orbital_lifetime(650.0, am, "mod")
     ecl = solve_eclipse_transient(300.0)

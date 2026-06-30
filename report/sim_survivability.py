@@ -60,8 +60,8 @@ def decay_years(h0_km, BCinv, tab, cd=2.2):
         dt = 3600*48 if (a-RE)>500e3 else (3600*12 if (a-RE)>300e3 else 3600*2)
     return t/yr
 
-# Reference data-center bus (Report I mass budget m=415 kg).
-m_sat=415.0
+# Reference data-center bus (integrated mass budget: 233 kg launch mass).
+m_sat=233.0
 Am_compact=3.5/m_sat        # arrays feathered (realistic operating attitude)
 Am_dense  =1.5/m_sat
 for sc,tab in [("min",rho_min),("mod",rho_mod),("max",rho_max)]:
@@ -204,7 +204,7 @@ dv_m=0.20*(dv_d+dv_f+dv_c+dv_o)
 labels=["Drag\nmake-up","Formation\nkeeping","Collision\navoidance","Controlled\nde-orbit","Margin\n20%"]
 vals=[dv_d,dv_f,dv_c,dv_o,dv_m]; dvT=sum(vals)
 D["dvT"]=dvT; D["dv_deorbit"]=dv_o; D["dv_drag"]=dv_d
-prop=lambda dv,isp,md=375.0: md*(np.exp(dv/(isp*G0))-1)
+prop=lambda dv,isp,md=220.0: md*(np.exp(dv/(isp*G0))-1)
 sysv=[("Cold gas\nIsp 70 s",70,"#9aa7b1"),("Hydrazine\nIsp 220 s",220,COOL),("Electric\nIsp 1500 s",1500,GOOD)]
 fig=plt.figure(figsize=(9.4,4.8)); gs=gridspec.GridSpec(1,2,width_ratios=[1.3,1],wspace=0.34)
 axL=fig.add_subplot(gs[0]); xb=np.arange(len(labels))
@@ -229,7 +229,7 @@ fig.savefig(OUT+"fig5_deltav.png"); plt.close(fig)
 # Fig 6 : LAUNCH ECONOMICS (honest band)
 # Falcon 9 customer ~$3,770/kg (reusable payload basis); Starship target $10 .. realistic $100-600
 # ==========================================================================================
-price=np.array([3770,1500,600,300,200,100,30]); mL=415.0; sats=81; hw=1.1e6
+price=np.array([3770,1500,600,300,200,100,30]); mL=233.0; sats=81; hw=1.1e6
 fig=plt.figure(figsize=(9.4,4.9)); gs=gridspec.GridSpec(1,2,width_ratios=[1.1,1],wspace=0.32)
 axA=fig.add_subplot(gs[0])
 axA.plot(price,price*mL/1e6,"o-",color=ACCENT,lw=2.3,label="launch cost / sat")
