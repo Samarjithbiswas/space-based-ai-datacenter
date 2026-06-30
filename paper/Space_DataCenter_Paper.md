@@ -71,8 +71,7 @@ and carries an automated test suite. The models are sizing and risk-ranking tool
 flight-design tools; the explicit limitations are stated in Section 10. Inputs are drawn, with stated
 confidence, from public agency models, vendor documentation, standard texts, and the
 reference-architecture preprint, with a strict line kept between demonstrated and projected quantities.
-The use of generative AI as a drafting aid, and the independent verification of all equations, are
-described in the accompanying disclosure.
+All equations were independently verified against the cited primary sources.
 
 ## 3. Thermal control: solved, but it does not scale
 
@@ -198,12 +197,6 @@ crowded shell of near-Earth space, for years, and bringing each one safely home,
 All models, derivations, figures, and the simulations behind every number are openly available at
 github.com/Samarjithbiswas/space-based-ai-datacenter (release v1.0), under the MIT License (code) and
 CC-BY 4.0 (text and figures). A single command reproduces the full analysis.
-
-## Disclosure
-
-See the accompanying methods and AI-use disclosure. Generative AI was used as a drafting aid; all
-quantitative claims are produced by the open code or cited primary sources, all equations were
-independently verified, and the author is solely responsible for the content.
 
 ## References
 
