@@ -18,6 +18,7 @@ visualization. The reference architecture is Google's Project Suncatcher
 
 | Folder | Contents |
 |---|---|
+| [`report-1/`](report-1) | Self-contained, dependency-free code reproducing the first report's passive thermal-feasibility study (heat load, radiator temperature, resistance chain, junction margin, failure case, external loads, eclipse), with self-checks against the published numbers. |
 | [`systems-model/`](systems-model) | `orbital_dc`, the full Python package across roughly twenty subsystems (orbit, thermal, power, attitude, communications, ground link, structures, radiation, debris, propulsion, reliability, compute, workload, finance, economics) with an integration layer that closes the mass, power, thermal, and Δv budgets, a Monte-Carlo module, a 122-test suite, and continuous integration. |
 | [`survivability-model/`](survivability-model) | A focused survivability model (single module, twelve pure functions, a fourteen-check validation, seven figures). |
 | [`report/`](report) | The complete study and the derivation-by-derivation mathematical guide (Markdown and HTML), all figures, and the figure-generating code. |
